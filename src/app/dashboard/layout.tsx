@@ -7,7 +7,7 @@ export default function DashboardLayout({ children }: Readonly<{
 }>) {
     return <SidebarProvider>
         <AppSidebar />
-        <main>
+        <main className="w-full px-4">
             <SiteHeader />
             {children}
         </main>
