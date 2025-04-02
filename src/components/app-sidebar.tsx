@@ -3,15 +3,12 @@
 import * as React from "react"
 import {
   AudioWaveform,
-  BookOpen,
-  Bot,
+  Zap,
+  Users,
   Command,
-  Frame,
   GalleryVerticalEnd,
-  Map,
-  PieChart,
   Settings2,
-  SquareTerminal,
+  DoorOpen,
 } from "lucide-react"
 
 import { NavMain } from "@/components/nav-main"
@@ -29,8 +26,8 @@ import {
 // This is sample data.
 const data = {
   user: {
-    name: "shadcn",
-    email: "m@example.com",
+    name: "Vĩ Phong lý",
+    email: "viphongly@example.com",
     avatar: "/avatars/shadcn.jpg",
   },
   teams: [
@@ -55,180 +52,140 @@ const data = {
       title: "Anh văn",
       navs: [
         {
-          title: "Playground",
+          title: "Lớp học",
           url: "#",
-          icon: SquareTerminal,
+          icon: DoorOpen,
           isActive: true,
           items: [
             {
-              title: "History",
+              title: "Tổng quan",
               url: "#",
             },
             {
-              title: "Starred",
+              title: "Phiên dịch",
               url: "#",
             },
             {
-              title: "Settings",
+              title: "AV chủ nhật",
+              url: "#",
+            },
+            {
+              title: "AV thứ 5",
               url: "#",
             },
           ],
         },
         {
-          title: "Models",
+          title: "Học sinh",
           url: "#",
-          icon: Bot,
+          icon: Users,
           items: [
             {
-              title: "Genesis",
+              title: "Danh sách",
               url: "#",
             },
             {
-              title: "Explorer",
+              title: "Phân tổ",
               url: "#",
             },
             {
-              title: "Quantum",
+              title: "Thống kê",
               url: "#",
             },
           ],
         },
         {
-          title: "Documentation",
+          title: "Kỹ năng",
           url: "#",
-          icon: BookOpen,
+          icon: Zap,
           items: [
+
             {
-              title: "Introduction",
+              title: "Bảng điểm",
               url: "#",
             },
             {
-              title: "Get Started",
+              title: "Nhóm Kỹ năng",
               url: "#",
             },
             {
-              title: "Tutorials",
+              title: "Thống kê",
               url: "#",
             },
             {
-              title: "Changelog",
+              title: "Lịch sử",
               url: "#",
             },
           ],
-        },
-        {
-          title: "Settings",
-          url: "#",
-          icon: Settings2,
-          items: [
-            {
-              title: "General",
-              url: "#",
-            },
-            {
-              title: "Team",
-              url: "#",
-            },
-            {
-              title: "Billing",
-              url: "#",
-            },
-            {
-              title: "Limits",
-              url: "#",
-            },
-          ],
-        },
+        }
       ],
     },
     {
-      title: "Sinh viên",
+      title: "Kỹ năng Giao tiếp",
       navs: [
         {
-          title: "Playground",
+          title: "Lớp học",
           url: "#",
-          icon: SquareTerminal,
+          icon: DoorOpen,
           isActive: true,
           items: [
             {
-              title: "History",
+              title: "Tổng quan",
               url: "#",
             },
             {
-              title: "Starred",
+              title: "Giao tiếp Đám đông",
               url: "#",
             },
             {
-              title: "Settings",
+              title: "Giao tiếp Thu hút",
               url: "#",
             },
           ],
         },
         {
-          title: "Models",
+          title: "Học sinh",
           url: "#",
-          icon: Bot,
+          icon: Users,
           items: [
             {
-              title: "Genesis",
+              title: "Danh sách",
               url: "#",
             },
             {
-              title: "Explorer",
+              title: "Phân tổ",
               url: "#",
             },
             {
-              title: "Quantum",
+              title: "Thống kê",
               url: "#",
             },
           ],
         },
         {
-          title: "Documentation",
+          title: "Kỹ năng",
           url: "#",
-          icon: BookOpen,
+          icon: Zap,
           items: [
+
             {
-              title: "Introduction",
+              title: "Bảng điểm",
               url: "#",
             },
             {
-              title: "Get Started",
+              title: "Nhóm Kỹ năng",
               url: "#",
             },
             {
-              title: "Tutorials",
+              title: "Thống kê",
               url: "#",
             },
             {
-              title: "Changelog",
+              title: "Lịch sử",
               url: "#",
             },
           ],
-        },
-        {
-          title: "Settings",
-          url: "#",
-          icon: Settings2,
-          items: [
-            {
-              title: "General",
-              url: "#",
-            },
-            {
-              title: "Team",
-              url: "#",
-            },
-            {
-              title: "Billing",
-              url: "#",
-            },
-            {
-              title: "Limits",
-              url: "#",
-            },
-          ],
-        },
+        }
       ],
     },
   ]
@@ -259,7 +216,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       </SidebarHeader>
       <SidebarContent>
         {data.navMain.map((item) => (
-          <NavMain key={item.title} title={item.title} items={item.navs} />
+          <NavMain key={item.title} title={item.title} items={item.navs}/>
         ))}
         {/* <NavProjects projects={data.projects} /> */}
       </SidebarContent>

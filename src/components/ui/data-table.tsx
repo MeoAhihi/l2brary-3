@@ -33,15 +33,15 @@ import { Plus } from "lucide-react"
 interface DataTableProps<TData, TValue> {
   title: string
   columns: ColumnDef<TData, TValue>[]
-  data: TData[]
-  createPage: string
+  data?: TData[]
+  createPage?: string
   filterField?: string
 }
 
 export function DataTable<TData, TValue>({
   title,
   columns,
-  data,
+  data = [],
   createPage,
   filterField
 }: DataTableProps<TData, TValue>) {
@@ -69,12 +69,13 @@ export function DataTable<TData, TValue>({
     <div>
       <div className="flex items-center justify-between p-4">
         <h2 className="text-xl font-medium">{title}</h2>
-        <Button asChild>
-          <a href={createPage}>
-            <Plus />
-            Tạo mới
-          </a>
-        </Button>
+        {createPage &&
+          <Button asChild>
+            <a href={createPage}>
+              <Plus />
+              Tạo mới
+            </a>
+          </Button>}
       </div>
       {filterField &&
         <div className="flex items-center py-2">
