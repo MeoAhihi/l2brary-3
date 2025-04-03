@@ -76,7 +76,7 @@ const data = {
           ],
         },
         {
-          title: "Học sinh",
+          title: "Thành viên",
           url: "#",
           icon: Users,
           items: [
@@ -85,7 +85,7 @@ const data = {
               url: "#",
             },
             {
-              title: "Phân tổ",
+              title: "Sinh nhật",
               url: "#",
             },
             {
@@ -144,7 +144,7 @@ const data = {
           ],
         },
         {
-          title: "Học sinh",
+          title: "Thành viên",
           url: "#",
           icon: Users,
           items: [
@@ -153,7 +153,7 @@ const data = {
               url: "#",
             },
             {
-              title: "Phân tổ",
+              title: "Sinh nhật",
               url: "#",
             },
             {

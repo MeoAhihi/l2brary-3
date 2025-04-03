@@ -23,7 +23,7 @@ export interface MemberRowProps extends BaseMemberProps {
 export interface OptionalField {
   key: string;
   label: string;
-  render?: (value: any, member: MemberRowProps) => React.ReactNode;
+  render?: (value: any) => React.ReactNode;
 }
 
 export interface MemberListProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -50,7 +50,7 @@ const MemberRow = ({ member, optionalFields = [] }: {
       {optionalFields.map((field) => (
         <TableCell key={field.key}>
           {field.render
-            ? field.render(member[field.key], member)
+            ? field.render(member[field.key])
             : member[field.key]}
         </TableCell>
       ))}

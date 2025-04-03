@@ -1,11 +1,11 @@
-import ClassMemberPostionList from "@/components/class-member-position-list";
+import MemberList from "@/components/member-list";
 import { Button } from "@/components/ui/button";
 import { DataTable } from "@/components/ui/data-table";
 import PageHeader from "@/components/ui/page-header";
 import { Separator } from "@/components/ui/separator";
-import { Pencil, Plus, Download } from "lucide-react";
+import { Download, Pencil, Plus } from "lucide-react";
 import { columns } from "./columns";
-import MemberList from "@/components/member-list";
+import { MyChart } from "./my-chart";
 
 const data = [
   {
@@ -50,7 +50,7 @@ const sessions = [
     date: new Date("10/20/2023"),
     startTime: "19:30",
     endTime: "20:00",
-    attendees: 20,
+    attendees: 18,
     link: "#"
   },
   {
@@ -60,7 +60,7 @@ const sessions = [
     date: new Date("10/27/2023"),
     startTime: "20:00",
     endTime: "20:30",
-    attendees: 20,
+    attendees: 30,
     link: "#"
   },
   {
@@ -70,7 +70,7 @@ const sessions = [
     date: new Date("11/03/2023"),
     startTime: "20:30",
     endTime: "21:00",
-    attendees: 20,
+    attendees: 23,
     link: "#"
   },
   {
@@ -80,7 +80,7 @@ const sessions = [
     date: new Date("11/10/2023"),
     startTime: "21:00",
     endTime: "21:30",
-    attendees: 20,
+    attendees: 73,
     link: "#"
   },
   {
@@ -100,7 +100,7 @@ const sessions = [
     date: new Date("11/24/2023"),
     startTime: "22:00",
     endTime: "22:30",
-    attendees: 20,
+    attendees: 21,
     link: "#"
   }
 ]
@@ -137,7 +137,7 @@ export default function Page() {
             </Button>
           </div>
         </div>
-        
+        <MyChart />
         <DataTable title="Danh sách Buổi học" columns={columns} data={sessions} createPage="" filterField="title" />
       </div>
       <Separator />
