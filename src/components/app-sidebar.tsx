@@ -53,68 +53,52 @@ const data = {
       navs: [
         {
           title: "Lớp học",
-          url: "#",
+          url: "/dashboard/123/classes/overview",
           icon: DoorOpen,
           isActive: true,
           items: [
             {
               title: "Tổng quan",
-              url: "#",
+              url: "/dashboard/123/classes/overview",
             },
             {
               title: "Phiên dịch",
-              url: "#",
+              url: "/dashboard/123/classes/147",
             },
             {
               title: "AV chủ nhật",
-              url: "#",
+              url: "/dashboard/123/classes/258",
             },
             {
               title: "AV thứ 5",
-              url: "#",
+              url: "/dashboard/123/classes/369",
             },
           ],
         },
         {
           title: "Thành viên",
-          url: "#",
+          url: "/dashboard/123/members/list",
           icon: Users,
           items: [
             {
               title: "Danh sách",
-              url: "#",
+              url: "/dashboard/123/members/list",
             },
             {
               title: "Sinh nhật",
-              url: "#",
-            },
-            {
-              title: "Thống kê",
-              url: "#",
-            },
+              url: "/dashboard/123/members/birthday",
+            }
           ],
         },
         {
           title: "Kỹ năng",
-          url: "#",
+          url: "/dashboard/123/skills/score-table",
           icon: Zap,
           items: [
 
             {
               title: "Bảng điểm",
-              url: "#",
-            },
-            {
-              title: "Nhóm Kỹ năng",
-              url: "#",
-            },
-            {
-              title: "Thống kê",
-              url: "#",
-            },
-            {
-              title: "Lịch sử",
-              url: "#",
+              url: "/dashboard/123/skills/score-table",
             },
           ],
         }
@@ -125,64 +109,48 @@ const data = {
       navs: [
         {
           title: "Lớp học",
-          url: "#",
+          url: "/dashboard/456/classes/overview",
           icon: DoorOpen,
           isActive: true,
           items: [
             {
               title: "Tổng quan",
-              url: "#",
+              url: "/dashboard/456/classes/overview",
             },
             {
               title: "Giao tiếp Đám đông",
-              url: "#",
+              url: "/dashboard/456/classes/741",
             },
             {
               title: "Giao tiếp Thu hút",
-              url: "#",
+              url: "/dashboard/456/classes/852",
             },
           ],
         },
         {
           title: "Thành viên",
-          url: "#",
+          url: "/dashboard/456/members/list",
           icon: Users,
           items: [
             {
               title: "Danh sách",
-              url: "#",
+              url: "/dashboard/456/members/list",
             },
             {
               title: "Sinh nhật",
-              url: "#",
-            },
-            {
-              title: "Thống kê",
-              url: "#",
-            },
+              url: "/dashboard/456/members/birthday",
+            }
           ],
         },
         {
           title: "Kỹ năng",
-          url: "#",
+          url: "/dashboard/456/skills/score-table",
           icon: Zap,
           items: [
 
             {
               title: "Bảng điểm",
-              url: "#",
-            },
-            {
-              title: "Nhóm Kỹ năng",
-              url: "#",
-            },
-            {
-              title: "Thống kê",
-              url: "#",
-            },
-            {
-              title: "Lịch sử",
-              url: "#",
+              url: "/dashboard/456/skills/score-table",
             },
           ],
         }
@@ -216,7 +184,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       </SidebarHeader>
       <SidebarContent>
         {data.navMain.map((item) => (
-          <NavMain key={item.title} title={item.title} items={item.navs}/>
+          <NavMain key={item.title} title={item.title} items={item.navs} />
         ))}
         {/* <NavProjects projects={data.projects} /> */}
       </SidebarContent>
