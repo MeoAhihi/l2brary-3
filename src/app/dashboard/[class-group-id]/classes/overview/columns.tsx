@@ -10,7 +10,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { ColumnDef } from "@tanstack/react-table"
-import { ArrowUpDown, Link, MoreHorizontal } from "lucide-react"
+import { ArrowUpDown, MoreHorizontal } from "lucide-react"
 
 export type Class = {
   id: string

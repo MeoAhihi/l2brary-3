@@ -98,7 +98,7 @@ export default function Page() {
         "Tháng 11",
         "Tháng 12"
       ].map((month, index) => (
-        <div className="max-w-fit">
+        <div key={index} className="max-w-fit">
           <h2 className="text-1xl font-semibold">{month}</h2>
           <MemberList
             className="my-4"

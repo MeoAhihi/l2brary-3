@@ -1,5 +1,4 @@
 import { DataTable } from "@/components/ui/data-table";
-import ClassMemberPositionList from "@/components/class-member-position-list";
 import { Class, columns } from "./columns";
 import PageHeader from "@/components/ui/page-header";
 import { Plus } from "lucide-react";
