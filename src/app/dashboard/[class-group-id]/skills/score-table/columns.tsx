@@ -1,10 +1,9 @@
-"use client"
+"use client";
 
-import { Button } from "@/components/ui/button"
-import { ColumnDef } from "@tanstack/react-table"
-import { ArrowUpDown } from "lucide-react"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-
+import { Button } from "@/components/ui/button";
+import { ColumnDef } from "@tanstack/react-table";
+import { ArrowUpDown } from "lucide-react";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 const scoreColumns = [
   "Stamp",
@@ -12,7 +11,7 @@ const scoreColumns = [
   "Điểm Soạn bài",
   "Điểm Tác phong",
   "Điểm thi",
-]
+];
 
 export const columns: ColumnDef<any>[] = [
   {
@@ -21,10 +20,13 @@ export const columns: ColumnDef<any>[] = [
     cell: ({ row }) => {
       return (
         <Avatar>
-          <AvatarImage src={row.getValue("avatarUrl")} alt={`${row.getValue("fullName")}'s avatar`} />
+          <AvatarImage
+            src={row.getValue("avatarUrl")}
+            alt={`${row.getValue("fullName")}'s avatar`}
+          />
           <AvatarFallback>{row.getValue("fullName")}</AvatarFallback>
         </Avatar>
-      )
+      );
     },
   },
   {
@@ -38,7 +40,7 @@ export const columns: ColumnDef<any>[] = [
           Họ và tên
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
-      )
+      );
     },
   },
   ...scoreColumns.map((scoreColumn) => ({
@@ -52,7 +54,7 @@ export const columns: ColumnDef<any>[] = [
           {scoreColumn}
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
-      )
-    }
-  }))
-]
+      );
+    },
+  })),
+];

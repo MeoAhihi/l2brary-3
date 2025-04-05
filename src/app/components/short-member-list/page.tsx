@@ -1,4 +1,6 @@
-import ShortMemberList, { MemberRowProps } from "@/components/short-member-list";
+import ShortMemberList, {
+  MemberRowProps,
+} from "@/components/short-member-list";
 
 const data: MemberRowProps[] = [
   {
@@ -25,11 +27,9 @@ const data: MemberRowProps[] = [
     avatarUrl: "https://picsum.photos/504",
     name: "Iris Shadowmend",
     dateOfBirth: "1934-09-30",
-  }
-]
+  },
+];
 
 export default function Page() {
-  return (
-    <ShortMemberList members={data} />
-  )
+  return <ShortMemberList members={data} />;
 }

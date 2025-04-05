@@ -1,9 +1,4 @@
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableRow,
-} from "@/components/ui/table"
+import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 export interface MemberRowProps {
@@ -29,7 +24,11 @@ const MemberRow = ({ avatarUrl, name, position }: MemberRowProps) => {
   );
 };
 
-export default function ClassMemberPostionList({ members }: { members: MemberRowProps[] }) {
+export default function ClassMemberPostionList({
+  members,
+}: {
+  members: MemberRowProps[];
+}) {
   return (
     <Table>
       <TableBody>
@@ -39,5 +38,4 @@ export default function ClassMemberPostionList({ members }: { members: MemberRow
       </TableBody>
     </Table>
   );
-};
-
+}
