@@ -1,7 +1,15 @@
-import { Badge } from '@/components/ui/badge'
-import { Separator } from '@/components/ui/separator'
+import { Badge } from "@/components/ui/badge";
+import { Separator } from "@/components/ui/separator";
 
-export default function PageHeader({ pageTitle, descriptions = [], children }: { pageTitle: string, descriptions?: string[], children?: React.ReactNode }) {
+export default function PageHeader({
+  pageTitle,
+  descriptions = [],
+  children,
+}: {
+  pageTitle: string;
+  descriptions?: string[];
+  children?: React.ReactNode;
+}) {
   return (
     <>
       <div className="flex items-center justify-between mb-4">
@@ -15,11 +23,9 @@ export default function PageHeader({ pageTitle, descriptions = [], children }: {
             ))}
           </p>
         </div>
-        <div className='flex gap-2'>
-          {children}
-        </div>
+        <div className="flex gap-2">{children}</div>
       </div>
       <Separator className="my-4" />
     </>
-  )
+  );
 }

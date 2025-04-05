@@ -1,6 +1,6 @@
-"use client"
+"use client";
 
-import { Button } from "@/components/ui/button"
+import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -8,18 +8,17 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import { ColumnDef } from "@tanstack/react-table"
-import { ArrowUpDown, MoreHorizontal } from "lucide-react"
+} from "@/components/ui/dropdown-menu";
+import { ColumnDef } from "@tanstack/react-table";
+import { ArrowUpDown, MoreHorizontal } from "lucide-react";
 
 export type Member = {
-  id: string
-  fullName: string
-  birthday: Date
-  isMale: boolean
-  group: string
-}
-
+  id: string;
+  fullName: string;
+  birthday: Date;
+  isMale: boolean;
+  group: string;
+};
 
 export const columns: ColumnDef<Member>[] = [
   {
@@ -33,12 +32,12 @@ export const columns: ColumnDef<Member>[] = [
           Họ và tên
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
-      )
+      );
     },
     cell: ({ row }) => {
       return (
-        <a href={`#${row.getValue("name")}`} > {row.getValue("fullName")}</ a>
-      )
+        <a href={`#${row.getValue("name")}`}> {row.getValue("fullName")}</a>
+      );
     },
   },
   {
@@ -52,11 +51,11 @@ export const columns: ColumnDef<Member>[] = [
           Ngày sinh
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
-      )
+      );
     },
     cell: ({ row }) => {
-      return (row.getValue("birthday") as Date).toLocaleDateString("en-GB")
-    }
+      return (row.getValue("birthday") as Date).toLocaleDateString("en-GB");
+    },
   },
   {
     accessorKey: "isMale",
@@ -69,10 +68,10 @@ export const columns: ColumnDef<Member>[] = [
           Giới tính
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
-      )
+      );
     },
     cell: ({ row }) => {
-      return row.getValue("isMale") ? "Nam" : "Nữ"
+      return row.getValue("isMale") ? "Nam" : "Nữ";
     },
   },
   {
@@ -86,14 +85,14 @@ export const columns: ColumnDef<Member>[] = [
           Tổ
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
-      )
+      );
     },
   },
   {
     //Actions (edit, delete)
     id: "actions",
     cell: ({ row }) => {
-      const members = row.original
+      const members = row.original;
 
       return (
         <DropdownMenu>
@@ -115,7 +114,7 @@ export const columns: ColumnDef<Member>[] = [
             <DropdownMenuItem>View members details</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
-      )
+      );
     },
   },
-]
+];

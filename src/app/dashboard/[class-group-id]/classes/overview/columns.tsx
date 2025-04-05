@@ -1,6 +1,6 @@
-"use client"
+"use client";
 
-import { Button } from "@/components/ui/button"
+import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -8,18 +8,17 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import { ColumnDef } from "@tanstack/react-table"
-import { ArrowUpDown, MoreHorizontal } from "lucide-react"
+} from "@/components/ui/dropdown-menu";
+import { ColumnDef } from "@tanstack/react-table";
+import { ArrowUpDown, MoreHorizontal } from "lucide-react";
 
 export type Class = {
-  id: string
-  name: string
-  day: string
-  startTime: string
-  endTime: string
-}
-
+  id: string;
+  name: string;
+  day: string;
+  startTime: string;
+  endTime: string;
+};
 
 export const columns: ColumnDef<Class>[] = [
   {
@@ -33,12 +32,10 @@ export const columns: ColumnDef<Class>[] = [
           Lớp học
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
-      )
+      );
     },
     cell: ({ row }) => {
-      return (
-        <a href={`#${row.getValue("name")}`} > {row.getValue("name")}</ a>
-      )
+      return <a href={`#${row.getValue("name")}`}> {row.getValue("name")}</a>;
     },
   },
   {
@@ -52,22 +49,22 @@ export const columns: ColumnDef<Class>[] = [
           Ngày học
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
-      )
+      );
     },
   },
   {
     accessorKey: "startTime",
-    header: "Bắt đầu"
+    header: "Bắt đầu",
   },
   {
     accessorKey: "endTime",
-    header: "Kết thúc"
+    header: "Kết thúc",
   },
   {
     //Actions (edit, delete)
     id: "actions",
     cell: ({ row }) => {
-      const payment = row.original
+      const payment = row.original;
 
       return (
         <DropdownMenu>
@@ -89,7 +86,7 @@ export const columns: ColumnDef<Class>[] = [
             <DropdownMenuItem>View payment details</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
-      )
+      );
     },
   },
-]
+];

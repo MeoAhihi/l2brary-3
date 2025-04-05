@@ -12,35 +12,39 @@ const data = [
     id: 1,
     avatarUrl: "https://picsum.photos/500",
     name: "Nguyễn Văn A",
-    position: "lớp trưởng"
+    position: "lớp trưởng",
   },
   {
     id: 2,
     avatarUrl: "https://picsum.photos/500",
     name: "Trần Thị B",
-    position: "lớp phó"
-  }, {
+    position: "lớp phó",
+  },
+  {
     id: 3,
     avatarUrl: "https://picsum.photos/500",
     name: "Lê Văn C",
-    position: "thư ký"
-  }, {
+    position: "thư ký",
+  },
+  {
     id: 4,
     avatarUrl: "https://picsum.photos/500",
     name: "Phạm Thị D",
-    position: "tổ trưởng"
-  }, {
+    position: "tổ trưởng",
+  },
+  {
     id: 5,
     avatarUrl: "https://picsum.photos/500",
     name: "Hoàng Văn E",
-    position: "tổ phó"
-  }, {
+    position: "tổ phó",
+  },
+  {
     id: 6,
     avatarUrl: "https://picsum.photos/500",
     name: "Đỗ Thị F",
-    position: "thủ quỹ"
-  }
-]
+    position: "thủ quỹ",
+  },
+];
 
 const sessions = [
   {
@@ -51,7 +55,7 @@ const sessions = [
     startTime: "19:30",
     endTime: "20:00",
     attendees: 18,
-    link: "#"
+    link: "#",
   },
   {
     id: "2",
@@ -61,7 +65,7 @@ const sessions = [
     startTime: "20:00",
     endTime: "20:30",
     attendees: 30,
-    link: "#"
+    link: "#",
   },
   {
     id: "3",
@@ -71,7 +75,7 @@ const sessions = [
     startTime: "20:30",
     endTime: "21:00",
     attendees: 23,
-    link: "#"
+    link: "#",
   },
   {
     id: "4",
@@ -81,7 +85,7 @@ const sessions = [
     startTime: "21:00",
     endTime: "21:30",
     attendees: 73,
-    link: "#"
+    link: "#",
   },
   {
     id: "5",
@@ -91,7 +95,7 @@ const sessions = [
     startTime: "21:30",
     endTime: "22:00",
     attendees: 20,
-    link: "#"
+    link: "#",
   },
   {
     id: "6",
@@ -101,14 +105,17 @@ const sessions = [
     startTime: "22:00",
     endTime: "22:30",
     attendees: 21,
-    link: "#"
-  }
-]
+    link: "#",
+  },
+];
 
 export default function Page() {
   return (
     <>
-      <PageHeader pageTitle="AV thứ 5" descriptions={["Online", "Thứ 5", "19:30 - 21:00"]} >
+      <PageHeader
+        pageTitle="AV thứ 5"
+        descriptions={["Online", "Thứ 5", "19:30 - 21:00"]}
+      >
         <Button>
           <Plus />
           Tạo mới
@@ -120,7 +127,12 @@ export default function Page() {
       </PageHeader>
       <div className="max-w-fit">
         <h2 className="text-2xl font-semibold">Ban cán sự</h2>
-        <MemberList className="my-4" members={data} optionalFields={[{ key: "position", label: "Position" }]} showHeader={false} />
+        <MemberList
+          className="my-4"
+          members={data}
+          optionalFields={[{ key: "position", label: "Position" }]}
+          showHeader={false}
+        />
       </div>
       <Separator />
       <div className="my-4">
@@ -138,7 +150,13 @@ export default function Page() {
           </div>
         </div>
         <MyChart />
-        <DataTable title="Danh sách Buổi học" columns={columns} data={sessions} createPage="" filterField="title" />
+        <DataTable
+          title="Danh sách Buổi học"
+          columns={columns}
+          data={sessions}
+          createPage=""
+          filterField="title"
+        />
       </div>
       <Separator />
       <div className="grid grid-cols-1 md:grid-cols-3 sm:grid-cols-1 gap-16 my-4">
@@ -157,5 +175,4 @@ export default function Page() {
       </div>
     </>
   );
-
 }
