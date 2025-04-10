@@ -7,12 +7,13 @@ import { Button } from "@/components/ui/button";
 
 const data: Class[] = [
   {
-    id: '1',
+    id: "1",
     name: "AV thứ 5",
     day: "Thứ 5",
     startTime: "19:00",
     endTime: "21:00",
-  }, {
+  },
+  {
     id: "2",
     name: "AV chủ nhật",
     day: "Chủ nhật",
@@ -25,8 +26,8 @@ const data: Class[] = [
     day: "Chủ Nhật",
     startTime: "15:00",
     endTime: "17:00",
-  }
-]
+  },
+];
 
 export default function Page() {
   return (
@@ -38,8 +39,14 @@ export default function Page() {
         </Button>
       </PageHeader>
       <div>
-        <DataTable columns={columns} data={data} title="Danh sách Lớp học" createPage="/dashboard/create" filterField="name" />
+        <DataTable
+          columns={columns}
+          data={data}
+          title="Danh sách Lớp học"
+          createPage="/dashboard/create"
+          filterField="name"
+        />
       </div>
     </>
-  )
+  );
 }

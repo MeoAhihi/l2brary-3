@@ -5,7 +5,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table"
+} from "@/components/ui/table";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 // Base required properties
@@ -32,9 +32,12 @@ export interface MemberListProps extends React.HTMLAttributes<HTMLDivElement> {
   showHeader?: boolean;
 }
 
-const MemberRow = ({ member, optionalFields = [] }: {
-  member: MemberRowProps,
-  optionalFields: OptionalField[]
+const MemberRow = ({
+  member,
+  optionalFields = [],
+}: {
+  member: MemberRowProps;
+  optionalFields: OptionalField[];
 }) => {
   return (
     <TableRow className="border-b">
@@ -49,9 +52,7 @@ const MemberRow = ({ member, optionalFields = [] }: {
       </TableCell>
       {optionalFields.map((field) => (
         <TableCell key={field.key}>
-          {field.render
-            ? field.render(member[field.key])
-            : member[field.key]}
+          {field.render ? field.render(member[field.key]) : member[field.key]}
         </TableCell>
       ))}
     </TableRow>
@@ -88,4 +89,4 @@ export default function MemberList({
       </TableBody>
     </Table>
   );
-};
+}

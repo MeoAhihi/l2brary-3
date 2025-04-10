@@ -16,21 +16,31 @@ import { Button } from "@/components/ui/button";
 
 // Define fields dynamically
 
-export default function DataForm({ fields, onSubmit }: {
-  fields: any[], onSubmit: (values: any) => void | Promise<void>;
+export default function DataForm({
+  fields,
+  onSubmit,
+}: {
+  fields: any[];
+  onSubmit: (values: any) => void | Promise<void>;
 }) {
   // Generate schema and default values dynamically
   const formSchema = z.object(
-    fields.reduce((schema, field) => {
-      schema[field.name] = field.zodValidation;
-      return schema;
-    }, {} as Record<string, z.ZodTypeAny>)
+    fields.reduce(
+      (schema, field) => {
+        schema[field.name] = field.zodValidation;
+        return schema;
+      },
+      {} as Record<string, z.ZodTypeAny>,
+    ),
   );
 
-  const formDefaultValues = fields.reduce((defaults, field) => {
-    defaults[field.name] = field.default;
-    return defaults;
-  }, {} as Record<string, any>);
+  const formDefaultValues = fields.reduce(
+    (defaults, field) => {
+      defaults[field.name] = field.default;
+      return defaults;
+    },
+    {} as Record<string, any>,
+  );
 
   // Initialize the form
   const form = useForm<z.infer<typeof formSchema>>({
