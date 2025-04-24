@@ -8,8 +8,8 @@ export function encodeVietnameseUrl(str: string): string {
 
 export const urlDisplayMapping: Record<string, string> = {
   dashboard: "Bảng điều khiển",
-  english: "Anh văn",
-  communication: "Giao tiếp",
+  12345: "Anh văn",
+  56789: "Giao tiếp",
   classes: "Lớp học",
   overview: "Tổng quan",
   members: "Thành viên",

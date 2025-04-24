@@ -36,51 +36,51 @@ export const appSidebar = {
       navs: [
         {
           title: "Lớp học",
-          url: "/dashboard/english/classes/overview",
+          url: "/dashboard/12345/classes/overview",
           icon: DoorOpen,
           isActive: true,
           items: [
             {
               title: "Tổng quan",
-              url: "/dashboard/english/classes/overview",
+              url: "/dashboard/12345/classes/overview",
             },
             {
               title: "Phiên dịch",
-              url: "/dashboard/english/classes/translation",
+              url: "/dashboard/12345/classes/translation",
             },
             {
               title: "AV chủ nhật",
-              url: "/dashboard/english/classes/sunday-english",
+              url: "/dashboard/12345/classes/sunday-english",
             },
             {
               title: "AV thứ 5",
-              url: "/dashboard/english/classes/thursday-english",
+              url: "/dashboard/12345/classes/thursday-english",
             },
           ],
         },
         {
           title: "Thành viên",
-          url: "/dashboard/english/members/list",
+          url: "/dashboard/12345/members/list",
           icon: Users,
           items: [
             {
               title: "Danh sách",
-              url: "/dashboard/english/members/list",
+              url: "/dashboard/12345/members/list",
             },
             {
               title: "Sinh nhật",
-              url: "/dashboard/english/members/birthday",
+              url: "/dashboard/12345/members/birthday",
             },
           ],
         },
         {
           title: "Kỹ năng",
-          url: "/dashboard/english/skills/score-table",
+          url: "/dashboard/12345/skills/score-table",
           icon: Zap,
           items: [
             {
               title: "Bảng điểm",
-              url: "/dashboard/english/skills/score-table",
+              url: "/dashboard/12345/skills/score-table",
             },
           ],
         },
@@ -91,47 +91,47 @@ export const appSidebar = {
       navs: [
         {
           title: "Lớp học",
-          url: "/dashboard/communication/classes/overview",
+          url: "/dashboard/56789/classes/overview",
           icon: DoorOpen,
           isActive: true,
           items: [
             {
               title: "Tổng quan",
-              url: "/dashboard/communication/classes/overview",
+              url: "/dashboard/56789/classes/overview",
             },
             {
               title: "Giao tiếp Đám đông",
-              url: "/dashboard/communication/classes/crowd-communication",
+              url: "/dashboard/56789/classes/crowd-communication",
             },
             {
               title: "Giao tiếp Thu hút",
-              url: "/dashboard/communication/classes/attraction-communication",
+              url: "/dashboard/56789/classes/attraction-communication",
             },
           ],
         },
         {
           title: "Thành viên",
-          url: "/dashboard/communication/members/list",
+          url: "/dashboard/56789/members/list",
           icon: Users,
           items: [
             {
               title: "Danh sách",
-              url: "/dashboard/communication/members/list",
+              url: "/dashboard/56789/members/list",
             },
             {
               title: "Sinh nhật",
-              url: "/dashboard/communication/members/birthday",
+              url: "/dashboard/56789/members/birthday",
             },
           ],
         },
         {
           title: "Kỹ năng",
-          url: "/dashboard/communication/skills/score-table",
+          url: "/dashboard/56789/skills/score-table",
           icon: Zap,
           items: [
             {
               title: "Bảng điểm",
-              url: "/dashboard/communication/skills/score-table",
+              url: "/dashboard/56789/skills/score-table",
             },
           ],
         },
