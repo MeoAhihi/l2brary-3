@@ -32,7 +32,7 @@ export const appSidebar = {
   ],
   navMain: [
     {
-      title: "Anh văn",
+      title: "Khám phá Vật lý",
       navs: [
         {
           title: "Lớp học",
@@ -45,15 +45,15 @@ export const appSidebar = {
               url: "/dashboard/12345/classes/overview",
             },
             {
-              title: "Phiên dịch",
+              title: "Thí nghiệm Vật Lý",
               url: "/dashboard/12345/classes/translation",
             },
             {
-              title: "AV chủ nhật",
+              title: "Lịch sử Vật lý học",
               url: "/dashboard/12345/classes/sunday-english",
             },
             {
-              title: "AV thứ 5",
+              title: "Hoạt động Dã ngoại",
               url: "/dashboard/12345/classes/thursday-english",
             },
           ],
@@ -87,7 +87,7 @@ export const appSidebar = {
       ],
     },
     {
-      title: "Kỹ năng Giao tiếp",
+      title: "Vật lý Học thuật",
       navs: [
         {
           title: "Lớp học",
@@ -100,11 +100,11 @@ export const appSidebar = {
               url: "/dashboard/56789/classes/overview",
             },
             {
-              title: "Giao tiếp Đám đông",
+              title: "Phương pháp Nghiên cứu Khoa học",
               url: "/dashboard/56789/classes/crowd-communication",
             },
             {
-              title: "Giao tiếp Thu hút",
+              title: "101 Bài tập Vật lý Hay và Khó",
               url: "/dashboard/56789/classes/attraction-communication",
             },
           ],

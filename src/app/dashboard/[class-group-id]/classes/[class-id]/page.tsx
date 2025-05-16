@@ -113,7 +113,7 @@ export default function Page() {
   return (
     <>
       <PageHeader
-        pageTitle="AV thứ 5"
+        pageTitle="Thí nghiệm Vật lý"
         descriptions={["Online", "Thứ 5", "19:30 - 21:00"]}
       >
         <Button>

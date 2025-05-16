@@ -15,7 +15,7 @@ const data: Class[] = [
   },
   {
     id: "2",
-    name: "Phương pháp Nghiên cứu Khoa học",
+    name: "Lịch sử Vật lý học",
     day: "Thứ 7",
     startTime: "14:00",
     endTime: "17:00",
