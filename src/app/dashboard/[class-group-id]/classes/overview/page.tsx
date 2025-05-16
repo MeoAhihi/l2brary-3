@@ -8,24 +8,24 @@ import { Button } from "@/components/ui/button";
 const data: Class[] = [
   {
     id: "1",
-    name: "AV thứ 5",
-    day: "Thứ 5",
-    startTime: "19:00",
-    endTime: "21:00",
+    name: "Thí nghiệm Vật Lý",
+    day: "Thứ 7",
+    startTime: "14:00",
+    endTime: "17:00",
   },
   {
     id: "2",
-    name: "AV chủ nhật",
-    day: "Chủ nhật",
+    name: "Phương pháp Nghiên cứu Khoa học",
+    day: "Thứ 7",
     startTime: "14:00",
     endTime: "17:00",
   },
   {
     id: "3",
-    name: "Phiên dịch",
+    name: "Hoạt động Dã ngoại",
     day: "Chủ Nhật",
-    startTime: "15:00",
-    endTime: "17:00",
+    startTime: "09:00",
+    endTime: "15:00",
   },
 ];
 
