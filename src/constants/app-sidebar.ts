@@ -1,5 +1,6 @@
 import {
   AudioWaveform,
+  CakeIcon,
   Command,
   DoorOpen,
   GalleryVerticalEnd,
@@ -8,6 +9,7 @@ import {
   PieChart,
   Users,
   Users2,
+  Users2Icon,
   Zap
 } from "lucide-react";
 
@@ -146,12 +148,12 @@ export const appSidebar = {
     {
       name: "Thành viên",
       url: "/dashboard/members",
-      icon: Users2 as LucideIcon,
+      icon: Users2Icon,
     },
     {
-      name: "Sales & Marketing",
-      url: "#",
-      icon: PieChart as LucideIcon,
+      name: "Sinh nhật",
+      url: "/dashboard/birthdays",
+      icon: CakeIcon,
     },
     {
       name: "Travel",
