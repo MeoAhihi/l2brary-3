@@ -15,6 +15,7 @@ import {
 
 // This is sample data.
 import { appSidebar } from "@/constants/app-sidebar";
+import { NavProjects } from "./nav-projects";
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
@@ -26,7 +27,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         {appSidebar.navMain.map((item) => (
           <NavMain key={item.title} title={item.title} items={item.navs} />
         ))}
-        {/* <NavProjects projects={data.projects} /> */}
+        <NavProjects projects={appSidebar.projects} />
       </SidebarContent>
       <SidebarFooter>
         <NavUser user={appSidebar.user} />

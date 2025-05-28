@@ -108,7 +108,7 @@ function page() {
                 </TableHeader>
                 <TableBody>
                   {classJoining.map(row => (
-                    <TableRow>
+                    <TableRow key={row.class}>
                       <TableCell>{row.class}</TableCell>
                       <TableCell>{row.join_rate}%</TableCell>
                       <TableCell>{row.quiz_rate}%</TableCell>

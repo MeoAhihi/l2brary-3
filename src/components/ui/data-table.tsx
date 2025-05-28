@@ -32,7 +32,7 @@ interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data?: TData[];
   createPage?: string;
-  filterField?: string;
+  filterField?: string | string[];
 }
 
 export function DataTable<TData, TValue>({
@@ -78,13 +78,22 @@ export function DataTable<TData, TValue>({
       {filterField && (
         <div className="flex items-center py-2">
           <Input
-            placeholder={`Filter ${filterField}...`}
+            placeholder="Tìm kiếm..."
             value={
-              (table.getColumn(filterField)?.getFilterValue() as string) ?? ""
+              Array.isArray(filterField)
+                ? (table.getColumn(filterField[0])?.getFilterValue() as string) ?? ""
+                : (table.getColumn(filterField)?.getFilterValue() as string) ?? ""
             }
-            onChange={(event) =>
-              table.getColumn(filterField)?.setFilterValue(event.target.value)
-            }
+            onChange={(event) => {
+              const searchValue = event.target.value;
+              if (Array.isArray(filterField)) {
+                filterField.forEach((field) => {
+                  table.getColumn(field)?.setFilterValue(searchValue);
+                });
+              } else {
+                table.getColumn(filterField)?.setFilterValue(searchValue);
+              }
+            }}
             className="max-w-sm"
           />
         </div>
@@ -101,9 +110,9 @@ export function DataTable<TData, TValue>({
                       {header.isPlaceholder
                         ? null
                         : flexRender(
-                            header.column.columnDef.header,
-                            header.getContext(),
-                          )}
+                          header.column.columnDef.header,
+                          header.getContext(),
+                        )}
                     </TableHead>
                   );
                 })}

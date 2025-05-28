@@ -3,8 +3,12 @@ import {
   Command,
   DoorOpen,
   GalleryVerticalEnd,
+  LucideIcon,
+  Map,
+  PieChart,
   Users,
-  Zap,
+  Users2,
+  Zap
 } from "lucide-react";
 
 export const appSidebar = {
@@ -74,7 +78,7 @@ export const appSidebar = {
           ],
         },
         {
-          title: "Kỹ năng",
+          title: "Điểm số",
           url: "/dashboard/12345/skills/score-table",
           icon: Zap,
           items: [
@@ -125,7 +129,7 @@ export const appSidebar = {
           ],
         },
         {
-          title: "Kỹ năng",
+          title: "Điểm số",
           url: "/dashboard/56789/skills/score-table",
           icon: Zap,
           items: [
@@ -138,21 +142,21 @@ export const appSidebar = {
       ],
     },
   ],
-  // projects: [
-  //   {
-  //     name: "Design Engineering",
-  //     url: "#",
-  //     icon: Frame,
-  //   },
-  //   {
-  //     name: "Sales & Marketing",
-  //     url: "#",
-  //     icon: PieChart,
-  //   },
-  //   {
-  //     name: "Travel",
-  //     url: "#",
-  //     icon: Map,
-  //   },
-  // ],
+  projects: [
+    {
+      name: "Thành viên",
+      url: "/dashboard/members",
+      icon: Users2 as LucideIcon,
+    },
+    {
+      name: "Sales & Marketing",
+      url: "#",
+      icon: PieChart as LucideIcon,
+    },
+    {
+      name: "Travel",
+      url: "#",
+      icon: Map as LucideIcon,
+    },
+  ],
 };
