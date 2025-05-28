@@ -1,6 +1,6 @@
 "use client";
 
-import { Bar, BarChart, CartesianGrid, XAxis } from "recharts";
+import { Bar, BarChart, CartesianGrid, XAxis, YAxis } from "recharts";
 
 import {
   ChartConfig,
@@ -9,7 +9,7 @@ import {
   ChartTooltipContent,
 } from "@/components/ui/chart";
 
-import chartData from "@/constants/sessions.json";
+import classJoining from "@/constants/class-joining.json";
 
 const chartConfig = {
   attendees: {
@@ -21,17 +21,25 @@ const chartConfig = {
 export function MyChart() {
   return (
     <ChartContainer config={chartConfig} className="min-h-[200px] w-full">
-      <BarChart accessibilityLayer data={chartData}>
+      <BarChart accessibilityLayer data={classJoining}>
         <CartesianGrid vertical={false} />
         <ChartTooltip content={<ChartTooltipContent />} />
         <XAxis
-          dataKey="session"
+          dataKey="class"
           tickLine={false}
           tickMargin={10}
           axisLine={false}
           tickFormatter={(value) => value}
         />
-        <Bar dataKey="attendees" fill="var(--chart-2)" radius={4} />
+        <YAxis
+          tickMargin={10}
+          axisLine={false}
+          tickLine={false}
+          domain={[0, 100]}
+          tickFormatter={(value) => `${value}%`}
+        />
+        <Bar dataKey="join_rate" fill="var(--chart-2)" radius={4} />
+        <Bar dataKey="quiz_rate" fill="var(--chart-1)" radius={4} />
       </BarChart>
     </ChartContainer>
   );

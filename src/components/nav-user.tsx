@@ -84,9 +84,11 @@ export function NavUser({
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
-              <DropdownMenuItem>
-                <BadgeCheck />
-                Account
+              <DropdownMenuItem asChild>
+                <a href="/dashboard/profile">
+                  <BadgeCheck />
+                  Hồ sơ
+                </a>
               </DropdownMenuItem>
               <DropdownMenuItem>
                 <CreditCard />

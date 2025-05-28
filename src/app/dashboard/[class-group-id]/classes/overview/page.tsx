@@ -5,29 +5,7 @@ import { Plus } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 
-const data: Class[] = [
-  {
-    id: "1",
-    name: "Thí nghiệm Vật Lý",
-    day: "Thứ 7",
-    startTime: "14:00",
-    endTime: "17:00",
-  },
-  {
-    id: "2",
-    name: "Lịch sử Vật lý học",
-    day: "Thứ 7",
-    startTime: "14:00",
-    endTime: "17:00",
-  },
-  {
-    id: "3",
-    name: "Hoạt động Dã ngoại",
-    day: "Chủ Nhật",
-    startTime: "09:00",
-    endTime: "15:00",
-  },
-];
+import classes from "@/constants/classes.json";
 
 export default function Page() {
   return (
@@ -41,7 +19,7 @@ export default function Page() {
       <div>
         <DataTable
           columns={columns}
-          data={data}
+          data={classes}
           title="Danh sách Lớp học"
           createPage="/dashboard/create"
           filterField="name"
