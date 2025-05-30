@@ -8,9 +8,9 @@ export default function Page() {
         <div className="flex flex-col gap-6">
           <Card>
             <CardHeader>
-              <CardTitle>Login to your account</CardTitle>
+              <CardTitle>Đăng nhập</CardTitle>
               <CardDescription>
-                Enter your email below to login to your account
+                Nhập thông tin đăng nhập của bạn để tiếp tục.
               </CardDescription>
             </CardHeader>
             <CardContent>

@@ -66,7 +66,7 @@ const formSchema = z.object({
   path: ["confirm_password"],
 });
 
-export function SignupForm() {
+export function SignupForm({ loginUrl = "/login" }: { loginUrl?: string }) {
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -254,6 +254,17 @@ export function SignupForm() {
         />
 
         <Button type="submit" className="w-full">Đăng ký</Button>
+        <p>Hoặc đăng nhập với</p>
+        <Button variant="outline" className="w-full">
+          <img src="/icons8-google.svg" alt="Google Icon" style={{ width: 20, height: "auto" }} />
+          Google
+        </Button>
+        <div className="mt-4 text-center text-sm">
+          Đã có tài khoản?{" "}
+          <a href={loginUrl} className="underline underline-offset-4">
+            Đăng ký
+          </a>
+        </div>
       </form>
     </Form>
   )
