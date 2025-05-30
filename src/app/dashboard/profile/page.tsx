@@ -14,7 +14,13 @@ function page() {
   const date = new Date()
   return (
     <>
-      <PageHeader pageTitle="Hồ sơ cá nhân" descriptions={[{ label: `Hoạt động gần nhất: ${date.toLocaleString()}`, status: "warning" }, { label: `Tham gia gần nhất: ${date.toLocaleString()}`, status: "danger" }]} />
+      <PageHeader
+        pageTitle="Hồ sơ cá nhân"
+        descriptions={[
+          { label: `Hoạt động gần nhất: ${date.toLocaleString()}`, status: "warning" },
+          { label: `Tham gia gần nhất: ${date.toLocaleString()}`, status: "danger" }
+        ]}
+      />
       <div className="grid grid-cols-12 gap-4">
         <div className="col-span-4 space-y-4">
           <Card className="relative">
