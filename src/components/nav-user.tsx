@@ -25,6 +25,7 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from "@/components/ui/sidebar";
+import Link from "next/link";
 
 export function NavUser({
   user,
@@ -85,10 +86,10 @@ export function NavUser({
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
               <DropdownMenuItem asChild>
-                <a href="/dashboard/profile">
+                <Link href="/dashboard/profile">
                   <BadgeCheck />
                   Hồ sơ
-                </a>
+                </Link>
               </DropdownMenuItem>
               <DropdownMenuItem>
                 <CreditCard />

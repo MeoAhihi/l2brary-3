@@ -6,9 +6,7 @@ import {
   GalleryVerticalEnd,
   LucideIcon,
   Map,
-  PieChart,
   Users,
-  Users2,
   Users2Icon,
   Zap
 } from "lucide-react";

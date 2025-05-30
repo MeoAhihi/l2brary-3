@@ -52,10 +52,11 @@ import {
   PasswordInput
 } from "@/components/ui/password-input"
 import { RadioGroupItem } from "./ui/radio-group"
+import Image from "next/image"
 
 const formSchema = z.object({
   fullname: z.string().min(1), // delete require contraints
-  isMale: z.enum(["male", "female", "other"]),
+  gender: z.enum(["male", "female", "other"]),
   birthday: z.coerce.date(),
   email: z.string().email().optional(),
   phone_number: z.string().optional(),
@@ -84,6 +85,8 @@ export function SignupForm({ loginUrl = "/login" }: { loginUrl?: string }) {
           <code className="text-white">{JSON.stringify(values, null, 2)}</code>
         </pre>
       );
+
+
     } catch (error) {
       console.error("Lỗi Đăng ký", error);
       toast.error("Đăng ký không thành công. Vui lòng thử lại.");
@@ -115,7 +118,7 @@ export function SignupForm({ loginUrl = "/login" }: { loginUrl?: string }) {
 
         <FormField
           control={form.control}
-          name="isMale"
+          name="gender"
           render={({ field }) => (
             <FormItem className="space-y-3">
               <FormLabel>Giới tính</FormLabel>
@@ -256,7 +259,7 @@ export function SignupForm({ loginUrl = "/login" }: { loginUrl?: string }) {
         <Button type="submit" className="w-full">Đăng ký</Button>
         <p>Hoặc đăng nhập với</p>
         <Button variant="outline" className="w-full">
-          <img src="/icons8-google.svg" alt="Google Icon" style={{ width: 20, height: "auto" }} />
+          <Image src="/icons8-google.svg" alt="Google Icon" style={{ width: 20, height: "auto" }} />
           Google
         </Button>
         <div className="mt-4 text-center text-sm">

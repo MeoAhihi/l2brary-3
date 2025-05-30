@@ -1,9 +1,9 @@
+import { Button } from "@/components/ui/button";
 import { DataTable } from "@/components/ui/data-table";
-import { Class, columns } from "./columns";
 import PageHeader from "@/components/ui/page-header";
 import { Plus } from "lucide-react";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
+import { columns } from "./columns";
 
 import classes from "@/constants/classes.json";
 

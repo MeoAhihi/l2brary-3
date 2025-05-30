@@ -1,8 +1,7 @@
 import MemberList from "@/components/member-list";
 import { Card, CardContent } from "@/components/ui/card";
 import PageHeader from "@/components/ui/page-header";
-import data from "@/constants/members.json"
-import { cn } from "@/lib/utils";
+import data from "@/constants/members.json";
 const birthdays = data.map((member) => ({
   avatarUrl: "lorem.photos/500",
   name: member.fullname,
@@ -30,7 +29,6 @@ const membersByMonth = months.map((month, index) => {
     members: birthdays.filter((member) => member.birthday.getMonth() === index) || [],
   };
 });
-const thisMonth = new Date().getMonth();
 
 export default function Page() {
   return (

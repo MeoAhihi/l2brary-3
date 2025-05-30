@@ -1,4 +1,5 @@
 "use client"
+
 import {
   Button
 } from "@/components/ui/button"
@@ -19,9 +20,8 @@ import {
 import {
   zodResolver
 } from "@hookform/resolvers/zod"
-import {
-  useState
-} from "react"
+import Image from "next/image"
+import { redirect } from "next/navigation"
 import {
   useForm
 } from "react-hook-form"
@@ -29,7 +29,6 @@ import {
   toast
 } from "sonner"
 import * as z from "zod"
-import { Label } from "./ui/label"
 
 const formSchema = z.object({
   email: z.string(),
@@ -58,7 +57,7 @@ export function LoginForm({ signupUrl = "/signup" }: { signupUrl?: string }) {
       })
       const data = await response.json()
       localStorage.setItem("token", data.token)
-      window.location.href = "/"
+      redirect("/dashboard")
     } catch (error) {
       console.error("Form submission error", error);
       toast.error("Failed to submit the form. Please try again.");
@@ -108,7 +107,7 @@ export function LoginForm({ signupUrl = "/signup" }: { signupUrl?: string }) {
             Đăng nhập
           </Button>
           <Button variant="outline" className="w-full">
-            <img src="/icons8-google.svg" alt="Google Icon" style={{ width: 20, height: "auto" }} />
+            <Image src="/icons8-google.svg" alt="Google Icon" style={{ width: 20, height: "auto" }} />
             Đăng nhập với Google
           </Button>
         </div>
