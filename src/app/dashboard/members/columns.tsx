@@ -11,6 +11,8 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { ColumnDef } from "@tanstack/react-table";
 import { ArrowUpDown, MoreHorizontal } from "lucide-react";
+import { redirect } from "next/navigation";
+import { toast } from "sonner";
 
 export type Member = {
   id: string;
@@ -126,13 +128,26 @@ export const columns: ColumnDef<Member>[] = [
           <DropdownMenuContent align="end">
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
             <DropdownMenuItem
-              onClick={() => navigator.clipboard.writeText(members.id)}
+              onClick={() => {
+                navigator.clipboard.writeText(members.id);
+                toast("Đã sao chép ID thành viên", {
+                  description: members.id,
+                  action: {
+                    label: "OK",
+                    onClick: () => { }
+                  }
+                })
+              }}
             >
               Sao chép ID
             </DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>Xem hồ sơ</DropdownMenuItem>
-            <DropdownMenuItem>Chỉnh sửa</DropdownMenuItem>
+            <DropdownMenuItem onClick={() => redirect(`/dashboard/members/${members.id}/profile`)}>
+              Xem hồ sơ
+            </DropdownMenuItem>
+            <DropdownMenuItem onClick={() => redirect(`/dashboard/members/${members.id}/update`)}>
+              Chỉnh sửa
+            </DropdownMenuItem>
             <DropdownMenuItem>Chặn thành viên</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>

@@ -24,10 +24,10 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         <TeamSwitcher teams={appSidebar.teams} />
       </SidebarHeader>
       <SidebarContent>
+        <NavProjects projects={appSidebar.projects} />
         {appSidebar.navMain.map((item) => (
           <NavMain key={item.title} title={item.title} items={item.navs} />
         ))}
-        <NavProjects projects={appSidebar.projects} />
       </SidebarContent>
       <SidebarFooter>
         <NavUser user={appSidebar.user} />

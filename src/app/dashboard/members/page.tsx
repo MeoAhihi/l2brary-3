@@ -15,7 +15,13 @@ export default function Page() {
         <DownloadMembersListButton />
       </PageHeader>
       <div>
-        <DataTable title="Thành viên" columns={columns} data={members} filterField={["fullname", "international_name"]} />
+        <DataTable
+          title="Thành viên"
+          columns={columns}
+          data={members}
+          filterField={["fullname", "international_name"]}
+          createPage="/dashboard/members/new"
+        />
       </div>
     </>
   );
