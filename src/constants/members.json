@@ -8,7 +8,7 @@
     "is_male": true,
     "group": "1",
     "school_class": "10A3",
-    "phone_number": "(+84)123-456-789",
+    "phone_number": "+84123456789",
     "email": "m@example.com"
   },
   {
@@ -20,7 +20,7 @@
     "is_male": true,
     "group": "2",
     "school_class": "10A3",
-    "phone_number": "(+84)123-456-789",
+    "phone_number": "+84123456789",
     "email": "m@example.com"
   },
   {
@@ -32,7 +32,7 @@
     "is_male": false,
     "group": "1",
     "school_class": "10A3",
-    "phone_number": "(+84)123-456-789",
+    "phone_number": "+84123456789",
     "email": "m@example.com"
   },
   {
@@ -44,7 +44,7 @@
     "is_male": false,
     "group": "2",
     "school_class": "10A3",
-    "phone_number": "(+84)123-456-789",
+    "phone_number": "+84123456789",
     "email": "m@example.com"
   },
   {
@@ -56,7 +56,7 @@
     "is_male": false,
     "group": "1",
     "school_class": "10A3",
-    "phone_number": "(+84)123-456-789",
+    "phone_number": "+84123456789",
     "email": "m@example.com"
   },
   {
@@ -68,7 +68,7 @@
     "is_male": true,
     "group": "2",
     "school_class": "10A3",
-    "phone_number": "(+84)123-456-789",
+    "phone_number": "+84123456789",
     "email": "m@example.com"
   },
   {
@@ -80,7 +80,7 @@
     "is_male": true,
     "group": "1",
     "school_class": "10A3",
-    "phone_number": "(+84)123-456-789",
+    "phone_number": "+84123456789",
     "email": "m@example.com"
   },
   {
@@ -92,7 +92,7 @@
     "is_male": true,
     "group": "2",
     "school_class": "10A3",
-    "phone_number": "(+84)123-456-789",
+    "phone_number": "+84123456789",
     "email": "m@example.com"
   },
   {
@@ -104,7 +104,7 @@
     "is_male": false,
     "group": "1",
     "school_class": "10A3",
-    "phone_number": "(+84)123-456-789",
+    "phone_number": "+84123456789",
     "email": "m@example.com"
   },
   {
@@ -116,7 +116,7 @@
     "is_male": true,
     "group": "2",
     "school_class": "10A3",
-    "phone_number": "(+84)123-456-789",
+    "phone_number": "+84123456789",
     "email": "m@example.com"
   },
   {
@@ -128,7 +128,7 @@
     "is_male": false,
     "group": "1",
     "school_class": "10A3",
-    "phone_number": "(+84)123-456-789",
+    "phone_number": "+84123456789",
     "email": "m@example.com"
   },
   {
@@ -140,7 +140,7 @@
     "is_male": true,
     "group": "2",
     "school_class": "10A3",
-    "phone_number": "(+84)123-456-789",
+    "phone_number": "+84123456789",
     "email": "m@example.com"
   }
 ]
