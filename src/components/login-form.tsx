@@ -107,7 +107,7 @@ export function LoginForm({ signupUrl = "/signup" }: { signupUrl?: string }) {
             Đăng nhập
           </Button>
           <Button variant="outline" className="w-full">
-            <Image src="/icons8-google.svg" alt="Google Icon" style={{ width: 20, height: "auto" }} />
+            <Image src="/icons8-google.svg" alt="Google Icon" width={20} height={20}/>
             Đăng nhập với Google
           </Button>
         </div>
