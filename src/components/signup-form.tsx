@@ -67,7 +67,7 @@ const formSchema = z.object({
   path: ["confirm_password"],
 });
 
-export function SignupForm({ loginUrl = "/login" }: { loginUrl?: string }) {
+export function SignupForm({ loginUrl = "/login", signupAction }: { loginUrl?: string, signupAction: (formData: FormData) => Promise<void> }) {
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -77,20 +77,15 @@ export function SignupForm({ loginUrl = "/login" }: { loginUrl?: string }) {
   })
 
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    try {
-      console.log(values);
-      toast(
-        <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-          <code className="text-white">{JSON.stringify(values, null, 2)}</code>
-        </pre>
-      );
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    const formData = new FormData()
 
-
-    } catch (error) {
-      console.error("Lỗi Đăng ký", error);
-      toast.error("Đăng ký không thành công. Vui lòng thử lại.");
+    for (const [key, value] of Object.entries(values)) {
+      if (value !== undefined) {
+        formData.append(key, value as string)
+      }
     }
+    await signupAction(formData)
   }
 
   return (
