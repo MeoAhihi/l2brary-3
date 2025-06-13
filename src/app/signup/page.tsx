@@ -1,5 +1,6 @@
 import { SignupForm } from "@/components/signup-form";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { signup } from "./action";
 
 export default function Page() {
   return (
@@ -14,7 +15,7 @@ export default function Page() {
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <SignupForm />
+              <SignupForm signupAction={signup} />
             </CardContent>
           </Card>
         </div>

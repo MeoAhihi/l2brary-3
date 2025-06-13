@@ -21,13 +21,9 @@ import {
   zodResolver
 } from "@hookform/resolvers/zod"
 import Image from "next/image"
-import { redirect } from "next/navigation"
 import {
   useForm
 } from "react-hook-form"
-import {
-  toast
-} from "sonner"
 import * as z from "zod"
 
 const formSchema = z.object({
@@ -35,38 +31,27 @@ const formSchema = z.object({
   password: z.string()
 });
 
-export function LoginForm({ signupUrl = "/signup" }: { signupUrl?: string }) {
-
+export function LoginForm({ signupUrl = "/signup", loginAction }: {
+  signupUrl?: string, loginAction: (formData: FormData) => Promise<void>
+}) {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
-
   })
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    try {
-      console.log(values);
-      const response = await fetch("http://localhost:3000/auth/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email: values.email,
-          password: values.password,
-        }),
-      })
-      const data = await response.json()
-      localStorage.setItem("token", data.token)
-      redirect("/dashboard")
-    } catch (error) {
-      console.error("Form submission error", error);
-      toast.error("Failed to submit the form. Please try again.");
-    }
+    const formData = new FormData()
+    formData.append("email", values.email)
+    formData.append("password", values.password)
+    await loginAction(formData)
+
   }
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 max-w-3xl mx-auto">
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        // action={loginAction}
+        className="space-y-8 max-w-3xl mx-auto">
 
         <FormField
           control={form.control}
@@ -107,7 +92,7 @@ export function LoginForm({ signupUrl = "/signup" }: { signupUrl?: string }) {
             Đăng nhập
           </Button>
           <Button variant="outline" className="w-full">
-            <Image src="/icons8-google.svg" alt="Google Icon" style={{ width: 20, height: "auto" }} />
+            <Image src="/icons8-google.svg" alt="Google Icon" width={20} height={20} />
             Đăng nhập với Google
           </Button>
         </div>

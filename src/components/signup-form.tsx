@@ -1,21 +1,11 @@
 "use client"
 
 import {
-  toast
-} from "sonner"
-import {
-  useForm
-} from "react-hook-form"
-import {
-  zodResolver
-} from "@hookform/resolvers/zod"
-import * as z from "zod"
-import {
-  cn
-} from "@/lib/utils"
-import {
   Button
 } from "@/components/ui/button"
+import {
+  Calendar
+} from "@/components/ui/calendar"
 import {
   Form,
   FormControl,
@@ -29,30 +19,37 @@ import {
   Input
 } from "@/components/ui/input"
 import {
-  RadioGroup
-} from "@/components/ui/radio-group"
+  PasswordInput
+} from "@/components/ui/password-input"
 import {
-  format
-} from "date-fns"
+  PhoneInput
+} from "@/components/ui/phone-input"
 import {
   Popover,
   PopoverContent,
   PopoverTrigger
 } from "@/components/ui/popover"
 import {
-  Calendar
-} from "@/components/ui/calendar"
+  RadioGroup
+} from "@/components/ui/radio-group"
+import {
+  cn
+} from "@/lib/utils"
+import {
+  zodResolver
+} from "@hookform/resolvers/zod"
+import {
+  format
+} from "date-fns"
 import {
   Calendar as CalendarIcon
 } from "lucide-react"
-import {
-  PhoneInput
-} from "@/components/ui/phone-input";
-import {
-  PasswordInput
-} from "@/components/ui/password-input"
-import { RadioGroupItem } from "./ui/radio-group"
 import Image from "next/image"
+import {
+  useForm
+} from "react-hook-form"
+import * as z from "zod"
+import { RadioGroupItem } from "./ui/radio-group"
 
 const formSchema = z.object({
   fullname: z.string().min(1), // delete require contraints
@@ -67,7 +64,7 @@ const formSchema = z.object({
   path: ["confirm_password"],
 });
 
-export function SignupForm({ loginUrl = "/login" }: { loginUrl?: string }) {
+export function SignupForm({ loginUrl = "/login", signupAction }: { loginUrl?: string, signupAction: (formData: FormData) => Promise<void> }) {
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -77,20 +74,15 @@ export function SignupForm({ loginUrl = "/login" }: { loginUrl?: string }) {
   })
 
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    try {
-      console.log(values);
-      toast(
-        <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-          <code className="text-white">{JSON.stringify(values, null, 2)}</code>
-        </pre>
-      );
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    const formData = new FormData()
 
-
-    } catch (error) {
-      console.error("Lỗi Đăng ký", error);
-      toast.error("Đăng ký không thành công. Vui lòng thử lại.");
+    for (const [key, value] of Object.entries(values)) {
+      if (value !== undefined) {
+        formData.append(key, value as string)
+      }
     }
+    await signupAction(formData)
   }
 
   return (
@@ -259,7 +251,7 @@ export function SignupForm({ loginUrl = "/login" }: { loginUrl?: string }) {
         <Button type="submit" className="w-full">Đăng ký</Button>
         <p>Hoặc đăng nhập với</p>
         <Button variant="outline" className="w-full">
-          <Image src="/icons8-google.svg" alt="Google Icon" style={{ width: 20, height: "auto" }} />
+          <Image src="/icons8-google.svg" alt="Google Icon" width={20} height={20} />
           Google
         </Button>
         <div className="mt-4 text-center text-sm">
