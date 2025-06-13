@@ -22,6 +22,7 @@ export const urlDisplayMapping: Record<string, string> = {
   "thursday-english": "AV thứ 5",
   "crowd-communication": "Giao tiếp đám đông",
   "attraction-communication": "Giao tiếp thu hút",
+  "profile": "Hồ sơ",
 };
 
 export function getDisplayNameFromUrl(urlSegment: string): string {
