@@ -5,10 +5,19 @@ import { columns } from "./columns";
 
 import data from "@/constants/members.json";
 import DownloadMembersListButton from "./download_members_list_btn";
+import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 
 const members: any = data.map(member => ({ ...member, birthday: new Date(member.birthday) }));
 
-export default function Page() {
+export default async function Page() {
+  const cookieStore = await cookies();
+  const token = cookieStore.get("token");
+  console.log("🚀 ~ Page ~ token:", token)
+  
+  if (!token) {
+    // return redirect("/login");
+  }
   return (
     <>
       <PageHeader pageTitle="Danh sách thành viên CLB">
