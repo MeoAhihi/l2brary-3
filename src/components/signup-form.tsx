@@ -1,21 +1,11 @@
 "use client"
 
 import {
-  toast
-} from "sonner"
-import {
-  useForm
-} from "react-hook-form"
-import {
-  zodResolver
-} from "@hookform/resolvers/zod"
-import * as z from "zod"
-import {
-  cn
-} from "@/lib/utils"
-import {
   Button
 } from "@/components/ui/button"
+import {
+  Calendar
+} from "@/components/ui/calendar"
 import {
   Form,
   FormControl,
@@ -29,30 +19,37 @@ import {
   Input
 } from "@/components/ui/input"
 import {
-  RadioGroup
-} from "@/components/ui/radio-group"
+  PasswordInput
+} from "@/components/ui/password-input"
 import {
-  format
-} from "date-fns"
+  PhoneInput
+} from "@/components/ui/phone-input"
 import {
   Popover,
   PopoverContent,
   PopoverTrigger
 } from "@/components/ui/popover"
 import {
-  Calendar
-} from "@/components/ui/calendar"
+  RadioGroup
+} from "@/components/ui/radio-group"
+import {
+  cn
+} from "@/lib/utils"
+import {
+  zodResolver
+} from "@hookform/resolvers/zod"
+import {
+  format
+} from "date-fns"
 import {
   Calendar as CalendarIcon
 } from "lucide-react"
-import {
-  PhoneInput
-} from "@/components/ui/phone-input";
-import {
-  PasswordInput
-} from "@/components/ui/password-input"
-import { RadioGroupItem } from "./ui/radio-group"
 import Image from "next/image"
+import {
+  useForm
+} from "react-hook-form"
+import * as z from "zod"
+import { RadioGroupItem } from "./ui/radio-group"
 
 const formSchema = z.object({
   fullname: z.string().min(1), // delete require contraints
