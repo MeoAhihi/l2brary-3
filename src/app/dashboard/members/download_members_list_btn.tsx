@@ -5,11 +5,9 @@ import { DownloadIcon } from 'lucide-react'
 
 // import members from '@/constants/members.json'
 import { Button } from '@/components/ui/button'
-import { getMembers } from '@/lib/api/members.api'
 import { Member } from './columns'
 
-export default async function DownloadMembersListButton({ data }: { data: Member[] }) {
-  // const members = await getMembers()
+export default function DownloadMembersListButton({ data }: { data: Member[] }) {
 
   return (
     <Button
