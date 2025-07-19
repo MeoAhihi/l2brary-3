@@ -1,36 +1,65 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-## Getting Started
+# L2brary-Client
 
-First, run the development server:
+L2brary-3 là một dự án quản lý thành viên, lớp học, kỹ năng... được xây dựng với [Next.js](https://nextjs.org) (App Router), React, TypeScript và pnpm.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## Mục lục
+- [Cấu trúc dự án](#cấu-trúc-dự-án)
+- [Luồng hoạt động](#luồng-hoạt-động)
+- [Khởi động & phát triển](#khởi-động--phát-triển)
+- [Ghi chú](#ghi-chú)
+
+## Cấu trúc dự án
+
+```
+src/
+  app/           # Các route, layout, page chính
+  components/     # Component UI & logic tái sử dụng
+  constants/      # Dữ liệu tĩnh, cấu hình
+  hooks/          # Custom React hooks
+  lib/            # Helper, util, export excel...
+  providers/      # Context, provider cho global state
+  styles/         # CSS toàn cục
+public/           # Ảnh, SVG, asset tĩnh
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Luồng hoạt động
+1. **Entry Point**: Trang chính ở `src/app/page.tsx`.
+2. **Routing**: Next.js App Router, mỗi thư mục trong `src/app/` là một route.
+3. **Layout**: Sử dụng `layout.tsx` cho từng route để chia sẻ UI (sidebar, header...)
+4. **Component**: Page sử dụng các component từ `src/components/`.
+5. **Data**: Dữ liệu tĩnh từ `src/constants/` hoặc fetch động.
+6. **State**: Quản lý state toàn cục qua provider trong `src/providers/`.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Khởi động & phát triển
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Cài đặt
 
-## Learn More
+```bash
+pnpm install
+# hoặc npm install
+```
 
-To learn more about Next.js, take a look at the following resources:
+### Chạy dev server
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+pnpm dev
+# hoặc npm run dev
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Truy cập [http://localhost:3000](http://localhost:3000) để xem kết quả.
 
-## Deploy on Vercel
+### Build & Production
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```bash
+pnpm build
+pnpm start
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Ghi chú
+- Sử dụng Next.js App Router (không dùng pages/)
+- React hiện đại (function component, hook)
+- Tổ chức theo tính năng, dễ mở rộng
+- Dùng pnpm để quản lý package
+
+---
