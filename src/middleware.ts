@@ -24,7 +24,7 @@ export async function middleware(req: NextRequest) {
   const cookie = req.cookies.get(ACCESS_TOKEN)?.value;
   const token = await decrypt(cookie);
   const isTokenExpired = checkTokenExpired(token);
-  const [, , ...segments] = pathname.split("/");
+  const segments = pathname.split("/").slice(2);
 
   const lastPathname = segments.join("/");
 
