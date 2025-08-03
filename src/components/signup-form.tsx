@@ -1,11 +1,7 @@
-"use client"
+"use client";
 
-import {
-  Button
-} from "@/components/ui/button"
-import {
-  Calendar
-} from "@/components/ui/calendar"
+import { Button } from "@/components/ui/button";
+import { Calendar } from "@/components/ui/calendar";
 import {
   Form,
   FormControl,
@@ -14,81 +10,74 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form"
-import {
-  Input
-} from "@/components/ui/input"
-import {
-  PasswordInput
-} from "@/components/ui/password-input"
-import {
-  PhoneInput
-} from "@/components/ui/phone-input"
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { PasswordInput } from "@/components/ui/password-input";
+import { PhoneInput } from "@/components/ui/phone-input";
 import {
   Popover,
   PopoverContent,
-  PopoverTrigger
-} from "@/components/ui/popover"
-import {
-  RadioGroup
-} from "@/components/ui/radio-group"
-import {
-  cn
-} from "@/lib/utils"
-import {
-  zodResolver
-} from "@hookform/resolvers/zod"
-import {
-  format
-} from "date-fns"
-import {
-  Calendar as CalendarIcon
-} from "lucide-react"
-import Image from "next/image"
-import {
-  useForm
-} from "react-hook-form"
-import * as z from "zod"
-import { RadioGroupItem } from "./ui/radio-group"
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import { RadioGroup } from "@/components/ui/radio-group";
+import { cn } from "@/lib/utils";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { format } from "date-fns";
+import { Calendar as CalendarIcon } from "lucide-react";
+import Image from "next/image";
+import { useForm } from "react-hook-form";
+import * as z from "zod";
+import { RadioGroupItem } from "./ui/radio-group";
 
-const formSchema = z.object({
-  fullname: z.string().min(1), // delete require contraints
-  gender: z.enum(["male", "female", "other"]),
-  birthday: z.coerce.date(),
-  email: z.string().email().optional(),
-  phone_number: z.string().optional(),
-  password: z.string().min(8, "Mật khẩu phải có ít nhất 8 ký tự").regex(/\d/, "Mật khẩu phải có ít 1 chữ số"),
-  confirm_password: z.string()
-}).refine((data) => data.password === data.confirm_password, {
-  message: "Mật khẩu không trùng khớp",
-  path: ["confirm_password"],
-});
+const formSchema = z
+  .object({
+    fullname: z.string().min(1), // delete require contraints
+    gender: z.enum(["male", "female", "other"]),
+    birthday: z.coerce.date(),
+    email: z.string().email().optional(),
+    phone_number: z.string().optional(),
+    password: z
+      .string()
+      .min(8, "Mật khẩu phải có ít nhất 8 ký tự")
+      .regex(/\d/, "Mật khẩu phải có ít 1 chữ số"),
+    confirm_password: z.string(),
+  })
+  .refine((data) => data.password === data.confirm_password, {
+    message: "Mật khẩu không trùng khớp",
+    path: ["confirm_password"],
+  });
 
-export function SignupForm({ loginUrl = "/login", signupAction }: { loginUrl?: string, signupAction: (formData: FormData) => Promise<void> }) {
-
+export function SignupForm({
+  loginUrl = "/login",
+  signupAction,
+}: {
+  loginUrl?: string;
+  signupAction: (formData: FormData) => Promise<void>;
+}) {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      "birthday": new Date()
+      birthday: new Date(),
     },
-  })
-
+  });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    const formData = new FormData()
+    const formData = new FormData();
 
     for (const [key, value] of Object.entries(values)) {
       if (value !== undefined) {
-        formData.append(key, value as string)
+        formData.append(key, value as string);
       }
     }
-    await signupAction(formData)
+    await signupAction(formData);
   }
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 max-w-3xl mx-auto">
-
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        className="space-y-8 max-w-3xl mx-auto"
+      >
         <FormField
           control={form.control}
           name="fullname"
@@ -122,15 +111,16 @@ export function SignupForm({ loginUrl = "/login", signupAction }: { loginUrl?: s
                   {[
                     ["Nam", "male"],
                     ["Nữ", "female"],
-                    ["Khác", "other"]
+                    ["Khác", "other"],
                   ].map((option, index) => (
-                    <FormItem className="flex items-center space-x-3 space-y-0" key={index}>
+                    <FormItem
+                      className="flex items-center space-x-3 space-y-0"
+                      key={index}
+                    >
                       <FormControl>
                         <RadioGroupItem value={option[1]} />
                       </FormControl>
-                      <FormLabel className="font-normal">
-                        {option[0]}
-                      </FormLabel>
+                      <FormLabel className="font-normal">{option[0]}</FormLabel>
                     </FormItem>
                   ))}
                 </RadioGroup>
@@ -139,7 +129,6 @@ export function SignupForm({ loginUrl = "/login", signupAction }: { loginUrl?: s
             </FormItem>
           )}
         />
-
 
         <FormField
           control={form.control}
@@ -154,7 +143,7 @@ export function SignupForm({ loginUrl = "/login", signupAction }: { loginUrl?: s
                       variant={"outline"}
                       className={cn(
                         "w-[240px] pl-3 text-left font-normal",
-                        !field.value && "text-muted-foreground"
+                        !field.value && "text-muted-foreground",
                       )}
                     >
                       {field.value ? (
@@ -189,9 +178,9 @@ export function SignupForm({ loginUrl = "/login", signupAction }: { loginUrl?: s
               <FormControl>
                 <Input
                   placeholder="example@gmail.com"
-
                   type="email"
-                  {...field} />
+                  {...field}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -217,7 +206,6 @@ export function SignupForm({ loginUrl = "/login", signupAction }: { loginUrl?: s
           )}
         />
 
-
         <FormField
           control={form.control}
           name="password"
@@ -227,12 +215,13 @@ export function SignupForm({ loginUrl = "/login", signupAction }: { loginUrl?: s
               <FormControl>
                 <PasswordInput placeholder="●●●●●●●●" {...field} />
               </FormControl>
-              <FormDescription>Mật khẩu phải có ít nhất 8 ký tự và 1 chữ số</FormDescription>
+              <FormDescription>
+                Mật khẩu phải có ít nhất 8 ký tự và 1 chữ số
+              </FormDescription>
               <FormMessage />
             </FormItem>
           )}
         />
-
 
         <FormField
           control={form.control}
@@ -248,10 +237,17 @@ export function SignupForm({ loginUrl = "/login", signupAction }: { loginUrl?: s
           )}
         />
 
-        <Button type="submit" className="w-full">Đăng ký</Button>
+        <Button type="submit" className="w-full">
+          Đăng ký
+        </Button>
         <p>Hoặc đăng nhập với</p>
         <Button variant="outline" className="w-full">
-          <Image src="/icons8-google.svg" alt="Google Icon" width={20} height={20} />
+          <Image
+            src="/icons8-google.svg"
+            alt="Google Icon"
+            width={20}
+            height={20}
+          />
           Google
         </Button>
         <div className="mt-4 text-center text-sm">
@@ -262,5 +258,5 @@ export function SignupForm({ loginUrl = "/login", signupAction }: { loginUrl?: s
         </div>
       </form>
     </Form>
-  )
+  );
 }

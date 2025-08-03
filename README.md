@@ -1,9 +1,9 @@
-
 # L2brary-Client
 
 L2brary-3 là một dự án quản lý thành viên, lớp học, kỹ năng... được xây dựng với [Next.js](https://nextjs.org) (App Router), React, TypeScript và pnpm.
 
 ## Mục lục
+
 - [Cấu trúc dự án](#cấu-trúc-dự-án)
 - [Luồng hoạt động](#luồng-hoạt-động)
 - [Khởi động & phát triển](#khởi-động--phát-triển)
@@ -24,6 +24,7 @@ public/           # Ảnh, SVG, asset tĩnh
 ```
 
 ## Luồng hoạt động
+
 1. **Entry Point**: Trang chính ở `src/app/page.tsx`.
 2. **Routing**: Next.js App Router, mỗi thư mục trong `src/app/` là một route.
 3. **Layout**: Sử dụng `layout.tsx` cho từng route để chia sẻ UI (sidebar, header...)
@@ -57,6 +58,7 @@ pnpm start
 ```
 
 ## Ghi chú
+
 - Sử dụng Next.js App Router (không dùng pages/)
 - React hiện đại (function component, hook)
 - Tổ chức theo tính năng, dễ mở rộng

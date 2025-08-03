@@ -1,6 +1,6 @@
 [
-  {"class": "Thí nghiệm Vật Lý", "join_rate": 65, "quiz_rate": 15},
-  {"class": "Phương pháp NCKH", "join_rate": 80, "quiz_rate": 10},
-  {"class": "Thí nghiệm Kinh Tế", "join_rate": 75, "quiz_rate": 15},
-  {"class": "Thí nghiệm Điện Tử", "join_rate": 70, "quiz_rate": 10}
+  { "class": "Thí nghiệm Vật Lý", "join_rate": 65, "quiz_rate": 15 },
+  { "class": "Phương pháp NCKH", "join_rate": 80, "quiz_rate": 10 },
+  { "class": "Thí nghiệm Kinh Tế", "join_rate": 75, "quiz_rate": 15 },
+  { "class": "Thí nghiệm Điện Tử", "join_rate": 70, "quiz_rate": 10 }
 ]
