@@ -27,7 +27,9 @@ const restConnector = async (cookie?: string) => {
 
       if (status === 401) {
         cookieStore.delete(ACCESS_TOKEN);
-        window.location.reload();
+        if (typeof window !== "undefined") {
+          window.location.reload();
+        }
       }
       if (!IS_PRODUCTION) console.log(error);
 
