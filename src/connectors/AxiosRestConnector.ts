@@ -13,7 +13,7 @@ const restConnector = async (cookie?: string) => {
     withCredentials: false,
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${cookie ? cookie : cookieStore.get(ACCESS_TOKEN)}`,
+      Authorization: `Bearer ${cookie ? cookie : cookieStore.get(ACCESS_TOKEN)?.value}`,
     },
   });
 
