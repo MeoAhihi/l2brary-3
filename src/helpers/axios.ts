@@ -6,12 +6,6 @@ interface RequestParams {
   url: string;
   headers?: AxiosRequestHeaders;
   data?: any;
-}
-
-interface RequestParams {
-  url: string;
-  headers?: AxiosRequestHeaders;
-  data?: any;
   method?: "GET" | "POST" | "PUT" | "DELETE";
   config?: any; // Optional: for extra axios config
 }
