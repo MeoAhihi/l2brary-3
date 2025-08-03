@@ -3,7 +3,7 @@ import * as XLSX from "xlsx";
 export async function exportExcel(
   title: string,
   worksheetname: string,
-  data: Array<any>
+  data: Array<any>,
 ) {
   try {
     // Create Excel workbook and worksheet

@@ -81,8 +81,11 @@ export function DataTable<TData, TValue>({
             placeholder="Tìm kiếm..."
             value={
               Array.isArray(filterField)
-                ? (table.getColumn(filterField[0])?.getFilterValue() as string) ?? ""
-                : (table.getColumn(filterField)?.getFilterValue() as string) ?? ""
+                ? ((table
+                    .getColumn(filterField[0])
+                    ?.getFilterValue() as string) ?? "")
+                : ((table.getColumn(filterField)?.getFilterValue() as string) ??
+                  "")
             }
             onChange={(event) => {
               const searchValue = event.target.value;
@@ -110,9 +113,9 @@ export function DataTable<TData, TValue>({
                       {header.isPlaceholder
                         ? null
                         : flexRender(
-                          header.column.columnDef.header,
-                          header.getContext(),
-                        )}
+                            header.column.columnDef.header,
+                            header.getContext(),
+                          )}
                     </TableHead>
                   );
                 })}

@@ -24,7 +24,7 @@ export async function signup(formData: FormData) {
   cookieStore.set("token", data.access_token, {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
-    maxAge: 60 * 60 * 24 , // 1 day
+    maxAge: 60 * 60 * 24, // 1 day
   });
 
   redirect("/dashboard");

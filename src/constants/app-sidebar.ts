@@ -8,7 +8,7 @@ import {
   Map,
   Users,
   Users2Icon,
-  Zap
+  Zap,
 } from "lucide-react";
 
 export const appSidebar = {
