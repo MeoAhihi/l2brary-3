@@ -1,49 +1,42 @@
-"use client"
+"use client";
 
-import {
-  Button
-} from "@/components/ui/button"
+import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
   FormField,
   FormItem,
   FormLabel,
-  FormMessage
-} from "@/components/ui/form"
-import {
-  Input
-} from "@/components/ui/input"
-import {
-  PasswordInput
-} from "@/components/ui/password-input"
-import {
-  zodResolver
-} from "@hookform/resolvers/zod"
-import Image from "next/image"
-import {
-  useForm
-} from "react-hook-form"
-import * as z from "zod"
+  FormMessage,
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { PasswordInput } from "@/components/ui/password-input";
+import { zodResolver } from "@hookform/resolvers/zod";
+import Image from "next/image";
+import { useForm } from "react-hook-form";
+import * as z from "zod";
 
 const formSchema = z.object({
   email: z.string(),
-  password: z.string()
+  password: z.string(),
 });
 
-export function LoginForm({ signupUrl = "/signup", loginAction }: {
-  signupUrl?: string, loginAction: (formData: FormData) => Promise<void>
+export function LoginForm({
+  signupUrl = "/signup",
+  loginAction,
+}: {
+  signupUrl?: string;
+  loginAction: (formData: FormData) => Promise<void>;
 }) {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
-  })
+  });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    const formData = new FormData()
-    formData.append("email", values.email)
-    formData.append("password", values.password)
-    await loginAction(formData)
-
+    const formData = new FormData();
+    formData.append("email", values.email);
+    formData.append("password", values.password);
+    await loginAction(formData);
   }
 
   return (
@@ -51,8 +44,8 @@ export function LoginForm({ signupUrl = "/signup", loginAction }: {
       <form
         onSubmit={form.handleSubmit(onSubmit)}
         // action={loginAction}
-        className="space-y-8 max-w-3xl mx-auto">
-
+        className="space-y-8 max-w-3xl mx-auto"
+      >
         <FormField
           control={form.control}
           name="email"
@@ -62,9 +55,9 @@ export function LoginForm({ signupUrl = "/signup", loginAction }: {
               <FormControl>
                 <Input
                   placeholder="example@gmail.com"
-
                   type="email"
-                  {...field} />
+                  {...field}
+                />
               </FormControl>
 
               <FormMessage />
@@ -92,7 +85,12 @@ export function LoginForm({ signupUrl = "/signup", loginAction }: {
             Đăng nhập
           </Button>
           <Button variant="outline" className="w-full">
-            <Image src="/icons8-google.svg" alt="Google Icon" width={20} height={20} />
+            <Image
+              src="/icons8-google.svg"
+              alt="Google Icon"
+              width={20}
+              height={20}
+            />
             Đăng nhập với Google
           </Button>
         </div>
@@ -104,5 +102,5 @@ export function LoginForm({ signupUrl = "/signup", loginAction }: {
         </div>
       </form>
     </Form>
-  )
+  );
 }

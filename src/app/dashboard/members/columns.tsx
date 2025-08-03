@@ -57,7 +57,10 @@ export const columns: ColumnDef<Member>[] = [
     },
     cell: ({ row }) => {
       return (
-        <a href={`#${row.getValue("international_name")}`}> {row.getValue("international_name")}</a>
+        <a href={`#${row.getValue("international_name")}`}>
+          {" "}
+          {row.getValue("international_name")}
+        </a>
       );
     },
   },
@@ -134,18 +137,26 @@ export const columns: ColumnDef<Member>[] = [
                   description: members.id,
                   action: {
                     label: "OK",
-                    onClick: () => { }
-                  }
-                })
+                    onClick: () => {},
+                  },
+                });
               }}
             >
               Sao chép ID
             </DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem onClick={() => redirect(`/dashboard/members/${members.id}/profile`)}>
+            <DropdownMenuItem
+              onClick={() =>
+                redirect(`/dashboard/members/${members.id}/profile`)
+              }
+            >
               Xem hồ sơ
             </DropdownMenuItem>
-            <DropdownMenuItem onClick={() => redirect(`/dashboard/members/${members.id}/update`)}>
+            <DropdownMenuItem
+              onClick={() =>
+                redirect(`/dashboard/members/${members.id}/update`)
+              }
+            >
               Chỉnh sửa
             </DropdownMenuItem>
             <DropdownMenuItem>Chặn thành viên</DropdownMenuItem>

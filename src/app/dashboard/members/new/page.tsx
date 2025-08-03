@@ -1,4 +1,4 @@
-import { MemberForm } from "@/components/member-form"
+import { MemberForm } from "@/components/member-form";
 
 export default function page() {
   return (
@@ -6,5 +6,5 @@ export default function page() {
       <h1 className="font-semibold text-2xl mb-5">Tạo thành viên mới</h1>
       <MemberForm />
     </div>
-  )
+  );
 }

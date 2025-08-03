@@ -1,5 +1,11 @@
 import { SignupForm } from "@/components/signup-form";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { signup } from "./action";
 
 export default function Page() {
@@ -21,5 +27,5 @@ export default function Page() {
         </div>
       </div>
     </div>
-  )
+  );
 }

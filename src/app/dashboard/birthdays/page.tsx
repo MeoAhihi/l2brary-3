@@ -21,12 +21,13 @@ const months = [
   "Tháng 10",
   "Tháng 11",
   "Tháng 12",
-]
+];
 
 const membersByMonth = months.map((month, index) => {
   return {
     month,
-    members: birthdays.filter((member) => member.birthday.getMonth() === index) || [],
+    members:
+      birthdays.filter((member) => member.birthday.getMonth() === index) || [],
   };
 });
 
@@ -35,13 +36,13 @@ export default function Page() {
     <>
       <PageHeader pageTitle="Sinh nhật thành viên CLB" />
       <div className="flex flex-col items-center space-y-4 mb-4">
-        {membersByMonth.map((month, index) =>
+        {membersByMonth.map((month, index) => (
           <div key={index} className="max-w-fit">
             <Card>
               <CardContent>
                 <h2 className="text-1xl font-semibold">{month.month}</h2>
-                {month.members.length
-                  ? <MemberList
+                {month.members.length ? (
+                  <MemberList
                     className="my-4"
                     members={month.members}
                     optionalFields={[
@@ -55,11 +56,13 @@ export default function Page() {
                     ]}
                     showHeader={false}
                   />
-                  : "Chưa có sinh nhật vào tháng này"}
+                ) : (
+                  "Chưa có sinh nhật vào tháng này"
+                )}
               </CardContent>
             </Card>
           </div>
-        )}
+        ))}
       </div>
     </>
   );
