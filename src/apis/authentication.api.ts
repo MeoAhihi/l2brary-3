@@ -9,7 +9,7 @@ export const signUp = async (email: string, password: string) => {
   return data;
 };
 
-export const SignIn = async (email: string, password: string) => {
+export const signIn = async (email: string, password: string) => {
   const { data } = await postWithCustomAxios({
     url: "/auth/signin",
     data: { params: { email, password } },
