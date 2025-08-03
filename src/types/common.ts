@@ -1,0 +1,8 @@
+export enum PAGE_NAME {
+  LOGIN = "login",
+  SIGN_UP = "signUp",
+  DASHBOARD = "dashboard",
+  BIRTHDAY = "birthday",
+  MEMBERS = "members",
+  PROFILE = "profile",
+}
