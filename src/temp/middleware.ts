@@ -1,9 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
 
-import { PAGE_LINKS, X_PATHNAME_KEY } from "./constants/common";
-import { ACCESS_TOKEN } from "./constants/authentication";
+import { PAGE_LINKS, X_PATHNAME_KEY } from "../constants/common";
+import { ACCESS_TOKEN } from "../constants/authentication";
 import { checkTokenExpired, decrypt } from "@/lib/authentication";
-import { PAGE_NAME } from "./types/common";
+import { PAGE_NAME } from "../types/common";
 
 const PROTECTED_ROUTES = [
   PAGE_LINKS[PAGE_NAME.DASHBOARD],
