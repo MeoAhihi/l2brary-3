@@ -2,8 +2,8 @@ import { DataTable } from "@/components/ui/data-table";
 import PageHeader from "@/components/ui/page-header";
 import data from "@/constants/members.json";
 import { Metadata } from "next";
-import { columns } from "../../../dashboard/members/columns";
-import DownloadMembersListButton from "../../../dashboard/members/download_members_list_btn";
+import { columns } from "./columns";
+import DownloadMembersListButton from "./download_members_list_btn";
 
 
 
