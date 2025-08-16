@@ -3,7 +3,8 @@ import Image from "next/image";
 import { PhoneCall, Mail, Users, VenusAndMars, Cake } from "lucide-react";
 
 type ProfileCardContentProps = {
-    avatarSrc: string;
+    id: string,
+    avatarUrl: string;
     name: string;
     phone: string;
     email: string;
@@ -13,7 +14,8 @@ type ProfileCardContentProps = {
 };
 
 export default function ProfileCardContent({
-    avatarSrc,
+    id,
+    avatarUrl,
     name,
     phone,
     email,
@@ -24,7 +26,7 @@ export default function ProfileCardContent({
     return (
         <CardContent>
             <Image
-                src={avatarSrc}
+                src={avatarUrl}
                 alt="avatar"
                 className="rounded-full mx-auto"
                 width={200}
@@ -33,6 +35,9 @@ export default function ProfileCardContent({
             <h3 className="text-lg font-semibold text-center mt-4">
                 {name}
             </h3>
+            <div className="text-center text-xs text-muted-foreground mt-1">
+                ID: {id}
+            </div>
             <div className="flex flex-col gap-y-4 mt-2">
                 <div className="flex flex-row gap-3 items-center">
                     <PhoneCall opacity={0.3} size={18} />
