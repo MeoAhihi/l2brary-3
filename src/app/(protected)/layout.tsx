@@ -1,4 +1,7 @@
 import { Metadata } from "next";
+import { AppSidebar } from "@/components/side-nav/app-sidebar";
+import { SidebarProvider } from "@/components/ui/sidebar";
+import { SiteHeader } from "@/components/header/site-header";
 
 export const metadata: Metadata = {
   title: "Admin | L2brary",
@@ -11,20 +14,12 @@ export default function ProtectedLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="min-h-screen bg-background">
-      <div className="flex">
-        {/* Admin Sidebar can be added here */}
-        <aside className="w-64 min-h-screen bg-muted/50 border-r">
-          <div className="p-4">
-            <h2 className="text-lg font-semibold">Admin Panel</h2>
-            {/* Navigation menu will be implemented here */}
-          </div>
-        </aside>
-        
-        <main className="flex-1">
-          {children}
-        </main>
-      </div>
-    </div>
+    <SidebarProvider>
+      <AppSidebar />
+      <main className="w-full px-4">
+        <SiteHeader />
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">{children}</div>
+      </main>
+    </SidebarProvider>
   );
 }
