@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 
-import { MemberForm } from "@/components/member-form";
+import { MemberForm } from "@/components/member/member-form";
 import { useParams } from "next/navigation";
 
 import members from "@/constants/members.json";

@@ -1,4 +1,4 @@
-import { MemberForm } from "@/components/member-form";
+import { MemberForm } from "@/components/member/member-form";
 
 export default function page() {
   return (

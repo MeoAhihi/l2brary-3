@@ -1,4 +1,4 @@
-import MemberList from "@/components/member-list";
+import MemberList from "@/components/member/member-list";
 import { Button } from "@/components/ui/button";
 import { DataTable } from "@/components/ui/data-table";
 import PageHeader from "@/components/ui/page-header";
