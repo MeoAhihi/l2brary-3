@@ -1,7 +1,16 @@
 import { Metadata } from "next";
 import { use } from "react";
-import { BarChart3, Users, BookOpen, TrendingUp } from "lucide-react";
+import { BarChart3, Users, BookOpen, TrendingUp, Crown, Star, Shield, Award, MoreHorizontal } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { 
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 export const metadata: Metadata = {
   title: "Course Overview | Admin | L2brary",
@@ -13,6 +22,84 @@ interface ManageCoursePageProps {
     "course-id": string;
   }>;
 }
+
+// Mock data for students with special positions
+const studentsWithPositions = [
+  {
+    id: 1,
+    name: "Emma Thompson",
+    email: "emma.thompson@example.com",
+    avatar: "/avatars/emma.jpg",
+    position: "Course Assistant",
+    role: "assistant",
+    status: "active",
+    joinedDate: "2024-01-08",
+    performance: 95,
+  },
+  {
+    id: 2,
+    name: "Alice Johnson",
+    email: "alice.johnson@example.com",
+    avatar: "/avatars/alice.jpg",
+    position: "Discussion Leader",
+    role: "leader",
+    status: "active",
+    joinedDate: "2024-01-15",
+    performance: 88,
+  },
+  {
+    id: 3,
+    name: "Frank Miller",
+    email: "frank.miller@example.com",
+    avatar: "/avatars/frank.jpg",
+    position: "Peer Mentor",
+    role: "mentor",
+    status: "active",
+    joinedDate: "2024-01-14",
+    performance: 92,
+  },
+  {
+    id: 4,
+    name: "Carol Davis",
+    email: "carol.davis@example.com",
+    avatar: "/avatars/carol.jpg",
+    position: "Study Group Coordinator",
+    role: "coordinator",
+    status: "active",
+    joinedDate: "2024-01-10",
+    performance: 85,
+  },
+];
+
+const getPositionIcon = (role: string) => {
+  switch (role) {
+    case "assistant":
+      return <Crown className="h-4 w-4 text-yellow-600" />;
+    case "leader":
+      return <Star className="h-4 w-4 text-blue-600" />;
+    case "mentor":
+      return <Shield className="h-4 w-4 text-green-600" />;
+    case "coordinator":
+      return <Award className="h-4 w-4 text-purple-600" />;
+    default:
+      return <Users className="h-4 w-4 text-gray-600" />;
+  }
+};
+
+const getPositionBadge = (role: string) => {
+  switch (role) {
+    case "assistant":
+      return <Badge className="bg-yellow-100 text-yellow-800">Course Assistant</Badge>;
+    case "leader":
+      return <Badge className="bg-blue-100 text-blue-800">Discussion Leader</Badge>;
+    case "mentor":
+      return <Badge className="bg-green-100 text-green-800">Peer Mentor</Badge>;
+    case "coordinator":
+      return <Badge className="bg-purple-100 text-purple-800">Study Coordinator</Badge>;
+    default:
+      return <Badge variant="secondary">Student</Badge>;
+  }
+};
 
 export default function ManageCoursePage({ params }: ManageCoursePageProps) {
   const { "course-id": courseId } = use(params);
@@ -127,6 +214,74 @@ export default function ManageCoursePage({ params }: ManageCoursePageProps) {
           </CardContent>
         </Card>
       </div>
+
+      {/* Students with Special Positions */}
+      <Card>
+        <CardHeader>
+          <div className="flex justify-between items-center">
+            <CardTitle>Students with Special Positions</CardTitle>
+            <Button variant="outline" size="sm">
+              Manage Positions
+            </Button>
+          </div>
+        </CardHeader>
+        <CardContent>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            {studentsWithPositions.map((student) => (
+              <div
+                key={student.id}
+                className="p-4 border rounded-lg hover:bg-accent transition-colors"
+              >
+                <div className="flex items-start justify-between mb-3">
+                  <div className="flex items-center space-x-3">
+                    <Avatar className="h-10 w-10">
+                      <AvatarImage src={student.avatar} />
+                      <AvatarFallback>
+                        {student.name.split(' ').map(n => n[0]).join('')}
+                      </AvatarFallback>
+                    </Avatar>
+                    <div>
+                      <div className="font-medium text-sm">{student.name}</div>
+                      <div className="text-xs text-muted-foreground">{student.email}</div>
+                    </div>
+                  </div>
+                  <DropdownMenu>
+                    <DropdownMenuTrigger asChild>
+                      <Button variant="ghost" className="h-6 w-6 p-0">
+                        <MoreHorizontal className="h-3 w-3" />
+                      </Button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent align="end">
+                      <DropdownMenuItem>View Profile</DropdownMenuItem>
+                      <DropdownMenuItem>Edit Position</DropdownMenuItem>
+                      <DropdownMenuItem>Remove Position</DropdownMenuItem>
+                    </DropdownMenuContent>
+                  </DropdownMenu>
+                </div>
+                
+                <div className="space-y-2">
+                  <div className="flex items-center space-x-2">
+                    {getPositionIcon(student.role)}
+                    {getPositionBadge(student.role)}
+                  </div>
+                  
+                  <div className="flex items-center justify-between text-xs text-muted-foreground">
+                    <span>Joined: {student.joinedDate}</span>
+                    <span>Performance: {student.performance}%</span>
+                  </div>
+                  
+                  <div className="w-full bg-gray-200 rounded-full h-1.5">
+                    <div 
+                      className="bg-blue-600 h-1.5 rounded-full" 
+                      style={{ width: `${student.performance}%` }}
+                    ></div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </CardContent>
+      </Card>
     </div>
   );
 }
