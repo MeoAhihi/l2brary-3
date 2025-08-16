@@ -1,14 +1,13 @@
 import {
-  AudioWaveform,
-  CakeIcon,
-  Command,
-  DoorOpen,
-  GalleryVerticalEnd,
-  LucideIcon,
-  Map,
-  Users,
-  Users2Icon,
-  Zap,
+  Activity,
+  BarChart3,
+  BookOpen,
+  FileText,
+  GraduationCap,
+  Home,
+  TrendingUp,
+  UserCheck,
+  Users
 } from "lucide-react";
 
 export const appSidebar = {
@@ -19,123 +18,129 @@ export const appSidebar = {
   },
   teams: [
     {
-      name: "Acme Inc",
-      logo: GalleryVerticalEnd,
-      plan: "Enterprise",
-    },
-    {
-      name: "Acme Corp.",
-      logo: AudioWaveform,
-      plan: "Startup",
-    },
-    {
-      name: "Evil Corp.",
-      logo: Command,
-      plan: "Free",
+      name: "L2brary",
+      logo: BookOpen,
+      plan: "Learning Platform",
     },
   ],
   navMain: [
     {
-      title: "Khám phá Vật lý",
+      title: "Public Access",
       navs: [
         {
-          title: "Lớp học",
-          url: "/dashboard/12345/classes/overview",
-          icon: DoorOpen,
-          isActive: true,
+          title: "Courses",
+          url: "/courses",
+          icon: GraduationCap,
           items: [
             {
-              title: "Tổng quan",
-              url: "/dashboard/12345/classes/overview",
-            },
-            {
-              title: "Thí nghiệm Vật Lý",
-              url: "/dashboard/12345/classes/translation",
-            },
-            {
-              title: "Lịch sử Vật lý học",
-              url: "/dashboard/12345/classes/sunday-english",
-            },
-            {
-              title: "Hoạt động Dã ngoại",
-              url: "/dashboard/12345/classes/thursday-english",
+              title: "Browse Courses",
+              url: "/courses",
             },
           ],
         },
         {
-          title: "Thành viên",
-          url: "/dashboard/12345/members/list",
-          icon: Users,
+          title: "Knowledge Hub",
+          url: "/knowledge",
+          icon: FileText,
           items: [
             {
-              title: "Danh sách",
-              url: "/dashboard/12345/members/list",
+              title: "Browse Posts",
+              url: "/knowledge",
             },
             {
-              title: "Sinh nhật",
-              url: "/dashboard/12345/members/birthday",
-            },
-          ],
-        },
-        {
-          title: "Điểm số",
-          url: "/dashboard/12345/skills/score-table",
-          icon: Zap,
-          items: [
-            {
-              title: "Bảng điểm",
-              url: "/dashboard/12345/skills/score-table",
+              title: "Create Post",
+              url: "/knowledge/posts/new",
             },
           ],
         },
       ],
     },
     {
-      title: "Vật lý Học thuật",
+      title: "Member Dashboard",
       navs: [
         {
-          title: "Lớp học",
-          url: "/dashboard/56789/classes/overview",
-          icon: DoorOpen,
-          isActive: true,
+          title: "My Profile",
+          url: "/profile",
+          icon: UserCheck,
           items: [
             {
-              title: "Tổng quan",
-              url: "/dashboard/56789/classes/overview",
-            },
-            {
-              title: "Phương pháp Nghiên cứu Khoa học",
-              url: "/dashboard/56789/classes/crowd-communication",
-            },
-            {
-              title: "101 Bài tập Vật lý Hay và Khó",
-              url: "/dashboard/56789/classes/attraction-communication",
+              title: "View Profile",
+              url: "/profile",
             },
           ],
         },
         {
-          title: "Thành viên",
-          url: "/dashboard/56789/members/list",
+          title: "My Progress",
+          url: "/my-progress/performance",
+          icon: TrendingUp,
+          items: [
+            {
+              title: "Performance",
+              url: "/my-progress/performance",
+            },
+          ],
+        },
+        {
+          title: "Log Activity",
+          url: "/log-activity",
+          icon: Activity,
+          items: [
+            {
+              title: "Log Activity",
+              url: "/log-activity",
+            },
+          ],
+        },
+      ],
+    },
+    {
+      title: "Administration",
+      navs: [
+        {
+          title: "Members",
+          url: "/admin/members",
           icon: Users,
           items: [
             {
-              title: "Danh sách",
-              url: "/dashboard/56789/members/list",
-            },
-            {
-              title: "Sinh nhật",
-              url: "/dashboard/56789/members/birthday",
+              title: "All Members",
+              url: "/admin/members",
             },
           ],
         },
         {
-          title: "Điểm số",
-          url: "/dashboard/56789/skills/score-table",
-          icon: Zap,
+          title: "Learning & Development",
+          url: "/admin/ld/courses/new",
+          icon: GraduationCap,
           items: [
             {
-              title: "Bảng điểm",
-              url: "/dashboard/56789/skills/score-table",
+              title: "Create Course",
+              url: "/admin/ld/courses/new",
+            },
+          ],
+        },
+        {
+          title: "Engagement",
+          url: "/admin/engagement/settings",
+          icon: Activity,
+          items: [
+            {
+              title: "Activity Settings",
+              url: "/admin/engagement/settings",
+            },
+          ],
+        },
+        {
+          title: "Analytics",
+          url: "/admin/analytics/growth",
+          icon: BarChart3,
+          items: [
+            {
+              title: "Growth Dashboard",
+              url: "/admin/analytics/growth",
+            },
+            {
+              title: "Learning Dashboard",
+              url: "/admin/analytics/learning",
             },
           ],
         },
@@ -144,19 +149,24 @@ export const appSidebar = {
   ],
   projects: [
     {
-      name: "Thành viên",
-      url: "/dashboard/members",
-      icon: Users2Icon,
+      name: "Home",
+      url: "/",
+      icon: Home,
     },
     {
-      name: "Sinh nhật",
-      url: "/dashboard/birthdays",
-      icon: CakeIcon,
+      name: "Courses",
+      url: "/courses",
+      icon: GraduationCap,
     },
     {
-      name: "Travel",
-      url: "#",
-      icon: Map as LucideIcon,
+      name: "Knowledge",
+      url: "/knowledge",
+      icon: FileText,
+    },
+    {
+      name: "Profile",
+      url: "/profile",
+      icon: UserCheck,
     },
   ],
 };
