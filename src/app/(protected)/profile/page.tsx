@@ -23,6 +23,18 @@ export const metadata: Metadata = {
 };
 
 export default function ProfilePage() {
+  const user = {
+    id: "28042003",
+    name: "Lý Vĩ Phong",
+    email: "phong.ly@example.com",
+    phone: "+84 912 345 678",
+    gender: "Nam",
+    birthday: "2002-05-15",
+    avatarUrl: "/image.png",
+    role: "Thành viên",
+    status: "Đang hoạt động",
+    className: "11A15"
+  }
   const engagement = {
     recentActivityTime: new Date('2025-01-01').toLocaleString(),
     recentAttendanceTime: new Date('2025-01-01').toLocaleString(),
@@ -80,13 +92,14 @@ export default function ProfilePage() {
               Quản lý
             </Badge>
             <ProfileCardContent
-              avatarSrc="/image.png"
-              name="Nguyen Van A"
-              phone="(+84) 123 456 789"
-              email="m@example.com"
-              className="12A3"
-              gender="Nam"
-              birthday="12/03/2003"
+              id={user.id}
+              avatarUrl={user.avatarUrl}
+              name={user.name}
+              phone={user.phone}
+              email={user.email}
+              className={user.className}
+              gender={user.gender}
+              birthday={user.birthday}
             />
           </Card>
           <BadgeCard title="Chứng nhận lớp học" items={classCerts} />
