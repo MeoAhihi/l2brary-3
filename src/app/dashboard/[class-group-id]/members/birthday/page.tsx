@@ -1,4 +1,4 @@
-import MemberList from "@/components/member-list";
+import MemberList from "@/components/member/member-list";
 import PageHeader from "@/components/ui/page-header";
 const data = [
   {

@@ -1,5 +1,5 @@
-import { AppSidebar } from "../app-sidebar";
-import { SiteHeader } from "../site-header";
+import { SiteHeader } from "../header/site-header";
+import { AppSidebar } from "../side-nav/app-sidebar";
 import { SidebarProvider } from "../ui/sidebar";
 
 const MainLayout = ({ children }: { children: React.ReactNode }) => {

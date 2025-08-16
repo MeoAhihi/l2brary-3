@@ -1,4 +1,4 @@
-import MemberList from "@/components/member-list";
+import MemberList from "@/components/member/member-list";
 import { Card, CardContent } from "@/components/ui/card";
 import PageHeader from "@/components/ui/page-header";
 import data from "@/constants/members.json";
