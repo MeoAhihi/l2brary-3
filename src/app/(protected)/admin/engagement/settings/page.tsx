@@ -13,23 +13,23 @@ export default function EngagementSettingsPage() {
         <p className="text-muted-foreground mb-8">
           Manage activity types and engagement configuration
         </p>
-        
+
         {/* Activity types management will be implemented here */}
         <div className="space-y-6">
           <div className="p-6 border rounded-lg">
             <h3 className="font-semibold mb-2">Activity Types</h3>
             <p className="text-sm text-muted-foreground">
-              Manage offline activities that Monitors can log (e.g., "Room Setup", "Presentation")
+              Manage offline activities that Monitors can log (e.g., &quot;Room Setup&quot;, &quot;Presentation&quot;)
             </p>
           </div>
-          
+
           <div className="p-6 border rounded-lg">
             <h3 className="font-semibold mb-2">Activity Configuration</h3>
             <p className="text-sm text-muted-foreground">
               Activity type settings and scoring configuration will be implemented here
             </p>
           </div>
-          
+
           <div className="p-6 border rounded-lg">
             <h3 className="font-semibold mb-2">Engagement Rules</h3>
             <p className="text-sm text-muted-foreground">

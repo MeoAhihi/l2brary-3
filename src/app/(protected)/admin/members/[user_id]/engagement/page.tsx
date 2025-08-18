@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import React from "react";
 
 export const metadata: Metadata = {
   title: "Member Engagement | Admin | L2brary",
@@ -6,13 +7,13 @@ export const metadata: Metadata = {
 };
 
 interface MemberEngagementPageProps {
-  params: {
+  params: Promise<{
     user_id: string;
-  };
+  }>;
 }
 
 export default function MemberEngagementPage({ params }: MemberEngagementPageProps) {
-  const { user_id } = params;
+  const { user_id } = React.use(params);
 
   return (
     <div className="container mx-auto px-4 py-8">

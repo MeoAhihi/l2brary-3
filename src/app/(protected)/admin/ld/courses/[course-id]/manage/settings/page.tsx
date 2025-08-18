@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import { use } from "react";
+// import { use } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -13,14 +13,16 @@ export const metadata: Metadata = {
   description: "Manage course settings and configuration",
 };
 
-interface SettingsPageProps {
-  params: Promise<{
-    "course-id": string;
-  }>;
-}
+// interface SettingsPageProps {
+//   params: Promise<{
+//     "course-id": string;
+//   }>;
+// }
 
-export default function SettingsPage({ params }: SettingsPageProps) {
-  const { "course-id": courseId } = use(params);
+export default function SettingsPage(
+  // { params }: SettingsPageProps
+) {
+ // const { "course-id": courseId } = use(params);
 
   return (
     <div className="space-y-6">
