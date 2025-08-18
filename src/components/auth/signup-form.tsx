@@ -27,7 +27,7 @@ import { Calendar as CalendarIcon } from "lucide-react";
 import Image from "next/image";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
-import { RadioGroupItem } from "./ui/radio-group";
+import { RadioGroupItem } from "@/components/ui/radio-group";
 
 const formSchema = z
   .object({

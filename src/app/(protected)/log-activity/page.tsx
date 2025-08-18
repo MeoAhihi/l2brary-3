@@ -13,7 +13,7 @@ export default function LogActivityPage() {
         <p className="text-muted-foreground mb-8">
           Record offline member contributions and activities
         </p>
-        
+
         {/* Activity logging form will be implemented here */}
         <div className="space-y-6">
           <div className="p-6 border rounded-lg">
@@ -22,11 +22,11 @@ export default function LogActivityPage() {
               Form to log member activities will be implemented here
             </p>
           </div>
-          
+
           <div className="p-6 border rounded-lg">
             <h3 className="font-semibold mb-2">Activity Types</h3>
             <p className="text-sm text-muted-foreground">
-              Available activity types (e.g., "Room Setup", "Presentation") will be listed here
+              Available activity types (e.g., &quot;Room Setup&quot;, &quot;Presentation&quot;) will be listed here
             </p>
           </div>
         </div>

@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import React from "react";
 
 export const metadata: Metadata = {
   title: "Knowledge Post | L2brary",
@@ -6,13 +7,13 @@ export const metadata: Metadata = {
 };
 
 interface PostPageProps {
-  params: {
+  params: Promise<{
     post_id: string;
-  };
+  }>;
 }
 
 export default function PostPage({ params }: PostPageProps) {
-  const { post_id } = params;
+  const { post_id } = React.use(params);
 
   return (
     <div className="container mx-auto px-4 py-8">
@@ -21,7 +22,7 @@ export default function PostPage({ params }: PostPageProps) {
         <p className="text-muted-foreground mb-8">
           Post ID: {post_id}
         </p>
-        
+
         {/* Post content will be implemented here */}
         <div className="space-y-6">
           <div className="p-6 border rounded-lg">
@@ -30,7 +31,7 @@ export default function PostPage({ params }: PostPageProps) {
               Post title will be displayed here
             </p>
           </div>
-          
+
           <div className="p-6 border rounded-lg">
             <h3 className="font-semibold mb-2">Post Content</h3>
             <p className="text-sm text-muted-foreground">

@@ -1,6 +1,7 @@
-import { Metadata } from "next";
-import PageHeader from "@/components/ui/page-header";
 import { MemberForm } from "@/components/member/member-form";
+import PageHeader from "@/components/ui/page-header";
+import { Metadata } from "next";
+import React from "react";
 
 export const metadata: Metadata = {
   title: "Edit Member | Admin | L2brary",
@@ -8,13 +9,13 @@ export const metadata: Metadata = {
 };
 
 interface EditMemberPageProps {
-  params: {
+  params: Promise<{
     user_id: string;
-  };
+  }>;
 }
 
 export default function EditMemberPage({ params }: EditMemberPageProps) {
-  const { user_id } = params;
+  const { user_id } = React.use(params);
   const user = {
     id: "28042003",
     name: "Lý Vĩ Phong",

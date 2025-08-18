@@ -2,14 +2,6 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import PageHeader from "@/components/ui/page-header";
 import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
-import {
   Timeline,
   TimelineDescription,
   TimelineHeader,
@@ -17,9 +9,7 @@ import {
   TimelineTime,
   TimelineTitle,
 } from "@/components/ui/timeline";
-import { Cake, Mail, PhoneCall, Users, VenusAndMars } from "lucide-react";
 import { Metadata } from "next";
-import Image from "next/image";
 
 import timelineData from "@/constants/activities.json";
 import classJoining from "@/constants/class-joining.json";
@@ -27,6 +17,7 @@ import { MyChart } from "./chart";
 import { BadgeCard } from "@/components/ui/badge-card";
 import { ClassJoiningTable } from "@/components/member/class-joining-table";
 import ProfileCardContent from "@/components/member/profile-card-content";
+import React from "react";
 
 export const metadata: Metadata = {
   title: "Member Details | Admin | L2brary",
@@ -34,13 +25,13 @@ export const metadata: Metadata = {
 };
 
 interface MemberDetailPageProps {
-  params: {
+  params: Promise<{
     user_id: string;
-  };
+  }>;
 }
 
 export default function MemberDetailPage({ params }: MemberDetailPageProps) {
-  const { user_id } = params;
+  const { user_id } = React.use(params);
 
   const user = {
     name: "Lý Vĩ Phong",

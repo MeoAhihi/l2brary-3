@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import { use } from "react";
+// import { use } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -18,7 +18,6 @@ import {
     Plus,
     MoreHorizontal,
     ChevronDown,
-    ChevronRight,
     FileText,
     Video,
     Image,
@@ -34,11 +33,11 @@ export const metadata: Metadata = {
     description: "Manage course content, modules, and curriculum",
 };
 
-interface ContentPageProps {
-    params: Promise<{
-        "course-id": string;
-    }>;
-}
+// interface ContentPageProps {
+//     params: Promise<{
+//         "course-id": string;
+//     }>;
+// }
 
 // Mock data for course content
 const modules = [
@@ -145,8 +144,8 @@ const getContentTypeIcon = (type: string) => {
     }
 };
 
-export default function ContentPage({ params }: ContentPageProps) {
-    const { "course-id": courseId } = use(params);
+export default function ContentPage(/*{ params }: ContentPageProps*/) {
+    // const { "course-id": courseId } = use(params);
 
     return (
         <div className="space-y-6">

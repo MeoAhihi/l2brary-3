@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import { use } from "react";
+// import { use } from "react";
 import { BarChart3, Users, BookOpen, TrendingUp, Crown, Star, Shield, Award, MoreHorizontal } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -17,11 +17,11 @@ export const metadata: Metadata = {
   description: "Course overview and analytics",
 };
 
-interface ManageCoursePageProps {
-  params: Promise<{
-    "course-id": string;
-  }>;
-}
+// interface ManageCoursePageProps {
+//   params: Promise<{
+//     "course-id": string;
+//   }>;
+// }
 
 // Mock data for students with special positions
 const studentsWithPositions = [
@@ -101,8 +101,10 @@ const getPositionBadge = (role: string) => {
   }
 };
 
-export default function ManageCoursePage({ params }: ManageCoursePageProps) {
-  const { "course-id": courseId } = use(params);
+export default function ManageCoursePage(
+  // { params }: ManageCoursePageProps
+) {
+ // const { "course-id": courseId } = use(params);
 
   return (
     <div className="space-y-6">

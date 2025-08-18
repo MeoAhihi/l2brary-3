@@ -51,7 +51,7 @@ export default function ManageCourseLayout({
   params
 }: ManageCourseLayoutProps) {
   const pathname = usePathname();
-  const { "course-id": courseId } = use(params);
+ const { "course-id": courseId } = use(params);
 
   return (
     <div className="container mx-auto px-4 py-8">
