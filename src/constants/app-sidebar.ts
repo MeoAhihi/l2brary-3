@@ -7,7 +7,7 @@ import {
   Home,
   TrendingUp,
   UserCheck,
-  Users
+  Users,
 } from "lucide-react";
 
 export const appSidebar = {
@@ -23,95 +23,51 @@ export const appSidebar = {
       plan: "Learning Platform",
     },
   ],
+  projects: [
+    {
+      name: "Members",
+      url: "/admin/members",
+      icon: Users,
+    },
+    {
+      name: "Log Activity",
+      url: "/log-activity",
+      icon: Activity,
+    },
+    {
+      name: "Engagement Settings",
+      url: "/admin/engagement/settings",
+      icon: BarChart3,
+    },
+  ],
   navMain: [
-    {
-      title: "Public Access",
-      navs: [
-        {
-          title: "Courses",
-          url: "/courses",
-          icon: GraduationCap,
-          items: [
-            {
-              title: "Browse Courses",
-              url: "/courses",
-            },
-          ],
-        },
-        {
-          title: "Knowledge Hub",
-          url: "/knowledge",
-          icon: FileText,
-          items: [
-            {
-              title: "Browse Posts",
-              url: "/knowledge",
-            },
-            {
-              title: "Create Post",
-              url: "/knowledge/posts/new",
-            },
-          ],
-        },
-      ],
-    },
-    {
-      title: "Member Dashboard",
-      navs: [
-        {
-          title: "My Profile",
-          url: "/profile",
-          icon: UserCheck,
-          items: [
-            {
-              title: "View Profile",
-              url: "/profile",
-            },
-          ],
-        },
-        {
-          title: "My Progress",
-          url: "/my-progress/performance",
-          icon: TrendingUp,
-          items: [
-            {
-              title: "Performance",
-              url: "/my-progress/performance",
-            },
-          ],
-        },
-        {
-          title: "Log Activity",
-          url: "/log-activity",
-          icon: Activity,
-          items: [
-            {
-              title: "Log Activity",
-              url: "/log-activity",
-            },
-          ],
-        },
-      ],
-    },
     {
       title: "Administration",
       navs: [
         {
-          title: "Members",
-          url: "/admin/members",
-          icon: Users,
+          title: "Knowledge Sharing",
+          url: "/knowledge",
+          icon: FileText,
           items: [
             {
-              title: "All Members",
-              url: "/admin/members",
+              title: "Posts",
+              url: "/knowledge",
+            },
+            {
+              title: "New Post",
+              url: "/knowledge/posts/new",
             },
           ],
         },
         {
           title: "Learning & Development",
-          url: "/admin/ld/courses/new",
+          url: "/admin/ld/courses",
           icon: GraduationCap,
           items: [
+            {
+              title: "Courses",
+              url: "/admin/ld/courses",
+            },
             {
               title: "Create Course",
               url: "/admin/ld/courses/new",
@@ -119,54 +75,21 @@ export const appSidebar = {
           ],
         },
         {
-          title: "Engagement",
-          url: "/admin/engagement/settings",
-          icon: Activity,
-          items: [
-            {
-              title: "Activity Settings",
-              url: "/admin/engagement/settings",
-            },
-          ],
-        },
-        {
           title: "Analytics",
-          url: "/admin/analytics/growth",
+          url: "/admin/analytics",
           icon: BarChart3,
           items: [
             {
-              title: "Growth Dashboard",
+              title: "Growth",
               url: "/admin/analytics/growth",
             },
             {
-              title: "Learning Dashboard",
+              title: "Learning",
               url: "/admin/analytics/learning",
             },
           ],
         },
       ],
-    },
-  ],
-  projects: [
-    {
-      name: "Home",
-      url: "/",
-      icon: Home,
-    },
-    {
-      name: "Courses",
-      url: "/courses",
-      icon: GraduationCap,
-    },
-    {
-      name: "Knowledge",
-      url: "/knowledge",
-      icon: FileText,
-    },
-    {
-      name: "Profile",
-      url: "/profile",
-      icon: UserCheck,
     },
   ],
 };
