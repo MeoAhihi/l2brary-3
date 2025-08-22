@@ -14,23 +14,23 @@ import {
 } from "@/components/ui/sidebar";
 
 // This is sample data.
-import { appSidebar } from "@/constants/app-sidebar";
+import { adminSidebar } from "@/constants/admin-sidebar";
 import { NavProjects } from "./nav-projects";
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
     <Sidebar collapsible="icon" {...props}>
       <SidebarHeader>
-        <TeamSwitcher teams={appSidebar.teams} />
+        <TeamSwitcher teams={adminSidebar.teams} />
       </SidebarHeader>
       <SidebarContent>
-        <NavProjects projects={appSidebar.projects} />
-        {appSidebar.navMain.map((item) => (
+        <NavProjects projects={adminSidebar.projects} />
+        {adminSidebar.navMain.map((item) => (
           <NavMain key={item.title} title={item.title} items={item.navs} />
         ))}
       </SidebarContent>
       <SidebarFooter>
-        <NavUser user={appSidebar.user} />
+        <NavUser user={adminSidebar.user} />
       </SidebarFooter>
       <SidebarRail />
     </Sidebar>
