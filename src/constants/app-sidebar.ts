@@ -45,21 +45,6 @@ export const appSidebar = {
       title: "Administration",
       navs: [
         {
-          title: "Knowledge Sharing",
-          url: "/knowledge",
-          icon: FileText,
-          items: [
-            {
-              title: "Posts",
-              url: "/knowledge",
-            },
-            {
-              title: "New Post",
-              url: "/knowledge/posts/new",
-            },
-          ],
-        },
-        {
           title: "Learning & Development",
           url: "/admin/ld/courses",
           icon: GraduationCap,
@@ -71,6 +56,21 @@ export const appSidebar = {
             {
               title: "Create Course",
               url: "/admin/ld/courses/new",
+            },
+          ],
+        },
+        {
+          title: "Knowledge Sharing",
+          url: "/knowledge",
+          icon: FileText,
+          items: [
+            {
+              title: "Posts",
+              url: "/knowledge",
+            },
+            {
+              title: "New Post",
+              url: "/knowledge/posts/new",
             },
           ],
         },
