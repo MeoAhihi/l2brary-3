@@ -4,12 +4,13 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { appNavbar } from "@/constants/app-navbar";
+import { CollapsibleSearch } from "../ui/collapsible-search";
 
 export function AppNavbar() {
   const pathname = usePathname();
 
   return (
-    <nav className="flex items-center justify-between px-4 py-2 border-b bg-background">
+    <nav className="flex items-center justify-between px-4 py-2 border-b bg-background sticky top-0 z-40">
       {/* Logo on the left */}
       <div className="flex items-center">
         <Link href="/" className="flex items-center gap-2 font-bold text-lg">
@@ -47,6 +48,7 @@ export function AppNavbar() {
             </Button>
           );
         })}
+        <CollapsibleSearch />
       </div>
 
       {/* Login on the right */}
