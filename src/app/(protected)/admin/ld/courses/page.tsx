@@ -1,4 +1,7 @@
+import { DataTable } from "@/components/ui/data-table";
 import { Metadata } from "next";
+import { columns } from "./columns"
+import courses from '@/constants/courses.json'
 
 export const metadata: Metadata = {
   title: "Courses | Admin | L2brary",
@@ -13,15 +16,11 @@ export default function AdminCoursesPage() {
         <p className="text-muted-foreground mb-8">
           View and manage all courses in the Learning & Development domain.
         </p>
-        {/* Course list will be implemented here */}
-        <div className="space-y-4">
-          <div className="p-6 border rounded-lg">
-            <h3 className="font-semibold mb-2">Course List</h3>
-            <p className="text-sm text-muted-foreground">
-              List of courses will be displayed here.
-            </p>
-          </div>
-        </div>
+        <DataTable
+          columns={columns}
+          title="Danh sách lớp học"
+          data={courses}
+        />
       </div>
     </div>
   );
