@@ -20,8 +20,8 @@ export const appNavbar = [
     public: true,
   },
   {
-    title: "Posts",
-    url: "/posts",
+    title: "Knowledge",
+    url: "/knowledge",
     icon: BookOpen,
     public: true,
   },
