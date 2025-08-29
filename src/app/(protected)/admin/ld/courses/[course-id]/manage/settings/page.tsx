@@ -26,7 +26,7 @@ export const metadata: Metadata = {
 // }
 
 export default function SettingsPage() {
-// { params }: SettingsPageProps
+  // { params }: SettingsPageProps
   // const { "course-id": courseId } = use(params);
 
   return (

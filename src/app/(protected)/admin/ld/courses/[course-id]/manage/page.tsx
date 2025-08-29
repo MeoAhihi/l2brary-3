@@ -122,7 +122,7 @@ const getPositionBadge = (role: string) => {
 };
 
 export default function ManageCoursePage() {
-// { params }: ManageCoursePageProps
+  // { params }: ManageCoursePageProps
   // const { "course-id": courseId } = use(params);
 
   return (
