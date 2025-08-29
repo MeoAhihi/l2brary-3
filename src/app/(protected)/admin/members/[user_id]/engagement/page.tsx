@@ -12,7 +12,9 @@ interface MemberEngagementPageProps {
   }>;
 }
 
-export default function MemberEngagementPage({ params }: MemberEngagementPageProps) {
+export default function MemberEngagementPage({
+  params,
+}: MemberEngagementPageProps) {
   const { user_id } = React.use(params);
 
   return (
@@ -22,7 +24,7 @@ export default function MemberEngagementPage({ params }: MemberEngagementPagePro
         <p className="text-muted-foreground mb-8">
           Activity log for User ID: {user_id}
         </p>
-        
+
         {/* Member engagement data will be implemented here */}
         <div className="space-y-6">
           <div className="p-6 border rounded-lg">
@@ -31,7 +33,7 @@ export default function MemberEngagementPage({ params }: MemberEngagementPagePro
               Chronological table of member activities will be implemented here
             </p>
           </div>
-          
+
           <div className="p-6 border rounded-lg">
             <h3 className="font-semibold mb-2">Engagement Metrics</h3>
             <p className="text-sm text-muted-foreground">

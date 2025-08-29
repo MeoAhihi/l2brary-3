@@ -7,7 +7,11 @@ interface BadgeCardProps {
   variant?: "default" | "secondary" | "destructive" | "outline";
 }
 
-export function BadgeCard({ title, items, variant = "outline" }: BadgeCardProps) {
+export function BadgeCard({
+  title,
+  items,
+  variant = "outline",
+}: BadgeCardProps) {
   return (
     <Card>
       <CardHeader>

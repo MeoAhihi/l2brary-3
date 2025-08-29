@@ -1,11 +1,21 @@
 import { Metadata } from "next";
 // import { use } from "react";
-import { BarChart3, Users, BookOpen, TrendingUp, Crown, Star, Shield, Award, MoreHorizontal } from "lucide-react";
+import {
+  BarChart3,
+  Users,
+  BookOpen,
+  TrendingUp,
+  Crown,
+  Star,
+  Shield,
+  Award,
+  MoreHorizontal,
+} from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { 
+import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
@@ -89,29 +99,40 @@ const getPositionIcon = (role: string) => {
 const getPositionBadge = (role: string) => {
   switch (role) {
     case "assistant":
-      return <Badge className="bg-yellow-100 text-yellow-800">Course Assistant</Badge>;
+      return (
+        <Badge className="bg-yellow-100 text-yellow-800">
+          Course Assistant
+        </Badge>
+      );
     case "leader":
-      return <Badge className="bg-blue-100 text-blue-800">Discussion Leader</Badge>;
+      return (
+        <Badge className="bg-blue-100 text-blue-800">Discussion Leader</Badge>
+      );
     case "mentor":
       return <Badge className="bg-green-100 text-green-800">Peer Mentor</Badge>;
     case "coordinator":
-      return <Badge className="bg-purple-100 text-purple-800">Study Coordinator</Badge>;
+      return (
+        <Badge className="bg-purple-100 text-purple-800">
+          Study Coordinator
+        </Badge>
+      );
     default:
       return <Badge variant="secondary">Student</Badge>;
   }
 };
 
-export default function ManageCoursePage(
-  // { params }: ManageCoursePageProps
-) {
- // const { "course-id": courseId } = use(params);
+export default function ManageCoursePage() {
+// { params }: ManageCoursePageProps
+  // const { "course-id": courseId } = use(params);
 
   return (
     <div className="space-y-6">
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Total Students</CardTitle>
+            <CardTitle className="text-sm font-medium">
+              Total Students
+            </CardTitle>
             <Users className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
@@ -121,23 +142,25 @@ export default function ManageCoursePage(
             </p>
           </CardContent>
         </Card>
-        
+
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Active Sessions</CardTitle>
+            <CardTitle className="text-sm font-medium">
+              Active Sessions
+            </CardTitle>
             <BarChart3 className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">89</div>
-            <p className="text-xs text-muted-foreground">
-              +12% from last week
-            </p>
+            <p className="text-xs text-muted-foreground">+12% from last week</p>
           </CardContent>
         </Card>
-        
+
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Course Modules</CardTitle>
+            <CardTitle className="text-sm font-medium">
+              Course Modules
+            </CardTitle>
             <BookOpen className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
@@ -147,10 +170,12 @@ export default function ManageCoursePage(
             </p>
           </CardContent>
         </Card>
-        
+
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Completion Rate</CardTitle>
+            <CardTitle className="text-sm font-medium">
+              Completion Rate
+            </CardTitle>
             <TrendingUp className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
@@ -180,7 +205,9 @@ export default function ManageCoursePage(
                 <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
                 <div className="flex-1">
                   <p className="text-sm font-medium">Module completed</p>
-                  <p className="text-xs text-muted-foreground">15 minutes ago</p>
+                  <p className="text-xs text-muted-foreground">
+                    15 minutes ago
+                  </p>
                 </div>
               </div>
               <div className="flex items-center space-x-4">
@@ -193,7 +220,7 @@ export default function ManageCoursePage(
             </div>
           </CardContent>
         </Card>
-        
+
         <Card className="col-span-3">
           <CardHeader>
             <CardTitle>Quick Actions</CardTitle>
@@ -202,15 +229,21 @@ export default function ManageCoursePage(
             <div className="space-y-2">
               <button className="w-full text-left p-3 rounded-lg border hover:bg-accent transition-colors">
                 <div className="font-medium">Add New Module</div>
-                <div className="text-sm text-muted-foreground">Create course content</div>
+                <div className="text-sm text-muted-foreground">
+                  Create course content
+                </div>
               </button>
               <button className="w-full text-left p-3 rounded-lg border hover:bg-accent transition-colors">
                 <div className="font-medium">Review Enrollments</div>
-                <div className="text-sm text-muted-foreground">Approve pending requests</div>
+                <div className="text-sm text-muted-foreground">
+                  Approve pending requests
+                </div>
               </button>
               <button className="w-full text-left p-3 rounded-lg border hover:bg-accent transition-colors">
                 <div className="font-medium">Generate Report</div>
-                <div className="text-sm text-muted-foreground">Export course analytics</div>
+                <div className="text-sm text-muted-foreground">
+                  Export course analytics
+                </div>
               </button>
             </div>
           </CardContent>
@@ -239,12 +272,17 @@ export default function ManageCoursePage(
                     <Avatar className="h-10 w-10">
                       <AvatarImage src={student.avatar} />
                       <AvatarFallback>
-                        {student.name.split(' ').map(n => n[0]).join('')}
+                        {student.name
+                          .split(" ")
+                          .map((n) => n[0])
+                          .join("")}
                       </AvatarFallback>
                     </Avatar>
                     <div>
                       <div className="font-medium text-sm">{student.name}</div>
-                      <div className="text-xs text-muted-foreground">{student.email}</div>
+                      <div className="text-xs text-muted-foreground">
+                        {student.email}
+                      </div>
                     </div>
                   </div>
                   <DropdownMenu>
@@ -260,21 +298,21 @@ export default function ManageCoursePage(
                     </DropdownMenuContent>
                   </DropdownMenu>
                 </div>
-                
+
                 <div className="space-y-2">
                   <div className="flex items-center space-x-2">
                     {getPositionIcon(student.role)}
                     {getPositionBadge(student.role)}
                   </div>
-                  
+
                   <div className="flex items-center justify-between text-xs text-muted-foreground">
                     <span>Joined: {student.joinedDate}</span>
                     <span>Performance: {student.performance}%</span>
                   </div>
-                  
+
                   <div className="w-full bg-gray-200 rounded-full h-1.5">
-                    <div 
-                      className="bg-blue-600 h-1.5 rounded-full" 
+                    <div
+                      className="bg-blue-600 h-1.5 rounded-full"
                       style={{ width: `${student.performance}%` }}
                     ></div>
                   </div>

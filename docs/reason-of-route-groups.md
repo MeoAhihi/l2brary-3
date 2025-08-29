@@ -8,40 +8,40 @@ Here’s why it makes sense:
 
 ### **Auth Pages**
 
-* **Examples:** `/login`, `/signup`, `/forgot-password`
-* **Who can see them?**
+- **Examples:** `/login`, `/signup`, `/forgot-password`
+- **Who can see them?**
   Only unauthenticated users — if someone is already logged in, redirect them to the dashboard or homepage.
-* **Purpose:** Handle authentication flow, minimal UI distractions.
-* **Rule:** If logged in → redirect away.
+- **Purpose:** Handle authentication flow, minimal UI distractions.
+- **Rule:** If logged in → redirect away.
 
 ---
 
 ### **Public Pages**
 
-* **Examples:** `/`, `/about`, `/contact`, `/blog`
-* **Who can see them?**
+- **Examples:** `/`, `/about`, `/contact`, `/blog`
+- **Who can see them?**
   Anyone — both guests and logged-in users.
-* **Purpose:** Marketing, information, public content.
-* **Rule:** No auth checks required.
+- **Purpose:** Marketing, information, public content.
+- **Rule:** No auth checks required.
 
 ---
 
 ### **Protected Pages**
 
-* **Examples:** `/dashboard`, `/account`, `/settings`, `/orders`
-* **Who can see them?**
+- **Examples:** `/dashboard`, `/account`, `/settings`, `/orders`
+- **Who can see them?**
   Only authenticated users — redirect guests to `/login`.
-* **Purpose:** Private user data or admin-only sections.
-* **Rule:** If not logged in → redirect to login.
+- **Purpose:** Private user data or admin-only sections.
+- **Rule:** If not logged in → redirect to login.
 
 ---
 
 ## **2. Why This Structure is Reasonable**
 
-* **Clarity** → Developers instantly know what rules apply to a page.
-* **Maintainability** → Auth logic is centralized and predictable.
-* **Security** → Reduces risk of accidentally exposing protected routes.
-* **UX Consistency** → Users get consistent behavior across similar pages.
+- **Clarity** → Developers instantly know what rules apply to a page.
+- **Maintainability** → Auth logic is centralized and predictable.
+- **Security** → Reduces risk of accidentally exposing protected routes.
+- **UX Consistency** → Users get consistent behavior across similar pages.
 
 ---
 
@@ -64,8 +64,8 @@ app/
 
 Then, in each **layout**:
 
-* **Auth layout** → redirect logged-in users away from auth pages.
-* **Protected layout** → redirect guests to `/login`.
+- **Auth layout** → redirect logged-in users away from auth pages.
+- **Protected layout** → redirect guests to `/login`.
 
 Example protected layout:
 
@@ -103,9 +103,8 @@ export default async function AuthLayout({ children }) {
 
 You can extend **Protected** to multiple subtypes:
 
-* `(protected-admin)` → admin-only pages
-* `(protected-user)` → normal user pages
-* `(protected-premium)` → paid users
+- `(protected-admin)` → admin-only pages
+- `(protected-user)` → normal user pages
+- `(protected-premium)` → paid users
 
 Same layout approach, just check `session.user.role` instead of just `session`.
-

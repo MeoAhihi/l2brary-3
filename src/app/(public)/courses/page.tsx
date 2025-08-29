@@ -13,7 +13,7 @@ export default function CoursesPage() {
         <p className="text-muted-foreground mb-8">
           Discover and enroll in courses to enhance your skills
         </p>
-        
+
         {/* Course catalog will be implemented here */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           <div className="p-6 border rounded-lg">

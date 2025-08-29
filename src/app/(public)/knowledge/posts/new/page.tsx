@@ -13,7 +13,7 @@ export default function NewPostPage() {
         <p className="text-muted-foreground mb-8">
           Share your knowledge with the community
         </p>
-        
+
         {/* Post creation form will be implemented here */}
         <div className="space-y-6">
           <div className="p-6 border rounded-lg">
@@ -22,7 +22,7 @@ export default function NewPostPage() {
               Title field and rich-text editor will be implemented here
             </p>
           </div>
-          
+
           <div className="p-6 border rounded-lg">
             <h3 className="font-semibold mb-2">Publishing Options</h3>
             <p className="text-sm text-muted-foreground">

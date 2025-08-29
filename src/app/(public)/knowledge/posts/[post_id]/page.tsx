@@ -19,9 +19,7 @@ export default function PostPage({ params }: PostPageProps) {
     <div className="container mx-auto px-4 py-8">
       <div className="max-w-4xl mx-auto">
         <h1 className="text-3xl font-bold mb-6">Knowledge Post</h1>
-        <p className="text-muted-foreground mb-8">
-          Post ID: {post_id}
-        </p>
+        <p className="text-muted-foreground mb-8">Post ID: {post_id}</p>
 
         {/* Post content will be implemented here */}
         <div className="space-y-6">

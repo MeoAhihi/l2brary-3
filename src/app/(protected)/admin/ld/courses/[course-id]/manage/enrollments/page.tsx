@@ -5,21 +5,33 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { 
-  Table, 
-  TableBody, 
-  TableCell, 
-  TableHead, 
-  TableHeader, 
-  TableRow 
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
 } from "@/components/ui/table";
-import { 
+import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { MoreHorizontal, Search, CheckCircle, XCircle, Clock, Filter, Download, Mail, Users, BookOpen, Calendar } from "lucide-react";
+import {
+  MoreHorizontal,
+  Search,
+  CheckCircle,
+  XCircle,
+  Clock,
+  Filter,
+  Download,
+  Mail,
+  Users,
+  BookOpen,
+  Calendar,
+} from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Course Enrollments | Admin | L2brary",
@@ -159,14 +171,16 @@ const getStatusIcon = (status: string) => {
 };
 
 export default function EnrollmentsPage(/*{ params }: EnrollmentsPageProps*/) {
- // const { "course-id": courseId } = use(params);
+  // const { "course-id": courseId } = use(params);
 
   return (
     <div className="space-y-6">
       <div className="flex justify-between items-center">
         <div>
           <h2 className="text-2xl font-bold">Enrollments</h2>
-          <p className="text-muted-foreground">Manage student enrollments and approval requests</p>
+          <p className="text-muted-foreground">
+            Manage student enrollments and approval requests
+          </p>
         </div>
         <Button>Export List</Button>
       </div>
@@ -179,19 +193,27 @@ export default function EnrollmentsPage(/*{ params }: EnrollmentsPageProps*/) {
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
             <div className="text-center">
               <div className="text-2xl font-bold text-green-600">1,234</div>
-              <div className="text-sm text-muted-foreground">Total Enrolled</div>
+              <div className="text-sm text-muted-foreground">
+                Total Enrolled
+              </div>
             </div>
             <div className="text-center">
               <div className="text-2xl font-bold text-yellow-600">23</div>
-              <div className="text-sm text-muted-foreground">Pending Approval</div>
+              <div className="text-sm text-muted-foreground">
+                Pending Approval
+              </div>
             </div>
             <div className="text-center">
               <div className="text-2xl font-bold text-blue-600">89</div>
-              <div className="text-sm text-muted-foreground">Active This Week</div>
+              <div className="text-sm text-muted-foreground">
+                Active This Week
+              </div>
             </div>
             <div className="text-center">
               <div className="text-2xl font-bold text-gray-600">78.5%</div>
-              <div className="text-sm text-muted-foreground">Completion Rate</div>
+              <div className="text-sm text-muted-foreground">
+                Completion Rate
+              </div>
             </div>
           </div>
         </CardContent>
@@ -239,12 +261,19 @@ export default function EnrollmentsPage(/*{ params }: EnrollmentsPageProps*/) {
                       <Avatar className="h-8 w-8">
                         <AvatarImage src={enrollment.student.avatar} />
                         <AvatarFallback>
-                          {enrollment.student.name.split(' ').map(n => n[0]).join('')}
+                          {enrollment.student.name
+                            .split(" ")
+                            .map((n) => n[0])
+                            .join("")}
                         </AvatarFallback>
                       </Avatar>
                       <div>
-                        <div className="font-medium">{enrollment.student.name}</div>
-                        <div className="text-sm text-muted-foreground">{enrollment.student.email}</div>
+                        <div className="font-medium">
+                          {enrollment.student.name}
+                        </div>
+                        <div className="text-sm text-muted-foreground">
+                          {enrollment.student.email}
+                        </div>
                       </div>
                     </div>
                   </TableCell>
@@ -255,36 +284,46 @@ export default function EnrollmentsPage(/*{ params }: EnrollmentsPageProps*/) {
                     </div>
                   </TableCell>
                   <TableCell>
-                    <Badge variant={enrollment.grade === "N/A" ? "secondary" : "default"}>
+                    <Badge
+                      variant={
+                        enrollment.grade === "N/A" ? "secondary" : "default"
+                      }
+                    >
                       {enrollment.grade}
                     </Badge>
                   </TableCell>
                   <TableCell>
                     <div className="flex items-center space-x-2">
                       <div className="w-12 bg-gray-200 rounded-full h-2">
-                        <div 
-                          className="bg-green-600 h-2 rounded-full" 
+                        <div
+                          className="bg-green-600 h-2 rounded-full"
                           style={{ width: `${enrollment.attendance}%` }}
                         ></div>
                       </div>
-                      <span className="text-sm text-muted-foreground">{enrollment.attendance}%</span>
+                      <span className="text-sm text-muted-foreground">
+                        {enrollment.attendance}%
+                      </span>
                     </div>
                   </TableCell>
                   <TableCell>
                     <div className="flex items-center space-x-1">
                       <BookOpen className="h-4 w-4 text-muted-foreground" />
-                      <span className="text-sm">{enrollment.completed}/{enrollment.assignments}</span>
+                      <span className="text-sm">
+                        {enrollment.completed}/{enrollment.assignments}
+                      </span>
                     </div>
                   </TableCell>
                   <TableCell>
                     <div className="flex items-center space-x-2">
                       <div className="w-16 bg-gray-200 rounded-full h-2">
-                        <div 
-                          className="bg-blue-600 h-2 rounded-full" 
+                        <div
+                          className="bg-blue-600 h-2 rounded-full"
                           style={{ width: `${enrollment.progress}%` }}
                         ></div>
                       </div>
-                      <span className="text-sm text-muted-foreground">{enrollment.progress}%</span>
+                      <span className="text-sm text-muted-foreground">
+                        {enrollment.progress}%
+                      </span>
                     </div>
                   </TableCell>
                   <TableCell>
@@ -348,28 +387,28 @@ export default function EnrollmentsPage(/*{ params }: EnrollmentsPageProps*/) {
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">B+</div>
-            <p className="text-xs text-muted-foreground">
-              +0.3 from last week
-            </p>
+            <p className="text-xs text-muted-foreground">+0.3 from last week</p>
           </CardContent>
         </Card>
-        
+
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Average Attendance</CardTitle>
+            <CardTitle className="text-sm font-medium">
+              Average Attendance
+            </CardTitle>
             <Calendar className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">87%</div>
-            <p className="text-xs text-muted-foreground">
-              +2% from last week
-            </p>
+            <p className="text-xs text-muted-foreground">+2% from last week</p>
           </CardContent>
         </Card>
-        
+
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Assignment Completion</CardTitle>
+            <CardTitle className="text-sm font-medium">
+              Assignment Completion
+            </CardTitle>
             <CheckCircle className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
@@ -379,10 +418,12 @@ export default function EnrollmentsPage(/*{ params }: EnrollmentsPageProps*/) {
             </p>
           </CardContent>
         </Card>
-        
+
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Active Students</CardTitle>
+            <CardTitle className="text-sm font-medium">
+              Active Students
+            </CardTitle>
             <Users className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>

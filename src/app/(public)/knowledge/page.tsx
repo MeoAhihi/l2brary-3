@@ -13,7 +13,7 @@ export default function KnowledgePage() {
         <p className="text-muted-foreground mb-8">
           Discover insights and knowledge shared by the community
         </p>
-        
+
         {/* Knowledge posts listing will be implemented here */}
         <div className="space-y-4">
           <div className="p-6 border rounded-lg">

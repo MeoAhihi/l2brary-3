@@ -1,7 +1,6 @@
 import { Metadata } from "next";
 import React from "react";
 
-
 export const metadata: Metadata = {
   title: "Course Details | L2brary",
   description: "View course details and request enrollment",
@@ -20,9 +19,7 @@ export default function CoursePage({ params }: CoursePageProps) {
     <div className="container mx-auto px-4 py-8">
       <div className="max-w-4xl mx-auto">
         <h1 className="text-3xl font-bold mb-6">Course Details</h1>
-        <p className="text-muted-foreground mb-8">
-          Course ID: {courseId}
-        </p>
+        <p className="text-muted-foreground mb-8">Course ID: {courseId}</p>
 
         {/* Course details will be implemented here */}
         <div className="space-y-6">

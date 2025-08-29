@@ -13,7 +13,7 @@ export default function MyPerformancePage() {
         <p className="text-muted-foreground mb-8">
           Track your attendance, scores, and skill development progress
         </p>
-        
+
         {/* Performance dashboard will be implemented here */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           <div className="p-6 border rounded-lg">
@@ -22,14 +22,14 @@ export default function MyPerformancePage() {
               Attendance statistics will be displayed here
             </p>
           </div>
-          
+
           <div className="p-6 border rounded-lg">
             <h3 className="font-semibold mb-2">Skill Scores</h3>
             <p className="text-sm text-muted-foreground">
               Skill development scores will be displayed here
             </p>
           </div>
-          
+
           <div className="p-6 border rounded-lg">
             <h3 className="font-semibold mb-2">Progress Charts</h3>
             <p className="text-sm text-muted-foreground">

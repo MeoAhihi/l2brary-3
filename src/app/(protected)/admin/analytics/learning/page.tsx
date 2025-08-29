@@ -13,7 +13,7 @@ export default function LearningAnalyticsPage() {
         <p className="text-muted-foreground mb-8">
           Track course popularity, enrollment, and attendance statistics
         </p>
-        
+
         {/* Learning analytics dashboard will be implemented here */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           <div className="p-6 border rounded-lg">
@@ -22,18 +22,19 @@ export default function LearningAnalyticsPage() {
               Course enrollment and popularity metrics will be displayed here
             </p>
           </div>
-          
+
           <div className="p-6 border rounded-lg">
             <h3 className="font-semibold mb-2">Attendance Statistics</h3>
             <p className="text-sm text-muted-foreground">
               Course attendance and completion rates will be displayed here
             </p>
           </div>
-          
+
           <div className="p-6 border rounded-lg">
             <h3 className="font-semibold mb-2">Learning Outcomes</h3>
             <p className="text-sm text-muted-foreground">
-              Learning effectiveness and skill development metrics will be displayed here
+              Learning effectiveness and skill development metrics will be
+              displayed here
             </p>
           </div>
         </div>

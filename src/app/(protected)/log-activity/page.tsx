@@ -26,7 +26,8 @@ export default function LogActivityPage() {
           <div className="p-6 border rounded-lg">
             <h3 className="font-semibold mb-2">Activity Types</h3>
             <p className="text-sm text-muted-foreground">
-              Available activity types (e.g., &quot;Room Setup&quot;, &quot;Presentation&quot;) will be listed here
+              Available activity types (e.g., &quot;Room Setup&quot;,
+              &quot;Presentation&quot;) will be listed here
             </p>
           </div>
         </div>

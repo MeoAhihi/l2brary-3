@@ -13,9 +13,7 @@ export default function PublicLayout({
   return (
     <div className="min-h-screen bg-background">
       {/* Header/Navigation can be added here */}
-      <main className="flex-1">
-        {children}
-      </main>
+      <main className="flex-1">{children}</main>
       {/* Footer can be added here */}
     </div>
   );

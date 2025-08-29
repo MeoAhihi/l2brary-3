@@ -13,7 +13,7 @@ export default function NewCoursePage() {
         <p className="text-muted-foreground mb-8">
           Create a new learning course for the community
         </p>
-        
+
         {/* Course creation form will be implemented here */}
         <div className="space-y-6">
           <div className="p-6 border rounded-lg">
@@ -22,14 +22,14 @@ export default function NewCoursePage() {
               Course details form will be implemented here
             </p>
           </div>
-          
+
           <div className="p-6 border rounded-lg">
             <h3 className="font-semibold mb-2">Course Content</h3>
             <p className="text-sm text-muted-foreground">
               Content management and curriculum setup will be implemented here
             </p>
           </div>
-          
+
           <div className="p-6 border rounded-lg">
             <h3 className="font-semibold mb-2">Publishing Options</h3>
             <p className="text-sm text-muted-foreground">
