@@ -1,40 +1,39 @@
 "use client";
 
+import Image from "next/image";
 import { useState } from "react";
 
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import { contactFormInitialState } from "./constants";
+
 export default function ContactPage() {
-  const [form, setForm] = useState({
-    name: "",
-    email: "",
-    class: "",
-    content: "",
-  });
+  const [form, setForm] = useState(contactFormInitialState);
   const [submitted, setSubmitted] = useState(false);
 
-  function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
-  }
+  };
 
-  function handleSubmit(e: React.FormEvent) {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     // Here you would handle sending the form data, e.g., via fetch or an API call
     setSubmitted(true);
-  }
+  };
 
   return (
     <div className="w-full min-h-screen flex items-center justify-center bg-background py-16">
       <div className="max-w-4xl w-full bg-white dark:bg-zinc-900 rounded-lg shadow-lg flex flex-col md:flex-row overflow-hidden">
         {/* Image Section */}
-        <div className="md:w-1/2 w-full flex items-center justify-center bg-zinc-100 dark:bg-zinc-800 p-8">
-          <img
-            src="/contact-illustration.svg"
+        <div className="md:w-1/2 w-full flex items-center justfy-center bg-zinc-100 dark:bg-zinc-800 p-8">
+          <Image
+            src="/l2brary.ico"
             alt="Contact us"
+            width={300}
+            height={300}
             className="w-64 h-64 object-contain"
-            onError={(e: any) => {
-              // fallback if image not found
-              e.target.onerror = null;
-              e.target.src = "/l2brary.ico";
-            }}
           />
         </div>
         {/* Form Section */}
@@ -50,55 +49,52 @@ export default function ContactPage() {
           ) : (
             <form className="space-y-4" onSubmit={handleSubmit}>
               <div>
-                <label htmlFor="name" className="block text-sm font-medium text-zinc-700 dark:text-zinc-200 mb-1">
+                <Label htmlFor="name" className="block mb-1 text-zinc-700 dark:text-zinc-200">
                   Name
-                </label>
-                <input
+                </Label>
+                <Input
                   id="name"
                   name="name"
                   type="text"
                   required
                   value={form.name}
                   onChange={handleChange}
-                  className="w-full px-3 py-2 border border-zinc-300 dark:border-zinc-700 rounded-md bg-zinc-50 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-primary"
                   autoComplete="name"
                 />
               </div>
               <div>
-                <label htmlFor="email" className="block text-sm font-medium text-zinc-700 dark:text-zinc-200 mb-1">
+                <Label htmlFor="email" className="block mb-1 text-zinc-700 dark:text-zinc-200">
                   Email
-                </label>
-                <input
+                </Label>
+                <Input
                   id="email"
                   name="email"
                   type="email"
                   required
                   value={form.email}
                   onChange={handleChange}
-                  className="w-full px-3 py-2 border border-zinc-300 dark:border-zinc-700 rounded-md bg-zinc-50 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-primary"
                   autoComplete="email"
                 />
               </div>
               <div>
-                <label htmlFor="class" className="block text-sm font-medium text-zinc-700 dark:text-zinc-200 mb-1">
+                <Label htmlFor="class" className="block mb-1 text-zinc-700 dark:text-zinc-200">
                   Class
-                </label>
-                <input
+                </Label>
+                <Input
                   id="class"
                   name="class"
                   type="text"
                   required
                   value={form.class}
                   onChange={handleChange}
-                  className="w-full px-3 py-2 border border-zinc-300 dark:border-zinc-700 rounded-md bg-zinc-50 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-primary"
                   placeholder="e.g. 10A, 12B, etc."
                 />
               </div>
               <div>
-                <label htmlFor="content" className="block text-sm font-medium text-zinc-700 dark:text-zinc-200 mb-1">
+                <Label htmlFor="content" className="block mb-1 text-zinc-700 dark:text-zinc-200">
                   Message
-                </label>
-                <textarea
+                </Label>
+                <Textarea
                   id="content"
                   name="content"
                   required
@@ -109,12 +105,12 @@ export default function ContactPage() {
                   placeholder="How can we help you?"
                 />
               </div>
-              <button
+              <Button
                 type="submit"
                 className="w-full py-2 px-4 bg-primary text-primary-foreground font-semibold rounded-md hover:bg-primary/90 transition"
               >
                 Send Message
-              </button>
+              </Button>
             </form>
           )}
         </div>

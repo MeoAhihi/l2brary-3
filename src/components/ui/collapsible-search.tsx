@@ -1,5 +1,9 @@
 import { Search } from "lucide-react";
-import { useRef, useState } from "react";
+import { ChangeEvent, useRef, useState } from "react";
+
+import { cn } from "@/lib/utils";
+import { Button } from "./button";
+import { Input } from "./input";
 
 interface CollapsibleSearchProps {
   placeholder?: string;
@@ -28,10 +32,16 @@ export function CollapsibleSearch({
     }
   };
 
+  const handleChangeValue = (e: ChangeEvent<HTMLInputElement>) => {
+    onChange?.(e.target.value);
+  };
+
   return (
     <div
-      className={`flex items-center transition-all duration-300 ease-in-out border border-input bg-background rounded-full overflow-hidden shadow-sm ${expanded ? "w-64 px-3" : "w-10 px-0"
-        }`}
+      className={cn(
+        "flex items-center transition-all duration-300 ease-in-out border border-input bg-background rounded-full overflow-hidden shadow-sm",
+        expanded ? "w-64 px-3" : "w-10 px-0"
+      )}
       style={{
         minHeight: 40,
         cursor: expanded ? "auto" : "pointer",
@@ -40,7 +50,7 @@ export function CollapsibleSearch({
         if (!expanded) handleExpand();
       }}
     >
-      <button
+      <Button
         type="button"
         tabIndex={-1}
         className="flex items-center justify-center p-2"
@@ -50,20 +60,21 @@ export function CollapsibleSearch({
         }}
       >
         <Search size={20} className="text-muted-foreground" />
-      </button>
-      <input
+      </Button>
+      <Input
         ref={inputRef}
         type="text"
-        className={`bg-transparent outline-none border-none flex-1 transition-all duration-300 text-sm ${expanded ? "opacity-100 ml-2" : "opacity-0 w-0 ml-0"
-          }`}
+        className={cn(
+          "bg-transparent outline-none border-0 flex-1 transition-all duration-300 text-sm",
+          expanded
+            ? "opacity-100 ml-2 w-full"
+            : "opacity-0 ml-0 w-0 pointer-events-none"
+        )}
         placeholder={expanded ? placeholder : ""}
         value={value}
-        onChange={e => onChange?.(e.target.value)}
+        onChange={handleChangeValue}
         onBlur={handleBlur}
         tabIndex={expanded ? 0 : -1}
-        style={{
-          minWidth: expanded ? 0 : 0,
-        }}
       />
     </div>
   );
