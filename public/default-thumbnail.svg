@@ -1,0 +1,17 @@
+<svg
+                width="20"
+                height="20"
+                fill="none"
+                viewBox="0 0 24 24"
+                className="text-gray-400"
+              >
+                <rect width="24" height="24" rx="4" fill="#e5e7eb" />
+                <path
+                  d="M8 13l2.5 3.5L15 11l4 6H5l3-4z"
+                  stroke="#9ca3af"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  fill="none"
+                />
+              </svg>
