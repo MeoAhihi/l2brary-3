@@ -4,13 +4,8 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { use } from "react";
 import { cn } from "@/lib/utils";
-import {
-  Settings,
-  Users,
-  BookOpen,
-  BarChart3
-} from "lucide-react";
-
+import { Settings, Users, BookOpen, BarChart3, Layers } from "lucide-react";
+import PageHeader from "@/components/ui/page-header";
 interface ManageCourseLayoutProps {
   children: React.ReactNode;
   params: Promise<{
@@ -20,27 +15,32 @@ interface ManageCourseLayoutProps {
 
 const tabs = [
   {
-    name: "Overview",
+    name: "Tổng quan",
     href: "",
     icon: BarChart3,
   },
   {
-    name: "Enrollments",
+    name: "Buổi học",
+    href: "/sessions",
+    icon: Layers,
+  },
+  {
+    name: "Đăng ký",
     href: "/enrollments",
     icon: Users,
   },
   {
-    name: "Content",
+    name: "Nội dung",
     href: "/content",
     icon: BookOpen,
   },
   {
-    name: "Score Table",
+    name: "Bảng điểm",
     href: "/score-table",
     icon: BarChart3,
   },
   {
-    name: "Settings",
+    name: "Cài đặt",
     href: "/settings",
     icon: Settings,
   },
@@ -48,26 +48,23 @@ const tabs = [
 
 export default function ManageCourseLayout({
   children,
-  params
+  params,
 }: ManageCourseLayoutProps) {
   const pathname = usePathname();
- const { "course-id": courseId } = use(params);
+  const { "course-id": courseId } = use(params);
+  const courseName = "Vật lý Lý thuyết";
 
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="max-w-6xl mx-auto">
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold mb-2">Manage Course</h1>
-          <p className="text-muted-foreground">
-            Course ID: {courseId}
-          </p>
-        </div>
+        <PageHeader pageTitle={courseName} descriptions={[`ID: ${courseId}`]} />
 
         {/* Tab Navigation */}
         <div className="border-b">
           <nav className="-mb-px flex space-x-8">
             {tabs.map((tab) => {
-              const isActive = pathname === `/admin/ld/courses/${courseId}/manage${tab.href}`;
+              const isActive =
+                pathname === `/admin/ld/courses/${courseId}/manage${tab.href}`;
 
               return (
                 <Link
@@ -89,9 +86,7 @@ export default function ManageCourseLayout({
         </div>
 
         {/* Tab Content */}
-        <div className="mt-8">
-          {children}
-        </div>
+        <div className="mt-8">{children}</div>
       </div>
     </div>
   );
