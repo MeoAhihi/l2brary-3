@@ -98,3 +98,54 @@ export async function getStudentStamps(
     },
   ];
 }
+
+// Function to get mock data for studentAttendances
+export async function getStudentAttendances() {
+  return [
+    {
+      id: 1,
+      name: "John Doe",
+      email: "john.doe@example.com",
+      avatar: "/avatars/01.png",
+      checkedIn: true,
+      checkInTime: "14:05",
+      status: "present",
+    },
+    {
+      id: 2,
+      name: "Jane Smith",
+      email: "jane.smith@example.com",
+      avatar: "/avatars/02.png",
+      checkedIn: true,
+      checkInTime: "14:02",
+      status: "present",
+    },
+    {
+      id: 3,
+      name: "Mike Johnson",
+      email: "mike.johnson@example.com",
+      avatar: "/avatars/03.png",
+      checkedIn: false,
+      checkInTime: null,
+      status: "absent",
+    },
+    {
+      id: 4,
+      name: "Sarah Wilson",
+      email: "sarah.wilson@example.com",
+      avatar: "/avatars/04.png",
+      checkedIn: true,
+      checkInTime: "14:08",
+      status: "late",
+    },
+    {
+      id: 5,
+      name: "David Brown",
+      email: "david.brown@example.com",
+      avatar: "/avatars/05.png",
+      checkedIn: false,
+      checkInTime: null,
+      status: "absent",
+    },
+  ];
+}
