@@ -1,6 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -9,8 +10,9 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { ColumnDef } from "@tanstack/react-table";
-import { ArrowUpDown, MoreHorizontal } from "lucide-react";
+import { Input } from "@/components/ui/input";
+import { ColumnDef, Table } from "@tanstack/react-table";
+import { ArrowUpDown, MoreHorizontal, Plus } from "lucide-react";
 import { redirect } from "next/navigation";
 import { toast } from "sonner";
 
@@ -166,3 +168,33 @@ export const columns: ColumnDef<Member>[] = [
     },
   },
 ];
+
+export function TableHeader({ table }: { table: Table<Member> }) {
+  const FILTER_COLUMN = "international_name";
+  return (
+    <>
+      <div className="flex items-center justify-between">
+        <h2 className="text-xl font-medium">Danh sách Thành viên</h2>
+        <Button asChild>
+          <Link href="">
+            <Plus />
+            Tạo mới
+          </Link>
+        </Button>
+      </div>
+      <div className="flex items-center py-2">
+        <Input
+          placeholder="Tìm kiếm..."
+          value={
+            (table.getColumn(FILTER_COLUMN)?.getFilterValue() as string) ?? ""
+          }
+          onChange={(event) => {
+            const searchValue = event.target.value;
+            table.getColumn(FILTER_COLUMN)?.setFilterValue(searchValue);
+          }}
+          className="max-w-sm"
+        />
+      </div>
+    </>
+  );
+}
