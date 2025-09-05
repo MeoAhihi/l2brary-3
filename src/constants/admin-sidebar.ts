@@ -10,7 +10,7 @@ import {
   Users,
 } from "lucide-react";
 
-export const appSidebar = {
+export const adminSidebar = {
   user: {
     name: "Vĩ Phong lý",
     email: "viphongly@example.com",
