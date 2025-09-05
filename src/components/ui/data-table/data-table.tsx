@@ -11,7 +11,8 @@ import {
   getSortedRowModel, // Gets the sorted rows based on the current sorting state
   getPaginationRowModel, // Manages pagination of table rows
   ColumnFiltersState, // Represents the current state of column filters
-  getFilteredRowModel, // Gets the filtered rows based on the current filter state
+  getFilteredRowModel,
+  Table as TableType,
 } from "@tanstack/react-table";
 
 import {
@@ -23,28 +24,22 @@ import {
   TableRow,
 } from "@/components/ui/table";
 
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Plus } from "lucide-react";
-
 interface DataTableProps<TData, TValue> {
-  title: string;
   columns: ColumnDef<TData, TValue>[];
   data?: TData[];
-  createPage?: string;
-  filterField?: string | string[];
+  header?: React.ElementType<{ table: TableType<TData> }>;
+  footer?: React.ElementType<{ table: TableType<TData> }>;
 }
 
 export function DataTable<TData, TValue>({
-  title,
   columns,
   data = [],
-  createPage,
-  filterField,
+  header: Header,
+  footer: Footer,
 }: DataTableProps<TData, TValue>) {
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
-    [],
+    []
   );
 
   const table = useReactTable({
@@ -63,44 +58,8 @@ export function DataTable<TData, TValue>({
   });
 
   return (
-    <div>
-      <div className="flex items-center justify-between p-4">
-        <h2 className="text-xl font-medium">{title}</h2>
-        {createPage && (
-          <Button asChild>
-            <a href={createPage}>
-              <Plus />
-              Tạo mới
-            </a>
-          </Button>
-        )}
-      </div>
-      {filterField && (
-        <div className="flex items-center py-2">
-          <Input
-            placeholder="Tìm kiếm..."
-            value={
-              Array.isArray(filterField)
-                ? ((table
-                    .getColumn(filterField[0])
-                    ?.getFilterValue() as string) ?? "")
-                : ((table.getColumn(filterField)?.getFilterValue() as string) ??
-                  "")
-            }
-            onChange={(event) => {
-              const searchValue = event.target.value;
-              if (Array.isArray(filterField)) {
-                filterField.forEach((field) => {
-                  table.getColumn(field)?.setFilterValue(searchValue);
-                });
-              } else {
-                table.getColumn(filterField)?.setFilterValue(searchValue);
-              }
-            }}
-            className="max-w-sm"
-          />
-        </div>
-      )}
+    <div className="flex flex-col gap-3">
+      {Header && <Header table={table} />}
       <div className="rounded-md border">
         <Table>
           <TableHeader>
@@ -114,7 +73,7 @@ export function DataTable<TData, TValue>({
                         ? null
                         : flexRender(
                             header.column.columnDef.header,
-                            header.getContext(),
+                            header.getContext()
                           )}
                     </TableHead>
                   );
@@ -134,7 +93,7 @@ export function DataTable<TData, TValue>({
                     <TableCell key={cell.id}>
                       {flexRender(
                         cell.column.columnDef.cell,
-                        cell.getContext(),
+                        cell.getContext()
                       )}
                     </TableCell>
                   ))}
@@ -153,24 +112,7 @@ export function DataTable<TData, TValue>({
           </TableBody>
         </Table>
       </div>
-      <div className="flex items-center justify-end space-x-2 py-4">
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={() => table.previousPage()}
-          disabled={!table.getCanPreviousPage()}
-        >
-          Previous
-        </Button>
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={() => table.nextPage()}
-          disabled={!table.getCanNextPage()}
-        >
-          Next
-        </Button>
-      </div>
+      {Footer && <Footer table={table} />}
     </div>
   );
 }
