@@ -1,5 +1,6 @@
 import { Metadata } from "next";
-
+import { PostList } from "@/components/post/post-list";
+import posts from "@/constants/posts.json"
 export const metadata: Metadata = {
   title: "Knowledge Hub | L2brary",
   description: "Browse and discover knowledge posts from the community",
@@ -13,16 +14,8 @@ export default function KnowledgePage() {
         <p className="text-muted-foreground mb-8">
           Discover insights and knowledge shared by the community
         </p>
-        
-        {/* Knowledge posts listing will be implemented here */}
-        <div className="space-y-4">
-          <div className="p-6 border rounded-lg">
-            <h3 className="font-semibold mb-2">Knowledge Posts</h3>
-            <p className="text-sm text-muted-foreground">
-              Reverse-chronological list of post titles will be implemented here
-            </p>
-          </div>
-        </div>
+
+        <PostList posts={posts} pageSize={5} />
       </div>
     </div>
   );

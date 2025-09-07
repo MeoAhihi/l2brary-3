@@ -1,5 +1,115 @@
 [
   {
+    "thumbnail": "https://picsum.photos/500/500",
+    "title": "Introduction to Programming",
+    "description": "Learn the basics of programming using Python. No prior experience required.",
+    "frequency": "Weekly (Monday, Wednesday)",
+    "studentsCount": 42,
+    "deatilUrl": "#",
+    "registerUrl": "#"
+  },
+  {
+    "thumbnail": "https://picsum.photos/500/500",
+    "title": "Web Development Bootcamp",
+    "description": "Build modern websites with HTML, CSS, and JavaScript.",
+    "frequency": "Weekly (Tuesday, Thursday)",
+    "studentsCount": 35,
+    "deatilUrl": "#",
+    "registerUrl": "#"
+  },
+  {
+    "thumbnail": "https://picsum.photos/500/500",
+    "title": "Data Science Fundamentals",
+    "description": "Explore data analysis, visualization, and machine learning basics.",
+    "frequency": "Monthly",
+    "studentsCount": 28,
+    "deatilUrl": "#",
+    "registerUrl": "#"
+  },
+  {
+    "thumbnail": "https://picsum.photos/500/500",
+    "title": "Creative Writing",
+    "description": "Unlock your creativity and improve your writing skills.",
+    "frequency": "Weekly (Friday)",
+    "studentsCount": 19,
+    "deatilUrl": "#",
+    "registerUrl": "#"
+  },
+  {
+    "thumbnail": "https://picsum.photos/500/500",
+    "title": "Public Speaking",
+    "description": "Gain confidence and master the art of public speaking.",
+    "frequency": "Biweekly",
+    "studentsCount": 24,
+    "deatilUrl": "#",
+    "registerUrl": "#"
+  },
+  {
+    "thumbnail": "https://picsum.photos/500/500",
+    "title": "Mathematics Club",
+    "description": "Challenge yourself with advanced math problems and competitions.",
+    "frequency": "Weekly (Saturday)",
+    "studentsCount": 31,
+    "deatilUrl": "#",
+    "registerUrl": "#"
+  },
+  {
+    "thumbnail": "https://picsum.photos/500/500",
+    "title": "Robotics Workshop",
+    "description": "Hands-on robotics and engineering projects for all levels.",
+    "frequency": "Monthly",
+    "studentsCount": 16,
+    "deatilUrl": "#",
+    "registerUrl": "#"
+  },
+  {
+    "thumbnail": "https://picsum.photos/500/500",
+    "title": "Art & Design",
+    "description": "Explore drawing, painting, and digital art techniques.",
+    "frequency": "Weekly (Sunday)",
+    "studentsCount": 22,
+    "deatilUrl": "#",
+    "registerUrl": "#"
+  },
+  {
+    "thumbnail": "https://picsum.photos/500/500",
+    "title": "Chess Club",
+    "description": "Sharpen your chess skills and compete with peers.",
+    "frequency": "Weekly (Wednesday)",
+    "studentsCount": 27,
+    "deatilUrl": "#",
+    "registerUrl": "#"
+  },
+  {
+    "thumbnail": "https://picsum.photos/500/500",
+    "title": "Science Explorers",
+    "description": "Fun experiments and science projects for curious minds.",
+    "frequency": "Biweekly",
+    "studentsCount": 18,
+    "deatilUrl": "#",
+    "registerUrl": "#"
+  },
+  {
+    "thumbnail": "https://picsum.photos/500/500",
+    "title": "Photography Basics",
+    "description": "Learn to capture stunning photos with any camera.",
+    "frequency": "Monthly",
+    "studentsCount": 14,
+    "deatilUrl": "#",
+    "registerUrl": "#"
+  },
+  {
+    "thumbnail": "https://picsum.photos/500/500",
+    "title": "History Debates",
+    "description": "Discuss and debate key moments in world history.",
+    "frequency": "Weekly (Thursday)",
+    "studentsCount": 20,
+    "deatilUrl": "#",
+    "registerUrl": "#"
+  }
+]
+[
+  {
     "id": "course-1",
     "thumbnail": "https://picsum.photos/200",
     "title": "Thí nghiệm Vật Lý",

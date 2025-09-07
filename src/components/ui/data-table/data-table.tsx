@@ -3,16 +3,16 @@
 import * as React from "react";
 
 import {
-  ColumnDef, // Defines the structure of a column in the table
+  ColumnDef, // Manages pagination of table rows
+  ColumnFiltersState, // Retrieves the core row model without sorting or filtering
+  flexRender, // Hook to create and use a table instance
+  getCoreRowModel, // Represents the current state of column filters
+  getFilteredRowModel, // Gets the sorted rows based on the current sorting state
+  getPaginationRowModel, // Represents the current sorting state of the table
+  getSortedRowModel, // Renders table cells with flexible JSX components
+  SortingState,
+  Table as TableType, // Defines the structure of a column in the table
   useReactTable, // Hook to create and use a table instance
-  getCoreRowModel, // Retrieves the core row model without sorting or filtering
-  flexRender, // Renders table cells with flexible JSX components
-  SortingState, // Represents the current sorting state of the table
-  getSortedRowModel, // Gets the sorted rows based on the current sorting state
-  getPaginationRowModel, // Manages pagination of table rows
-  ColumnFiltersState, // Represents the current state of column filters
-  getFilteredRowModel,
-  Table as TableType,
 } from "@tanstack/react-table";
 
 import {
@@ -27,21 +27,41 @@ import {
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data?: TData[];
-  header?: React.ElementType<{ table: TableType<TData> }>;
-  footer?: React.ElementType<{ table: TableType<TData> }>;
+  header?: (table: TableType<TData>) => React.ReactNode;
+  footer?: (table: TableType<TData>) => React.ReactNode;
 }
 
+/**
+ * DataTable is a client component that defines and renders a table using TanStack Table.
+ * It manages sorting and filtering state locally, and renders table headers, body, and optional header/footer content.
+ * You must define table component for specific page with "use client" before using
+ * @template TData - The type of the data objects in the table.
+ * @template TValue - The type of the value for each column.
+ *
+ * @param {Object} props - The props for the DataTable component.
+ * @param {ColumnDef<TData, TValue>[]} props.columns - The column definitions for the table.
+ * @param {TData[]} [props.data=[]] - The data to display in the table.
+ * @param {(table: TableType<TData>) => React.ReactNode} [props.header] - Optional function to render custom header content.
+ * @param {(table: TableType<TData>) => React.ReactNode} [props.footer] - Optional function to render custom footer content.
+ *
+ * @returns {JSX.Element} The rendered table component.
+ *
+ * @example
+ * <DataTable columns={columns} data={data} />
+ */
 export function DataTable<TData, TValue>({
   columns,
   data = [],
-  header: Header,
-  footer: Footer,
+  header,
+  footer,
 }: DataTableProps<TData, TValue>) {
+  // State for sorting and column filters
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []
   );
 
+  // Define the table instance using TanStack Table's useReactTable hook
   const table = useReactTable({
     data,
     columns,
@@ -59,25 +79,24 @@ export function DataTable<TData, TValue>({
 
   return (
     <div className="flex flex-col gap-3">
-      {Header && <Header table={table} />}
+      {/* Optional custom header */}
+      {header && header(table)}
       <div className="rounded-md border">
         <Table>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id}>
                 <TableHead>#</TableHead>
-                {headerGroup.headers.map((header) => {
-                  return (
-                    <TableHead key={header.id}>
-                      {header.isPlaceholder
-                        ? null
-                        : flexRender(
-                            header.column.columnDef.header,
-                            header.getContext()
-                          )}
-                    </TableHead>
-                  );
-                })}
+                {headerGroup.headers.map((header) => (
+                  <TableHead key={header.id}>
+                    {header.isPlaceholder
+                      ? null
+                      : flexRender(
+                          header.column.columnDef.header,
+                          header.getContext()
+                        )}
+                  </TableHead>
+                ))}
               </TableRow>
             ))}
           </TableHeader>
@@ -112,7 +131,8 @@ export function DataTable<TData, TValue>({
           </TableBody>
         </Table>
       </div>
-      {Footer && <Footer table={table} />}
+      {/* Optional custom footer */}
+      {footer && footer(table)}
     </div>
   );
 }
