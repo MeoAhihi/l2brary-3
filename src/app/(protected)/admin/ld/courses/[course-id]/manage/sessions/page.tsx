@@ -1,21 +1,25 @@
 import { getSessions } from "@/apis/ld.api";
-import { columns } from "./column";
-import { DataTable } from "@/components/ui/data-table";
+import SessionsTable from "./session-table";
+import { Metadata } from "next";
 
-export default async function SessionsPage({
-  params,
-}: {
-  params: { "course-id": string };
-}) {
-  const courseId = params["course-id"];
+export const metadata: Metadata = {
+  title: "Quản lý buổi học",
+  description: "Trang quản lý các buổi học cho khoá học",
+};
+
+type PageProps = {
+  params: Promise<{
+    "course-id": string;
+  }>;
+};
+
+export default async function Page({ params }: PageProps) {
+  const { "course-id": courseId } = await params;
   const sessions = await getSessions(courseId);
 
   return (
-    <DataTable
-      title="Danh sách các buổi học"
-      columns={columns}
-      data={sessions}
-      createPage="/"
-    />
+    <div className="p-6">
+      <SessionsTable sessions={sessions} />
+    </div>
   );
 }

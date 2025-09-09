@@ -39,55 +39,55 @@ export default function ManageSessionPage({ params }: ManageSessionPageProps) {
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
         <StatCard
           title="Total Participants"
-          icon={Users}
+          icon={<Users className="w-4 h-4" />}
           value={45}
           description="+5 from last session"
         />
 
         <StatCard
           title="Checked In"
-          icon={CheckSquare}
+          icon={<CheckSquare className="w-4 h-4" />}
           value={42}
           description="93% attendance rate"
         />
 
         <StatCard
           title="Stamps Given"
-          icon={Stamp}
+          icon={<Stamp className="w-4 h-4" />}
           value={28}
           description="For participation"
         />
 
         <StatCard
           title="Games Played"
-          icon={Gamepad2}
+          icon={<Gamepad2 className="w-4 h-4" />}
           value={3}
           description="Average score: 85%"
         />
         <StatCard
           title="Total Games"
-          icon={Gamepad2}
+          icon={<Gamepad2 className="w-4 h-4" />}
           value={3}
           description="2 completed"
         />
 
         <StatCard
           title="Active Games"
-          icon={Clock}
+          icon={<Clock className="w-4 h-4" />}
           value={1}
           description="Currently running"
         />
 
         <StatCard
           title="Total Participants"
-          icon={Users}
+          icon={<Users className="w-4 h-4" />}
           value={45}
           description="Across all games"
         />
 
         <StatCard
           title="Average Score"
-          icon={BarChart3}
+          icon={<BarChart3 className="w-4 h-4" />}
           value="85%"
           description="Overall performance"
         />

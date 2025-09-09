@@ -4,7 +4,7 @@ import { ColumnDef } from "@tanstack/react-table";
 
 export type Member = {
   id: number | string;
-  name: string;
+  fullname: string;
   internationalName?: string;
   avatar?: string;
 };
@@ -15,7 +15,7 @@ export const columns: ColumnDef<Member>[] = [
     header: ({ table }) => (
       <Checkbox
         checked={table.getIsAllPageRowsSelected()}
-        onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
+        onCheckedChange={(value) => table.toggleAllRowsSelected(!!value)}
         aria-label="Select all"
       />
     ),
@@ -32,48 +32,62 @@ export const columns: ColumnDef<Member>[] = [
     maxSize: 32,
   },
   {
-    accessorKey: "avatar",
-    header: "",
+    accessorKey: "name",
+    header: ({ column }) => (
+      <div className="flex items-center gap-1">
+        Thành viên
+        <button
+          type="button"
+          className="ml-1"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          aria-label="Sort"
+        >
+          {column.getIsSorted() === "asc"
+            ? "▲"
+            : column.getIsSorted() === "desc"
+              ? "▼"
+              : "↕"}
+        </button>
+      </div>
+    ),
     cell: ({ row }) => {
       const member = row.original;
       return (
-        <Avatar className="h-8 w-8">
-          {member.avatar ? (
-            <AvatarImage src={member.avatar} alt={member.name} />
-          ) : null}
-          <AvatarFallback>
-            {member.name
-              .split(" ")
-              .map((n) => n[0])
-              .join("")
-              .toUpperCase()}
-          </AvatarFallback>
-        </Avatar>
+        <div className="flex flex-row items-center gap-2">
+          <Avatar className="h-8 w-8">
+            {member.avatar ? (
+              <AvatarImage src={member.avatar} alt={member.fullname} />
+            ) : null}
+            <AvatarFallback>
+              {member.fullname
+                .split(" ")
+                .map((n) => n[0])
+                .join("")
+                .toUpperCase()}
+            </AvatarFallback>
+          </Avatar>
+          {row.original.fullname}
+        </div>
       );
     },
-    size: 40,
-    maxSize: 40,
-    enableSorting: false,
-    enableHiding: false,
-  },
-  {
-    accessorKey: "lastname",
-    header: "Last Name",
-    cell: ({ row }) => {
-      const name = row.original.name || "";
-      const parts = name.trim().split(" ");
-      const lastName = parts.length > 1 ? parts[parts.length - 1] : name;
-      return <span>{lastName}</span>;
+    sortingFn: (a, b) => {
+      const getLastName = (fullname: string = "") => {
+        const parts = fullname.trim().split(" ");
+        return parts.length > 1
+          ? parts[parts.length - 1].toLowerCase()
+          : fullname.toLowerCase();
+      };
+      const lastNameA = getLastName(a.original.fullname);
+      const lastNameB = getLastName(b.original.fullname);
+      if (lastNameA < lastNameB) return -1;
+      if (lastNameA > lastNameB) return 1;
+      return 0;
     },
-  },
-  {
-    accessorKey: "name",
-    header: "Name",
-    cell: ({ row }) => <span>{row.original.name}</span>,
+    enableSorting: true,
   },
   {
     accessorKey: "internationalName",
-    header: "International Name",
+    header: "Tên Quốc tế",
     cell: ({ row }) =>
       row.original.internationalName ? (
         <span className="text-muted-foreground">

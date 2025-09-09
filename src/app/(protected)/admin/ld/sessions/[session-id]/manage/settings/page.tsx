@@ -1,22 +1,7 @@
-import { Metadata } from "next";
-import { use } from "react";
-import {
-  Settings,
-  Clock,
-  Users,
-  Calendar,
-  MapPin,
-  Save,
-  Trash2,
-  AlertTriangle,
-  Info,
-} from "lucide-react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
 import {
   Select,
   SelectContent,
@@ -24,8 +9,19 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Switch } from "@/components/ui/toggle";
-import { Separator } from "@/components/ui/separator";
+import { Switch } from "@/components/ui/switch";
+import { Textarea } from "@/components/ui/textarea";
+import {
+  AlertTriangle,
+  Calendar,
+  Info,
+  MapPin,
+  Save,
+  Settings,
+  Trash2,
+  Users,
+} from "lucide-react";
+import { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Session Settings | Admin | L2brary",
@@ -39,7 +35,7 @@ interface SettingsPageProps {
 }
 
 export default function SettingsPage({ params }: SettingsPageProps) {
-  const { "session-id": sessionId } = use(params);
+  // const { "session-id": sessionId } = use(params);
 
   return (
     <div className="space-y-6">
@@ -330,16 +326,13 @@ export default function SettingsPage({ params }: SettingsPageProps) {
 
       {/* Action Buttons */}
       <div className="flex gap-4 justify-end">
-        <Button
-          variant="outline"
-          className="text-red-600 border-red-600 hover:bg-red-50"
-        >
+        <Button variant="destructive">
           <Trash2 className="h-4 w-4 mr-2" />
-          Delete Session
+          Xóa Buổi học
         </Button>
         <Button>
           <Save className="h-4 w-4 mr-2" />
-          Save Changes
+          Lưu thay đổi
         </Button>
       </div>
     </div>
