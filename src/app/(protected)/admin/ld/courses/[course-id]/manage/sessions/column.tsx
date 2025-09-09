@@ -9,16 +9,21 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import type { Session } from "@/types/ld.types";
 import { ColumnDef } from "@tanstack/react-table";
-import { ArrowUpDown, Copy, MoreHorizontal, Pencil, X } from "lucide-react";
+import {
+  ArrowUpDown,
+  Copy,
+  MoreHorizontal,
+  Settings,
+  X
+} from "lucide-react";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
-import type { Session } from "@/types/ld.types";
 
 export const columns: ColumnDef<Session>[] = [
   {
-    accessorKey: "thumbnail",
-    header: "",
+    id: "thumbnail",
     cell: ({ row }) => {
       const thumbnail = row.original.thumbnail;
       return (
@@ -64,7 +69,7 @@ export const columns: ColumnDef<Session>[] = [
         variant="ghost"
         onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
       >
-        Tên buổi học
+        Tiêu đề buổi học
         <ArrowUpDown className="ml-2 h-4 w-4" />
       </Button>
     ),
@@ -238,9 +243,7 @@ export const columns: ColumnDef<Session>[] = [
             <DropdownMenuLabel>Hành động</DropdownMenuLabel>
             <DropdownMenuItem
               onClick={() =>
-                router.push(
-                  `/admin/ld/courses/${session.courseId ?? ""}/sessions/${session.id}`
-                )
+                router.push(`/admin/ld/sessions/${session.id}/manage`)
               }
             >
               <span className="flex items-center gap-2">
@@ -250,14 +253,12 @@ export const columns: ColumnDef<Session>[] = [
             </DropdownMenuItem>
             <DropdownMenuItem
               onClick={() =>
-                router.push(
-                  `/admin/ld/courses/${session.courseId ?? ""}/sessions/${session.id}/edit`
-                )
+                router.push(`/admin/ld/sessions/${session.id}/manage/settings`)
               }
             >
               <span className="flex items-center gap-2">
-                <Pencil />
-                Chỉnh sửa
+                <Settings />
+                Cài đặt
               </span>
             </DropdownMenuItem>
             <DropdownMenuItem

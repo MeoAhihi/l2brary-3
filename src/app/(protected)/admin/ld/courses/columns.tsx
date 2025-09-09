@@ -10,7 +10,14 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { ColumnDef } from "@tanstack/react-table";
-import { ArrowUpDown, Copy, MoreHorizontal, Pencil, X } from "lucide-react";
+import {
+  ArrowUpDown,
+  Copy,
+  MoreHorizontal,
+  Pencil,
+  Settings,
+  X,
+} from "lucide-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
@@ -83,7 +90,6 @@ export const columns: ColumnDef<Course>[] = [
   },
   {
     id: "actions",
-    header: "Thao tác",
     cell: ({ row }) => {
       const course = row.original;
       const router = useRouter();
@@ -99,19 +105,23 @@ export const columns: ColumnDef<Course>[] = [
           <DropdownMenuContent align="end">
             <DropdownMenuLabel>Hành động</DropdownMenuLabel>
             <DropdownMenuItem
-              onClick={() => router.push(`/admin/ld/courses/${course.id}`)}
+              onClick={() =>
+                router.push(`/admin/ld/courses/${course.id}/manage`)
+              }
             >
               <span className="flex items-center gap-2">
                 <ArrowUpDown className="h-4 w-4" />
-                Chi tiết
+                Quản lý
               </span>
             </DropdownMenuItem>
             <DropdownMenuItem
-              onClick={() => router.push(`/admin/ld/courses/${course.id}/edit`)}
+              onClick={() =>
+                router.push(`/admin/ld/courses/${course.id}/manage/settings`)
+              }
             >
               <span className="flex items-center gap-2">
-                <Pencil />
-                Chỉnh sửa
+                <Settings />
+                Cài đặt
               </span>
             </DropdownMenuItem>
             <DropdownMenuItem

@@ -1,5 +1,6 @@
 [
   {
+    "id": "course-101",
     "thumbnail": "https://picsum.photos/500/500",
     "title": "Introduction to Programming",
     "description": "Learn the basics of programming using Python. No prior experience required.",
@@ -9,6 +10,7 @@
     "time": "09:00 - 11:00"
   },
   {
+    "id": "course-102",
     "thumbnail": "https://picsum.photos/500/500",
     "title": "Web Development Bootcamp",
     "description": "Build modern websites with HTML, CSS, and JavaScript.",
@@ -18,6 +20,7 @@
     "time": "13:00 - 15:00"
   },
   {
+    "id": "course-103",
     "thumbnail": "https://picsum.photos/500/500",
     "title": "Data Science Fundamentals",
     "description": "Explore data analysis, visualization, and machine learning basics.",
@@ -27,6 +30,7 @@
     "time": "10:00 - 12:00"
   },
   {
+    "id": "course-104",
     "thumbnail": "https://picsum.photos/500/500",
     "title": "Creative Writing",
     "description": "Unlock your creativity and improve your writing skills.",
@@ -36,6 +40,7 @@
     "time": "15:00 - 17:00"
   },
   {
+    "id": "course-105",
     "thumbnail": "https://picsum.photos/500/500",
     "title": "Public Speaking",
     "description": "Gain confidence and master the art of public speaking.",
@@ -45,6 +50,7 @@
     "time": "16:00 - 18:00"
   },
   {
+    "id": "course-106",
     "thumbnail": "https://picsum.photos/500/500",
     "title": "Mathematics Club",
     "description": "Challenge yourself with advanced math problems and competitions.",
@@ -54,6 +60,7 @@
     "time": "08:00 - 10:00"
   },
   {
+    "id": "course-107",
     "thumbnail": "https://picsum.photos/500/500",
     "title": "Robotics Workshop",
     "description": "Hands-on robotics and engineering projects for all levels.",
@@ -63,6 +70,7 @@
     "time": "14:00 - 17:00"
   },
   {
+    "id": "course-108",
     "thumbnail": "https://picsum.photos/500/500",
     "title": "Art & Design",
     "description": "Explore drawing, painting, and digital art techniques.",
@@ -72,6 +80,7 @@
     "time": "10:00 - 12:00"
   },
   {
+    "id": "course-109",
     "thumbnail": "https://picsum.photos/500/500",
     "title": "Chess Club",
     "description": "Sharpen your chess skills and compete with peers.",
@@ -81,6 +90,7 @@
     "time": "17:00 - 19:00"
   },
   {
+    "id": "course-110",
     "thumbnail": "https://picsum.photos/500/500",
     "title": "Science Explorers",
     "description": "Fun experiments and science projects for curious minds.",
@@ -90,6 +100,7 @@
     "time": "13:00 - 15:00"
   },
   {
+    "id": "course-111",
     "thumbnail": "https://picsum.photos/500/500",
     "title": "Photography Basics",
     "description": "Learn to capture stunning photos with any camera.",
@@ -99,6 +110,7 @@
     "time": "15:00 - 17:00"
   },
   {
+    "id": "course-112",
     "thumbnail": "https://picsum.photos/500/500",
     "title": "History Debates",
     "description": "Discuss and debate key moments in world history.",

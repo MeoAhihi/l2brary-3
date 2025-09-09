@@ -18,7 +18,7 @@ export function CoursesTable({ courses }: CoursesTableProps) {
       columns={columns}
       data={courses}
       header={(table) => (
-        <div className="flex flex-col gap-2 px-2 py-4 sm:flex-row sm:items-center sm:justify-between">
+        <div className="flex flex-col gap-2 px-2 sm:flex-row sm:items-center sm:justify-between">
           <div className="flex">
             <h2 className="text-lg font-semibold">Danh sách khoá học</h2>
             <Input
@@ -30,7 +30,7 @@ export function CoursesTable({ courses }: CoursesTableProps) {
             />
           </div>
           <Button asChild>
-            <Link href="/dashboard/ld/courses/new">Tạo khoá học mới</Link>
+            <Link href="/admin/ld/courses/new">Tạo khoá học mới</Link>
           </Button>
         </div>
       )}

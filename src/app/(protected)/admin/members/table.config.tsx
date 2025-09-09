@@ -13,7 +13,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { ColumnDef, Table } from "@tanstack/react-table";
 import { ArrowUpDown, MoreHorizontal, Plus } from "lucide-react";
-import { redirect } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { Member } from "@/types/iam.types";
 
@@ -114,7 +114,7 @@ export const columns: ColumnDef<Member>[] = [
     id: "actions",
     cell: ({ row }) => {
       const members = row.original;
-
+      const router = useRouter();
       return (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
@@ -141,18 +141,21 @@ export const columns: ColumnDef<Member>[] = [
             </DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem
-              onClick={() =>
-                redirect(`/dashboard/members/${members.id}/profile`)
-              }
+              onClick={() => router.push(`/admin/members/${members.id}`)}
             >
               Xem hồ sơ
             </DropdownMenuItem>
             <DropdownMenuItem
-              onClick={() =>
-                redirect(`/dashboard/members/${members.id}/update`)
-              }
+              onClick={() => router.push(`/admin/members/${members.id}/edit`)}
             >
               Chỉnh sửa
+            </DropdownMenuItem>
+            <DropdownMenuItem
+              onClick={() =>
+                router.push(`/admin/members/${members.id}/engagement`)
+              }
+            >
+              Xem hoạt động
             </DropdownMenuItem>
             <DropdownMenuItem>Chặn thành viên</DropdownMenuItem>
           </DropdownMenuContent>
