@@ -1,7 +1,10 @@
 import {
   Activity,
   BarChart3,
+  Book,
   BookOpen,
+  BookUp2,
+  BookUser,
   FileText,
   GraduationCap,
   Home,
@@ -30,9 +33,25 @@ export const adminSidebar = {
       icon: Users,
     },
     {
+      name: "Courses",
+      url: "/admin/ld/courses",
+      icon: GraduationCap,
+    },
+
+    {
       name: "Log Activity",
       url: "/log-activity",
       icon: Activity,
+    },
+    {
+      name: "Analytics Growth",
+      url: "/admin/analytics/growth",
+      icon: TrendingUp,
+    },
+    {
+      name: "Analytic Learning",
+      url: "/admin/analytics/learning",
+      icon: BookUser,
     },
     {
       name: "Engagement Settings",
@@ -41,55 +60,55 @@ export const adminSidebar = {
     },
   ],
   navMain: [
-    {
-      title: "Administration",
-      navs: [
-        {
-          title: "Knowledge Sharing",
-          url: "/knowledge",
-          icon: FileText,
-          items: [
-            {
-              title: "Posts",
-              url: "/knowledge",
-            },
-            {
-              title: "New Post",
-              url: "/knowledge/posts/new",
-            },
-          ],
-        },
-        {
-          title: "Learning & Development",
-          url: "/admin/ld/courses",
-          icon: GraduationCap,
-          items: [
-            {
-              title: "Courses",
-              url: "/admin/ld/courses",
-            },
-            {
-              title: "Create Course",
-              url: "/admin/ld/courses/new",
-            },
-          ],
-        },
-        {
-          title: "Analytics",
-          url: "/admin/analytics",
-          icon: BarChart3,
-          items: [
-            {
-              title: "Growth",
-              url: "/admin/analytics/growth",
-            },
-            {
-              title: "Learning",
-              url: "/admin/analytics/learning",
-            },
-          ],
-        },
-      ],
-    },
+    //   {
+    //     title: "Administration",
+    //     navs: [
+    //       {
+    //         title: "Knowledge Sharing",
+    //         url: "/knowledge",
+    //         icon: FileText,
+    //         items: [
+    //           {
+    //             title: "Posts",
+    //             url: "/knowledge",
+    //           },
+    //           {
+    //             title: "New Post",
+    //             url: "/knowledge/posts/new",
+    //           },
+    //         ],
+    //       },
+    //       {
+    //         title: "Learning & Development",
+    //         url: "/admin/ld/courses",
+    //         icon: GraduationCap,
+    //         items: [
+    //           {
+    //             title: "Courses",
+    //             url: "/admin/ld/courses",
+    //           },
+    //           {
+    //             title: "Create Course",
+    //             url: "/admin/ld/courses/new",
+    //           },
+    //         ],
+    //       },
+    //       {
+    //         title: "Analytics",
+    //         url: "/admin/analytics",
+    //         icon: BarChart3,
+    //         items: [
+    //           {
+    //             title: "Growth",
+    //             url: "/admin/analytics/growth",
+    //           },
+    //           {
+    //             title: "Learning",
+    //             url: "/admin/analytics/learning",
+    //           },
+    //         ],
+    //       },
+    //     ],
+    //   },
   ],
 };

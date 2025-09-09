@@ -1,15 +1,22 @@
 "use client";
 
+import PageHeader from "@/components/ui/page-header";
+import { cn } from "@/lib/utils";
+import {
+  BarChart3,
+  CheckSquare,
+  Gamepad2,
+  Settings,
+  Stamp,
+} from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { use } from "react";
-import { cn } from "@/lib/utils";
-import { Settings, Users, BookOpen, BarChart3, Layers } from "lucide-react";
-import PageHeader from "@/components/ui/page-header";
-interface ManageCourseLayoutProps {
+
+interface ManageSessionLayoutProps {
   children: React.ReactNode;
   params: Promise<{
-    "course-id": string;
+    "session-id": string;
   }>;
 }
 
@@ -20,24 +27,19 @@ const tabs = [
     icon: BarChart3,
   },
   {
-    name: "Buổi học",
-    href: "/sessions",
-    icon: Layers,
+    name: "Điểm danh",
+    href: "/check-in",
+    icon: CheckSquare,
   },
   {
-    name: "Đăng ký",
-    href: "/enrollments",
-    icon: Users,
+    name: "Diểm cộng",
+    href: "/stamp",
+    icon: Stamp,
   },
   {
-    name: "Nội dung",
-    href: "/content",
-    icon: BookOpen,
-  },
-  {
-    name: "Bảng điểm",
-    href: "/score-table",
-    icon: BarChart3,
+    name: "Ghi điểm",
+    href: "/game-log",
+    icon: Gamepad2,
   },
   {
     name: "Cài đặt",
@@ -46,30 +48,34 @@ const tabs = [
   },
 ];
 
-export default function ManageCourseLayout({
+export default function ManageSessionLayout({
   children,
   params,
-}: ManageCourseLayoutProps) {
+}: ManageSessionLayoutProps) {
   const pathname = usePathname();
-  const { "course-id": courseId } = use(params);
-  const courseName = "Vật lý Lý thuyết";
+  const { "session-id": sessionId } = use(params);
+  const sessionName = "Buổi học Vật lý Lý thuyết";
 
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="max-w-6xl mx-auto">
-        <PageHeader pageTitle={courseName} descriptions={[`ID: ${courseId}`]} />
+        <PageHeader
+          pageTitle={sessionName}
+          descriptions={[`Session ID: ${sessionId}`]}
+        />
 
         {/* Tab Navigation */}
         <div className="border-b">
           <nav className="-mb-px flex space-x-8">
             {tabs.map((tab) => {
               const isActive =
-                pathname === `/admin/ld/courses/${courseId}/manage${tab.href}`;
+                pathname ===
+                `/admin/ld/sessions/${sessionId}/manage${tab.href}`;
 
               return (
                 <Link
                   key={tab.name}
-                  href={`/admin/ld/courses/${courseId}/manage${tab.href}`}
+                  href={`/admin/ld/sessions/${sessionId}/manage${tab.href}`}
                   className={cn(
                     "flex items-center gap-2 py-4 px-1 border-b-2 font-medium text-sm transition-colors",
                     isActive

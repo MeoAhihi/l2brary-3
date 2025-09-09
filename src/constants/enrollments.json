@@ -1,0 +1,98 @@
+[
+  {
+    "id": 1,
+    "student": {
+      "name": "Alice Johnson",
+      "email": "alice.johnson@example.com",
+      "avatar": "/avatars/alice.jpg"
+    },
+    "status": "approved",
+    "enrolledDate": "2024-01-15",
+    "lastActivity": "2024-01-20",
+    "progress": 75,
+    "grade": "A",
+    "attendance": 95,
+    "assignments": 8,
+    "completed": 6
+  },
+  {
+    "id": 2,
+    "student": {
+      "name": "Bob Smith",
+      "email": "bob.smith@example.com",
+      "avatar": "/avatars/bob.jpg"
+    },
+    "status": "pending",
+    "enrolledDate": "2024-01-18",
+    "lastActivity": "2024-01-19",
+    "progress": 0,
+    "grade": "N/A",
+    "attendance": 0,
+    "assignments": 0,
+    "completed": 0
+  },
+  {
+    "id": 3,
+    "student": {
+      "name": "Carol Davis",
+      "email": "carol.davis@example.com",
+      "avatar": "/avatars/carol.jpg"
+    },
+    "status": "approved",
+    "enrolledDate": "2024-01-10",
+    "lastActivity": "2024-01-21",
+    "progress": 45,
+    "grade": "B+",
+    "attendance": 88,
+    "assignments": 8,
+    "completed": 4
+  },
+  {
+    "id": 4,
+    "student": {
+      "name": "David Wilson",
+      "email": "david.wilson@example.com",
+      "avatar": "/avatars/david.jpg"
+    },
+    "status": "rejected",
+    "enrolledDate": "2024-01-12",
+    "lastActivity": "2024-01-12",
+    "progress": 0,
+    "grade": "N/A",
+    "attendance": 0,
+    "assignments": 0,
+    "completed": 0
+  },
+  {
+    "id": 5,
+    "student": {
+      "name": "Emma Thompson",
+      "email": "emma.thompson@example.com",
+      "avatar": "/avatars/emma.jpg"
+    },
+    "status": "approved",
+    "enrolledDate": "2024-01-08",
+    "lastActivity": "2024-01-22",
+    "progress": 92,
+    "grade": "A+",
+    "attendance": 100,
+    "assignments": 8,
+    "completed": 8
+  },
+  {
+    "id": 6,
+    "student": {
+      "name": "Frank Miller",
+      "email": "frank.miller@example.com",
+      "avatar": "/avatars/frank.jpg"
+    },
+    "status": "approved",
+    "enrolledDate": "2024-01-14",
+    "lastActivity": "2024-01-18",
+    "progress": 60,
+    "grade": "B",
+    "attendance": 75,
+    "assignments": 8,
+    "completed": 5
+  }
+]
