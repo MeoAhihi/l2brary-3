@@ -15,14 +15,7 @@ import { ColumnDef, Table } from "@tanstack/react-table";
 import { ArrowUpDown, MoreHorizontal, Plus } from "lucide-react";
 import { redirect } from "next/navigation";
 import { toast } from "sonner";
-
-export type Member = {
-  id: string;
-  fullName: string;
-  birthday: Date;
-  isMale: boolean;
-  group: string;
-};
+import { Member } from "@/types/iam.types";
 
 export const columns: ColumnDef<Member>[] = [
   {
@@ -39,9 +32,8 @@ export const columns: ColumnDef<Member>[] = [
       );
     },
     cell: ({ row }) => {
-      return (
-        <a href={`#${row.getValue("fullname")}`}> {row.getValue("fullname")}</a>
-      );
+      const fullname = row.original.fullname;
+      return <a href={`#${fullname}`}> {fullname}</a>;
     },
   },
   {
@@ -58,16 +50,12 @@ export const columns: ColumnDef<Member>[] = [
       );
     },
     cell: ({ row }) => {
-      return (
-        <a href={`#${row.getValue("international_name")}`}>
-          {" "}
-          {row.getValue("international_name")}
-        </a>
-      );
+      const internationalName = row.original.international_name;
+      return <a href={`#${internationalName}`}> {internationalName}</a>;
     },
   },
   {
-    accessorKey: "isMale",
+    accessorKey: "is_male",
     header: ({ column }) => {
       return (
         <Button
@@ -80,7 +68,7 @@ export const columns: ColumnDef<Member>[] = [
       );
     },
     cell: ({ row }) => {
-      return row.getValue("isMale") ? "Nam" : "Nữ";
+      return row.original.is_male ? "Nam" : "Nữ";
     },
   },
   {
@@ -111,7 +99,12 @@ export const columns: ColumnDef<Member>[] = [
       );
     },
     cell: ({ row }) => {
-      return (row.getValue("birthday") as Date).toLocaleDateString("en-GB");
+      const birthday = row.original.birthday;
+      // birthday is string in format YYYY-MM-DD or ISO, so parse to Date
+      const date = new Date(birthday);
+      return !isNaN(date.getTime())
+        ? date.toLocaleDateString("en-GB")
+        : birthday;
     },
   },
   { accessorKey: "phone_number", header: "Số điện thoại" },
