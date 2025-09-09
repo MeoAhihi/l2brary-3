@@ -13,18 +13,11 @@ import { ColumnDef } from "@tanstack/react-table";
 import { ArrowUpDown, Copy, MoreHorizontal, Pencil, X } from "lucide-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { useMemo } from "react";
 import { toast } from "sonner";
-import type { Courses } from "@/types/ld.types";
+import type { Course } from "@/types/ld.types";
+import { DataTableColumnHeader } from "@/components/ui/data-table/data-table-column-header";
 
-// Helper for unique values for filters
-function getUniqueValues<T>(data: T[], key: keyof T): string[] {
-  return Array.from(new Set(data.map((item) => item[key] as string))).filter(
-    Boolean
-  );
-}
-
-export const columns: ColumnDef<Courses>[] = [
+export const columns: ColumnDef<Course>[] = [
   {
     accessorKey: "thumbnail",
     header: "Thumbnail",
@@ -52,69 +45,29 @@ export const columns: ColumnDef<Courses>[] = [
         </Button>
       </div>
     ),
-    cell: ({ row }) => (
-      <span className="font-medium">{row.original.title}</span>
-    ),
+    cell: ({ row }) => row.original.title,
     filterFn: "includesString",
   },
   {
     accessorKey: "classGroup",
-    header: ({ column, table }) => {
-      // Get all unique class groups from the table data for filter options
-      const options = useMemo(
-        () =>
-          getUniqueValues(
-            table.getPreFilteredRowModel().rows.map((r) => r.original),
-            "classGroup"
-          ),
-        [table.getPreFilteredRowModel().rows]
-      );
-      return (
-        <div className="flex flex-col gap-1">
-          <Button
-            variant="ghost"
-            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-            className="justify-start"
-          >
-            Lớp
-            <ArrowUpDown className="ml-2 h-4 w-4" />
-          </Button>
-        </div>
-      );
-    },
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="Lớp" />
+    ),
+    cell: ({ row }) => row.original.classGroup,
     filterFn: "equalsString",
   },
   {
     accessorKey: "recurrentRule",
-    header: ({ column, table }) => {
-      // Get all unique recurrent rules from the table data for filter options
-      const options = useMemo(
-        () =>
-          getUniqueValues(
-            table.getPreFilteredRowModel().rows.map((r) => r.original),
-            "recurrentRule"
-          ),
-        [table.getPreFilteredRowModel().rows]
-      );
-      return (
-        <div className="flex flex-col gap-1">
-          <span className="font-semibold">Lịch lặp lại</span>
-        </div>
-      );
-    },
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="Lịch lặp lại" />
+    ),
     cell: ({ row }) => row.original.recurrentRule,
     filterFn: "equalsString",
   },
   {
     accessorKey: "time",
     header: ({ column }) => (
-      <Button
-        variant="ghost"
-        onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-      >
-        Thời gian
-        <ArrowUpDown className="ml-2 h-4 w-4" />
-      </Button>
+      <DataTableColumnHeader column={column} title="Thời gian" />
     ),
     cell: ({ row }) => row.original.time,
     sortingFn: (rowA, rowB, columnId) => {
