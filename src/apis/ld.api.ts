@@ -1,7 +1,15 @@
-import { Session } from "@/types/ld.types";
+import courses from "@/constants/courses.json";
+import enrollments from "@/constants/enrollments.json";
 import sessions from "@/constants/sessions.json";
-import { StampType, StudentStamp } from "@/types/ld.types";
-import { Star, Trophy, Gift, Medal, Award } from "lucide-react";
+import { EnrollmentSchema } from "@/types/ld.schema";
+import {
+  Course,
+  Enrollment,
+  Session,
+  StampType,
+  StudentStamp,
+} from "@/types/ld.types";
+import { Award, Gift, Medal, Star, Trophy } from "lucide-react";
 
 export async function getSessions(courseId: string): Promise<Session[]> {
   return sessions
@@ -148,4 +156,16 @@ export async function getStudentAttendances() {
       status: "absent",
     },
   ];
+}
+
+export async function getEnrollment(): Promise<Enrollment[]> {
+  // This function returns the mock enrollments data from the JSON file.
+  // In a real implementation, this would fetch from a database or API.
+  // Use zod to parse and validate the enrollments data
+  return enrollments.map((e) => EnrollmentSchema.parse(e));
+}
+
+export async function getCourses(): Promise<Course[]> {
+  // Use zod to parse and validate the courses data
+  return courses as Course[]; //.map((c) => CourseSchema.parse(c));
 }
