@@ -1,6 +1,5 @@
-import { DataTable } from "@/components/ui/data-table/data-table";
 import PageHeader from "@/components/ui/page-header";
-import { columns } from "./columns";
+import ScoreTable from "./score-table";
 
 const data = [
   {
@@ -165,12 +164,7 @@ export default function Page() {
   return (
     <>
       <PageHeader pageTitle="Bảng điểm" />
-      <DataTable
-        title="Bảng điểm"
-        data={data}
-        columns={columns}
-        filterField="fullName"
-      />
+      <ScoreTable scores={data} />
     </>
   );
 }
