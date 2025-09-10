@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { Button } from "../ui/button";
 
 export default function HeroSection() {
@@ -6,10 +5,12 @@ export default function HeroSection() {
     <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
       <main className="flex flex-col gap-[32px] row-start-2 items-center">
         <h1 className="text-3xl sm:text-5xl font-bold text-center mb-4">
-          Explore physics with <br /><span className="text-primary">Newton Club</span>
+          Explore physics with <br />
+          <span className="text-primary">Newton Club</span>
         </h1>
         <p className="text-lg sm:text-2xl text-center text-muted-foreground max-w-2xl">
-          Newton Club is a community for curious minds to learn, discuss, and explore the wonders of physics together.
+          Newton Club is a community for curious minds to learn, discuss, and
+          explore the wonders of physics together.
         </p>
         <div className="flex gap-4 items-center flex-col sm:flex-row mt-4 justify-center w-full">
           <Button
@@ -21,7 +22,7 @@ export default function HeroSection() {
           <Button
             className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-6 sm:px-8"
             type="button"
-            variant='outline'
+            variant="outline"
           >
             Explore Courses
           </Button>
@@ -74,6 +75,6 @@ export default function HeroSection() {
           Go to nextjs.org →
         </a>
       </footer> */}
-    </div >
+    </div>
   );
 }

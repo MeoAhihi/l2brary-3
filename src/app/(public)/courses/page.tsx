@@ -1,15 +1,13 @@
-"use client"
 import { CourseCard } from "@/components/course/course-card";
 import { Metadata } from "next";
 import { useState } from "react";
 import { PaginationButtons } from "@/components/ui/pagination-buttons";
-import courses from "@/constants/courses.json"
+import courses from "@/constants/courses.json";
 
-// export const metadata: Metadata = {
-//   title: "Courses | L2brary",
-//   description: "Browse available courses and learning opportunities",
-// };
-
+export const metadata: Metadata = {
+  title: "Courses | L2brary",
+  description: "Browse available courses and learning opportunities",
+};
 
 export default function CoursesPage() {
   const pageSize = 8;
@@ -26,7 +24,7 @@ export default function CoursesPage() {
         </p>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-          {pagedCourses.map((course, idx) => (
+          {pagedCourses.map((course) => (
             <CourseCard key={course.title} {...course} />
           ))}
         </div>

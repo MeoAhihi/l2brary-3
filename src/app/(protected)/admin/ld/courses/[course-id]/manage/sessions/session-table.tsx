@@ -12,7 +12,7 @@ export default function SessionsTable({ sessions }: { sessions: Session[] }) {
     <DataTable
       columns={columns}
       data={sessions}
-      header={(table) => (
+      header={() => (
         <div className="flex flex-row justify-between">
           <h2 className="text-xl font-semibold">Danh sách các buổi học</h2>
           <Button>

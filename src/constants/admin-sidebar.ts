@@ -1,16 +1,11 @@
 import {
   Activity,
   BarChart3,
-  Book,
   BookOpen,
-  BookUp2,
   BookUser,
-  FileText,
   GraduationCap,
-  Home,
   TrendingUp,
-  UserCheck,
-  Users,
+  Users
 } from "lucide-react";
 
 export const adminSidebar = {

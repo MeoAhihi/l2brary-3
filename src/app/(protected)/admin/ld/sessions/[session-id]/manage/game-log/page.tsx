@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { FileUp, Plus, Save, Target, Trophy, X } from "lucide-react";
 import Head from "next/head";
-import { useParams } from "next/navigation";
+// import { useParams } from "next/navigation";
 import { useState } from "react";
 import { GameLogTable } from "./game-log-table";
 
@@ -39,10 +39,9 @@ const topPerformers = [
 ];
 
 export default function GameLogPage() {
-  const params = useParams();
-  const sessionId = params["session-id"];
+  // const params = useParams();
 
-  const [players, setPlayers] = useState([
+  const [players /*setPlayers*/] = useState([
     {
       id: 1,
       name: "John Doe",

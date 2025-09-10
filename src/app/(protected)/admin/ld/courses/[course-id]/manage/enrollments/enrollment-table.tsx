@@ -5,7 +5,7 @@ import { Enrollment } from "@/types/ld.types";
 import { columns } from "./columns";
 import { CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { Filter, Download, Search, Mail } from "lucide-react";
+import { Filter, Search, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { DataTablePagination } from "@/components/ui/data-table/data-table-pagination";
 
@@ -19,7 +19,7 @@ export function EnrollmentTable({
     <DataTable
       columns={columns}
       data={enrollments}
-      header={(table) => (
+      header={() => (
         <div className="flex justify-between items-center">
           <CardTitle>Student Roster</CardTitle>
           <div className="flex items-center space-x-2">
