@@ -1,4 +1,4 @@
-import { BookOpen, GraduationCap, Home, Info, Mail } from "lucide-react";
+import { BookOpen, GraduationCap, Home, Info } from "lucide-react";
 
 export const appNavbar = [
   {

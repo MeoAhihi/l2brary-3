@@ -34,7 +34,7 @@ interface SettingsPageProps {
   }>;
 }
 
-export default function SettingsPage({ params }: SettingsPageProps) {
+export default function SettingsPage({}: SettingsPageProps) {
   // const { "session-id": sessionId } = use(params);
 
   return (

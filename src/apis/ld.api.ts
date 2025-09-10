@@ -12,6 +12,7 @@ import {
 import { Award, Gift, Medal, Star, Trophy } from "lucide-react";
 
 export async function getSessions(courseId: string): Promise<Session[]> {
+  console.log(courseId);
   return sessions
     .map((s) => ({
       ...s,
@@ -23,7 +24,7 @@ export async function getSessions(courseId: string): Promise<Session[]> {
     ) as Session[];
 }
 
-export async function getStampTypes(sessionId: string): Promise<StampType[]> {
+export async function getStampTypes(): Promise<StampType[]> {
   return [
     {
       id: "participation",
@@ -60,9 +61,7 @@ export async function getStampTypes(sessionId: string): Promise<StampType[]> {
 
 // Mock data for students
 
-export async function getStudentStamps(
-  sessionId: string
-): Promise<StudentStamp[]> {
+export async function getStudentStamps(): Promise<StudentStamp[]> {
   return [
     {
       id: 1,

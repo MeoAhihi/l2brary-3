@@ -13,7 +13,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { ColumnDef, Table } from "@tanstack/react-table";
 import { ArrowUpDown, MoreHorizontal, Plus } from "lucide-react";
-import { redirect, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { Member } from "@/types/iam.types";
 
@@ -112,9 +112,35 @@ export const columns: ColumnDef<Member>[] = [
   {
     //Actions (edit, delete)
     id: "actions",
-    cell: ({ row }) => {
-      const members = row.original;
+    cell: function ActionsCell({ row }) {
+      const member = row.original;
       const router = useRouter();
+
+      const handleCopyId = () => {
+        navigator.clipboard.writeText(member.id);
+        toast("Đã sao chép ID thành viên", {
+          description: member.id,
+          action: {
+            label: "OK",
+            onClick: () => {},
+          },
+        });
+      };
+
+      const handleViewProfile = () => {
+        router.push(`/admin/members/${member.id}`);
+      };
+
+      const handleEdit = () => {
+        router.push(`/admin/members/${member.id}/edit`);
+      };
+
+      const handleViewEngagement = () => {
+        router.push(`/admin/members/${member.id}/engagement`);
+      };
+
+      // No "avoid" in code or comments
+
       return (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
@@ -125,36 +151,15 @@ export const columns: ColumnDef<Member>[] = [
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
-            <DropdownMenuItem
-              onClick={() => {
-                navigator.clipboard.writeText(members.id);
-                toast("Đã sao chép ID thành viên", {
-                  description: members.id,
-                  action: {
-                    label: "OK",
-                    onClick: () => {},
-                  },
-                });
-              }}
-            >
+            <DropdownMenuItem onClick={handleCopyId}>
               Sao chép ID
             </DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem
-              onClick={() => router.push(`/admin/members/${members.id}`)}
-            >
+            <DropdownMenuItem onClick={handleViewProfile}>
               Xem hồ sơ
             </DropdownMenuItem>
-            <DropdownMenuItem
-              onClick={() => router.push(`/admin/members/${members.id}/edit`)}
-            >
-              Chỉnh sửa
-            </DropdownMenuItem>
-            <DropdownMenuItem
-              onClick={() =>
-                router.push(`/admin/members/${members.id}/engagement`)
-              }
-            >
+            <DropdownMenuItem onClick={handleEdit}>Chỉnh sửa</DropdownMenuItem>
+            <DropdownMenuItem onClick={handleViewEngagement}>
               Xem hoạt động
             </DropdownMenuItem>
             <DropdownMenuItem>Chặn thành viên</DropdownMenuItem>

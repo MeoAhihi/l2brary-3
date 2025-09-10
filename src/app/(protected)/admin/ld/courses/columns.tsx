@@ -10,14 +10,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { ColumnDef } from "@tanstack/react-table";
-import {
-  ArrowUpDown,
-  Copy,
-  MoreHorizontal,
-  Pencil,
-  Settings,
-  X,
-} from "lucide-react";
+import { ArrowUpDown, Copy, MoreHorizontal, Settings, X } from "lucide-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
@@ -40,7 +33,7 @@ export const columns: ColumnDef<Course>[] = [
   },
   {
     accessorKey: "title",
-    header: ({ column, table }) => (
+    header: ({ column }) => (
       <div className="flex flex-col gap-1">
         <Button
           variant="ghost"
@@ -90,9 +83,53 @@ export const columns: ColumnDef<Course>[] = [
   },
   {
     id: "actions",
-    cell: ({ row }) => {
+    cell: function ActionsCell({ row }) {
       const course = row.original;
       const router = useRouter();
+
+      // Helper to avoid lint warnings for unused callbacks
+      // and to avoid inline functions in JSX
+      const handleManage = () => {
+        router.push(`/admin/ld/courses/${course.id}/manage`);
+      };
+
+      const handleSettings = () => {
+        router.push(`/admin/ld/courses/${course.id}/manage/settings`);
+      };
+
+      const handleDelete = () => {
+        // Confirm before delete
+        // eslint-disable-next-line no-alert
+        if (window.confirm("Bạn có chắc muốn xoá khoá học này?")) {
+          // TODO: Implement delete logic
+          toast("Đã xoá khoá học", {
+            description: course.title,
+          });
+        }
+      };
+
+      const handleCopyId = () => {
+        navigator.clipboard.writeText(course.id);
+        toast("Đã sao chép ID khoá học", {
+          description: course.id,
+          action: {
+            label: "OK",
+            onClick: () => {},
+          },
+        });
+      };
+
+      const handleCopyZalo = () => {
+        const zaloUrl = `https://zalo.me/${course.id}`;
+        navigator.clipboard.writeText(zaloUrl);
+        toast("Đã sao chép Zalo URL", {
+          description: zaloUrl,
+          action: {
+            label: "OK",
+            onClick: () => {},
+          },
+        });
+      };
 
       return (
         <DropdownMenu>
@@ -104,73 +141,32 @@ export const columns: ColumnDef<Course>[] = [
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
             <DropdownMenuLabel>Hành động</DropdownMenuLabel>
-            <DropdownMenuItem
-              onClick={() =>
-                router.push(`/admin/ld/courses/${course.id}/manage`)
-              }
-            >
+            <DropdownMenuItem onClick={handleManage}>
               <span className="flex items-center gap-2">
                 <ArrowUpDown className="h-4 w-4" />
                 Quản lý
               </span>
             </DropdownMenuItem>
-            <DropdownMenuItem
-              onClick={() =>
-                router.push(`/admin/ld/courses/${course.id}/manage/settings`)
-              }
-            >
+            <DropdownMenuItem onClick={handleSettings}>
               <span className="flex items-center gap-2">
                 <Settings />
                 Cài đặt
               </span>
             </DropdownMenuItem>
-            <DropdownMenuItem
-              onClick={() => {
-                // Confirm before delete
-                if (window.confirm("Bạn có chắc muốn xoá khoá học này?")) {
-                  // TODO: Implement delete logic
-                  toast("Đã xoá khoá học", {
-                    description: course.title,
-                  });
-                }
-              }}
-            >
+            <DropdownMenuItem onClick={handleDelete}>
               <span className="flex items-center gap-2 text-destructive">
                 <X />
                 Xoá
               </span>
             </DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem
-              onClick={() => {
-                navigator.clipboard.writeText(course.id);
-                toast("Đã sao chép ID khoá học", {
-                  description: course.id,
-                  action: {
-                    label: "OK",
-                    onClick: () => {},
-                  },
-                });
-              }}
-            >
+            <DropdownMenuItem onClick={handleCopyId}>
               <span className="flex items-center gap-2">
                 <Copy />
                 Sao chép ID
               </span>
             </DropdownMenuItem>
-            <DropdownMenuItem
-              onClick={() => {
-                const zaloUrl = `https://zalo.me/${course.id}`;
-                navigator.clipboard.writeText(zaloUrl);
-                toast("Đã sao chép Zalo URL", {
-                  description: zaloUrl,
-                  action: {
-                    label: "OK",
-                    onClick: () => {},
-                  },
-                });
-              }}
-            >
+            <DropdownMenuItem onClick={handleCopyZalo}>
               <Image
                 src="/Icon_of_Zalo.svg"
                 alt="Zalo"

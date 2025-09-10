@@ -11,13 +11,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import type { Session } from "@/types/ld.types";
 import { ColumnDef } from "@tanstack/react-table";
-import {
-  ArrowUpDown,
-  Copy,
-  MoreHorizontal,
-  Settings,
-  X
-} from "lucide-react";
+import { ArrowUpDown, Copy, MoreHorizontal, Settings, X } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 
@@ -227,9 +221,37 @@ export const columns: ColumnDef<Session>[] = [
   },
   {
     id: "actions",
-    cell: ({ row }) => {
+    cell: function ActionsCell({ row }) {
       const session = row.original;
       const router = useRouter();
+
+      const handleDetail = () => {
+        router.push(`/admin/ld/sessions/${session.id}/manage`);
+      };
+
+      const handleSettings = () => {
+        router.push(`/admin/ld/sessions/${session.id}/manage/settings`);
+      };
+
+      const handleDelete = () => {
+        if (window.confirm("Bạn có chắc muốn xoá buổi học này?")) {
+          // TODO: Implement delete logic
+          toast("Đã xoá buổi học", {
+            description: session.title,
+          });
+        }
+      };
+
+      const handleCopyId = () => {
+        navigator.clipboard.writeText(session.id ?? "");
+        toast("Đã sao chép ID buổi học", {
+          description: session.id,
+          action: {
+            label: "OK",
+            onClick: () => {},
+          },
+        });
+      };
 
       return (
         <DropdownMenu>
@@ -241,54 +263,26 @@ export const columns: ColumnDef<Session>[] = [
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
             <DropdownMenuLabel>Hành động</DropdownMenuLabel>
-            <DropdownMenuItem
-              onClick={() =>
-                router.push(`/admin/ld/sessions/${session.id}/manage`)
-              }
-            >
+            <DropdownMenuItem onClick={handleDetail}>
               <span className="flex items-center gap-2">
                 <ArrowUpDown className="h-4 w-4" />
                 Chi tiết
               </span>
             </DropdownMenuItem>
-            <DropdownMenuItem
-              onClick={() =>
-                router.push(`/admin/ld/sessions/${session.id}/manage/settings`)
-              }
-            >
+            <DropdownMenuItem onClick={handleSettings}>
               <span className="flex items-center gap-2">
                 <Settings />
                 Cài đặt
               </span>
             </DropdownMenuItem>
-            <DropdownMenuItem
-              onClick={() => {
-                if (window.confirm("Bạn có chắc muốn xoá buổi học này?")) {
-                  // TODO: Implement delete logic
-                  toast("Đã xoá buổi học", {
-                    description: session.title,
-                  });
-                }
-              }}
-            >
+            <DropdownMenuItem onClick={handleDelete}>
               <span className="flex items-center gap-2 text-destructive">
                 <X />
                 Xoá
               </span>
             </DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem
-              onClick={() => {
-                navigator.clipboard.writeText(session.id ?? "");
-                toast("Đã sao chép ID buổi học", {
-                  description: session.id,
-                  action: {
-                    label: "OK",
-                    onClick: () => {},
-                  },
-                });
-              }}
-            >
+            <DropdownMenuItem onClick={handleCopyId}>
               <span className="flex items-center gap-2">
                 <Copy />
                 Sao chép ID

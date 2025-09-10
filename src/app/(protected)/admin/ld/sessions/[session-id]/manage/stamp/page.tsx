@@ -30,14 +30,14 @@ function StampPage() {
 
   // Set the first stamp type as selected by default when loaded
 
-  const { data: stampTypes = [], isLoading: stampTypesLoading } = useQuery({
+  const { data: stampTypes = [] } = useQuery({
     queryKey: ["stampTypes", sessionId],
-    queryFn: () => getStampTypes(sessionId as string),
+    queryFn: () => getStampTypes(),
   });
 
-  const { data: students = [], isLoading: studentsLoading } = useQuery({
+  const { data: students = [] } = useQuery({
     queryKey: ["studentStamps", sessionId],
-    queryFn: () => getStudentStamps(sessionId as string),
+    queryFn: () => getStudentStamps(),
   });
 
   // Create a map for stampTypeId to icon/color for StudentStampCard

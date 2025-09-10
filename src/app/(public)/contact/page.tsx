@@ -13,7 +13,9 @@ export default function ContactPage() {
   const [form, setForm] = useState(contactFormInitialState);
   const [submitted, setSubmitted] = useState(false);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
@@ -38,18 +40,24 @@ export default function ContactPage() {
         </div>
         {/* Form Section */}
         <div className="md:w-1/2 w-full p-8 flex flex-col justify-center">
-          <h1 className="text-3xl font-bold mb-2 text-zinc-900 dark:text-zinc-100">Contact Us</h1>
+          <h1 className="text-3xl font-bold mb-2 text-zinc-900 dark:text-zinc-100">
+            Contact Us
+          </h1>
           <p className="mb-6 text-zinc-600 dark:text-zinc-300">
-            Have a question or want to reach out? Fill out the form below and we'll get back to you soon!
+            Have a question or want to reach out? Fill out the form below and
+            we&apos;ll get back to you soon!
           </p>
           {submitted ? (
             <div className="text-green-600 dark:text-green-400 font-semibold text-center py-8">
-              Thank you for contacting us! We'll be in touch soon.
+              Thank you for contacting us! We&apos;ll be in touch soon.
             </div>
           ) : (
             <form className="space-y-4" onSubmit={handleSubmit}>
               <div>
-                <Label htmlFor="name" className="block mb-1 text-zinc-700 dark:text-zinc-200">
+                <Label
+                  htmlFor="name"
+                  className="block mb-1 text-zinc-700 dark:text-zinc-200"
+                >
                   Name
                 </Label>
                 <Input
@@ -63,7 +71,10 @@ export default function ContactPage() {
                 />
               </div>
               <div>
-                <Label htmlFor="email" className="block mb-1 text-zinc-700 dark:text-zinc-200">
+                <Label
+                  htmlFor="email"
+                  className="block mb-1 text-zinc-700 dark:text-zinc-200"
+                >
                   Email
                 </Label>
                 <Input
@@ -77,7 +88,10 @@ export default function ContactPage() {
                 />
               </div>
               <div>
-                <Label htmlFor="class" className="block mb-1 text-zinc-700 dark:text-zinc-200">
+                <Label
+                  htmlFor="class"
+                  className="block mb-1 text-zinc-700 dark:text-zinc-200"
+                >
                   Class
                 </Label>
                 <Input
@@ -91,7 +105,10 @@ export default function ContactPage() {
                 />
               </div>
               <div>
-                <Label htmlFor="content" className="block mb-1 text-zinc-700 dark:text-zinc-200">
+                <Label
+                  htmlFor="content"
+                  className="block mb-1 text-zinc-700 dark:text-zinc-200"
+                >
                   Message
                 </Label>
                 <Textarea

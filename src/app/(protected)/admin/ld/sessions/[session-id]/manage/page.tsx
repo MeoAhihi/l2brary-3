@@ -1,5 +1,4 @@
 import { Metadata } from "next";
-import { use } from "react";
 import {
   BarChart3,
   Users,
@@ -9,8 +8,6 @@ import {
   Stamp,
   Gamepad2,
   TrendingUp,
-  UserCheck,
-  Award,
   Settings,
 } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -30,9 +27,7 @@ interface ManageSessionPageProps {
   }>;
 }
 
-export default function ManageSessionPage({ params }: ManageSessionPageProps) {
-  const { "session-id": sessionId } = use(params);
-
+export default function ManageSessionPage({}: ManageSessionPageProps) {
   return (
     <div className="space-y-6">
       {/* Session Stats */}

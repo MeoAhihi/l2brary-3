@@ -1,5 +1,4 @@
 "use client";
-import { useState } from "react";
 import { toast } from "sonner";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -130,7 +129,7 @@ export default function CustomForm({
             key={field.name}
             control={form.control}
             name={field.name as any}
-            render={({ field: formField }) => (
+            render={({}) => (
               <FormItem>
                 <FormLabel>{field.label}</FormLabel>
                 <FormControl>{renderField(field, form)}</FormControl>

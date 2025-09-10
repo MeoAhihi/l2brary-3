@@ -5,6 +5,20 @@ import { ColumnDef } from "@tanstack/react-table";
 import { ArrowUpDown } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
+export type Score = {
+  id: string;
+  avatarUrl: string;
+  fullName: string;
+  birthday: Date;
+  isMale: boolean;
+  group: string;
+  Stamp: number;
+  "Điểm Nổ lực": number;
+  "Điểm Soạn bài": number;
+  "Điểm Tác phong": number;
+  "Điểm thi": number;
+};
+
 const scoreColumns = [
   "Stamp",
   "Điểm Nổ lực",
@@ -13,7 +27,7 @@ const scoreColumns = [
   "Điểm thi",
 ];
 
-export const columns: ColumnDef<any>[] = [
+export const columns: ColumnDef<Score>[] = [
   {
     accessorKey: "avatarUrl",
     header: "",
