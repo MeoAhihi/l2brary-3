@@ -8,6 +8,7 @@ import {
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Calendar, Users } from "lucide-react";
+import Link from "next/link";
 
 type CourseCardProps = {
   thumbnail: string;
@@ -54,11 +55,8 @@ export function CourseCard({
         </div>
       </CardContent>
       <CardFooter className="flex gap-2 justify-end pt-0">
-        <Button asChild variant="outline" size="sm">
-          More Info
-        </Button>
         <Button asChild variant="default" size="sm">
-          Join Now
+          <Link href={`/courses/${encodeURIComponent(title)}`}>Xem thêm</Link>
         </Button>
       </CardFooter>
     </Card>
