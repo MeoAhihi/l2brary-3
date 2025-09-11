@@ -33,12 +33,13 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { cn } from "@/lib/utils";
+import recurrentOptions from "@/constants/recurrent-rule.json";
 
 const formSchema = z.object({
   title: z.string().min(1),
   description: z.string().optional(),
   "course-group": z.string(),
-  "is-recurrent": z.string(),
+  "recurrent-type": z.string(),
   "occurent-date": z.coerce.date(),
   "recurrent-rule": z.string(),
   "chat-url": z.string().min(1).optional(),
@@ -47,17 +48,15 @@ const formSchema = z.object({
 type LabelValue = { label: string; value: string };
 
 export default function CreateCourseForm({
-  isReccurentOptions,
   courseGroupOptions,
-  recurrentRuleOptions,
 }: {
-  isReccurentOptions: LabelValue[];
   courseGroupOptions: LabelValue[];
-  recurrentRuleOptions: LabelValue[];
 }) {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
   });
+
+  const recurrentType = form.watch("recurrent-type");
 
   function onSubmit(values: z.infer<typeof formSchema>) {
     try {
@@ -145,7 +144,7 @@ export default function CreateCourseForm({
           <div className="col-span-6">
             <FormField
               control={form.control}
-              name="is-recurrent"
+              name="recurrent-type"
               render={({ field }) => (
                 <FormItem className="space-y-3">
                   <FormLabel>Loại lớp</FormLabel>
@@ -154,19 +153,21 @@ export default function CreateCourseForm({
                       onValueChange={field.onChange}
                       className="flex flex-col space-y-1"
                     >
-                      {isReccurentOptions.map((option, index) => (
-                        <FormItem
-                          className="flex items-center space-x-3 space-y-0"
-                          key={index}
-                        >
-                          <FormControl>
-                            <RadioGroupItem value={option.value} />
-                          </FormControl>
-                          <FormLabel className="font-normal">
-                            {option.label}
-                          </FormLabel>
-                        </FormItem>
-                      ))}
+                      {recurrentOptions["recurrent-options"].map(
+                        (option, index) => (
+                          <FormItem
+                            className="flex items-center space-x-3 space-y-0"
+                            key={index}
+                          >
+                            <FormControl>
+                              <RadioGroupItem value={option.value} />
+                            </FormControl>
+                            <FormLabel className="font-normal">
+                              {option.label}
+                            </FormLabel>
+                          </FormItem>
+                        )
+                      )}
                     </RadioGroup>
                   </FormControl>
                   <FormDescription>Lớp học một lần/lặp lại</FormDescription>
@@ -177,75 +178,160 @@ export default function CreateCourseForm({
           </div>
 
           <div className="col-span-6">
-            <FormField
-              control={form.control}
-              name="occurent-date"
-              render={({ field }) => (
-                <FormItem className="flex flex-col">
-                  <FormLabel>Ngày diễn ra</FormLabel>
-                  <Popover>
-                    <PopoverTrigger asChild>
-                      <FormControl>
-                        <Button
-                          variant={"outline"}
-                          className={cn(
-                            "w-[240px] pl-3 text-left font-normal",
-                            !field.value && "text-muted-foreground"
+            {["weekly", "biweekly", "odd-week", "even-week"].includes(
+              recurrentType
+            ) && (
+              <>
+                <FormField
+                  control={form.control}
+                  name="recurrent-rule"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Lịch học</FormLabel>
+                      <Select
+                        onValueChange={field.onChange}
+                        defaultValue={field.value}
+                      >
+                        <FormControl>
+                          <SelectTrigger className="w-full">
+                            <SelectValue placeholder="Ngày học" />
+                          </SelectTrigger>
+                        </FormControl>
+                        <SelectContent>
+                          {recurrentOptions["weekly-recurrent-options"].map(
+                            (option) => (
+                              <SelectItem
+                                key={option.value}
+                                value={option.value}
+                              >
+                                {option.label}
+                              </SelectItem>
+                            )
                           )}
-                        >
-                          {field.value ? (
-                            format(field.value, "PPP")
-                          ) : (
-                            <span>Pick a date</span>
+                        </SelectContent>
+                      </Select>
+
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </>
+            )}
+
+            {recurrentType === "monthly" && (
+              <>
+                <FormField
+                  control={form.control}
+                  name="recurrent-rule"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Lịch học</FormLabel>
+                      <Select
+                        onValueChange={field.onChange}
+                        defaultValue={field.value}
+                      >
+                        <FormControl>
+                          <SelectTrigger className="w-full">
+                            <SelectValue placeholder="Quy luật Tái hiện" />
+                          </SelectTrigger>
+                        </FormControl>
+                        <SelectContent>
+                          {recurrentOptions["monthly-recurrent-options"].map(
+                            (option) => (
+                              <SelectItem
+                                key={option.value}
+                                value={option.value}
+                              >
+                                {option.label}
+                              </SelectItem>
+                            )
                           )}
-                          <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
-                        </Button>
-                      </FormControl>
-                    </PopoverTrigger>
-                    <PopoverContent className="w-auto p-0" align="start">
-                      <Calendar
-                        mode="single"
-                        selected={field.value}
-                        onSelect={field.onChange}
-                        initialFocus
-                      />
-                    </PopoverContent>
-                  </Popover>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+                        </SelectContent>
+                      </Select>
 
-            <div className="h-3" />
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </>
+            )}
+            {recurrentType === "one-time" && (
+              <>
+                <FormField
+                  control={form.control}
+                  name="occurent-date"
+                  render={({ field }) => (
+                    <FormItem className="flex flex-col">
+                      <FormLabel>Ngày bắt đầu</FormLabel>
+                      <Popover>
+                        <PopoverTrigger asChild>
+                          <FormControl>
+                            <Button
+                              variant={"outline"}
+                              className={cn(
+                                "w-[240px] pl-3 text-left font-normal",
+                                !field.value && "text-muted-foreground"
+                              )}
+                            >
+                              {field.value ? (
+                                format(field.value, "PPP")
+                              ) : (
+                                <span>Diễn ra t</span>
+                              )}
+                              <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                            </Button>
+                          </FormControl>
+                        </PopoverTrigger>
+                        <PopoverContent className="w-auto p-0" align="start">
+                          <Calendar
+                            mode="single"
+                            selected={field.value}
+                            onSelect={field.onChange}
+                            initialFocus
+                          />
+                        </PopoverContent>
+                      </Popover>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <div className="h-3" />
 
-            <FormField
-              control={form.control}
-              name="recurrent-rule"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Lịch học</FormLabel>
-                  <Select
-                    onValueChange={field.onChange}
-                    defaultValue={field.value}
-                  >
-                    <FormControl>
-                      <SelectTrigger className="w-full">
-                        <SelectValue placeholder="Quy luật Tái hiện" />
-                      </SelectTrigger>
-                    </FormControl>
-                    <SelectContent>
-                      {recurrentRuleOptions.map((option) => (
-                        <SelectItem key={option.value} value={option.value}>
-                          {option.label}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
+                <FormField
+                  control={form.control}
+                  name="recurrent-rule"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Lịch học</FormLabel>
+                      <Select
+                        onValueChange={field.onChange}
+                        defaultValue={field.value}
+                      >
+                        <FormControl>
+                          <SelectTrigger className="w-full">
+                            <SelectValue placeholder="Quy luật Tái hiện" />
+                          </SelectTrigger>
+                        </FormControl>
+                        <SelectContent>
+                          {recurrentOptions["one-time-recurrent-options"].map(
+                            (option) => (
+                              <SelectItem
+                                key={option.value}
+                                value={option.value}
+                              >
+                                {option.label}
+                              </SelectItem>
+                            )
+                          )}
+                        </SelectContent>
+                      </Select>
 
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </>
+            )}
           </div>
         </div>
 
