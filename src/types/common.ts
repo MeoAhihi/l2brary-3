@@ -6,3 +6,8 @@ export enum PAGE_NAME {
   MEMBERS = "members",
   PROFILE = "profile",
 }
+
+export type LabelValue {
+  label: string,
+  value: string
+}
