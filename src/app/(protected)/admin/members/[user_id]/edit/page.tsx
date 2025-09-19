@@ -1,3 +1,4 @@
+import { getMember } from "@/apis/iam.api";
 import { MemberForm } from "@/components/member/member-form";
 import PageHeader from "@/components/ui/page-header";
 import { Metadata } from "next";
@@ -14,28 +15,15 @@ interface EditMemberPageProps {
   }>;
 }
 
-export default function EditMemberPage({ params }: EditMemberPageProps) {
-  const { user_id } = React.use(params);
-  const user = {
-    id: "28042003",
-    name: "Lý Vĩ Phong",
-    email: "phong.ly@example.com",
-    phone: "+84 912 345 678",
-    gender: "Nam",
-    birthday: "2002-05-15",
-    avatarUrl: "/image.png",
-    role: "Thành viên",
-    status: "Đang hoạt động",
-    className: "11A15"
-  }
+export default async function EditMemberPage({ params }: EditMemberPageProps) {
+  const { user_id } = await params;
+  const user = await getMember(user_id);
 
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="max-w-4xl mx-auto">
         <PageHeader pageTitle={`Chỉnh sửa thành viên "${user.name}"`} />
-        <p className="text-muted-foreground mb-8">
-          User ID: {user_id}
-        </p>
+        <p className="text-muted-foreground mb-8">User ID: {user_id}</p>
 
         {/* Member edit form will be implemented here */}
         <div className="space-y-6">

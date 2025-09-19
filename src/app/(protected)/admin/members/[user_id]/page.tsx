@@ -18,6 +18,7 @@ import { BadgeCard } from "@/components/ui/badge-card";
 import { ClassJoiningTable } from "@/components/member/class-joining-table";
 import ProfileCardContent from "@/components/member/profile-card-content";
 import React from "react";
+import { getMember } from "@/apis/iam.api";
 
 export const metadata: Metadata = {
   title: "Member Details | Admin | L2brary",
@@ -30,24 +31,16 @@ interface MemberDetailPageProps {
   }>;
 }
 
-export default function MemberDetailPage({ params }: MemberDetailPageProps) {
-  const { user_id } = React.use(params);
+export default async function MemberDetailPage({
+  params,
+}: MemberDetailPageProps) {
+  const { user_id } = await params;
 
-  const user = {
-    name: "Lý Vĩ Phong",
-    email: "phong.ly@example.com",
-    phone: "+84 912 345 678",
-    gender: "Nam",
-    birthday: "2002-05-15",
-    avatarUrl: "/image.png",
-    role: "Thành viên",
-    status: "Đang hoạt động",
-    className: "11A15"
-  }
+  const user = await getMember(user_id);
   const engagement = {
-    recentActivityTime: new Date('2025-01-01').toLocaleString(),
-    recentAttendanceTime: new Date('2025-01-01').toLocaleString(),
-  }
+    recentActivityTime: new Date("2025-01-01").toLocaleString(),
+    recentAttendanceTime: new Date("2025-01-01").toLocaleString(),
+  };
   const classCerts = [
     "Chuyên đề Vật lý hiện đại",
     "Thực hành Quang học",
@@ -55,8 +48,8 @@ export default function MemberDetailPage({ params }: MemberDetailPageProps) {
     "Workshop Điện từ học",
     "Khóa học Cơ học cổ điển",
     "Thí nghiệm Vật lý hạt nhân",
-    "Chuyên đề Vật lý thiên văn"
-  ]
+    "Chuyên đề Vật lý thiên văn",
+  ];
   const experiences = [
     "Olympic Vật lý",
     "Thực tập lab",
@@ -64,8 +57,8 @@ export default function MemberDetailPage({ params }: MemberDetailPageProps) {
     "Trợ giảng",
     "Hội thảo",
     "Nghiên cứu",
-    "Tình nguyện"
-  ]
+    "Tình nguyện",
+  ];
   const seminars = [
     "Hội thảo Khoa học",
     "Seminar Vật lý ứng dụng",
@@ -73,8 +66,8 @@ export default function MemberDetailPage({ params }: MemberDetailPageProps) {
     "Workshop STEM",
     "Hội thảo Công nghệ mới",
     "Seminar Đổi mới sáng tạo",
-    "Hội thảo Giáo dục"
-  ]
+    "Hội thảo Giáo dục",
+  ];
   return (
     <>
       <PageHeader

@@ -84,15 +84,6 @@ export function LoginForm({
           <Button type="submit" className="w-full">
             Đăng nhập
           </Button>
-          <Button variant="outline" className="w-full">
-            <Image
-              src="/icons8-google.svg"
-              alt="Google Icon"
-              width={20}
-              height={20}
-            />
-            Đăng nhập với Google
-          </Button>
         </div>
         <div className="mt-4 text-center text-sm">
           Chưa có tài khoản?{" "}

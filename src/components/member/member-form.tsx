@@ -38,10 +38,11 @@ const formSchema = z.object({
 });
 
 export function MemberForm({ defaultValues }: any) {
+  console.log("🚀 ~ MemberForm ~ defaultValues:", defaultValues)
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      fullname: defaultValues?.fullname || "",
+      fullname: defaultValues?.name || "",
       isMale: "male", //defaultValues?.isMale || "",
       birthday: defaultValues?.birthday
         ? new Date(defaultValues?.birthday)

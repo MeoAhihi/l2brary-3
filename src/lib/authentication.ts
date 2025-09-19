@@ -6,7 +6,7 @@ export const decrypt = async (cookie: string | undefined) => {
     return null;
   }
   return JSON.parse(
-    Buffer.from(cookie.split(".")[1], "base64").toString("ascii"),
+    Buffer.from(cookie.split(".")[1], "base64").toString("ascii")
   );
 };
 
@@ -35,4 +35,28 @@ export const removeAccessTokenCookie = async () => {
 export const getAccessTokenCookie = async () => {
   const cookieStore = await cookies();
   return cookieStore.get(ACCESS_TOKEN)?.value ?? null;
+};
+
+export const login = async (email: string, password: string) => {
+  const response = await fetch(`${process.env.L2BRARY_DOMAIN}/auth/login`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      email,
+      password,
+    }),
+  });
+
+  if (!response.ok) {
+    throw new Error("Login failed");
+  }
+
+  const data = await response.json();
+
+  // Set the access token cookie
+  await setAccessTokenCookie(data.access_token);
+
+  return data;
 };
