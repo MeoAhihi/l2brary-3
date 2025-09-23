@@ -68,7 +68,7 @@ export function MemberForm({ defaultValues }: any) {
   }
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 w-100">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="w-100 space-y-8">
         <FormField
           control={form.control}
           name="fullname"
@@ -107,7 +107,7 @@ export function MemberForm({ defaultValues }: any) {
                     ["Khác", "other"],
                   ].map((option, index) => (
                     <FormItem
-                      className="flex items-center space-x-3 space-y-0"
+                      className="flex items-center space-y-0 space-x-3"
                       key={index}
                     >
                       <FormControl>

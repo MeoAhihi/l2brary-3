@@ -64,7 +64,7 @@ export default function CreateCourseForm({
       toast(
         <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
           <code className="text-white">{JSON.stringify(values, null, 2)}</code>
-        </pre>
+        </pre>,
       );
     } catch (error) {
       console.error("Form submission error", error);
@@ -76,7 +76,7 @@ export default function CreateCourseForm({
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="space-y-8 max-w-3xl mx-auto py-10"
+        className="mx-auto max-w-3xl space-y-8 py-10"
       >
         <FormField
           control={form.control}
@@ -156,7 +156,7 @@ export default function CreateCourseForm({
                       {recurrentOptions["recurrent-options"].map(
                         (option, index) => (
                           <FormItem
-                            className="flex items-center space-x-3 space-y-0"
+                            className="flex items-center space-y-0 space-x-3"
                             key={index}
                           >
                             <FormControl>
@@ -166,7 +166,7 @@ export default function CreateCourseForm({
                               {option.label}
                             </FormLabel>
                           </FormItem>
-                        )
+                        ),
                       )}
                     </RadioGroup>
                   </FormControl>
@@ -179,7 +179,7 @@ export default function CreateCourseForm({
 
           <div className="col-span-6">
             {["weekly", "biweekly", "odd-week", "even-week"].includes(
-              recurrentType
+              recurrentType,
             ) && (
               <>
                 <FormField
@@ -206,7 +206,7 @@ export default function CreateCourseForm({
                               >
                                 {option.label}
                               </SelectItem>
-                            )
+                            ),
                           )}
                         </SelectContent>
                       </Select>
@@ -244,7 +244,7 @@ export default function CreateCourseForm({
                               >
                                 {option.label}
                               </SelectItem>
-                            )
+                            ),
                           )}
                         </SelectContent>
                       </Select>
@@ -270,7 +270,7 @@ export default function CreateCourseForm({
                               variant={"outline"}
                               className={cn(
                                 "w-[240px] pl-3 text-left font-normal",
-                                !field.value && "text-muted-foreground"
+                                !field.value && "text-muted-foreground",
                               )}
                             >
                               {field.value ? (
@@ -321,7 +321,7 @@ export default function CreateCourseForm({
                               >
                                 {option.label}
                               </SelectItem>
-                            )
+                            ),
                           )}
                         </SelectContent>
                       </Select>

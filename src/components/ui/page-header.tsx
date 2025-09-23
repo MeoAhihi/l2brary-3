@@ -19,15 +19,15 @@ export default function PageHeader({
 }) {
   return (
     <>
-      <div className="flex items-center justify-between mb-4">
+      <div className="mb-4 flex items-center justify-between">
         <div>
-          <h1 className="text-4xl font-bold mb-2">{pageTitle}</h1>
+          <h1 className="mb-2 text-4xl font-bold">{pageTitle}</h1>
           <p className="text-sm text-gray-500">
             {descriptions.map((description) =>
               typeof description === "string" ? (
                 <Badge
                   key={description}
-                  className="text-xs font-semibold mx-1"
+                  className="mx-1 text-xs font-semibold"
                   variant="secondary"
                 >
                   {description}
@@ -35,7 +35,7 @@ export default function PageHeader({
               ) : (
                 <Badge
                   key={description.label}
-                  className={`text-xs font-semibold mx-1 ${
+                  className={`mx-1 text-xs font-semibold ${
                     description.status === "normal"
                       ? "bg-gray-100 text-gray-500"
                       : description.status === "warning"

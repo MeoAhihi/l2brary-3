@@ -14,7 +14,7 @@ export default function ContactPage() {
   const [submitted, setSubmitted] = useState(false);
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
@@ -26,21 +26,21 @@ export default function ContactPage() {
   };
 
   return (
-    <div className="w-full min-h-screen flex items-center justify-center bg-background py-16">
-      <div className="max-w-4xl w-full bg-white dark:bg-zinc-900 rounded-lg shadow-lg flex flex-col md:flex-row overflow-hidden">
+    <div className="bg-background flex min-h-screen w-full items-center justify-center py-16">
+      <div className="flex w-full max-w-4xl flex-col overflow-hidden rounded-lg bg-white shadow-lg md:flex-row dark:bg-zinc-900">
         {/* Image Section */}
-        <div className="md:w-1/2 w-full flex items-center justfy-center bg-zinc-100 dark:bg-zinc-800 p-8">
+        <div className="justfy-center flex w-full items-center bg-zinc-100 p-8 md:w-1/2 dark:bg-zinc-800">
           <Image
             src="/l2brary.ico"
             alt="Contact us"
             width={300}
             height={300}
-            className="w-64 h-64 object-contain"
+            className="h-64 w-64 object-contain"
           />
         </div>
         {/* Form Section */}
-        <div className="md:w-1/2 w-full p-8 flex flex-col justify-center">
-          <h1 className="text-3xl font-bold mb-2 text-zinc-900 dark:text-zinc-100">
+        <div className="flex w-full flex-col justify-center p-8 md:w-1/2">
+          <h1 className="mb-2 text-3xl font-bold text-zinc-900 dark:text-zinc-100">
             Contact Us
           </h1>
           <p className="mb-6 text-zinc-600 dark:text-zinc-300">
@@ -48,7 +48,7 @@ export default function ContactPage() {
             we&apos;ll get back to you soon!
           </p>
           {submitted ? (
-            <div className="text-green-600 dark:text-green-400 font-semibold text-center py-8">
+            <div className="py-8 text-center font-semibold text-green-600 dark:text-green-400">
               Thank you for contacting us! We&apos;ll be in touch soon.
             </div>
           ) : (
@@ -56,7 +56,7 @@ export default function ContactPage() {
               <div>
                 <Label
                   htmlFor="name"
-                  className="block mb-1 text-zinc-700 dark:text-zinc-200"
+                  className="mb-1 block text-zinc-700 dark:text-zinc-200"
                 >
                   Name
                 </Label>
@@ -73,7 +73,7 @@ export default function ContactPage() {
               <div>
                 <Label
                   htmlFor="email"
-                  className="block mb-1 text-zinc-700 dark:text-zinc-200"
+                  className="mb-1 block text-zinc-700 dark:text-zinc-200"
                 >
                   Email
                 </Label>
@@ -90,7 +90,7 @@ export default function ContactPage() {
               <div>
                 <Label
                   htmlFor="class"
-                  className="block mb-1 text-zinc-700 dark:text-zinc-200"
+                  className="mb-1 block text-zinc-700 dark:text-zinc-200"
                 >
                   Class
                 </Label>
@@ -107,7 +107,7 @@ export default function ContactPage() {
               <div>
                 <Label
                   htmlFor="content"
-                  className="block mb-1 text-zinc-700 dark:text-zinc-200"
+                  className="mb-1 block text-zinc-700 dark:text-zinc-200"
                 >
                   Message
                 </Label>
@@ -118,13 +118,13 @@ export default function ContactPage() {
                   value={form.content}
                   onChange={handleChange}
                   rows={4}
-                  className="w-full px-3 py-2 border border-zinc-300 dark:border-zinc-700 rounded-md bg-zinc-50 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-primary resize-vertical"
+                  className="focus:ring-primary resize-vertical w-full rounded-md border border-zinc-300 bg-zinc-50 px-3 py-2 text-zinc-900 focus:ring-2 focus:outline-none dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-100"
                   placeholder="How can we help you?"
                 />
               </div>
               <Button
                 type="submit"
-                className="w-full py-2 px-4 bg-primary text-primary-foreground font-semibold rounded-md hover:bg-primary/90 transition"
+                className="bg-primary text-primary-foreground hover:bg-primary/90 w-full rounded-md px-4 py-2 font-semibold transition"
               >
                 Send Message
               </Button>

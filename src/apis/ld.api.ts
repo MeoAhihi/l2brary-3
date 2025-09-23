@@ -1,3 +1,5 @@
+import { Award, Gift, Medal, Star, Trophy } from "lucide-react";
+
 import courses from "@/constants/courses.json";
 import enrollments from "@/constants/enrollments.json";
 import sessions from "@/constants/sessions.json";
@@ -9,7 +11,6 @@ import {
   StampType,
   StudentStamp,
 } from "@/types/ld.types";
-import { Award, Gift, Medal, Star, Trophy } from "lucide-react";
 
 export async function getSessions(courseId: string): Promise<Session[]> {
   console.log(courseId);
@@ -20,7 +21,7 @@ export async function getSessions(courseId: string): Promise<Session[]> {
       endTime: s.endTime ? new Date(s.endTime) : undefined,
     }))
     .sort(
-      (a, b) => -a.startTime.getTime() + b.startTime.getTime()
+      (a, b) => -a.startTime.getTime() + b.startTime.getTime(),
     ) as Session[];
 }
 

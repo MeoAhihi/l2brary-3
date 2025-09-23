@@ -26,7 +26,7 @@ export default function ManualCheckinMembersTable({
       footer={(table) => (
         <div className="flex flex-col gap-4">
           <form
-            className="flex flex-row justify-between items-center gap-2"
+            className="flex flex-row items-center justify-between gap-2"
             onSubmit={handleCheckin}
           >
             <div className="text-muted-foreground text-sm">

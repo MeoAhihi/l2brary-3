@@ -78,7 +78,7 @@ export default function ActivityForm({
       toast(
         <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
           <code className="text-white">{JSON.stringify(values, null, 2)}</code>
-        </pre>
+        </pre>,
       );
       onFormSubmit?.();
     } catch (error) {
@@ -144,12 +144,12 @@ export default function ActivityForm({
                           role="combobox"
                           className={cn(
                             "w-[200px] justify-between",
-                            !field.value && "text-muted-foreground"
+                            !field.value && "text-muted-foreground",
                           )}
                         >
                           {field.value
                             ? categories?.find(
-                                (language) => language.value === field.value
+                                (language) => language.value === field.value,
                               )?.label
                             : "Select language"}
                           <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
@@ -175,7 +175,7 @@ export default function ActivityForm({
                                     "mr-2 h-4 w-4",
                                     value === field.value
                                       ? "opacity-100"
-                                      : "opacity-0"
+                                      : "opacity-0",
                                   )}
                                 />
                                 {label}

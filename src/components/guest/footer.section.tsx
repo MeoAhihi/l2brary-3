@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import React, { useState } from "react";
 
@@ -28,16 +28,16 @@ const FooterSection: React.FC = () => {
   };
 
   return (
-    <footer className="w-full bg-zinc-100 dark:bg-zinc-900 border-t border-zinc-200 dark:border-zinc-800 py-10 mt-12">
-      <div className="max-w-5xl mx-auto px-4 flex flex-col md:flex-row gap-10">
+    <footer className="mt-12 w-full border-t border-zinc-200 bg-zinc-100 py-10 dark:border-zinc-800 dark:bg-zinc-900">
+      <div className="mx-auto flex max-w-5xl flex-col gap-10 px-4 md:flex-row">
         {/* FAQ Section */}
         <div className="flex-1">
-          <h3 className="text-xl font-semibold mb-4">FAQ</h3>
+          <h3 className="mb-4 text-xl font-semibold">FAQ</h3>
           <ul className="space-y-3">
             {faqs.map((faq, idx) => (
               <li key={faq.question}>
                 <button
-                  className="w-full text-left font-medium text-zinc-800 dark:text-zinc-200 focus:outline-none"
+                  className="w-full text-left font-medium text-zinc-800 focus:outline-none dark:text-zinc-200"
                   onClick={() => handleToggle(idx)}
                   aria-expanded={openIndex === idx}
                   aria-controls={`faq-answer-${idx}`}
@@ -52,7 +52,7 @@ const FooterSection: React.FC = () => {
                 {openIndex === idx && (
                   <div
                     id={`faq-answer-${idx}`}
-                    className="mt-1 text-zinc-600 dark:text-zinc-400 text-sm"
+                    className="mt-1 text-sm text-zinc-600 dark:text-zinc-400"
                   >
                     {faq.answer}
                   </div>
@@ -63,19 +63,17 @@ const FooterSection: React.FC = () => {
         </div>
         {/* Contact Section */}
         <div className="flex-1">
-          <h3 className="text-xl font-semibold mb-4">Contact</h3>
-          <ul className="text-zinc-700 dark:text-zinc-300 text-sm space-y-2">
+          <h3 className="mb-4 text-xl font-semibold">Contact</h3>
+          <ul className="space-y-2 text-sm text-zinc-700 dark:text-zinc-300">
             <li>
               <span className="font-medium">Email:</span>{" "}
-              <a
-                href="mailto:info@l2brary.club"
-                className="hover:underline"
-              >
+              <a href="mailto:info@l2brary.club" className="hover:underline">
                 info@l2brary.club
               </a>
             </li>
             <li>
-              <span className="font-medium">Location:</span> Newton Physics Club, Main Campus, Science Block
+              <span className="font-medium">Location:</span> Newton Physics
+              Club, Main Campus, Science Block
             </li>
             <li>
               <span className="font-medium">Phone:</span> (555) 123-4567

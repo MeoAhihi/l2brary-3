@@ -76,7 +76,7 @@ export function SignupForm({
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="space-y-8 max-w-3xl mx-auto"
+        className="mx-auto max-w-3xl space-y-8"
       >
         <FormField
           control={form.control}
@@ -114,7 +114,7 @@ export function SignupForm({
                     ["Khác", "other"],
                   ].map((option, index) => (
                     <FormItem
-                      className="flex items-center space-x-3 space-y-0"
+                      className="flex items-center space-y-0 space-x-3"
                       key={index}
                     >
                       <FormControl>

@@ -34,55 +34,55 @@ export default function ManageSessionPage({}: ManageSessionPageProps) {
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
         <StatCard
           title="Total Participants"
-          icon={<Users className="w-4 h-4" />}
+          icon={<Users className="h-4 w-4" />}
           value={45}
           description="+5 from last session"
         />
 
         <StatCard
           title="Checked In"
-          icon={<CheckSquare className="w-4 h-4" />}
+          icon={<CheckSquare className="h-4 w-4" />}
           value={42}
           description="93% attendance rate"
         />
 
         <StatCard
           title="Stamps Given"
-          icon={<Stamp className="w-4 h-4" />}
+          icon={<Stamp className="h-4 w-4" />}
           value={28}
           description="For participation"
         />
 
         <StatCard
           title="Games Played"
-          icon={<Gamepad2 className="w-4 h-4" />}
+          icon={<Gamepad2 className="h-4 w-4" />}
           value={3}
           description="Average score: 85%"
         />
         <StatCard
           title="Total Games"
-          icon={<Gamepad2 className="w-4 h-4" />}
+          icon={<Gamepad2 className="h-4 w-4" />}
           value={3}
           description="2 completed"
         />
 
         <StatCard
           title="Active Games"
-          icon={<Clock className="w-4 h-4" />}
+          icon={<Clock className="h-4 w-4" />}
           value={1}
           description="Currently running"
         />
 
         <StatCard
           title="Total Participants"
-          icon={<Users className="w-4 h-4" />}
+          icon={<Users className="h-4 w-4" />}
           value={45}
           description="Across all games"
         />
 
         <StatCard
           title="Average Score"
-          icon={<BarChart3 className="w-4 h-4" />}
+          icon={<BarChart3 className="h-4 w-4" />}
           value="85%"
           description="Overall performance"
         />
@@ -98,29 +98,29 @@ export default function ManageSessionPage({}: ManageSessionPageProps) {
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
-            <div className="flex justify-between items-center">
+            <div className="flex items-center justify-between">
               <span className="text-sm font-medium">Date:</span>
-              <span className="text-sm text-muted-foreground">
+              <span className="text-muted-foreground text-sm">
                 December 15, 2024
               </span>
             </div>
-            <div className="flex justify-between items-center">
+            <div className="flex items-center justify-between">
               <span className="text-sm font-medium">Time:</span>
-              <span className="text-sm text-muted-foreground">
+              <span className="text-muted-foreground text-sm">
                 14:00 - 16:00
               </span>
             </div>
-            <div className="flex justify-between items-center">
+            <div className="flex items-center justify-between">
               <span className="text-sm font-medium">Duration:</span>
-              <span className="text-sm text-muted-foreground">2 hours</span>
+              <span className="text-muted-foreground text-sm">2 hours</span>
             </div>
-            <div className="flex justify-between items-center">
+            <div className="flex items-center justify-between">
               <span className="text-sm font-medium">Status:</span>
               <Badge className="bg-green-100 text-green-800">Active</Badge>
             </div>
-            <div className="flex justify-between items-center">
+            <div className="flex items-center justify-between">
               <span className="text-sm font-medium">Course:</span>
-              <span className="text-sm text-muted-foreground">
+              <span className="text-muted-foreground text-sm">
                 Vật lý Lý thuyết
               </span>
             </div>
@@ -136,19 +136,19 @@ export default function ManageSessionPage({}: ManageSessionPageProps) {
           </CardHeader>
           <CardContent className="space-y-3">
             <Button className="w-full justify-start" variant="outline">
-              <CheckSquare className="h-4 w-4 mr-2" />
+              <CheckSquare className="mr-2 h-4 w-4" />
               Manage Check-ins
             </Button>
             <Button className="w-full justify-start" variant="outline">
-              <Stamp className="h-4 w-4 mr-2" />
+              <Stamp className="mr-2 h-4 w-4" />
               Add Stamps
             </Button>
             <Button className="w-full justify-start" variant="outline">
-              <Gamepad2 className="h-4 w-4 mr-2" />
+              <Gamepad2 className="mr-2 h-4 w-4" />
               Record Game Results
             </Button>
             <Button className="w-full justify-start" variant="outline">
-              <Settings className="h-4 w-4 mr-2" />
+              <Settings className="mr-2 h-4 w-4" />
               Session Settings
             </Button>
           </CardContent>
@@ -165,19 +165,19 @@ export default function ManageSessionPage({}: ManageSessionPageProps) {
         </CardHeader>
         <CardContent>
           <div className="space-y-4">
-            <div className="flex items-center gap-4 p-3 border rounded-lg">
+            <div className="flex items-center gap-4 rounded-lg border p-3">
               <Avatar className="h-8 w-8">
                 <AvatarImage src="/avatars/01.png" />
                 <AvatarFallback>JD</AvatarFallback>
               </Avatar>
               <div className="flex-1">
                 <p className="text-sm font-medium">John Doe checked in</p>
-                <p className="text-xs text-muted-foreground">2 minutes ago</p>
+                <p className="text-muted-foreground text-xs">2 minutes ago</p>
               </div>
               <Badge variant="secondary">Check-in</Badge>
             </div>
 
-            <div className="flex items-center gap-4 p-3 border rounded-lg">
+            <div className="flex items-center gap-4 rounded-lg border p-3">
               <Avatar className="h-8 w-8">
                 <AvatarImage src="/avatars/02.png" />
                 <AvatarFallback>JS</AvatarFallback>
@@ -186,12 +186,12 @@ export default function ManageSessionPage({}: ManageSessionPageProps) {
                 <p className="text-sm font-medium">
                   Jane Smith received a stamp
                 </p>
-                <p className="text-xs text-muted-foreground">5 minutes ago</p>
+                <p className="text-muted-foreground text-xs">5 minutes ago</p>
               </div>
               <Badge variant="secondary">Stamp</Badge>
             </div>
 
-            <div className="flex items-center gap-4 p-3 border rounded-lg">
+            <div className="flex items-center gap-4 rounded-lg border p-3">
               <Avatar className="h-8 w-8">
                 <AvatarImage src="/avatars/03.png" />
                 <AvatarFallback>MJ</AvatarFallback>
@@ -200,7 +200,7 @@ export default function ManageSessionPage({}: ManageSessionPageProps) {
                 <p className="text-sm font-medium">
                   Mike Johnson completed game
                 </p>
-                <p className="text-xs text-muted-foreground">8 minutes ago</p>
+                <p className="text-muted-foreground text-xs">8 minutes ago</p>
               </div>
               <Badge variant="secondary">Game</Badge>
             </div>

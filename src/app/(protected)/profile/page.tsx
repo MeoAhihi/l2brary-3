@@ -33,12 +33,12 @@ export default function ProfilePage() {
     avatarUrl: "/image.png",
     role: "Thành viên",
     status: "Đang hoạt động",
-    className: "11A15"
-  }
+    className: "11A15",
+  };
   const engagement = {
-    recentActivityTime: new Date('2025-01-01').toLocaleString(),
-    recentAttendanceTime: new Date('2025-01-01').toLocaleString(),
-  }
+    recentActivityTime: new Date("2025-01-01").toLocaleString(),
+    recentAttendanceTime: new Date("2025-01-01").toLocaleString(),
+  };
   const classCerts = [
     "Chuyên đề Vật lý hiện đại",
     "Thực hành Quang học",
@@ -46,8 +46,8 @@ export default function ProfilePage() {
     "Workshop Điện từ học",
     "Khóa học Cơ học cổ điển",
     "Thí nghiệm Vật lý hạt nhân",
-    "Chuyên đề Vật lý thiên văn"
-  ]
+    "Chuyên đề Vật lý thiên văn",
+  ];
   const experiences = [
     "Olympic Vật lý",
     "Thực tập lab",
@@ -55,8 +55,8 @@ export default function ProfilePage() {
     "Trợ giảng",
     "Hội thảo",
     "Nghiên cứu",
-    "Tình nguyện"
-  ]
+    "Tình nguyện",
+  ];
   const seminars = [
     "Hội thảo Khoa học",
     "Seminar Vật lý ứng dụng",
@@ -64,8 +64,8 @@ export default function ProfilePage() {
     "Workshop STEM",
     "Hội thảo Công nghệ mới",
     "Seminar Đổi mới sáng tạo",
-    "Hội thảo Giáo dục"
-  ]
+    "Hội thảo Giáo dục",
+  ];
   return (
     <>
       <PageHeader
@@ -118,7 +118,7 @@ export default function ProfilePage() {
           </Card>
           <Card>
             <CardContent>
-              <h2 className="text-2xl font-medium mb-4">Hoạt động Gần đây</h2>
+              <h2 className="mb-4 text-2xl font-medium">Hoạt động Gần đây</h2>
               <Timeline className="mt-8">
                 {timelineData.map((item) => (
                   <TimelineItem key={item.id}>
@@ -141,16 +141,16 @@ export default function ProfilePage() {
 
       {/* Profile information will be implemented here */}
       <div className="space-y-6">
-        <div className="p-6 border rounded-lg">
-          <h3 className="font-semibold mb-2">Club Status</h3>
-          <p className="text-sm text-muted-foreground">
+        <div className="rounded-lg border p-6">
+          <h3 className="mb-2 font-semibold">Club Status</h3>
+          <p className="text-muted-foreground text-sm">
             Member status and rank information will be displayed here
           </p>
         </div>
 
-        <div className="p-6 border rounded-lg">
-          <h3 className="font-semibold mb-2">Account Settings</h3>
-          <p className="text-sm text-muted-foreground">
+        <div className="rounded-lg border p-6">
+          <h3 className="mb-2 font-semibold">Account Settings</h3>
+          <p className="text-muted-foreground text-sm">
             Account management options will be displayed here
           </p>
         </div>

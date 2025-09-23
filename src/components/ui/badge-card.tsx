@@ -7,13 +7,17 @@ interface BadgeCardProps {
   variant?: "default" | "secondary" | "destructive" | "outline";
 }
 
-export function BadgeCard({ title, items, variant = "outline" }: BadgeCardProps) {
+export function BadgeCard({
+  title,
+  items,
+  variant = "outline",
+}: BadgeCardProps) {
   return (
     <Card>
       <CardHeader>
         <h3 className="font-semibold">{title}</h3>
       </CardHeader>
-      <CardContent className="flex gap-2 flex-wrap">
+      <CardContent className="flex flex-wrap gap-2">
         {items.map((item) => (
           <Badge key={item} variant={variant}>
             {item}

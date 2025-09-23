@@ -17,24 +17,22 @@ export default function PostPage({ params }: PostPageProps) {
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <div className="max-w-4xl mx-auto">
-        <h1 className="text-3xl font-bold mb-6">Knowledge Post</h1>
-        <p className="text-muted-foreground mb-8">
-          Post ID: {post_id}
-        </p>
+      <div className="mx-auto max-w-4xl">
+        <h1 className="mb-6 text-3xl font-bold">Knowledge Post</h1>
+        <p className="text-muted-foreground mb-8">Post ID: {post_id}</p>
 
         {/* Post content will be implemented here */}
         <div className="space-y-6">
-          <div className="p-6 border rounded-lg">
-            <h3 className="font-semibold mb-2">Post Title</h3>
-            <p className="text-sm text-muted-foreground">
+          <div className="rounded-lg border p-6">
+            <h3 className="mb-2 font-semibold">Post Title</h3>
+            <p className="text-muted-foreground text-sm">
               Post title will be displayed here
             </p>
           </div>
 
-          <div className="p-6 border rounded-lg">
-            <h3 className="font-semibold mb-2">Post Content</h3>
-            <p className="text-sm text-muted-foreground">
+          <div className="rounded-lg border p-6">
+            <h3 className="mb-2 font-semibold">Post Content</h3>
+            <p className="text-muted-foreground text-sm">
               Formatted post body content will be displayed here
             </p>
           </div>

@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+
 // Stamp types
 export type StampType = {
   id: string;

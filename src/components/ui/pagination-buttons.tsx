@@ -12,9 +12,9 @@ export function PaginationButtons({
   onPageChange,
 }: PaginationButtonsProps) {
   return (
-    <div className="flex justify-center items-center gap-2">
+    <div className="flex items-center justify-center gap-2">
       <Button
-        className="px-3 py-1 rounded border text-sm disabled:opacity-50"
+        className="rounded border px-3 py-1 text-sm disabled:opacity-50"
         variant="outline"
         onClick={() => onPageChange(Math.max(1, page - 1))}
         disabled={page === 1}
@@ -25,14 +25,14 @@ export function PaginationButtons({
         <Button
           key={i}
           variant={page === i + 1 ? "default" : "outline"}
-          className="px-3 py-1 rounded border text-sm"
+          className="rounded border px-3 py-1 text-sm"
           onClick={() => onPageChange(i + 1)}
         >
           {i + 1}
         </Button>
       ))}
       <Button
-        className="px-3 py-1 rounded border text-sm disabled:opacity-50"
+        className="rounded border px-3 py-1 text-sm disabled:opacity-50"
         variant="outline"
         onClick={() => onPageChange(Math.min(totalPages, page + 1))}
         disabled={page === totalPages}
