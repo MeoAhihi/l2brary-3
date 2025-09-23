@@ -12,15 +12,15 @@ interface ThumbnailHeaderProps {
   isRequesting?: boolean;
 }
 
-export default function ThumbnailHeader({ 
-  course, 
-  onRequestJoin, 
-  isRequesting = false 
+export default function ThumbnailHeader({
+  course,
+  onRequestJoin,
+  isRequesting = false,
 }: ThumbnailHeaderProps) {
   return (
     <div className="relative">
       {/* Thumbnail Image */}
-      <div className="relative w-full h-64 md:h-80 lg:h-96 overflow-hidden rounded-lg mb-6">
+      <div className="relative mb-6 h-64 w-full overflow-hidden rounded-lg md:h-80 lg:h-96">
         <Image
           src={course.thumbnail}
           alt={course.title}
@@ -29,7 +29,7 @@ export default function ThumbnailHeader({
           priority
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
-        
+
         {/* Course Group Badge */}
         <div className="absolute top-4 left-4">
           <Badge variant="secondary" className="bg-white/90 text-black">
@@ -39,12 +39,9 @@ export default function ThumbnailHeader({
       </div>
 
       {/* Page Header with Title and Description */}
-      <PageHeader
-        pageTitle={course.title}
-        descriptions={[course.classGroup]}
-      >
+      <PageHeader pageTitle={course.title} descriptions={[course.classGroup]}>
         {/* CTA Button */}
-        <Button 
+        <Button
           onClick={onRequestJoin}
           disabled={isRequesting}
           size="lg"

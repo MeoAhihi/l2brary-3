@@ -44,7 +44,7 @@ export function LoginForm({
       <form
         onSubmit={form.handleSubmit(onSubmit)}
         // action={loginAction}
-        className="space-y-8 max-w-3xl mx-auto"
+        className="mx-auto max-w-3xl space-y-8"
       >
         <FormField
           control={form.control}

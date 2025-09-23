@@ -1,4 +1,5 @@
 import { cookies } from "next/headers";
+
 import { ACCESS_TOKEN } from "@/constants/authentication";
 
 export const decrypt = async (cookie: string | undefined) => {

@@ -8,24 +8,24 @@ export const metadata: Metadata = {
 export default function NewPostPage() {
   return (
     <div className="container mx-auto px-4 py-8">
-      <div className="max-w-4xl mx-auto">
-        <h1 className="text-3xl font-bold mb-6">Create New Post</h1>
+      <div className="mx-auto max-w-4xl">
+        <h1 className="mb-6 text-3xl font-bold">Create New Post</h1>
         <p className="text-muted-foreground mb-8">
           Share your knowledge with the community
         </p>
-        
+
         {/* Post creation form will be implemented here */}
         <div className="space-y-6">
-          <div className="p-6 border rounded-lg">
-            <h3 className="font-semibold mb-2">Post Form</h3>
-            <p className="text-sm text-muted-foreground">
+          <div className="rounded-lg border p-6">
+            <h3 className="mb-2 font-semibold">Post Form</h3>
+            <p className="text-muted-foreground text-sm">
               Title field and rich-text editor will be implemented here
             </p>
           </div>
-          
-          <div className="p-6 border rounded-lg">
-            <h3 className="font-semibold mb-2">Publishing Options</h3>
-            <p className="text-sm text-muted-foreground">
+
+          <div className="rounded-lg border p-6">
+            <h3 className="mb-2 font-semibold">Publishing Options</h3>
+            <p className="text-muted-foreground text-sm">
               Save as draft or publish options will be implemented here
             </p>
           </div>

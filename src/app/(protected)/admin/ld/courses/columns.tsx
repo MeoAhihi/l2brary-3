@@ -25,7 +25,7 @@ export const columns: ColumnDef<Course>[] = [
       <img
         src={row.original.thumbnail}
         alt={row.original.title}
-        className="h-10 w-16 object-cover rounded"
+        className="h-10 w-16 rounded object-cover"
       />
     ),
     enableSorting: false,
@@ -154,7 +154,7 @@ export const columns: ColumnDef<Course>[] = [
               </span>
             </DropdownMenuItem>
             <DropdownMenuItem onClick={handleDelete}>
-              <span className="flex items-center gap-2 text-destructive">
+              <span className="text-destructive flex items-center gap-2">
                 <X />
                 Xoá
               </span>

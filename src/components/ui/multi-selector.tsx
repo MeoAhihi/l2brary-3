@@ -92,7 +92,7 @@ const MultiSelector = ({
       }
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [value]
+    [value],
   );
 
   const handleKeyDown = useCallback(
@@ -113,7 +113,7 @@ const MultiSelector = ({
       const moveNext = () => {
         const nextIndex = activeIndex + 1;
         setActiveIndex(
-          nextIndex > value.length - 1 ? (loop ? 0 : -1) : nextIndex
+          nextIndex > value.length - 1 ? (loop ? 0 : -1) : nextIndex,
         );
       };
 
@@ -185,7 +185,7 @@ const MultiSelector = ({
           break;
       }
     },
-    [value, activeIndex, loop]
+    [value, activeIndex, loop],
   );
 
   return (
@@ -205,8 +205,8 @@ const MultiSelector = ({
       <Command
         onKeyDown={handleKeyDown}
         className={cn(
-          "overflow-visible bg-transparent flex flex-col space-y-2",
-          className
+          "flex flex-col space-y-2 overflow-visible bg-transparent",
+          className,
         )}
         dir={dir}
         {...props}
@@ -232,11 +232,11 @@ const MultiSelectorTrigger = forwardRef<
     <div
       ref={ref}
       className={cn(
-        "flex flex-wrap gap-1 p-1 py-2 ring-1 ring-muted rounded-lg bg-background",
+        "ring-muted bg-background flex flex-wrap gap-1 rounded-lg p-1 py-2 ring-1",
         {
-          "ring-1 focus-within:ring-ring": activeIndex === -1,
+          "focus-within:ring-ring ring-1": activeIndex === -1,
         },
-        className
+        className,
       )}
       {...props}
     >
@@ -244,8 +244,8 @@ const MultiSelectorTrigger = forwardRef<
         <Badge
           key={item.value}
           className={cn(
-            "px-1.5 rounded-md flex items-center gap-1",
-            activeIndex === index && "ring-2 ring-muted-foreground "
+            "flex items-center gap-1 rounded-md px-1.5",
+            activeIndex === index && "ring-muted-foreground ring-2",
           )}
           variant={"secondary"}
         >
@@ -258,7 +258,7 @@ const MultiSelectorTrigger = forwardRef<
             onClick={() => onValueChange(item)}
           >
             <span className="sr-only">Remove {item.label} option</span>
-            <RemoveIcon className="h-4 w-4 hover:stroke-destructive" />
+            <RemoveIcon className="hover:stroke-destructive h-4 w-4" />
           </button>
         </Badge>
       ))}
@@ -296,9 +296,9 @@ const MultiSelectorInput = forwardRef<
       onFocus={() => setOpen(true)}
       onClick={() => setActiveIndex(-1)}
       className={cn(
-        "ml-1 bg-transparent outline-none placeholder:text-muted-foreground flex-1",
+        "placeholder:text-muted-foreground ml-1 flex-1 bg-transparent outline-none",
         className,
-        activeIndex !== -1 && "caret-transparent"
+        activeIndex !== -1 && "caret-transparent",
       )}
     />
   );
@@ -328,8 +328,8 @@ const MultiSelectorList = forwardRef<
     <CommandList
       ref={ref}
       className={cn(
-        "p-2 flex flex-col gap-2 rounded-md scrollbar-thin scrollbar-track-transparent transition-colors scrollbar-thumb-muted-foreground dark:scrollbar-thumb-muted scrollbar-thumb-rounded-lg w-full absolute bg-background shadow-md z-10 border border-muted top-0",
-        className
+        "scrollbar-thin scrollbar-track-transparent scrollbar-thumb-muted-foreground dark:scrollbar-thumb-muted scrollbar-thumb-rounded-lg bg-background border-muted absolute top-0 z-10 flex w-full flex-col gap-2 rounded-md border p-2 shadow-md transition-colors",
+        className,
       )}
     >
       {children}
@@ -373,10 +373,10 @@ const MultiSelectorItem = forwardRef<
         setInputValue("");
       }}
       className={cn(
-        "rounded-md cursor-pointer px-2 py-1 transition-colors flex justify-between ",
+        "flex cursor-pointer justify-between rounded-md px-2 py-1 transition-colors",
         className,
-        isIncluded && "opacity-50 cursor-default",
-        props.disabled && "opacity-50 cursor-not-allowed"
+        isIncluded && "cursor-default opacity-50",
+        props.disabled && "cursor-not-allowed opacity-50",
       )}
       onMouseDown={mousePreventDefault}
     >

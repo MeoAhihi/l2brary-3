@@ -7,7 +7,9 @@ interface CourseDescriptionSectionProps {
   course: Course;
 }
 
-export default function CourseDescriptionSection({ course }: CourseDescriptionSectionProps) {
+export default function CourseDescriptionSection({
+  course,
+}: CourseDescriptionSectionProps) {
   return (
     <Card>
       <CardHeader>

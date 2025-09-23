@@ -4,7 +4,7 @@ import HeroSection from "@/components/guest/hero.section";
 
 export default function Home() {
   return (
-    <div className="w-full flex flex-col">
+    <div className="flex w-full flex-col">
       <HeroSection />
       <FeaturesSection />
       <ActivitySection />

@@ -25,7 +25,8 @@ const mockCourse: Course = {
   id: "course-101",
   thumbnail: "https://picsum.photos/800/400",
   title: "Introduction to Programming",
-  description: "Learn the basics of programming using Python. This comprehensive course covers fundamental programming concepts, data structures, algorithms, and best practices. Perfect for beginners who want to start their programming journey. You'll build real projects and gain hands-on experience with industry-standard tools and techniques.",
+  description:
+    "Learn the basics of programming using Python. This comprehensive course covers fundamental programming concepts, data structures, algorithms, and best practices. Perfect for beginners who want to start their programming journey. You'll build real projects and gain hands-on experience with industry-standard tools and techniques.",
   classGroup: "Programming",
   recurrentRule: "Thứ 2, Thứ 4 hàng tuần",
   time: "09:00 - 11:00",
@@ -66,7 +67,8 @@ const mockCourse: Course = {
     {
       id: "module-2",
       title: "Biến và kiểu dữ liệu",
-      description: "Học cách sử dụng biến và các kiểu dữ liệu cơ bản trong Python",
+      description:
+        "Học cách sử dụng biến và các kiểu dữ liệu cơ bản trong Python",
       duration: "1 tuần",
       isCompleted: false,
       lessons: [
@@ -96,7 +98,8 @@ const mockCourse: Course = {
     {
       id: "module-3",
       title: "Cấu trúc điều khiển",
-      description: "Tìm hiểu về if/else, vòng lặp và logic điều khiển chương trình",
+      description:
+        "Tìm hiểu về if/else, vòng lặp và logic điều khiển chương trình",
       duration: "2 tuần",
       isCompleted: false,
       lessons: [
@@ -135,31 +138,31 @@ export default function CoursePage({ params }: CoursePageProps) {
 
   const handleRequestJoin = async () => {
     setIsRequesting(true);
-    
+
     // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 2000));
-    
+    await new Promise((resolve) => setTimeout(resolve, 2000));
+
     toast.success("Yêu cầu tham gia khóa học đã được gửi thành công!");
     setIsRequesting(false);
   };
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <div className="max-w-6xl mx-auto">
+      <div className="mx-auto max-w-6xl">
         {/* Thumbnail Header with CTA */}
-        <ThumbnailHeader 
+        <ThumbnailHeader
           course={course}
           onRequestJoin={handleRequestJoin}
           isRequesting={isRequesting}
         />
 
         {/* Main Content Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mt-8">
+        <div className="mt-8 grid grid-cols-1 gap-8 lg:grid-cols-3">
           {/* Left Column - Main Content */}
-          <div className="lg:col-span-2 space-y-6">
+          <div className="space-y-6 lg:col-span-2">
             {/* Course Description */}
             <CourseDescriptionSection course={course} />
-            
+
             {/* Course Modules */}
             <CourseModulesSection course={course} />
           </div>

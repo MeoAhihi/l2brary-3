@@ -18,7 +18,7 @@ export default async function EnrollmentsPage(/*{ params }: EnrollmentsPageProps
 
   return (
     <div className="space-y-6">
-      <div className="flex justify-between items-center">
+      <div className="flex items-center justify-between">
         <div>
           <h2 className="text-2xl font-bold">Enrollments</h2>
           <p className="text-muted-foreground">
@@ -33,28 +33,28 @@ export default async function EnrollmentsPage(/*{ params }: EnrollmentsPageProps
           <CardTitle>Enrollment Statistics</CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-4">
             <div className="text-center">
               <div className="text-2xl font-bold text-green-600">1,234</div>
-              <div className="text-sm text-muted-foreground">
+              <div className="text-muted-foreground text-sm">
                 Total Enrolled
               </div>
             </div>
             <div className="text-center">
               <div className="text-2xl font-bold text-yellow-600">23</div>
-              <div className="text-sm text-muted-foreground">
+              <div className="text-muted-foreground text-sm">
                 Pending Approval
               </div>
             </div>
             <div className="text-center">
               <div className="text-2xl font-bold text-blue-600">89</div>
-              <div className="text-sm text-muted-foreground">
+              <div className="text-muted-foreground text-sm">
                 Active This Week
               </div>
             </div>
             <div className="text-center">
               <div className="text-2xl font-bold text-gray-600">78.5%</div>
-              <div className="text-sm text-muted-foreground">
+              <div className="text-muted-foreground text-sm">
                 Completion Rate
               </div>
             </div>
@@ -69,29 +69,29 @@ export default async function EnrollmentsPage(/*{ params }: EnrollmentsPageProps
       </Card>
 
       {/* Student Performance Summary */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
         <StatCard
           title="Average Grade"
           value="B+"
-          icon={<BookOpen className="h-4 w-4 text-muted-foreground" />}
+          icon={<BookOpen className="text-muted-foreground h-4 w-4" />}
           description="+0.3 from last week"
         />
         <StatCard
           title="Average Attendance"
           value="87%"
-          icon={<Calendar className="h-4 w-4 text-muted-foreground" />}
+          icon={<Calendar className="text-muted-foreground h-4 w-4" />}
           description="+2% from last week"
         />
         <StatCard
           title="Assignment Completion"
           value="73%"
-          icon={<CheckCircle className="h-4 w-4 text-muted-foreground" />}
+          icon={<CheckCircle className="text-muted-foreground h-4 w-4" />}
           description="23 of 32 assignments"
         />
         <StatCard
           title="Active Students"
           value="89%"
-          icon={<Users className="h-4 w-4 text-muted-foreground" />}
+          icon={<Users className="text-muted-foreground h-4 w-4" />}
           description="4 of 6 students active"
         />
       </div>

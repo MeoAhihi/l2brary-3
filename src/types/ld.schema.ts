@@ -1,4 +1,5 @@
 import { z } from "zod";
+
 import { EnrollmentStatus } from "./ld.types";
 
 export const EnrollmentSchema = z.object({

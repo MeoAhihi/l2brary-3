@@ -56,7 +56,7 @@ export default function ManageCourseLayout({
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <div className="max-w-6xl mx-auto">
+      <div className="mx-auto max-w-6xl">
         <PageHeader pageTitle={courseName} descriptions={[`ID: ${courseId}`]} />
 
         {/* Tab Navigation */}
@@ -71,10 +71,10 @@ export default function ManageCourseLayout({
                   key={tab.name}
                   href={`/admin/ld/courses/${courseId}/manage${tab.href}`}
                   className={cn(
-                    "flex items-center gap-2 py-4 px-1 border-b-2 font-medium text-sm transition-colors",
+                    "flex items-center gap-2 border-b-2 px-1 py-4 text-sm font-medium transition-colors",
                     isActive
                       ? "border-primary text-primary"
-                      : "border-transparent text-muted-foreground hover:text-foreground hover:border-muted-foreground"
+                      : "text-muted-foreground hover:text-foreground hover:border-muted-foreground border-transparent",
                   )}
                 >
                   <tab.icon className="h-4 w-4" />

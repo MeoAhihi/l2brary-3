@@ -18,7 +18,7 @@ const mockData: ActivityType[] = [
 ];
 export default function EngagementSettingsPage() {
   const [selectedActivity, setSelectedActivity] = useState<ActivityType | null>(
-    null
+    null,
   );
 
   const handleActivitySelect = (activity: ActivityType) => {
@@ -32,13 +32,13 @@ export default function EngagementSettingsPage() {
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <div className="max-w-4xl mx-auto">
+      <div className="mx-auto max-w-4xl">
         <PageHeader pageTitle="Trung tâm Hoạt động" />
         <p className="text-muted-foreground mb-8">
           Quản lý các loại hoạt động và điều chỉnh điểm tương tác
         </p>
         <div className="mb-8">
-          <div className="rounded-lg border bg-card text-card-foreground shadow-sm p-6">
+          <div className="bg-card text-card-foreground rounded-lg border p-6 shadow-sm">
             <h2 className="text-lg font-semibold">
               {selectedActivity ? "Chỉnh sửa hoạt động" : "Thêm hoạt động mới"}
             </h2>

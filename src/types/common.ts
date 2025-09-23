@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+
 export enum PAGE_NAME {
   LOGIN = "login",
   SIGN_UP = "signUp",
@@ -7,7 +9,7 @@ export enum PAGE_NAME {
   PROFILE = "profile",
 }
 
-export type LabelValue {
-  label: string,
-  value: string
-}
+export type LabelValue = {
+  label: string;
+  value: string;
+};

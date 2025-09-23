@@ -112,16 +112,16 @@ export default function AcivityLogPage() {
   }
 
   return (
-    <div className="container mx-auto px-4 py-8 flex flex-col items-center min-h-[80vh]">
-      <div className="w-full max-w-2xl flex flex-col flex-1 bg-card border rounded-xl shadow-sm">
-        <div className="px-6 py-4 border-b">
+    <div className="container mx-auto flex min-h-[80vh] flex-col items-center px-4 py-8">
+      <div className="bg-card flex w-full max-w-2xl flex-1 flex-col rounded-xl border shadow-sm">
+        <div className="border-b px-6 py-4">
           <h1 className="text-2xl font-bold">Lịch sử Hoạt động</h1>
           <p className="text-muted-foreground text-sm">
             Lịch sử hoạt động của các thành viên theo trình tự thời gian.
           </p>
         </div>
         <div
-          className="flex-1 overflow-y-auto px-6 py-4 space-y-4"
+          className="flex-1 space-y-4 overflow-y-auto px-6 py-4"
           style={{ minHeight: 300 }}
         >
           <div className="flex flex-col gap-4">
@@ -130,7 +130,7 @@ export default function AcivityLogPage() {
                 key={idx}
                 className={`flex ${msg.sender === "system" ? "justify-start" : "justify-end"}`}
               >
-                <div className={`max-w-[70%] w-fit`}>
+                <div className={`w-fit max-w-[70%]`}>
                   <AcivityLogChat
                     datetime={msg.datetime}
                     memberName={msg.memberName}
@@ -149,7 +149,7 @@ export default function AcivityLogPage() {
             onSubmit={form.handleSubmit(handleSend)}
             className="flex flex-col gap-4 border-t px-6 py-4"
           >
-            <div className="flex flex-col md:flex-row gap-4">
+            <div className="flex flex-col gap-4 md:flex-row">
               {/* Date Time Field */}
               <FormField
                 control={form.control}
@@ -231,7 +231,7 @@ export default function AcivityLogPage() {
             </div>
             <button
               type="submit"
-              className="bg-primary text-primary-foreground px-4 py-2 rounded-md font-medium hover:bg-primary/90 transition self-end"
+              className="bg-primary text-primary-foreground hover:bg-primary/90 self-end rounded-md px-4 py-2 font-medium transition"
             >
               Log Activity
             </button>
@@ -257,14 +257,14 @@ export function AcivityLogChat({
 }: ActivityLogProps) {
   return (
     <div className="flex justify-center">
-      <div className="flex flex-col max-w-xs w-full">
-        <div className="text-xs text-muted-foreground mb-1">
+      <div className="flex w-full max-w-xs flex-col">
+        <div className="text-muted-foreground mb-1 text-xs">
           {sender !== "user" && sender}
         </div>
-        <div className="rounded-lg px-4 py-2 bg-muted text-foreground w-full text-center">
+        <div className="bg-muted text-foreground w-full rounded-lg px-4 py-2 text-center">
           "{memberName}" đã "{actionName}"
         </div>
-        <div className="text-xs text-muted-foreground mt-1 self-end">
+        <div className="text-muted-foreground mt-1 self-end text-xs">
           {datetime.toLocaleString()}
         </div>
       </div>

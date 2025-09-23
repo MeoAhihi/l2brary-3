@@ -28,7 +28,7 @@ export default function RegisterPage({ params }: RegisterPageProps) {
     <div className="flex min-h-svh w-full items-center justify-center p-6 md:p-10">
       <div className="w-full max-w-sm">
         <div className="flex flex-col gap-6">
-          <div className="mb-4 p-3 bg-muted rounded-lg">
+          <div className="bg-muted mb-4 rounded-lg p-3">
             <p className="text-sm">
               <strong>Invite Token:</strong> {invite_token}
             </p>

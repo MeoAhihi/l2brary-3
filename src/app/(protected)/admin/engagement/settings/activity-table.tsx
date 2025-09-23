@@ -11,7 +11,11 @@ type ActivityTableProps = {
   selectedActivityId?: string;
 };
 
-export default function ActivityTable({ activities, onActivitySelect, selectedActivityId }: ActivityTableProps) {
+export default function ActivityTable({
+  activities,
+  onActivitySelect,
+  selectedActivityId,
+}: ActivityTableProps) {
   return (
     <div className="w-full">
       <DataTable

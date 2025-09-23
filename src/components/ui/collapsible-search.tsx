@@ -39,8 +39,8 @@ export function CollapsibleSearch({
   return (
     <div
       className={cn(
-        "flex items-center transition-all duration-300 ease-in-out border border-input bg-background rounded-full overflow-hidden shadow-sm",
-        expanded ? "w-64 px-3" : "w-10 px-0"
+        "border-input bg-background flex items-center overflow-hidden rounded-full border shadow-sm transition-all duration-300 ease-in-out",
+        expanded ? "w-64 px-3" : "w-10 px-0",
       )}
       style={{
         minHeight: 40,
@@ -65,10 +65,10 @@ export function CollapsibleSearch({
         ref={inputRef}
         type="text"
         className={cn(
-          "bg-transparent outline-none border-0 flex-1 transition-all duration-300 text-sm",
+          "flex-1 border-0 bg-transparent text-sm transition-all duration-300 outline-none",
           expanded
-            ? "opacity-100 ml-2 w-full"
-            : "opacity-0 ml-0 w-0 pointer-events-none"
+            ? "ml-2 w-full opacity-100"
+            : "pointer-events-none ml-0 w-0 opacity-0",
         )}
         placeholder={expanded ? placeholder : ""}
         value={value}
