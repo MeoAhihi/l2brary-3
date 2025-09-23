@@ -3,46 +3,49 @@ import { cookies } from "next/headers";
 
 import { ACCESS_TOKEN } from "@/constants/authentication";
 import { IS_PRODUCTION, STATIC_API_URL } from "@/constants/common";
+import { ApiError } from "@/types/api";
 
-const restConnector = async (cookie?: string) => {
-  const cookieStore = await cookies();
+const axiosClient = axios.create({
+  baseURL: STATIC_API_URL,
+  timeout: 30000,
+  withCredentials: false,
+  headers: {
+    "Content-Type": "application/json",
+  },
+});
 
-  const CreateRestConnector = axios.create({
-    baseURL: STATIC_API_URL,
-    timeout: 30000,
-    withCredentials: false,
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${cookie ? cookie : cookieStore.get(ACCESS_TOKEN)?.value}`,
-    },
-  });
+axiosClient.interceptors.request.use(
+  async function (config) {
+    const cookieStore = await cookies();
+    const token = cookieStore.get(ACCESS_TOKEN)?.value;
 
-  CreateRestConnector.interceptors.response.use(
-    (response) => {
-      return response;
-    },
-    (error) => {
-      const status = error.response?.status;
-      const message = error.response?.data?.message;
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+    return config;
+  },
+  function (error) {
+    return Promise.reject(error);
+  },
+);
+axiosClient.interceptors.response.use(
+  (response) => response,
+  async (error) => {
+    const status = error.response?.status;
+    const message = error.response?.data?.message;
+    const cookieStore = await cookies();
 
-      if (status === 401) {
-        cookieStore.delete(ACCESS_TOKEN);
-        if (typeof window !== "undefined") {
-          window.location.reload();
-        }
-      }
-      if (!IS_PRODUCTION) console.log(error);
+    if (status === 401) {
+      cookieStore.delete(ACCESS_TOKEN);
 
-      return Promise.resolve({
-        data: {
-          success: false,
-          error: { status, message },
-        },
-      });
-    },
-  );
+      window.location.reload();
+    }
+    if (!IS_PRODUCTION) console.log(error);
 
-  return CreateRestConnector;
-};
+    const apiError: ApiError = { message, status };
 
-export default restConnector;
+    return Promise.reject(apiError);
+  },
+);
+
+export default axiosClient;
