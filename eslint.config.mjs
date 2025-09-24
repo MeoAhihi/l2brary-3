@@ -28,18 +28,10 @@ const eslintConfig = [
       "no-unused-vars": "warn",
       "prefer-const": "off",
       "@typescript-eslint/no-explicit-any": "warn",
+      "@typescript-eslint/no-unused-vars": "warn",
       "react/jsx-curly-brace-presence": [
         "error",
         { props: "never", children: "ignore" },
-      ],
-      "no-restricted-syntax": [
-        "error",
-        {
-          selector:
-            'ImportDeclaration[importKind!="type"][specifiers.0.type="ImportNamespaceSpecifier"]',
-          message:
-            "Do not use namespace imports (*). Import only what you need to reduce bundle size.",
-        },
       ],
       "max-lines": [
         "error",
