@@ -1,16 +1,17 @@
-import { Enrollment, EnrollmentStatus } from "@/types/ld.types";
-import { Badge } from "@/components/ui/badge";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { ColumnDef } from "@tanstack/react-table";
 import {
   BookOpen,
   Calendar,
   CheckCircle,
-  XCircle,
   Clock,
-  Users,
   Mail,
   MoreHorizontal,
+  Users,
+  XCircle,
 } from "lucide-react";
+
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -18,7 +19,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { ColumnDef } from "@tanstack/react-table";
+import { Enrollment, EnrollmentStatus } from "@/types/ld.types";
 
 const getStatusBadge = (status: EnrollmentStatus) => {
   switch (status) {
@@ -65,7 +66,7 @@ export const columns: ColumnDef<Enrollment>[] = [
           </Avatar>
           <div>
             <div className="font-medium">{student.name}</div>
-            <div className="text-sm text-muted-foreground">{student.email}</div>
+            <div className="text-muted-foreground text-sm">{student.email}</div>
           </div>
         </div>
       );
@@ -95,13 +96,13 @@ export const columns: ColumnDef<Enrollment>[] = [
     header: "Attendance",
     cell: ({ row }) => (
       <div className="flex items-center space-x-2">
-        <div className="w-12 bg-gray-200 rounded-full h-2">
+        <div className="h-2 w-12 rounded-full bg-gray-200">
           <div
-            className="bg-green-600 h-2 rounded-full"
+            className="h-2 rounded-full bg-green-600"
             style={{ width: `${row.original.attendance}%` }}
           ></div>
         </div>
-        <span className="text-sm text-muted-foreground">
+        <span className="text-muted-foreground text-sm">
           {row.original.attendance}%
         </span>
       </div>
@@ -112,7 +113,7 @@ export const columns: ColumnDef<Enrollment>[] = [
     header: "Assignments",
     cell: ({ row }) => (
       <div className="flex items-center space-x-1">
-        <BookOpen className="h-4 w-4 text-muted-foreground" />
+        <BookOpen className="text-muted-foreground h-4 w-4" />
         <span className="text-sm">
           {row.original.completed}/{row.original.assignments}
         </span>
@@ -124,13 +125,13 @@ export const columns: ColumnDef<Enrollment>[] = [
     header: "Progress",
     cell: ({ row }) => (
       <div className="flex items-center space-x-2">
-        <div className="w-16 bg-gray-200 rounded-full h-2">
+        <div className="h-2 w-16 rounded-full bg-gray-200">
           <div
-            className="bg-blue-600 h-2 rounded-full"
+            className="h-2 rounded-full bg-blue-600"
             style={{ width: `${row.original.progress}%` }}
           ></div>
         </div>
-        <span className="text-sm text-muted-foreground">
+        <span className="text-muted-foreground text-sm">
           {row.original.progress}%
         </span>
       </div>
@@ -141,7 +142,7 @@ export const columns: ColumnDef<Enrollment>[] = [
     header: "Last Activity",
     cell: ({ row }) => (
       <div className="flex items-center space-x-1">
-        <Calendar className="h-4 w-4 text-muted-foreground" />
+        <Calendar className="text-muted-foreground h-4 w-4" />
         <span className="text-sm">{row.original.lastActivity}</span>
       </div>
     ),
@@ -161,31 +162,31 @@ export const columns: ColumnDef<Enrollment>[] = [
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
               <DropdownMenuItem>
-                <Users className="h-4 w-4 mr-2" />
+                <Users className="mr-2 h-4 w-4" />
                 View Profile
               </DropdownMenuItem>
               <DropdownMenuItem>
-                <Mail className="h-4 w-4 mr-2" />
+                <Mail className="mr-2 h-4 w-4" />
                 Send Message
               </DropdownMenuItem>
               <DropdownMenuItem>
-                <BookOpen className="h-4 w-4 mr-2" />
+                <BookOpen className="mr-2 h-4 w-4" />
                 View Progress
               </DropdownMenuItem>
               {enrollment.status === EnrollmentStatus.PENDING && (
                 <>
                   <DropdownMenuItem className="text-green-600">
-                    <CheckCircle className="h-4 w-4 mr-2" />
+                    <CheckCircle className="mr-2 h-4 w-4" />
                     Approve
                   </DropdownMenuItem>
                   <DropdownMenuItem className="text-red-600">
-                    <XCircle className="h-4 w-4 mr-2" />
+                    <XCircle className="mr-2 h-4 w-4" />
                     Reject
                   </DropdownMenuItem>
                 </>
               )}
               <DropdownMenuItem className="text-red-600">
-                <XCircle className="h-4 w-4 mr-2" />
+                <XCircle className="mr-2 h-4 w-4" />
                 Remove
               </DropdownMenuItem>
             </DropdownMenuContent>

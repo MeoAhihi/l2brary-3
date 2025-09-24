@@ -1,4 +1,4 @@
-import { Card, CardHeader, CardTitle, CardContent } from "./card";
+import { Card, CardContent, CardHeader, CardTitle } from "./card";
 
 export function StatCard({
   title,
@@ -19,7 +19,7 @@ export function StatCard({
       </CardHeader>
       <CardContent>
         <div className="text-2xl font-bold">{value}</div>
-        <p className="text-xs text-muted-foreground">{description}</p>
+        <p className="text-muted-foreground text-xs">{description}</p>
       </CardContent>
     </Card>
   );

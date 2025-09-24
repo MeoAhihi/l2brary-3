@@ -1,3 +1,16 @@
+/* eslint-disable max-lines */
+import {
+  AlertTriangle,
+  Calendar,
+  Info,
+  MapPin,
+  Save,
+  Settings,
+  Trash2,
+  Users,
+} from "lucide-react";
+import { Metadata } from "next";
+
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -11,17 +24,6 @@ import {
 } from "@/components/ui/select";
 import { Switch } from "@/components/ui/switch";
 import { Textarea } from "@/components/ui/textarea";
-import {
-  AlertTriangle,
-  Calendar,
-  Info,
-  MapPin,
-  Save,
-  Settings,
-  Trash2,
-  Users,
-} from "lucide-react";
-import { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Session Settings | Admin | L2brary",
@@ -213,7 +215,7 @@ export default function SettingsPage({}: SettingsPageProps) {
           <div className="flex items-center justify-between">
             <div>
               <Label htmlFor="auto-checkin">Auto Check-in</Label>
-              <p className="text-sm text-muted-foreground">
+              <p className="text-muted-foreground text-sm">
                 Automatically check in students when they join
               </p>
             </div>
@@ -222,7 +224,7 @@ export default function SettingsPage({}: SettingsPageProps) {
           <div className="flex items-center justify-between">
             <div>
               <Label htmlFor="allow-late-join">Allow Late Join</Label>
-              <p className="text-sm text-muted-foreground">
+              <p className="text-muted-foreground text-sm">
                 Allow students to join after the session starts
               </p>
             </div>
@@ -243,7 +245,7 @@ export default function SettingsPage({}: SettingsPageProps) {
           <div className="flex items-center justify-between">
             <div>
               <Label htmlFor="enable-games">Enable Games</Label>
-              <p className="text-sm text-muted-foreground">
+              <p className="text-muted-foreground text-sm">
                 Allow games during this session
               </p>
             </div>
@@ -252,7 +254,7 @@ export default function SettingsPage({}: SettingsPageProps) {
           <div className="flex items-center justify-between">
             <div>
               <Label htmlFor="auto-scoring">Auto Scoring</Label>
-              <p className="text-sm text-muted-foreground">
+              <p className="text-muted-foreground text-sm">
                 Automatically calculate game scores
               </p>
             </div>
@@ -295,7 +297,7 @@ export default function SettingsPage({}: SettingsPageProps) {
           <div className="flex items-center justify-between">
             <div>
               <Label htmlFor="email-notifications">Email Notifications</Label>
-              <p className="text-sm text-muted-foreground">
+              <p className="text-muted-foreground text-sm">
                 Send email notifications to participants
               </p>
             </div>
@@ -304,7 +306,7 @@ export default function SettingsPage({}: SettingsPageProps) {
           <div className="flex items-center justify-between">
             <div>
               <Label htmlFor="sms-notifications">SMS Notifications</Label>
-              <p className="text-sm text-muted-foreground">
+              <p className="text-muted-foreground text-sm">
                 Send SMS notifications to participants
               </p>
             </div>
@@ -315,7 +317,7 @@ export default function SettingsPage({}: SettingsPageProps) {
               <Label htmlFor="reminder-notifications">
                 Reminder Notifications
               </Label>
-              <p className="text-sm text-muted-foreground">
+              <p className="text-muted-foreground text-sm">
                 Send reminder notifications before session
               </p>
             </div>
@@ -325,13 +327,13 @@ export default function SettingsPage({}: SettingsPageProps) {
       </Card>
 
       {/* Action Buttons */}
-      <div className="flex gap-4 justify-end">
+      <div className="flex justify-end gap-4">
         <Button variant="destructive">
-          <Trash2 className="h-4 w-4 mr-2" />
+          <Trash2 className="mr-2 h-4 w-4" />
           Xóa Buổi học
         </Button>
         <Button>
-          <Save className="h-4 w-4 mr-2" />
+          <Save className="mr-2 h-4 w-4" />
           Lưu thay đổi
         </Button>
       </div>

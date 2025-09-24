@@ -1,8 +1,9 @@
-"use client"
-import { PostItem } from "./post-item";
-import { useState, useMemo } from "react";
-import type { PostCardProps } from "./post-item";
+"use client";
+import { useMemo, useState } from "react";
+
 import { PaginationButtons } from "../ui/pagination-buttons";
+import type { PostCardProps } from "./post-item";
+import { PostItem } from "./post-item";
 
 type PostListProps = {
   posts: PostCardProps[];
@@ -23,7 +24,9 @@ export function PostList({ posts, pageSize = 5 }: PostListProps) {
     <div className="flex flex-col gap-6">
       {/* Posts */}
       {paginatedPosts.length === 0 ? (
-        <div className="text-muted-foreground text-center py-8">No posts found.</div>
+        <div className="text-muted-foreground py-8 text-center">
+          No posts found.
+        </div>
       ) : (
         paginatedPosts.map((post, idx) => (
           <PostItem
@@ -49,4 +52,3 @@ export function PostList({ posts, pageSize = 5 }: PostListProps) {
     </div>
   );
 }
-

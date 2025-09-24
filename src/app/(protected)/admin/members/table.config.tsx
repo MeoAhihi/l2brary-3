@@ -1,7 +1,12 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
+import { ColumnDef, Table } from "@tanstack/react-table";
+import { ArrowUpDown, MoreHorizontal, Plus } from "lucide-react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { toast } from "sonner";
+
+import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -11,10 +16,6 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Input } from "@/components/ui/input";
-import { ColumnDef, Table } from "@tanstack/react-table";
-import { ArrowUpDown, MoreHorizontal, Plus } from "lucide-react";
-import { useRouter } from "next/navigation";
-import { toast } from "sonner";
 import { Member } from "@/types/iam.types";
 
 export const columns: ColumnDef<Member>[] = [

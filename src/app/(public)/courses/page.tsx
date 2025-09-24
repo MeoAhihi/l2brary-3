@@ -1,10 +1,11 @@
 "use client";
 
-import { CourseCard } from "@/components/course/course-card";
+import Head from "next/head";
 import { useState } from "react";
+
+import { CourseCard } from "@/components/course/course-card";
 import { PaginationButtons } from "@/components/ui/pagination-buttons";
 import courses from "@/constants/courses.json";
-import Head from "next/head";
 
 export default function CoursesPage() {
   const pageSize = 8;
@@ -22,13 +23,13 @@ export default function CoursesPage() {
         />
       </Head>
       <div className="container mx-auto px-4 py-8">
-        <div className="max-w-6xl mx-auto">
-          <h1 className="text-3xl font-bold mb-6">Courses</h1>
+        <div className="mx-auto max-w-6xl">
+          <h1 className="mb-6 text-3xl font-bold">Courses</h1>
           <p className="text-muted-foreground mb-8">
             Discover and enroll in courses to enhance your skills
           </p>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+          <div className="mb-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {pagedCourses.map((course) => (
               <CourseCard key={course.title} {...course} />
             ))}

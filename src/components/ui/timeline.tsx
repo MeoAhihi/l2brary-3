@@ -1,6 +1,12 @@
-import * as React from "react";
-import { cn } from "@/lib/utils";
+import {
+  ComponentProps,
+  forwardRef,
+  HTMLAttributes,
+  LiHTMLAttributes,
+} from "react";
+
 import { Badge } from "@/components/ui/badge";
+import { cn } from "@/lib/utils";
 
 export type TimelineItemType = {
   id: number;
@@ -9,17 +15,16 @@ export type TimelineItemType = {
   time: string;
 };
 
-const Timeline = React.forwardRef<
-  HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement>
->(({ className, ...props }, ref) => (
-  <div ref={ref} className={className} {...props} />
-));
+const Timeline = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
+  ({ className, ...props }, ref) => (
+    <div ref={ref} className={className} {...props} />
+  ),
+);
 Timeline.displayName = "Timeline";
 
-const TimelineItem = React.forwardRef<
+const TimelineItem = forwardRef<
   HTMLDivElement,
-  React.LiHTMLAttributes<HTMLDivElement>
+  LiHTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => (
   <div
     ref={ref}
@@ -29,14 +34,14 @@ const TimelineItem = React.forwardRef<
 ));
 TimelineItem.displayName = "TimelineItem";
 
-const TimelineHeader = React.forwardRef<
+const TimelineHeader = forwardRef<
   HTMLParagraphElement,
-  React.HTMLAttributes<HTMLParagraphElement>
+  HTMLAttributes<HTMLParagraphElement>
 >(({ className, ...props }, ref) => (
   <div
     ref={ref}
     className={cn(
-      "mb-1 flex flex-col items-start before:absolute before:left-2 before:h-full before:-translate-x-1/2 before:translate-y-3 before:self-start before:bg-slate-300 before:px-px after:absolute after:left-2 after:box-content after:h-2 after:w-2 after:-translate-x-1/2 after:translate-y-1.5 after:rounded-full after:border-4 after:border-primary-foreground/95 after:bg-foreground group-last:before:hidden sm:flex-row sm:before:left-0 sm:before:ml-[10rem] sm:after:left-0 sm:after:ml-[10rem]",
+      "after:border-primary-foreground/95 after:bg-foreground mb-1 flex flex-col items-start before:absolute before:left-2 before:h-full before:-translate-x-1/2 before:translate-y-3 before:self-start before:bg-slate-300 before:px-px group-last:before:hidden after:absolute after:left-2 after:box-content after:h-2 after:w-2 after:-translate-x-1/2 after:translate-y-1.5 after:rounded-full after:border-4 sm:flex-row sm:before:left-0 sm:before:ml-[10rem] sm:after:left-0 sm:after:ml-[10rem]",
       className,
     )}
     {...props}
@@ -44,13 +49,13 @@ const TimelineHeader = React.forwardRef<
 ));
 TimelineHeader.displayName = "TimelineHeader";
 
-const TimelineTitle = React.forwardRef<
+const TimelineTitle = forwardRef<
   HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement>
+  HTMLAttributes<HTMLDivElement>
 >(({ className, children, ...props }, ref) => (
   <div
     ref={ref}
-    className={cn("text-xl font-bold text-primary", className)}
+    className={cn("text-primary text-xl font-bold", className)}
     {...props}
   >
     {children}
@@ -62,7 +67,7 @@ const TimelineTime = ({
   className,
   variant = "default",
   ...props
-}: React.ComponentProps<typeof Badge>) => {
+}: ComponentProps<typeof Badge>) => {
   return (
     <Badge
       className={cn(
@@ -78,9 +83,9 @@ const TimelineTime = ({
 };
 TimelineTime.displayName = "TimelineTime";
 
-const TimelineDescription = React.forwardRef<
+const TimelineDescription = forwardRef<
   HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement>
+  HTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => (
   <div
     ref={ref}
@@ -92,9 +97,9 @@ TimelineDescription.displayName = "TimelineDescription";
 
 export {
   Timeline,
-  TimelineItem,
+  TimelineDescription,
   TimelineHeader,
+  TimelineItem,
   TimelineTime,
   TimelineTitle,
-  TimelineDescription,
 };

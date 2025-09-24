@@ -1,6 +1,7 @@
 "use client";
 
 import { DataTable } from "@/components/ui/data-table/data-table";
+
 import { columns, Score } from "./columns";
 
 type ScoreTableProps = {

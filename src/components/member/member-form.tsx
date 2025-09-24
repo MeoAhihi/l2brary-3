@@ -1,5 +1,12 @@
 "use client";
 
+import { zodResolver } from "@hookform/resolvers/zod";
+import { format } from "date-fns";
+import { Calendar as CalendarIcon } from "lucide-react";
+import { useForm } from "react-hook-form";
+import { toast } from "sonner";
+import { z } from "zod";
+
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
 import {
@@ -20,12 +27,6 @@ import {
 } from "@/components/ui/popover";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { cn } from "@/lib/utils";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { format } from "date-fns";
-import { Calendar as CalendarIcon } from "lucide-react";
-import { useForm } from "react-hook-form";
-import { toast } from "sonner";
-import * as z from "zod";
 
 const formSchema = z.object({
   fullname: z.string().min(1), // delete require contraints
@@ -68,7 +69,7 @@ export function MemberForm({ defaultValues }: any) {
   }
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 w-100">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="w-100 space-y-8">
         <FormField
           control={form.control}
           name="fullname"
@@ -107,7 +108,7 @@ export function MemberForm({ defaultValues }: any) {
                     ["Khác", "other"],
                   ].map((option, index) => (
                     <FormItem
-                      className="flex items-center space-x-3 space-y-0"
+                      className="flex items-center space-y-0 space-x-3"
                       key={index}
                     >
                       <FormControl>
@@ -133,7 +134,7 @@ export function MemberForm({ defaultValues }: any) {
                 <PopoverTrigger asChild>
                   <FormControl>
                     <Button
-                      variant={"outline"}
+                      variant="outline"
                       className={cn(
                         "w-[240px] pl-3 text-left font-normal",
                         !field.value && "text-muted-foreground",

@@ -1,5 +1,7 @@
 "use client";
 
+import { useState } from "react";
+
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   Table,
@@ -9,7 +11,6 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { useState } from "react";
 
 interface Player {
   id: number;
@@ -37,10 +38,10 @@ export function GameLogTable({ players, onPlayerChange }: GameLogTableProps) {
   const handleInputChange = (
     id: number,
     field: keyof Player,
-    value: string | number
+    value: string | number,
   ) => {
     const updatedPlayers = editablePlayers.map((player) =>
-      player.id === id ? { ...player, [field]: value } : player
+      player.id === id ? { ...player, [field]: value } : player,
     );
     setEditablePlayers(updatedPlayers);
     if (onPlayerChange) {
@@ -74,7 +75,7 @@ export function GameLogTable({ players, onPlayerChange }: GameLogTableProps) {
         <TableRow>
           <TableCell></TableCell>
           <TableCell>
-            <select className="w-full border rounded px-2 py-1 text-sm">
+            <select className="w-full rounded border px-2 py-1 text-sm">
               <option value="">Chọn thành viên</option>
               {editablePlayers.map((player) => (
                 <option key={player.id} value={player.id}>
@@ -122,7 +123,7 @@ function GameLogTableRow({
   handleInputChange: (
     id: number,
     field: keyof Player,
-    value: string | number
+    value: string | number,
   ) => void;
 }) {
   return (
@@ -151,7 +152,7 @@ function GameLogTableRow({
           onChange={(e) =>
             handleInputChange(id, "score", Number(e.target.value))
           }
-          className="w-16 border rounded px-2 py-1 text-sm text-right"
+          className="w-16 rounded border px-2 py-1 text-right text-sm"
           placeholder="Điểm"
         />
       </TableCell>
@@ -160,7 +161,7 @@ function GameLogTableRow({
           type="text"
           value={time || ""}
           onChange={(e) => handleInputChange(id, "time", e.target.value)}
-          className="w-20 border rounded px-2 py-1 text-sm"
+          className="w-20 rounded border px-2 py-1 text-sm"
           placeholder="mm:ss"
         />
       </TableCell>
@@ -172,7 +173,7 @@ function GameLogTableRow({
           onChange={(e) =>
             handleInputChange(id, "trials", Number(e.target.value))
           }
-          className="w-12 border rounded px-2 py-1 text-sm text-right"
+          className="w-12 rounded border px-2 py-1 text-right text-sm"
           placeholder="Lượt"
         />
       </TableCell>

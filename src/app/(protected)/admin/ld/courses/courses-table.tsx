@@ -1,12 +1,14 @@
 "use client";
 
+import Link from "next/link";
+
 import { Button } from "@/components/ui/button";
 import { DataTable } from "@/components/ui/data-table/data-table";
+import { DataTablePagination } from "@/components/ui/data-table/data-table-pagination";
 import { Input } from "@/components/ui/input";
 import { Course } from "@/types/ld.types";
-import Link from "next/link";
+
 import { columns } from "./columns";
-import { DataTablePagination } from "@/components/ui/data-table/data-table-pagination";
 
 type CoursesTableProps = {
   courses: Course[];
@@ -24,7 +26,7 @@ export function CoursesTable({ courses }: CoursesTableProps) {
             <Input
               type="text"
               placeholder="Tìm kiếm khoá học..."
-              className="border rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary"
+              className="focus:ring-primary rounded border px-3 py-2 text-sm focus:ring-2 focus:outline-none"
               value={table.getState().globalFilter ?? ""}
               onChange={(e) => table.setGlobalFilter(e.target.value)}
             />

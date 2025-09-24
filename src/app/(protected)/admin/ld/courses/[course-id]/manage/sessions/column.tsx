@@ -1,5 +1,10 @@
 "use client";
 
+import { ColumnDef } from "@tanstack/react-table";
+import { ArrowUpDown, Copy, MoreHorizontal, Settings, X } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { toast } from "sonner";
+
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -10,10 +15,6 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import type { Session } from "@/types/ld.types";
-import { ColumnDef } from "@tanstack/react-table";
-import { ArrowUpDown, Copy, MoreHorizontal, Settings, X } from "lucide-react";
-import { useRouter } from "next/navigation";
-import { toast } from "sonner";
 
 export const columns: ColumnDef<Session>[] = [
   {
@@ -21,16 +22,16 @@ export const columns: ColumnDef<Session>[] = [
     cell: ({ row }) => {
       const thumbnail = row.original.thumbnail;
       return (
-        <div className="flex justify-center items-center w-12 h-12">
+        <div className="flex h-12 w-12 items-center justify-center">
           {thumbnail ? (
             // eslint-disable-next-line @next/next/no-img-element
             <img
               src={thumbnail}
               alt="Thumbnail"
-              className="object-cover rounded w-10 h-10 border"
+              className="h-10 w-10 rounded border object-cover"
             />
           ) : (
-            <div className="w-10 h-10 rounded bg-gray-200 flex items-center justify-center border">
+            <div className="flex h-10 w-10 items-center justify-center rounded border bg-gray-200">
               <svg
                 width="20"
                 height="20"
@@ -109,7 +110,7 @@ export const columns: ColumnDef<Session>[] = [
   {
     id: "startTime",
     header: ({ column }) => (
-      <div className="text-center w-full">
+      <div className="w-full text-center">
         <Button
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
@@ -125,7 +126,7 @@ export const columns: ColumnDef<Session>[] = [
         ? new Date(row.original.startTime)
         : null;
       return (
-        <div className="text-center w-full">
+        <div className="w-full text-center">
           {start
             ? start.toLocaleTimeString("vi-VN", {
                 hour: "2-digit",
@@ -148,7 +149,7 @@ export const columns: ColumnDef<Session>[] = [
   {
     id: "endTime",
     header: ({ column }) => (
-      <div className="text-center w-full">
+      <div className="w-full text-center">
         <Button
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
@@ -162,7 +163,7 @@ export const columns: ColumnDef<Session>[] = [
     cell: ({ row }) => {
       const end = row.original.endTime ? new Date(row.original.endTime) : null;
       return (
-        <div className="text-center w-full">
+        <div className="w-full text-center">
           {end
             ? end.toLocaleTimeString("vi-VN", {
                 hour: "2-digit",
@@ -195,7 +196,7 @@ export const columns: ColumnDef<Session>[] = [
     ),
     cell: ({ row }) =>
       row.original.presenter || (
-        <span className="italic text-muted-foreground">Chưa có</span>
+        <span className="text-muted-foreground italic">Chưa có</span>
       ),
     filterFn: "includesString",
   },
@@ -211,7 +212,7 @@ export const columns: ColumnDef<Session>[] = [
       </Button>
     ),
     cell: ({ row }) => (
-      <div className="text-center w-full">{row.original.attended}</div>
+      <div className="w-full text-center">{row.original.attended}</div>
     ),
     sortingFn: (rowA, rowB, columnId) => {
       const a = Number(rowA.getValue(columnId)) || 0;
@@ -276,7 +277,7 @@ export const columns: ColumnDef<Session>[] = [
               </span>
             </DropdownMenuItem>
             <DropdownMenuItem onClick={handleDelete}>
-              <span className="flex items-center gap-2 text-destructive">
+              <span className="text-destructive flex items-center gap-2">
                 <X />
                 Xoá
               </span>

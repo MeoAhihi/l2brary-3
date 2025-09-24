@@ -1,13 +1,15 @@
 "use client";
 
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { FileUp, Plus, Save, Target, Trophy, X } from "lucide-react";
 import Head from "next/head";
 // import { useParams } from "next/navigation";
 import { useState } from "react";
+
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+
 import { GameLogTable } from "./game-log-table";
 
 // Mock data for top performers
@@ -98,7 +100,7 @@ export default function GameLogPage() {
               Ghi điểm Trò chơi
             </CardTitle>
             <Button variant="default">
-              <FileUp className="h-4 w-4 mr-2" />
+              <FileUp className="mr-2 h-4 w-4" />
               Nhập file Excel/CSV
             </Button>
           </CardHeader>
@@ -109,13 +111,13 @@ export default function GameLogPage() {
                 <GameLogTable players={players} />
               </div>
             </div>
-            <div className="flex flex-row gap-3 justify-end">
+            <div className="flex flex-row justify-end gap-3">
               <Button variant="outline">
-                <X className="h-4 w-4 mr-2" />
+                <X className="mr-2 h-4 w-4" />
                 Hủy
               </Button>
               <Button>
-                <Save className="h-4 w-4 mr-2" />
+                <Save className="mr-2 h-4 w-4" />
                 Lưu điểm
               </Button>
             </div>
@@ -135,7 +137,7 @@ export default function GameLogPage() {
               {topPerformers.map((performer) => (
                 <div
                   key={performer.id}
-                  className="flex items-center justify-between p-4 border rounded-lg"
+                  className="flex items-center justify-between rounded-lg border p-4"
                 >
                   <div className="flex items-center gap-4">
                     <div className="relative">
@@ -149,14 +151,14 @@ export default function GameLogPage() {
                         </AvatarFallback>
                       </Avatar>
                       {performer.rank <= 3 && (
-                        <div className="absolute -top-1 -right-1 w-5 h-5 bg-yellow-500 rounded-full flex items-center justify-center text-xs font-bold text-white">
+                        <div className="absolute -top-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full bg-yellow-500 text-xs font-bold text-white">
                           {performer.rank}
                         </div>
                       )}
                     </div>
                     <div>
                       <p className="font-medium">{performer.name}</p>
-                      <p className="text-sm text-muted-foreground">
+                      <p className="text-muted-foreground text-sm">
                         {performer.gamesPlayed} games played
                       </p>
                     </div>
@@ -168,7 +170,7 @@ export default function GameLogPage() {
                         <Target className="h-4 w-4" />
                         <span className="font-medium">{performer.score}%</span>
                       </div>
-                      <p className="text-xs text-muted-foreground">
+                      <p className="text-muted-foreground text-xs">
                         Average score
                       </p>
                     </div>

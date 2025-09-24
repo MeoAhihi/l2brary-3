@@ -1,3 +1,6 @@
+import { CheckSquare, Clock, UserCheck, Users, UserX, X } from "lucide-react";
+import { Metadata } from "next";
+
 import { getMembers } from "@/apis/iam.api";
 import { getStudentAttendances } from "@/apis/ld.api";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -8,9 +11,8 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { StatCard } from "@/components/ui/stat-card";
-import { CheckSquare, Clock, UserCheck, Users, UserX, X } from "lucide-react";
+
 import ManualCheckinMembersTable from "./manual-checkin-members-table";
-import { Metadata } from "next";
 
 const studentAttendances = await getStudentAttendances();
 
@@ -25,7 +27,7 @@ export default async function CheckInPage() {
   const presentCount = studentAttendances.filter((s) => s.checkedIn).length;
   const absentCount = studentAttendances.filter((s) => !s.checkedIn).length;
   const lateCount = studentAttendances.filter(
-    (s) => s.status === "late"
+    (s) => s.status === "late",
   ).length;
 
   return (
@@ -53,7 +55,7 @@ export default async function CheckInPage() {
         />
       </div>
 
-      <div className="grid md:grid-cols-2 gap-6">
+      <div className="grid gap-6 md:grid-cols-2">
         {/* Quick Check-in */}
         <Card>
           <CardHeader>
@@ -74,7 +76,7 @@ export default async function CheckInPage() {
               </div>
               <div className="flex items-end">
                 <Button>
-                  <CheckSquare className="h-4 w-4 mr-2" />
+                  <CheckSquare className="mr-2 h-4 w-4" />
                   Check In
                 </Button>
               </div>
@@ -108,12 +110,12 @@ export default async function CheckInPage() {
             {studentAttendances.map((student) => (
               <div
                 key={student.id}
-                className="flex items-center justify-between p-4 border rounded-lg"
+                className="flex items-center justify-between rounded-lg border p-4"
               >
                 <div className="flex items-center gap-4">
                   <Checkbox
                     checked={student.checkedIn}
-                    className="data-[state=checked]:bg-green-600 data-[state=checked]:border-green-600"
+                    className="data-[state=checked]:border-green-600 data-[state=checked]:bg-green-600"
                   />
                   <Avatar className="h-10 w-10">
                     <AvatarImage src={student.avatar} />
@@ -126,7 +128,7 @@ export default async function CheckInPage() {
                   </Avatar>
                   <div>
                     <p className="font-medium">{student.name}</p>
-                    <p className="text-sm text-muted-foreground">
+                    <p className="text-muted-foreground text-sm">
                       {student.email}
                     </p>
                   </div>
@@ -158,7 +160,7 @@ export default async function CheckInPage() {
                     </>
                   ) : (
                     <div className="text-right">
-                      <p className="text-sm text-muted-foreground">
+                      <p className="text-muted-foreground text-sm">
                         Not checked in
                       </p>
                       <Badge

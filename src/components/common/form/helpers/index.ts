@@ -1,6 +1,7 @@
 // Helper function to generate Zod schema from field configs
 
 import { z } from "zod";
+
 import { FormFieldConfig } from "../types";
 
 export function generateSchema(fields: FormFieldConfig[]): z.ZodObject<any> {

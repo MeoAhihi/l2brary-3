@@ -1,4 +1,5 @@
 import PageHeader from "@/components/ui/page-header";
+
 import ScoreTable from "./score-table";
 
 const data = [

@@ -1,12 +1,14 @@
 "use client";
 
+import { FormEventHandler } from "react";
+
+import { Button } from "@/components/ui/button";
 import { DataTable } from "@/components/ui/data-table/data-table";
-import { columns } from "./columns";
-import { Member } from "@/types/iam.types";
 import { DataTablePagination } from "@/components/ui/data-table/data-table-pagination";
 import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import { FormEventHandler } from "react";
+import { Member } from "@/types/iam.types";
+
+import { columns } from "./columns";
 
 type ManualCheckinMembersTableProps = {
   members: Member[];
@@ -26,7 +28,7 @@ export default function ManualCheckinMembersTable({
       footer={(table) => (
         <div className="flex flex-col gap-4">
           <form
-            className="flex flex-row justify-between items-center gap-2"
+            className="flex flex-row items-center justify-between gap-2"
             onSubmit={handleCheckin}
           >
             <div className="text-muted-foreground text-sm">

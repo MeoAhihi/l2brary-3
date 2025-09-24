@@ -2,25 +2,25 @@ import { Button } from "../ui/button";
 
 export default function HeroSection() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center">
-        <h1 className="text-3xl sm:text-5xl font-bold text-center mb-4">
+    <div className="grid min-h-screen grid-rows-[20px_1fr_20px] items-center justify-items-center gap-16 p-8 pb-20 font-[family-name:var(--font-geist-sans)] sm:p-20">
+      <main className="row-start-2 flex flex-col items-center gap-[32px]">
+        <h1 className="mb-4 text-center text-3xl font-bold sm:text-5xl">
           Explore physics with <br />
           <span className="text-primary">Newton Club</span>
         </h1>
-        <p className="text-lg sm:text-2xl text-center text-muted-foreground max-w-2xl">
+        <p className="text-muted-foreground max-w-2xl text-center text-lg sm:text-2xl">
           Newton Club is a community for curious minds to learn, discuss, and
           explore the wonders of physics together.
         </p>
-        <div className="flex gap-4 items-center flex-col sm:flex-row mt-4 justify-center w-full">
+        <div className="mt-4 flex w-full flex-col items-center justify-center gap-4 sm:flex-row">
           <Button
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-6 sm:px-8"
+            className="bg-foreground text-background flex h-10 items-center justify-center gap-2 rounded-full border border-solid border-transparent px-6 text-sm font-medium transition-colors hover:bg-[#383838] sm:h-12 sm:px-8 sm:text-base dark:hover:bg-[#ccc]"
             type="button"
           >
             Join Now
           </Button>
           <Button
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-6 sm:px-8"
+            className="flex h-10 items-center justify-center rounded-full border border-solid border-black/[.08] px-6 text-sm font-medium transition-colors hover:border-transparent hover:bg-[#f2f2f2] sm:h-12 sm:px-8 sm:text-base dark:border-white/[.145] dark:hover:bg-[#1a1a1a]"
             type="button"
             variant="outline"
           >

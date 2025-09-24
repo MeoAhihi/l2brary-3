@@ -1,10 +1,5 @@
 "use client";
 
-import { getStampTypes, getStudentStamps } from "@/apis/ld.api";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { StampType, StudentStamp } from "@/types/ld.types";
 import {
   QueryClient,
   QueryClientProvider,
@@ -13,6 +8,12 @@ import {
 import { Plus, Stamp, Users } from "lucide-react";
 import { useParams } from "next/navigation";
 import { useState } from "react";
+
+import { getStampTypes, getStudentStamps } from "@/apis/ld.api";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { StampType, StudentStamp } from "@/types/ld.types";
 
 const queryClient = new QueryClient();
 
@@ -48,12 +49,12 @@ function StampPage() {
         icon: stampType.icon,
         color: stampType.color,
       },
-    ])
+    ]),
   );
 
   return (
     <>
-      <div className="flex flex-col lg:flex-row gap-6">
+      <div className="flex flex-col gap-6 lg:flex-row">
         {/* Quick Stamp - Left 3/4 */}
         <div className="w-full lg:w-3/4">
           <Card>
@@ -64,7 +65,7 @@ function StampPage() {
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
-              <div className="flex flex-row gap-2 flex-wrap">
+              <div className="flex flex-row flex-wrap gap-2">
                 {stampTypes.map((stampType) => {
                   const Icon = stampType.icon;
                   const isSelected = selectedStamp?.id === stampType.id;
@@ -74,7 +75,7 @@ function StampPage() {
                       key={stampType.id}
                       variant={isSelected ? "default" : "outline"}
                       className={`flex items-center gap-2 ${
-                        isSelected ? "border-2 border-primary" : ""
+                        isSelected ? "border-primary border-2" : ""
                       }`}
                       onClick={() => setSelectedStamp(stampType)}
                     >
@@ -86,8 +87,8 @@ function StampPage() {
               </div>
 
               {selectedStamp && (
-                <div className="mt-4 p-4 bg-muted rounded-lg">
-                  <p className="text-sm text-muted-foreground">
+                <div className="bg-muted mt-4 rounded-lg p-4">
+                  <p className="text-muted-foreground text-sm">
                     Selected:{" "}
                     <span className="font-medium">{selectedStamp.name}</span>
                   </p>
@@ -95,14 +96,14 @@ function StampPage() {
               )}
 
               <div className="mt-8">
-                <h3 className="text-md font-semibold mb-2">Students</h3>
-                <div className="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 gap-4">
+                <h3 className="text-md mb-2 font-semibold">Students</h3>
+                <div className="grid grid-cols-4 gap-4 sm:grid-cols-6 md:grid-cols-8">
                   {students.map((student: StudentStamp) => (
                     <Card
                       key={student.id}
                       className="flex flex-col items-center"
                     >
-                      <Avatar className="h-10 w-10 mb-1">
+                      <Avatar className="mb-1 h-10 w-10">
                         {student.avatar ? (
                           <AvatarImage
                             src={student.avatar}
@@ -118,7 +119,7 @@ function StampPage() {
                           </AvatarFallback>
                         )}
                       </Avatar>
-                      <span className="text-xs text-center truncate max-w-[60px]">
+                      <span className="max-w-[60px] truncate text-center text-xs">
                         {student.name}
                       </span>
                     </Card>
@@ -171,7 +172,7 @@ function StudentStampCard({
   return (
     <div
       key={student.id}
-      className="flex flex-row justify-between gap-2 p-4 border rounded-lg"
+      className="flex flex-row justify-between gap-2 rounded-lg border p-4"
     >
       <div className="flex items-center gap-4">
         <Avatar className="h-5 w-5">
@@ -185,14 +186,14 @@ function StudentStampCard({
         </Avatar>
         <div>
           <p className="font-medium">{student.name}</p>
-          <p className="text-sm text-muted-foreground">
+          <p className="text-muted-foreground text-sm">
             {student.internationalName}
           </p>
         </div>
       </div>
 
-      <div className="flex items-center gap-4 justify-between">
-        <div className="text-right flex-1">
+      <div className="flex items-center justify-between gap-4">
+        <div className="flex-1 text-right">
           <div className="flex items-center gap-2">
             <Icon className={`h-4 w-4 ${iconColor}`} />
             <span className="font-medium">{student.stamps}</span>

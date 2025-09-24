@@ -1,7 +1,9 @@
-import PageHeader from "@/components/ui/page-header";
 import { Metadata } from "next";
-import { CoursesTable } from "./courses-table";
+
 import { getCourses } from "@/apis/ld.api";
+import PageHeader from "@/components/ui/page-header";
+
+import { CoursesTable } from "./courses-table";
 
 export const metadata: Metadata = {
   title: "Courses | Admin | L2brary",

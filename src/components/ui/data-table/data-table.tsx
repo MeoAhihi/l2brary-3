@@ -1,7 +1,5 @@
 "use client";
 
-import * as React from "react";
-
 import {
   ColumnDef, // Manages pagination of table rows
   ColumnFiltersState, // Retrieves the core row model without sorting or filtering
@@ -14,6 +12,7 @@ import {
   Table as TableType, // Defines the structure of a column in the table
   useReactTable, // Hook to create and use a table instance
 } from "@tanstack/react-table";
+import React from "react";
 
 import {
   Table,
@@ -29,6 +28,8 @@ interface DataTableProps<TData, TValue> {
   data?: TData[];
   header?: (table: TableType<TData>) => React.ReactNode;
   footer?: (table: TableType<TData>) => React.ReactNode;
+  onRowClick?: (row: TData) => void;
+  selectedRowId?: string;
 }
 
 /**
@@ -43,22 +44,26 @@ interface DataTableProps<TData, TValue> {
  * @param {TData[]} [props.data=[]] - The data to display in the table.
  * @param {(table: TableType<TData>) => React.ReactNode} [props.header] - Optional function to render custom header content.
  * @param {(table: TableType<TData>) => React.ReactNode} [props.footer] - Optional function to render custom footer content.
+ * @param {(row: TData) => void} [props.onRowClick] - Optional function to handle row clicks.
+ * @param {string} [props.selectedRowId] - Optional ID of the selected row.
  *
  * @returns {JSX.Element} The rendered table component.
  *
  * @example
- * <DataTable columns={columns} data={data} />
+ * <DataTable columns={columns} data={data} onRowClick={handleRowClick} selectedRowId={selectedId} />
  */
 export function DataTable<TData, TValue>({
   columns,
   data = [],
   header,
   footer,
+  onRowClick,
+  selectedRowId,
 }: DataTableProps<TData, TValue>) {
   // State for sorting and column filters
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
-    []
+    [],
   );
 
   // Define the table instance using TanStack Table's useReactTable hook
@@ -93,7 +98,7 @@ export function DataTable<TData, TValue>({
                       ? null
                       : flexRender(
                           header.column.columnDef.header,
-                          header.getContext()
+                          header.getContext(),
                         )}
                   </TableHead>
                 ))}
@@ -102,22 +107,32 @@ export function DataTable<TData, TValue>({
           </TableHeader>
           <TableBody>
             {table.getRowModel().rows?.length ? (
-              table.getRowModel().rows.map((row) => (
-                <TableRow
-                  key={row.id}
-                  data-state={row.getIsSelected() && "selected"}
-                >
-                  <TableCell>{row.index + 1}</TableCell>
-                  {row.getVisibleCells().map((cell) => (
-                    <TableCell key={cell.id}>
-                      {flexRender(
-                        cell.column.columnDef.cell,
-                        cell.getContext()
-                      )}
-                    </TableCell>
-                  ))}
-                </TableRow>
-              ))
+              table.getRowModel().rows.map((row) => {
+                const isSelected =
+                  selectedRowId && (row.original as any)?.id === selectedRowId;
+                return (
+                  <TableRow
+                    key={row.id}
+                    data-state={isSelected && "selected"}
+                    className={
+                      isSelected
+                        ? "bg-muted/50"
+                        : "hover:bg-muted/50 cursor-pointer"
+                    }
+                    onClick={() => onRowClick?.(row.original)}
+                  >
+                    <TableCell>{row.index + 1}</TableCell>
+                    {row.getVisibleCells().map((cell) => (
+                      <TableCell key={cell.id}>
+                        {flexRender(
+                          cell.column.columnDef.cell,
+                          cell.getContext(),
+                        )}
+                      </TableCell>
+                    ))}
+                  </TableRow>
+                );
+              })
             ) : (
               <TableRow>
                 <TableCell

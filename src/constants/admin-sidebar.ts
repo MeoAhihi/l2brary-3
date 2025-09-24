@@ -5,7 +5,7 @@ import {
   BookUser,
   GraduationCap,
   TrendingUp,
-  Users
+  Users,
 } from "lucide-react";
 
 export const adminSidebar = {

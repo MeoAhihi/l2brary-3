@@ -1,5 +1,12 @@
 "use client";
 
+import { zodResolver } from "@hookform/resolvers/zod";
+import { format } from "date-fns";
+import { Calendar as CalendarIcon } from "lucide-react";
+import Image from "next/image";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
 import {
@@ -20,14 +27,8 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { RadioGroup } from "@/components/ui/radio-group";
-import { cn } from "@/lib/utils";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { format } from "date-fns";
-import { Calendar as CalendarIcon } from "lucide-react";
-import Image from "next/image";
-import { useForm } from "react-hook-form";
-import * as z from "zod";
 import { RadioGroupItem } from "@/components/ui/radio-group";
+import { cn } from "@/lib/utils";
 
 const formSchema = z
   .object({
@@ -76,7 +77,7 @@ export function SignupForm({
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="space-y-8 max-w-3xl mx-auto"
+        className="mx-auto max-w-3xl space-y-8"
       >
         <FormField
           control={form.control}
@@ -114,7 +115,7 @@ export function SignupForm({
                     ["Khác", "other"],
                   ].map((option, index) => (
                     <FormItem
-                      className="flex items-center space-x-3 space-y-0"
+                      className="flex items-center space-y-0 space-x-3"
                       key={index}
                     >
                       <FormControl>
@@ -140,7 +141,7 @@ export function SignupForm({
                 <PopoverTrigger asChild>
                   <FormControl>
                     <Button
-                      variant={"outline"}
+                      variant="outline"
                       className={cn(
                         "w-[240px] pl-3 text-left font-normal",
                         !field.value && "text-muted-foreground",
