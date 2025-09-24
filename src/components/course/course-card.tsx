@@ -1,14 +1,15 @@
+import { Calendar, Users } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
+
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
+  CardDescription,
   CardFooter,
   CardTitle,
-  CardDescription,
 } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Calendar, Users } from "lucide-react";
-import Link from "next/link";
 
 type CourseCardProps = {
   thumbnail: string;

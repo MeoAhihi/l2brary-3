@@ -1,9 +1,10 @@
 "use client";
 
+import Image from "next/image";
+
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import PageHeader from "@/components/ui/page-header";
-import { Badge } from "@/components/ui/badge";
-import Image from "next/image";
 import { Course } from "@/types/ld.types";
 
 interface ThumbnailHeaderProps {

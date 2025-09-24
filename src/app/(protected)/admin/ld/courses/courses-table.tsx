@@ -1,12 +1,14 @@
 "use client";
 
+import Link from "next/link";
+
 import { Button } from "@/components/ui/button";
 import { DataTable } from "@/components/ui/data-table/data-table";
+import { DataTablePagination } from "@/components/ui/data-table/data-table-pagination";
 import { Input } from "@/components/ui/input";
 import { Course } from "@/types/ld.types";
-import Link from "next/link";
+
 import { columns } from "./columns";
-import { DataTablePagination } from "@/components/ui/data-table/data-table-pagination";
 
 type CoursesTableProps = {
   courses: Course[];

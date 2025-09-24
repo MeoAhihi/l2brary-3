@@ -1,10 +1,11 @@
 "use client";
 
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Calendar, Clock, ExternalLink, Users } from "lucide-react";
+
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Course } from "@/types/ld.types";
-import { Calendar, Users, ExternalLink, Clock } from "lucide-react";
 
 interface CourseInfoSectionProps {
   course: Course;

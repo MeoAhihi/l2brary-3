@@ -1,6 +1,12 @@
-import * as React from "react";
-import { cn } from "@/lib/utils";
+import {
+  ComponentProps,
+  forwardRef,
+  HTMLAttributes,
+  LiHTMLAttributes,
+} from "react";
+
 import { Badge } from "@/components/ui/badge";
+import { cn } from "@/lib/utils";
 
 export type TimelineItemType = {
   id: number;
@@ -9,17 +15,16 @@ export type TimelineItemType = {
   time: string;
 };
 
-const Timeline = React.forwardRef<
-  HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement>
->(({ className, ...props }, ref) => (
-  <div ref={ref} className={className} {...props} />
-));
+const Timeline = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
+  ({ className, ...props }, ref) => (
+    <div ref={ref} className={className} {...props} />
+  ),
+);
 Timeline.displayName = "Timeline";
 
-const TimelineItem = React.forwardRef<
+const TimelineItem = forwardRef<
   HTMLDivElement,
-  React.LiHTMLAttributes<HTMLDivElement>
+  LiHTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => (
   <div
     ref={ref}
@@ -29,9 +34,9 @@ const TimelineItem = React.forwardRef<
 ));
 TimelineItem.displayName = "TimelineItem";
 
-const TimelineHeader = React.forwardRef<
+const TimelineHeader = forwardRef<
   HTMLParagraphElement,
-  React.HTMLAttributes<HTMLParagraphElement>
+  HTMLAttributes<HTMLParagraphElement>
 >(({ className, ...props }, ref) => (
   <div
     ref={ref}
@@ -44,9 +49,9 @@ const TimelineHeader = React.forwardRef<
 ));
 TimelineHeader.displayName = "TimelineHeader";
 
-const TimelineTitle = React.forwardRef<
+const TimelineTitle = forwardRef<
   HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement>
+  HTMLAttributes<HTMLDivElement>
 >(({ className, children, ...props }, ref) => (
   <div
     ref={ref}
@@ -62,7 +67,7 @@ const TimelineTime = ({
   className,
   variant = "default",
   ...props
-}: React.ComponentProps<typeof Badge>) => {
+}: ComponentProps<typeof Badge>) => {
   return (
     <Badge
       className={cn(
@@ -78,9 +83,9 @@ const TimelineTime = ({
 };
 TimelineTime.displayName = "TimelineTime";
 
-const TimelineDescription = React.forwardRef<
+const TimelineDescription = forwardRef<
   HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement>
+  HTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => (
   <div
     ref={ref}
@@ -92,9 +97,9 @@ TimelineDescription.displayName = "TimelineDescription";
 
 export {
   Timeline,
-  TimelineItem,
+  TimelineDescription,
   TimelineHeader,
+  TimelineItem,
   TimelineTime,
   TimelineTitle,
-  TimelineDescription,
 };

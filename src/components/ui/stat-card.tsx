@@ -1,4 +1,4 @@
-import { Card, CardHeader, CardTitle, CardContent } from "./card";
+import { Card, CardContent, CardHeader, CardTitle } from "./card";
 
 export function StatCard({
   title,

@@ -1,6 +1,7 @@
 import { ColumnDef } from "@tanstack/react-table";
-import { Button } from "@/components/ui/button";
 import { Trash2 } from "lucide-react";
+
+import { Button } from "@/components/ui/button";
 
 export type ActivityType = {
   id: string;

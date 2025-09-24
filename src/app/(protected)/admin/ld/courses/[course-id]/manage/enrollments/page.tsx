@@ -1,11 +1,13 @@
+import { BookOpen, Calendar, CheckCircle, Users } from "lucide-react";
+import { Metadata } from "next";
+
 import { getEnrollment } from "@/apis/ld.api";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Enrollment } from "@/types/ld.types";
-import { BookOpen, Calendar, CheckCircle, Users } from "lucide-react";
-import { Metadata } from "next";
-import { EnrollmentTable } from "./enrollment-table";
 import { StatCard } from "@/components/ui/stat-card";
+import { Enrollment } from "@/types/ld.types";
+
+import { EnrollmentTable } from "./enrollment-table";
 
 export const metadata: Metadata = {
   title: "Course Enrollments | Admin | L2brary",

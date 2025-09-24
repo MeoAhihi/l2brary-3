@@ -1,23 +1,26 @@
+/* eslint-disable max-lines */
+
 "use client";
 
-import { Badge } from "@/components/ui/badge";
-import {
-  Command,
-  CommandItem,
-  CommandEmpty,
-  CommandList,
-} from "@/components/ui/command";
-import { cn } from "@/lib/utils";
 import { Command as CommandPrimitive } from "cmdk";
-import { X as RemoveIcon, Check } from "lucide-react";
+import { Check, X as RemoveIcon } from "lucide-react";
 import React, {
-  KeyboardEvent,
   createContext,
   forwardRef,
+  KeyboardEvent,
   useCallback,
   useContext,
   useState,
 } from "react";
+
+import { Badge } from "@/components/ui/badge";
+import {
+  Command,
+  CommandEmpty,
+  CommandItem,
+  CommandList,
+} from "@/components/ui/command";
+import { cn } from "@/lib/utils";
 
 export type MultiSelectValue = {
   value: string;
@@ -247,7 +250,7 @@ const MultiSelectorTrigger = forwardRef<
             "flex items-center gap-1 rounded-md px-1.5",
             activeIndex === index && "ring-muted-foreground ring-2",
           )}
-          variant={"secondary"}
+          variant="secondary"
         >
           <span className="text-xs">{item.label}</span>
           <button
@@ -272,7 +275,7 @@ MultiSelectorTrigger.displayName = "MultiSelectorTrigger";
 const MultiSelectorInput = forwardRef<
   React.ElementRef<typeof CommandPrimitive.Input>,
   React.ComponentPropsWithoutRef<typeof CommandPrimitive.Input>
->(({ className, ...props }, ref) => {
+>(({ className, ...props }) => {
   const {
     setOpen,
     inputValue,
@@ -390,9 +393,9 @@ MultiSelectorItem.displayName = "MultiSelectorItem";
 
 export {
   MultiSelector,
-  MultiSelectorTrigger,
-  MultiSelectorInput,
   MultiSelectorContent,
-  MultiSelectorList,
+  MultiSelectorInput,
   MultiSelectorItem,
+  MultiSelectorList,
+  MultiSelectorTrigger,
 };

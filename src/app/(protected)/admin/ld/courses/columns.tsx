@@ -1,6 +1,13 @@
 "use client";
 
+import { ColumnDef } from "@tanstack/react-table";
+import { ArrowUpDown, Copy, MoreHorizontal, Settings, X } from "lucide-react";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { toast } from "sonner";
+
 import { Button } from "@/components/ui/button";
+import { DataTableColumnHeader } from "@/components/ui/data-table/data-table-column-header";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -9,13 +16,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { ColumnDef } from "@tanstack/react-table";
-import { ArrowUpDown, Copy, MoreHorizontal, Settings, X } from "lucide-react";
-import Image from "next/image";
-import { useRouter } from "next/navigation";
-import { toast } from "sonner";
 import type { Course } from "@/types/ld.types";
-import { DataTableColumnHeader } from "@/components/ui/data-table/data-table-column-header";
 
 export const columns: ColumnDef<Course>[] = [
   {
@@ -99,7 +100,7 @@ export const columns: ColumnDef<Course>[] = [
 
       const handleDelete = () => {
         // Confirm before delete
-        // eslint-disable-next-line no-alert
+
         if (window.confirm("Bạn có chắc muốn xoá khoá học này?")) {
           // TODO: Implement delete logic
           toast("Đã xoá khoá học", {

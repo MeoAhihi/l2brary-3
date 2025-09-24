@@ -1,7 +1,8 @@
 import { Metadata } from "next";
+
+import { SiteHeader } from "@/components/header/site-header";
 import { AppSidebar } from "@/components/side-nav/app-sidebar";
 import { SidebarProvider } from "@/components/ui/sidebar";
-import { SiteHeader } from "@/components/header/site-header";
 
 export const metadata: Metadata = {
   title: "Admin | L2brary",

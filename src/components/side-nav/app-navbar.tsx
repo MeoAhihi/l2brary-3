@@ -2,8 +2,10 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+
 import { Button } from "@/components/ui/button";
 import { appNavbar } from "@/constants/app-navbar";
+
 import { CollapsibleSearch } from "../ui/collapsible-search";
 
 export function AppNavbar() {

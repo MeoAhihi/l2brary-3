@@ -1,7 +1,9 @@
 "use client";
-import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
+import { z } from "zod";
+
 import {
   Form,
   FormControl,
@@ -17,13 +19,9 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { useEffect, useRef, useState } from "react";
 
-type Message = {
-  id: number;
-  sender: "user" | "bot";
-  text: string;
-};
+import ActivityLogChat from "./components/ActivityLogChat";
+import { ActivityLogProps } from "./types/activityLog";
 
 export default function AcivityLogPage() {
   // Zod + React Hook Form setup
@@ -130,8 +128,8 @@ export default function AcivityLogPage() {
                 key={idx}
                 className={`flex ${msg.sender === "system" ? "justify-start" : "justify-end"}`}
               >
-                <div className={`w-fit max-w-[70%]`}>
-                  <AcivityLogChat
+                <div className="w-fit max-w-[70%]">
+                  <ActivityLogChat
                     datetime={msg.datetime}
                     memberName={msg.memberName}
                     sender={msg.sender}
@@ -237,36 +235,6 @@ export default function AcivityLogPage() {
             </button>
           </form>
         </Form>
-      </div>
-    </div>
-  );
-}
-
-type ActivityLogProps = {
-  datetime: Date;
-  memberName: string;
-  sender: "user" | "system" | string;
-  actionName: string;
-};
-
-export function AcivityLogChat({
-  datetime,
-  memberName,
-  actionName,
-  sender,
-}: ActivityLogProps) {
-  return (
-    <div className="flex justify-center">
-      <div className="flex w-full max-w-xs flex-col">
-        <div className="text-muted-foreground mb-1 text-xs">
-          {sender !== "user" && sender}
-        </div>
-        <div className="bg-muted text-foreground w-full rounded-lg px-4 py-2 text-center">
-          "{memberName}" đã "{actionName}"
-        </div>
-        <div className="text-muted-foreground mt-1 self-end text-xs">
-          {datetime.toLocaleString()}
-        </div>
       </div>
     </div>
   );

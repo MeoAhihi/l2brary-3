@@ -1,23 +1,24 @@
 "use client";
 
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  BookOpen,
+  CheckCircle,
+  ChevronDown,
+  Clock,
+  FileText,
+  HelpCircle,
+  Play,
+} from "lucide-react";
+import { useState } from "react";
+
 import { Badge } from "@/components/ui/badge";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
 } from "@/components/ui/collapsible";
-import { Course, CourseModule, CourseLesson } from "@/types/ld.types";
-import {
-  ChevronDown,
-  Play,
-  BookOpen,
-  FileText,
-  HelpCircle,
-  Clock,
-  CheckCircle,
-} from "lucide-react";
-import { useState } from "react";
+import { Course, CourseLesson, CourseModule } from "@/types/ld.types";
 
 interface CourseModulesSectionProps {
   course: Course;

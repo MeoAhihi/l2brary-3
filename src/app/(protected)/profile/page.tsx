@@ -1,3 +1,5 @@
+import { Metadata } from "next";
+
 import { ClassJoiningTable } from "@/components/member/class-joining-table";
 import ProfileCardContent from "@/components/member/profile-card-content";
 import { Badge } from "@/components/ui/badge";
@@ -14,7 +16,7 @@ import {
 } from "@/components/ui/timeline";
 import timelineData from "@/constants/activities.json";
 import classJoining from "@/constants/class-joining.json";
-import { Metadata } from "next";
+
 import { MyChart } from "./chart";
 
 export const metadata: Metadata = {

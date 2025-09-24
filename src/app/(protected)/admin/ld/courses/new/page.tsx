@@ -1,6 +1,8 @@
 import { Metadata } from "next";
-import CreateCourseForm from "./create-course-form";
+
 import PageHeader from "@/components/ui/page-header";
+
+import CreateCourseForm from "./create-course-form";
 
 export const metadata: Metadata = {
   title: "Create New Course | Admin | L2brary",

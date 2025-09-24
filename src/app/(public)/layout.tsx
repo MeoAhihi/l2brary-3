@@ -1,6 +1,7 @@
 import { Metadata } from "next";
-import { AppNavbar } from "@/components/side-nav/app-navbar";
+
 import FooterSection from "@/components/guest/footer.section";
+import { AppNavbar } from "@/components/side-nav/app-navbar";
 export const metadata: Metadata = {
   title: "L2brary",
   description: "Learning and development platform for clubs",

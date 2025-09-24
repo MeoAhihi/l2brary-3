@@ -1,10 +1,10 @@
 "use client";
 
-import * as React from "react";
+import { ComponentProps } from "react";
 
 import { cn } from "@/lib/utils";
 
-function Table({ className, ...props }: React.ComponentProps<"table">) {
+function Table({ className, ...props }: ComponentProps<"table">) {
   return (
     <div
       data-slot="table-container"
@@ -106,11 +106,11 @@ function TableCaption({
 
 export {
   Table,
-  TableHeader,
   TableBody,
+  TableCaption,
+  TableCell,
   TableFooter,
   TableHead,
+  TableHeader,
   TableRow,
-  TableCell,
-  TableCaption,
 };

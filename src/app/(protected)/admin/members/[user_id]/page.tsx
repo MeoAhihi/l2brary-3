@@ -1,4 +1,10 @@
+import { Metadata } from "next";
+import React from "react";
+
+import { ClassJoiningTable } from "@/components/member/class-joining-table";
+import ProfileCardContent from "@/components/member/profile-card-content";
 import { Badge } from "@/components/ui/badge";
+import { BadgeCard } from "@/components/ui/badge-card";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import PageHeader from "@/components/ui/page-header";
 import {
@@ -9,15 +15,10 @@ import {
   TimelineTime,
   TimelineTitle,
 } from "@/components/ui/timeline";
-import { Metadata } from "next";
-
 import timelineData from "@/constants/activities.json";
 import classJoining from "@/constants/class-joining.json";
+
 import { MyChart } from "./chart";
-import { BadgeCard } from "@/components/ui/badge-card";
-import { ClassJoiningTable } from "@/components/member/class-joining-table";
-import ProfileCardContent from "@/components/member/profile-card-content";
-import React from "react";
 
 export const metadata: Metadata = {
   title: "Member Details | Admin | L2brary",

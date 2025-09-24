@@ -1,13 +1,15 @@
 "use client";
 
-import { DataTable } from "@/components/ui/data-table/data-table";
-import { Enrollment } from "@/types/ld.types";
-import { columns } from "./columns";
-import { CardTitle } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Filter, Search, Mail } from "lucide-react";
+import { Filter, Mail, Search } from "lucide-react";
+
 import { Button } from "@/components/ui/button";
+import { CardTitle } from "@/components/ui/card";
+import { DataTable } from "@/components/ui/data-table/data-table";
 import { DataTablePagination } from "@/components/ui/data-table/data-table-pagination";
+import { Input } from "@/components/ui/input";
+import { Enrollment } from "@/types/ld.types";
+
+import { columns } from "./columns";
 
 export function EnrollmentTable({
   enrollments,

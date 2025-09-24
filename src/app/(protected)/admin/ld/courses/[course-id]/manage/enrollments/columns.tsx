@@ -1,16 +1,17 @@
-import { Enrollment, EnrollmentStatus } from "@/types/ld.types";
-import { Badge } from "@/components/ui/badge";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { ColumnDef } from "@tanstack/react-table";
 import {
   BookOpen,
   Calendar,
   CheckCircle,
-  XCircle,
   Clock,
-  Users,
   Mail,
   MoreHorizontal,
+  Users,
+  XCircle,
 } from "lucide-react";
+
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -18,7 +19,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { ColumnDef } from "@tanstack/react-table";
+import { Enrollment, EnrollmentStatus } from "@/types/ld.types";
 
 const getStatusBadge = (status: EnrollmentStatus) => {
   switch (status) {

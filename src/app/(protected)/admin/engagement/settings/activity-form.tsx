@@ -1,4 +1,11 @@
 "use client";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Check, ChevronsUpDown, Plus, Save, X } from "lucide-react";
+import { useEffect } from "react";
+import { useForm } from "react-hook-form";
+import { toast } from "sonner";
+import { z } from "zod";
+
 import { Button } from "@/components/ui/button";
 import {
   Command,
@@ -25,13 +32,8 @@ import {
 } from "@/components/ui/popover";
 import { cn } from "@/lib/utils";
 import { LabelValue } from "@/types/common";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { Check, ChevronsUpDown, Plus, Save, X } from "lucide-react";
-import { useForm } from "react-hook-form";
-import { toast } from "sonner";
-import { z } from "zod";
+
 import { ActivityType } from "./columns";
-import { useEffect } from "react";
 
 const formSchema = z.object({
   "activity-name": z.string().min(1),

@@ -1,19 +1,20 @@
-import { Metadata } from "next";
 import {
   BarChart3,
-  Users,
-  Clock,
   Calendar,
   CheckSquare,
-  Stamp,
+  Clock,
   Gamepad2,
-  TrendingUp,
   Settings,
+  Stamp,
+  TrendingUp,
+  Users,
 } from "lucide-react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
+import { Metadata } from "next";
+
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { StatCard } from "@/components/ui/stat-card";
 
 export const metadata: Metadata = {
