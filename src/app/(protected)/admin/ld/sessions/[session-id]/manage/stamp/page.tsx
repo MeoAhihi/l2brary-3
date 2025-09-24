@@ -1,10 +1,5 @@
 "use client";
 
-import { getStampTypes, getStudentStamps } from "@/apis/ld.api";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { StampType, StudentStamp } from "@/types/ld.types";
 import {
   QueryClient,
   QueryClientProvider,
@@ -13,6 +8,12 @@ import {
 import { Plus, Stamp, Users } from "lucide-react";
 import { useParams } from "next/navigation";
 import { useState } from "react";
+
+import { getStampTypes, getStudentStamps } from "@/apis/ld.api";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { StampType, StudentStamp } from "@/types/ld.types";
 
 const queryClient = new QueryClient();
 

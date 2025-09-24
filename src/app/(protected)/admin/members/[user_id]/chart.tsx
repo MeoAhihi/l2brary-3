@@ -8,7 +8,6 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart";
-
 import classJoining from "@/constants/class-joining.json";
 
 const chartConfig = {

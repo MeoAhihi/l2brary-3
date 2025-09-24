@@ -1,9 +1,10 @@
 "use client";
 
 import { DataTable } from "@/components/ui/data-table/data-table";
-import { columns, TableHeader } from "./table.config";
 import { DataTablePagination } from "@/components/ui/data-table/data-table-pagination";
 import { Member } from "@/types/iam.types";
+
+import { columns, TableHeader } from "./table.config";
 
 interface MemberTableProps {
   members: Member[];

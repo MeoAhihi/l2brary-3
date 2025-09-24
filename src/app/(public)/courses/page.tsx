@@ -1,10 +1,11 @@
 "use client";
 
-import { CourseCard } from "@/components/course/course-card";
+import Head from "next/head";
 import { useState } from "react";
+
+import { CourseCard } from "@/components/course/course-card";
 import { PaginationButtons } from "@/components/ui/pagination-buttons";
 import courses from "@/constants/courses.json";
-import Head from "next/head";
 
 export default function CoursesPage() {
   const pageSize = 8;

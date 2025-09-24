@@ -1,8 +1,9 @@
 "use client";
-import { PostItem } from "./post-item";
-import { useState, useMemo } from "react";
-import type { PostCardProps } from "./post-item";
+import { useMemo, useState } from "react";
+
 import { PaginationButtons } from "../ui/pagination-buttons";
+import type { PostCardProps } from "./post-item";
+import { PostItem } from "./post-item";
 
 type PostListProps = {
   posts: PostCardProps[];

@@ -2,12 +2,14 @@
 
 import { Metadata } from "next";
 import React, { useState } from "react";
+import { toast } from "sonner";
+
 import { Course } from "@/types/ld.types";
-import ThumbnailHeader from "./ThumbnailHeader";
+
 import CourseDescriptionSection from "./CourseDescriptionSection";
 import CourseInfoSection from "./CourseInfoSection";
 import CourseModulesSection from "./CourseModulesSection";
-import { toast } from "sonner";
+import ThumbnailHeader from "./ThumbnailHeader";
 
 // export const metadata: Metadata = {
 //   title: "Course Details | L2brary",

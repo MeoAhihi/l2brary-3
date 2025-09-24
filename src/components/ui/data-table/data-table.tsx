@@ -1,7 +1,5 @@
 "use client";
 
-import * as React from "react";
-
 import {
   ColumnDef, // Manages pagination of table rows
   ColumnFiltersState, // Retrieves the core row model without sorting or filtering
@@ -14,6 +12,7 @@ import {
   Table as TableType, // Defines the structure of a column in the table
   useReactTable, // Hook to create and use a table instance
 } from "@tanstack/react-table";
+import React from "react";
 
 import {
   Table,

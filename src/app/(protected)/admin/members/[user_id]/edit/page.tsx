@@ -1,7 +1,8 @@
-import { MemberForm } from "@/components/member/member-form";
-import PageHeader from "@/components/ui/page-header";
 import { Metadata } from "next";
 import React from "react";
+
+import { MemberForm } from "@/components/member/member-form";
+import PageHeader from "@/components/ui/page-header";
 
 export const metadata: Metadata = {
   title: "Edit Member | Admin | L2brary",

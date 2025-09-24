@@ -1,9 +1,9 @@
 "use client";
-import { columns } from "./columns";
+
 import { DataTable } from "@/components/ui/data-table/data-table";
+
 import type { ActivityType } from "./columns";
-import { Button } from "@/components/ui/button";
-import { Plus } from "lucide-react";
+import { columns } from "./columns";
 
 type ActivityTableProps = {
   activities: ActivityType[];

@@ -1,8 +1,23 @@
+/* eslint-disable max-lines */
+import {
+  ChevronDown,
+  Download,
+  Edit,
+  Eye,
+  FileText,
+  Image,
+  Link as LinkIcon,
+  MoreHorizontal,
+  Plus,
+  Trash2,
+  Video,
+} from "lucide-react";
 import { Metadata } from "next";
+
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 // import { use } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 import {
   Collapsible,
   CollapsibleContent,
@@ -14,19 +29,6 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import {
-  Plus,
-  MoreHorizontal,
-  ChevronDown,
-  FileText,
-  Video,
-  Image,
-  Link as LinkIcon,
-  Edit,
-  Trash2,
-  Eye,
-  Download,
-} from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Course Content | Admin | L2brary",

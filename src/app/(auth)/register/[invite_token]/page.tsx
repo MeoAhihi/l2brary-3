@@ -1,3 +1,6 @@
+import { Metadata } from "next";
+import React from "react";
+
 import { SignupForm } from "@/components/auth/signup-form";
 import {
   Card,
@@ -6,8 +9,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Metadata } from "next";
-import React from "react";
+
 import { signup } from "./action";
 
 export const metadata: Metadata = {

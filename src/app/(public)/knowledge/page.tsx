@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+
 import { PostList } from "@/components/post/post-list";
 import posts from "@/constants/posts.json";
 export const metadata: Metadata = {

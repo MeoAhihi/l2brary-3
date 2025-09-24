@@ -12,9 +12,9 @@ import {
   SidebarHeader,
   SidebarRail,
 } from "@/components/ui/sidebar";
-
 // This is sample data.
 import { adminSidebar } from "@/constants/admin-sidebar";
+
 import { NavProjects } from "./nav-projects";
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {

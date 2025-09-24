@@ -1,3 +1,6 @@
+import { CheckSquare, Clock, UserCheck, Users, UserX, X } from "lucide-react";
+import { Metadata } from "next";
+
 import { getMembers } from "@/apis/iam.api";
 import { getStudentAttendances } from "@/apis/ld.api";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -8,9 +11,8 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { StatCard } from "@/components/ui/stat-card";
-import { CheckSquare, Clock, UserCheck, Users, UserX, X } from "lucide-react";
+
 import ManualCheckinMembersTable from "./manual-checkin-members-table";
-import { Metadata } from "next";
 
 const studentAttendances = await getStudentAttendances();
 

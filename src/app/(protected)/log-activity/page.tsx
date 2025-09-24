@@ -1,7 +1,9 @@
 "use client";
-import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
+import { z } from "zod";
+
 import {
   Form,
   FormControl,
@@ -17,7 +19,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { useEffect, useRef, useState } from "react";
 
 type Message = {
   id: number;
@@ -130,7 +131,7 @@ export default function AcivityLogPage() {
                 key={idx}
                 className={`flex ${msg.sender === "system" ? "justify-start" : "justify-end"}`}
               >
-                <div className={`w-fit max-w-[70%]`}>
+                <div className="w-fit max-w-[70%]">
                   <AcivityLogChat
                     datetime={msg.datetime}
                     memberName={msg.memberName}
@@ -262,7 +263,7 @@ export function AcivityLogChat({
           {sender !== "user" && sender}
         </div>
         <div className="bg-muted text-foreground w-full rounded-lg px-4 py-2 text-center">
-          "{memberName}" đã "{actionName}"
+          {`${memberName} đã ${actionName}`}
         </div>
         <div className="text-muted-foreground mt-1 self-end text-xs">
           {datetime.toLocaleString()}

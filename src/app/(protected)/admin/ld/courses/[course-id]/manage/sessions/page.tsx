@@ -1,6 +1,8 @@
-import { getSessions } from "@/apis/ld.api";
-import SessionsTable from "./session-table";
 import { Metadata } from "next";
+
+import { getSessions } from "@/apis/ld.api";
+
+import SessionsTable from "./session-table";
 
 export const metadata: Metadata = {
   title: "Quản lý buổi học",

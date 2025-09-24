@@ -1,11 +1,12 @@
 "use client";
 
+import { BarChart3, BookOpen, Layers, Settings, Users } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { use } from "react";
-import { cn } from "@/lib/utils";
-import { Settings, Users, BookOpen, BarChart3, Layers } from "lucide-react";
+
 import PageHeader from "@/components/ui/page-header";
+import { cn } from "@/lib/utils";
 interface ManageCourseLayoutProps {
   children: React.ReactNode;
   params: Promise<{

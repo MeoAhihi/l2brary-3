@@ -1,3 +1,16 @@
+/* eslint-disable max-lines */
+import {
+  AlertTriangle,
+  Calendar,
+  Info,
+  MapPin,
+  Save,
+  Settings,
+  Trash2,
+  Users,
+} from "lucide-react";
+import { Metadata } from "next";
+
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -11,17 +24,6 @@ import {
 } from "@/components/ui/select";
 import { Switch } from "@/components/ui/switch";
 import { Textarea } from "@/components/ui/textarea";
-import {
-  AlertTriangle,
-  Calendar,
-  Info,
-  MapPin,
-  Save,
-  Settings,
-  Trash2,
-  Users,
-} from "lucide-react";
-import { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Session Settings | Admin | L2brary",

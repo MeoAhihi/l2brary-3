@@ -14,6 +14,7 @@ import {
 import { Separator } from "@/components/ui/separator";
 import { SidebarTrigger } from "@/components/ui/sidebar";
 import { getDisplayNameFromUrl } from "@/lib/format";
+
 import { ModeSwitcher } from "./mode-switcher";
 
 export function SiteHeader() {

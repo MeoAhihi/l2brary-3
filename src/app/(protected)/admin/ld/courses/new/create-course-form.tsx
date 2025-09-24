@@ -1,5 +1,15 @@
+/* eslint-disable max-lines */
 "use client";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { format } from "date-fns";
+import { Plus } from "lucide-react";
+import { Calendar as CalendarIcon } from "lucide-react";
+import { useForm } from "react-hook-form";
+import { toast } from "sonner";
+import { z } from "zod";
+
 import { Button } from "@/components/ui/button";
+import { Calendar } from "@/components/ui/calendar";
 import {
   Form,
   FormControl,
@@ -10,6 +20,11 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import {
   Select,
@@ -19,21 +34,8 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { Plus } from "lucide-react";
-import { useForm } from "react-hook-form";
-import { toast } from "sonner";
-import { z } from "zod";
-import { Calendar } from "@/components/ui/calendar";
-import { Calendar as CalendarIcon } from "lucide-react";
-import { format } from "date-fns";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
-import { cn } from "@/lib/utils";
 import recurrentOptions from "@/constants/recurrent-rule.json";
+import { cn } from "@/lib/utils";
 
 const formSchema = z.object({
   title: z.string().min(1),
@@ -267,7 +269,7 @@ export default function CreateCourseForm({
                         <PopoverTrigger asChild>
                           <FormControl>
                             <Button
-                              variant={"outline"}
+                              variant="outline"
                               className={cn(
                                 "w-[240px] pl-3 text-left font-normal",
                                 !field.value && "text-muted-foreground",

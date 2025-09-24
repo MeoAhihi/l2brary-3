@@ -1,10 +1,10 @@
 import { Metadata } from "next";
+
+import { Button } from "@/components/ui/button";
 // import { use } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
 import {
   Select,
   SelectContent,
@@ -12,6 +12,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { Textarea } from "@/components/ui/textarea";
 // import { Switch } from "@/components/ui/toggle";
 
 export const metadata: Metadata = {
@@ -26,7 +27,7 @@ export const metadata: Metadata = {
 // }
 
 export default function SettingsPage() {
-// { params }: SettingsPageProps
+  // { params }: SettingsPageProps
   // const { "course-id": courseId } = use(params);
 
   return (

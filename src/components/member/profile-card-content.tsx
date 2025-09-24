@@ -1,6 +1,7 @@
-import { CardContent } from "@/components/ui/card";
+import { Cake, Mail, PhoneCall, Users, VenusAndMars } from "lucide-react";
 import Image from "next/image";
-import { PhoneCall, Mail, Users, VenusAndMars, Cake } from "lucide-react";
+
+import { CardContent } from "@/components/ui/card";
 
 type ProfileCardContentProps = {
   id: string;

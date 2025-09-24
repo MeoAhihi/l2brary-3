@@ -1,11 +1,13 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
-import { columns } from "./column";
-import { DataTable } from "@/components/ui/data-table/data-table";
-import { Session } from "@/types/ld.types";
 import Link from "next/link";
+
+import { Button } from "@/components/ui/button";
+import { DataTable } from "@/components/ui/data-table/data-table";
 import { DataTablePagination } from "@/components/ui/data-table/data-table-pagination";
+import { Session } from "@/types/ld.types";
+
+import { columns } from "./column";
 
 export default function SessionsTable({ sessions }: { sessions: Session[] }) {
   return (

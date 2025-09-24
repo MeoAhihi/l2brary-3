@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 "use client";
 
 import * as React from "react";
@@ -345,9 +346,9 @@ function getPayloadConfigFromPayload(
 
 export {
   ChartContainer,
-  ChartTooltip,
-  ChartTooltipContent,
   ChartLegend,
   ChartLegendContent,
   ChartStyle,
+  ChartTooltip,
+  ChartTooltipContent,
 };
