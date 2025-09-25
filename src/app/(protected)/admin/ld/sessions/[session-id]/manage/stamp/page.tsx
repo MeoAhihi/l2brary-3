@@ -9,13 +9,36 @@ import { Plus, Stamp, Users } from "lucide-react";
 import { useParams } from "next/navigation";
 import { useState } from "react";
 
-import { getStampTypes, getStudentStamps } from "@/apis/ld.api";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { StampType, StudentStamp } from "@/types/ld.types";
 
 const queryClient = new QueryClient();
+
+const stampTypes = [
+  { id: 1, name: "Type A", icon: Plus, color: "text-blue-500" },
+  { id: 2, name: "Type B", icon: Stamp, color: "text-green-500" },
+];
+
+const students = [
+  {
+    id: 1,
+    name: "Nguyen Van A",
+    avatar: "",
+    internationalName: "A Nguyen",
+    stampTypeId: 1,
+    stamps: 5,
+  },
+  {
+    id: 2,
+    name: "Tran Thi B",
+    avatar: "",
+    internationalName: "B Tran",
+    stampTypeId: 2,
+    stamps: 3,
+  },
+];
 
 export default function StampPageWrapper() {
   return (
@@ -31,27 +54,6 @@ function StampPage() {
 
   // Set the first stamp type as selected by default when loaded
 
-  const { data: stampTypes = [] } = useQuery({
-    queryKey: ["stampTypes", sessionId],
-    queryFn: () => getStampTypes(),
-  });
-
-  const { data: students = [] } = useQuery({
-    queryKey: ["studentStamps", sessionId],
-    queryFn: () => getStudentStamps(),
-  });
-
-  // Create a map for stampTypeId to icon/color for StudentStampCard
-  const stampTypesMapObj = new Map(
-    stampTypes.map((stampType: StampType) => [
-      stampType.id,
-      {
-        icon: stampType.icon,
-        color: stampType.color,
-      },
-    ]),
-  );
-
   return (
     <>
       <div className="flex flex-col gap-6 lg:flex-row">
@@ -66,7 +68,7 @@ function StampPage() {
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="flex flex-row flex-wrap gap-2">
-                {stampTypes.map((stampType) => {
+                {/* {stampTypes.map((stampType) => {
                   const Icon = stampType.icon;
                   const isSelected = selectedStamp?.id === stampType.id;
 
@@ -83,7 +85,7 @@ function StampPage() {
                       {stampType.name}
                     </Button>
                   );
-                })}
+                })} */}
               </div>
 
               {selectedStamp && (
@@ -98,7 +100,7 @@ function StampPage() {
               <div className="mt-8">
                 <h3 className="text-md mb-2 font-semibold">Students</h3>
                 <div className="grid grid-cols-4 gap-4 sm:grid-cols-6 md:grid-cols-8">
-                  {students.map((student: StudentStamp) => (
+                  {/* {students.map((student: StudentStamp) => (
                     <Card
                       key={student.id}
                       className="flex flex-col items-center"
@@ -123,7 +125,7 @@ function StampPage() {
                         {student.name}
                       </span>
                     </Card>
-                  ))}
+                  ))} */}
                 </div>
               </div>
             </CardContent>
@@ -141,14 +143,14 @@ function StampPage() {
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
-                {students.map((student: StudentStamp) => (
+                {/* {students.map((student: StudentStamp) => (
                   <StudentStampCard
                     key={student.id}
                     student={student}
                     icon={stampTypesMapObj.get(student.stampTypeId)?.icon}
                     iconColor={stampTypesMapObj.get(student.stampTypeId)?.color}
                   />
-                ))}
+                ))} */}
               </div>
             </CardContent>
           </Card>

@@ -1,7 +1,6 @@
 import { BookOpen, Calendar, CheckCircle, Users } from "lucide-react";
 import { Metadata } from "next";
 
-import { getEnrollment } from "@/apis/ld.api";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { StatCard } from "@/components/ui/stat-card";
@@ -16,7 +15,6 @@ export const metadata: Metadata = {
 
 export default async function EnrollmentsPage(/*{ params }: EnrollmentsPageProps*/) {
   // const { "course-id": courseId } = use(params);
-  const enrollments: Enrollment[] = await getEnrollment();
 
   return (
     <div className="space-y-6">
@@ -66,7 +64,7 @@ export default async function EnrollmentsPage(/*{ params }: EnrollmentsPageProps
 
       <Card>
         <CardContent>
-          <EnrollmentTable enrollments={enrollments} />
+          <EnrollmentTable enrollments={[]} />
         </CardContent>
       </Card>
 
