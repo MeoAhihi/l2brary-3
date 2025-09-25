@@ -1,5 +1,5 @@
 import axios from "axios";
-import { cookies } from "next/headers";
+import { deleteCookie, getCookie } from "cookies-next";
 
 import { ACCESS_TOKEN } from "@/constants/authentication";
 import { IS_PRODUCTION, STATIC_API_URL } from "@/constants/common";
@@ -16,8 +16,7 @@ const axiosClient = axios.create({
 
 axiosClient.interceptors.request.use(
   async function (config) {
-    const cookieStore = await cookies();
-    const token = cookieStore.get(ACCESS_TOKEN)?.value;
+    const token = getCookie(ACCESS_TOKEN);
 
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
@@ -33,10 +32,9 @@ axiosClient.interceptors.response.use(
   async (error) => {
     const status = error.response?.status;
     const message = error.response?.data?.message;
-    const cookieStore = await cookies();
 
     if (status === 401) {
-      cookieStore.delete(ACCESS_TOKEN);
+      deleteCookie(ACCESS_TOKEN);
 
       window.location.reload();
     }
