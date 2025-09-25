@@ -1,6 +1,7 @@
 import { PAGE_NAME } from "@/types/common";
 
 export const IS_PRODUCTION = process.env.NEXT_PUBLIC_ENV === "production";
+export const IS_DEVELOPMENT = process.env.NEXT_PUBLIC_ENV === "development";
 export const STATIC_API_URL = process.env.NEXT_PUBLIC_API_URL;
 export const X_PATHNAME_KEY = "X-Pathname-Key";
 

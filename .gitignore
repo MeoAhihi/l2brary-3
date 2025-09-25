@@ -42,3 +42,6 @@ next-env.d.ts
 
 #error logs
 bash.exe.stackdump
+
+# test
+/test
