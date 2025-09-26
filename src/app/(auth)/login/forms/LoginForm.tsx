@@ -1,9 +1,8 @@
 "use client";
 
-import { zodResolver } from "@hookform/resolvers/zod";
 import Image from "next/image";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
+import Link from "next/link";
+import React from "react";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -16,58 +15,38 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { PasswordInput } from "@/components/ui/password-input";
+import { PAGE_LINKS } from "@/constants/common";
+import { PAGE_NAME } from "@/types/common";
 
-const formSchema = z.object({
-  email: z.string(),
-  password: z.string(),
-});
+import { useLogin } from "../hooks/useLogin";
 
-export function LoginForm({
-  signupUrl = "/signup",
-  loginAction,
-}: {
-  signupUrl?: string;
-  loginAction: (formData: FormData) => Promise<void>;
-}) {
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
-  });
+const LoginForm = () => {
+  const { form, login, status, error } = useLogin();
 
-  async function onSubmit(values: z.infer<typeof formSchema>) {
-    const formData = new FormData();
-    formData.append("email", values.email);
-    formData.append("password", values.password);
-    await loginAction(formData);
-  }
+  const { control, handleSubmit } = form;
 
   return (
     <Form {...form}>
       <form
-        onSubmit={form.handleSubmit(onSubmit)}
-        // action={loginAction}
+        onSubmit={handleSubmit(login)}
         className="mx-auto max-w-3xl space-y-8"
       >
         <FormField
-          control={form.control}
-          name="email"
+          control={control}
+          name="phoneNumber"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Email</FormLabel>
+              <FormLabel>Số điện thoại</FormLabel>
               <FormControl>
-                <Input
-                  placeholder="example@gmail.com"
-                  type="email"
-                  {...field}
-                />
+                <Input placeholder="VD: 0987654321" type="tel" {...field} />
               </FormControl>
-
               <FormMessage />
             </FormItem>
           )}
         />
 
         <FormField
-          control={form.control}
+          control={control}
           name="password"
           render={({ field }) => (
             <FormItem>
@@ -81,9 +60,16 @@ export function LoginForm({
           )}
         />
 
+        {error && (
+          <div className="text-center text-sm text-red-500">{error}</div>
+        )}
         <div className="flex flex-col gap-3">
-          <Button type="submit" className="w-full">
-            Đăng nhập
+          <Button
+            type="submit"
+            className="w-full"
+            disabled={status === "loading"}
+          >
+            {status === "loading" ? "Đang đăng nhập..." : "Đăng nhập"}
           </Button>
           <Button variant="outline" className="w-full">
             <Image
@@ -97,11 +83,16 @@ export function LoginForm({
         </div>
         <div className="mt-4 text-center text-sm">
           Chưa có tài khoản?{" "}
-          <a href={signupUrl} className="underline underline-offset-4">
+          <Link
+            href={`/${PAGE_LINKS[PAGE_NAME.SIGN_UP]}`}
+            className="underline underline-offset-4"
+          >
             Đăng ký
-          </a>
+          </Link>
         </div>
       </form>
     </Form>
   );
-}
+};
+
+export default LoginForm;
