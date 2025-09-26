@@ -8,11 +8,16 @@ import { PAGE_LINKS, X_PATHNAME_KEY } from "./constants/common";
 import { PAGE_NAME } from "./types/common";
 
 // Define route patterns for different access levels
-const AUTH_ROUTES = ["/login", "/register"];
+const AUTH_ROUTES = ["/login", "/sign-up", "/register"];
 
 const PUBLIC_ROUTES = ["/", "/about", "/contact", "/courses", "/knowledge"];
 
-const PROTECTED_ROUTES = ["/profile", "/my-progress", "/log-activity"];
+const PROTECTED_ROUTES = [
+  "/profile",
+  "/my-progress",
+  "/log-activity",
+  "/dashboard",
+];
 
 const ADMIN_ROUTES = ["/admin"];
 
