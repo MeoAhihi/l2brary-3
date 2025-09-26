@@ -11,12 +11,12 @@ export const decrypt = async (cookie: string | undefined) => {
   );
 };
 
-export const checkTokenExpired = (token: { exp: number }) => {
-  if (!token) {
+export const checkTokenExpired = (exp: number) => {
+  if (!exp) {
     return true;
   }
   const currentTime = new Date().getTime() / 1000;
-  return currentTime > token.exp;
+  return currentTime > exp;
 };
 
 export const setAccessTokenCookie = async (token: string) => {
