@@ -6,9 +6,6 @@ export interface JWTPayload {
   exp?: number;
   iat?: number;
   sub?: string;
-  email?: string;
-  phoneNumber?: string;
-  roles?: string[];
   permissions?: string[];
   [key: string]: unknown;
 }

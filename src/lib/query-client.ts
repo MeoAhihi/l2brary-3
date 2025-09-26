@@ -89,7 +89,9 @@ if (IS_DEVELOPMENT) {
 
 // Helper function to invalidate related queries
 export const invalidateQueries = {
-  auth: () => queryClient.invalidateQueries({ queryKey: queryKeys.auth.user }),
+  auth: () => queryClient.invalidateQueries({ queryKey: ["auth"] }),
+  session: () =>
+    queryClient.invalidateQueries({ queryKey: queryKeys.auth.session }),
   iam: () => queryClient.invalidateQueries({ queryKey: ["iam"] }),
   ld: () => queryClient.invalidateQueries({ queryKey: ["ld"] }),
   members: () => queryClient.invalidateQueries({ queryKey: queryKeys.members }),
