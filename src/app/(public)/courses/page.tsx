@@ -5,13 +5,12 @@ import { useState } from "react";
 
 import { CourseCard } from "@/components/course/course-card";
 import { PaginationButtons } from "@/components/ui/pagination-buttons";
-import courses from "@/constants/courses.json";
 
 export default function CoursesPage() {
   const pageSize = 8;
   const [page, setPage] = useState(1);
-  const totalPages = Math.ceil(courses.length / pageSize);
-  const pagedCourses = courses.slice((page - 1) * pageSize, page * pageSize);
+  const totalPages = Math.ceil([].length / pageSize);
+  const pagedCourses = [].slice((page - 1) * pageSize, page * pageSize);
 
   return (
     <>
@@ -30,9 +29,9 @@ export default function CoursesPage() {
           </p>
 
           <div className="mb-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {pagedCourses.map((course) => (
+            {/* {pagedCourses.map((course) => (
               <CourseCard key={course.title} {...course} />
-            ))}
+            ))} */}
           </div>
           <PaginationButtons
             page={page}

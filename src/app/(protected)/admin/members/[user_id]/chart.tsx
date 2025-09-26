@@ -8,7 +8,6 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart";
-import classJoining from "@/constants/class-joining.json";
 
 const chartConfig = {
   attendees: {
@@ -20,7 +19,7 @@ const chartConfig = {
 export function MyChart() {
   return (
     <ChartContainer config={chartConfig} className="min-h-[200px] w-full">
-      <BarChart accessibilityLayer data={classJoining}>
+      <BarChart accessibilityLayer data={[]}>
         <CartesianGrid vertical={false} />
         <ChartTooltip content={<ChartTooltipContent />} />
         <XAxis

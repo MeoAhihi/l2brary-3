@@ -14,8 +14,6 @@ import {
   TimelineTime,
   TimelineTitle,
 } from "@/components/ui/timeline";
-import timelineData from "@/constants/activities.json";
-import classJoining from "@/constants/class-joining.json";
 
 import { MyChart } from "./chart";
 
@@ -115,14 +113,14 @@ export default function ProfilePage() {
             </CardHeader>
             <CardContent>
               <MyChart />
-              <ClassJoiningTable data={classJoining} />
+              <ClassJoiningTable data={[]} />
             </CardContent>
           </Card>
           <Card>
             <CardContent>
               <h2 className="mb-4 text-2xl font-medium">Hoạt động Gần đây</h2>
               <Timeline className="mt-8">
-                {timelineData.map((item) => (
+                {/*                 {timelineData.map((item) => (
                   <TimelineItem key={item.id}>
                     <TimelineHeader>
                       <TimelineTime>{item.time}</TimelineTime>
@@ -134,7 +132,7 @@ export default function ProfilePage() {
                       </TimelineDescription>
                     )}
                   </TimelineItem>
-                ))}
+                ))} */}
               </Timeline>
             </CardContent>
           </Card>

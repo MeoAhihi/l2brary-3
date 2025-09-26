@@ -14,10 +14,13 @@ import {
 } from "@/components/ui/sidebar";
 // This is sample data.
 import { adminSidebar } from "@/constants/admin-sidebar";
+import { useAuth } from "@/contexts";
 
 import { NavProjects } from "./nav-projects";
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+  const { user } = useAuth();
+
   return (
     <Sidebar collapsible="icon" {...props}>
       <SidebarHeader>
@@ -30,7 +33,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         ))}
       </SidebarContent>
       <SidebarFooter>
-        <NavUser user={adminSidebar.user} />
+        <NavUser user={user} />
       </SidebarFooter>
       <SidebarRail />
     </Sidebar>

@@ -30,17 +30,18 @@ axiosClient.interceptors.request.use(
 axiosClient.interceptors.response.use(
   (response) => response,
   async (error) => {
-    const status = error.response?.status;
-    const message = error.response?.data?.message;
+    const status = error?.status;
+    const message = error?.message;
+    const code = error?.code;
 
     if (status === 401) {
       deleteCookie(ACCESS_TOKEN);
 
       window.location.reload();
     }
-    if (!IS_PRODUCTION) console.log(error);
+    if (!IS_PRODUCTION) console.log({ message, status, code });
 
-    const apiError: ApiError = { message, status };
+    const apiError: ApiError = { message, status, code };
 
     return Promise.reject(apiError);
   },

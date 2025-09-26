@@ -1,4 +1,4 @@
-import { Role } from "@/contexts";
+import { Role } from "@/types/auth/iam.response";
 
 import { DEFAULT_AUTH_ROUTE, ROLE_REDIRECT_PRIORITY } from "./constants";
 

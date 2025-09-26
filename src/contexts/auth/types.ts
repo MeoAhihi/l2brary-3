@@ -18,5 +18,3 @@ export type AuthAction =
   | { type: "LOGOUT" }
   | { type: "UPDATE_USER"; payload: Partial<IAMProfileResponse> }
   | { type: "SET_PERMISSIONS"; payload: string[] };
-
-export type Permission = string;
