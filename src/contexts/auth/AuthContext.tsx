@@ -1,6 +1,8 @@
 "use client";
 
-import React, {
+import { useMutation } from "@tanstack/react-query";
+import { deleteCookie, setCookie } from "cookies-next";
+import {
   createContext,
   ReactNode,
   useContext,
@@ -8,92 +10,28 @@ import React, {
   useReducer,
 } from "react";
 
+import { login as loginApi } from "@/apis/authentication.api";
 import { ACCESS_TOKEN } from "@/constants/authentication";
-import { Member, Role } from "@/types/iam.types";
+import { IS_DEVELOPMENT } from "@/constants/common";
+import { useGetCurrentUser } from "@/hooks/useGetCurrentUser";
+import { decodeJWT } from "@/lib/jwt";
+import { invalidateQueries } from "@/lib/query-client";
+import { IAMProfileResponse, Role } from "@/types/auth/iam.response";
+import { LoginPayload } from "@/types/auth/login.payload";
 
-import { AuthAction, AuthState, User } from "./types";
-import {
-  getUserDisplayName,
-  getUserInitials,
-  hasRequiredRole,
-  isProfileComplete,
-  isValidEmail,
-  isValidPhoneNumber,
-  validatePermissions,
-} from "./utils";
-
-// Initial state
-const initialState: AuthState = {
-  user: null,
-  isAuthenticated: false,
-  isLoading: true,
-  permissions: [],
-  token: null,
-};
-
-// Reducer
-function authReducer(state: AuthState, action: AuthAction): AuthState {
-  switch (action.type) {
-    case "AUTH_START":
-      return {
-        ...state,
-        isLoading: true,
-      };
-    case "AUTH_SUCCESS":
-      return {
-        ...state,
-        user: action.payload.user,
-        token: action.payload.token,
-        permissions: action.payload.permissions,
-        isAuthenticated: true,
-        isLoading: false,
-      };
-    case "AUTH_FAILURE":
-      return {
-        ...state,
-        user: null,
-        token: null,
-        permissions: [],
-        isAuthenticated: false,
-        isLoading: false,
-      };
-    case "LOGOUT":
-      return {
-        ...initialState,
-        isLoading: false,
-      };
-    case "UPDATE_USER":
-      return {
-        ...state,
-        user: state.user ? { ...state.user, ...action.payload } : null,
-      };
-    case "SET_PERMISSIONS":
-      return {
-        ...state,
-        permissions: action.payload,
-      };
-    default:
-      return state;
-  }
-}
+import { authReducer, initialState } from "./reducer";
+import { AuthState } from "./types";
+import { getUserDisplayName, hasRequiredRole } from "./utils";
 
 // Context
 interface AuthContextType extends AuthState {
-  login: (user: User, token: string, permissions: string[]) => void;
+  login: (payload: LoginPayload) => Promise<void>;
   logout: () => void;
-  updateUser: (userData: Partial<User>) => void;
-  setPermissions: (permissions: string[]) => void;
-  hasPermission: (permission: string) => boolean;
-  hasAnyPermission: (permissions: string[]) => boolean;
-  hasAllPermissions: (permissions: string[]) => boolean;
-  // Utility functions
-  validatePermissions: (permissions: string[]) => boolean;
-  hasRequiredRole: (requiredRoles: string[]) => boolean;
+  updateUser: (userData: Partial<IAMProfileResponse>) => void;
+  hasRequiredRole: (requiredRoles: Role[]) => boolean;
   getUserDisplayName: () => string;
-  isProfileComplete: () => boolean;
-  getUserInitials: () => string;
-  isValidEmail: (email: string) => boolean;
-  isValidPhoneNumber: (phone: string) => boolean;
+  // React Query mutations
+  loginMutation: ReturnType<typeof useMutation>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -106,71 +44,60 @@ interface AuthProviderProps {
 export function AuthProvider({ children }: AuthProviderProps) {
   const [state, dispatch] = useReducer(authReducer, initialState);
 
-  // Check for existing token on mount
+  const { data: authData, isLoading: isValidatingToken } = useGetCurrentUser();
+
+  // Update auth state when token validation completes
   useEffect(() => {
-    const checkAuthStatus = async () => {
-      const token = localStorage.getItem(ACCESS_TOKEN);
-      if (token) {
-        try {
-          // Here you would typically validate the token with your API
-          // For now, we'll just set loading to false
-          dispatch({ type: "AUTH_START" });
+    if (isValidatingToken) {
+      dispatch({ type: "AUTH_START" });
+    } else if (authData) {
+      dispatch({
+        type: "AUTH_SUCCESS",
+        payload: {
+          user: authData,
+        },
+      });
+    } else {
+      dispatch({ type: "AUTH_FAILURE" });
+    }
+  }, [authData, isValidatingToken]);
 
-          // TODO: Implement token validation with your authentication API
-          // const response = await validateToken(token);
-          // if (response.isValid) {
-          //   dispatch({ type: 'AUTH_SUCCESS', payload: response.data });
-          // } else {
-          //   dispatch({ type: 'AUTH_FAILURE' });
-          // }
+  // Login mutation
+  const loginMutation = useMutation({
+    mutationFn: async (payload: LoginPayload) => {
+      const response = await loginApi(payload);
+      return response;
+    },
+    onSuccess: (data) => {
+      // Store token in cookie
+      const decodedData = decodeJWT(data.accessToken);
+      const tokenLifespan =
+        decodedData?.exp && decodedData?.iat
+          ? decodedData.exp - decodedData.iat
+          : undefined;
 
-          // Temporary: just set loading to false
-          setTimeout(() => {
-            dispatch({ type: "AUTH_FAILURE" });
-          }, 100);
-        } catch (error) {
-          dispatch({ type: "AUTH_FAILURE" });
-        }
-      } else {
-        dispatch({ type: "AUTH_FAILURE" });
-      }
-    };
+      // Update state
+      setCookie(ACCESS_TOKEN, data.accessToken, {
+        maxAge: tokenLifespan,
+      });
+    },
+    onError: (error) => {
+      dispatch({ type: "AUTH_FAILURE" });
+      if (IS_DEVELOPMENT) console.error("Login error:", error);
+    },
+  });
 
-    checkAuthStatus();
-  }, []);
-
-  const login = (user: User, token: string, permissions: string[]) => {
-    localStorage.setItem(ACCESS_TOKEN, token);
-    dispatch({ type: "AUTH_SUCCESS", payload: { user, token, permissions } });
+  const login = async (payload: LoginPayload) => {
+    await loginMutation.mutateAsync(payload);
   };
 
   const logout = () => {
-    localStorage.removeItem(ACCESS_TOKEN);
+    deleteCookie(ACCESS_TOKEN);
     dispatch({ type: "LOGOUT" });
   };
 
-  const updateUser = (userData: Partial<User>) => {
+  const updateUser = (userData: Partial<IAMProfileResponse>) => {
     dispatch({ type: "UPDATE_USER", payload: userData });
-  };
-
-  const setPermissions = (permissions: string[]) => {
-    dispatch({ type: "SET_PERMISSIONS", payload: permissions });
-  };
-
-  const hasPermission = (permission: string): boolean => {
-    return state.permissions.includes(permission);
-  };
-
-  const hasAnyPermission = (permissions: string[]): boolean => {
-    return permissions.some((permission) =>
-      state.permissions.includes(permission),
-    );
-  };
-
-  const hasAllPermissions = (permissions: string[]): boolean => {
-    return permissions.every((permission) =>
-      state.permissions.includes(permission),
-    );
   };
 
   const value: AuthContextType = {
@@ -178,20 +105,12 @@ export function AuthProvider({ children }: AuthProviderProps) {
     login,
     logout,
     updateUser,
-    setPermissions,
-    hasPermission,
-    hasAnyPermission,
-    hasAllPermissions,
     // Utility functions
-    validatePermissions: (permissions: string[]) =>
-      validatePermissions(permissions),
-    hasRequiredRole: (requiredRoles: string[]) =>
+    hasRequiredRole: (requiredRoles: Role[]) =>
       hasRequiredRole(state.user, requiredRoles),
     getUserDisplayName: () => getUserDisplayName(state.user),
-    isProfileComplete: () => isProfileComplete(state.user),
-    getUserInitials: () => getUserInitials(state.user),
-    isValidEmail,
-    isValidPhoneNumber,
+    // React Query mutations
+    loginMutation: loginMutation as any,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
@@ -205,31 +124,3 @@ export function useAuth() {
   }
   return context;
 }
-
-// Permission helpers
-export const PERMISSIONS = {
-  // Admin permissions
-  ADMIN_READ: "admin:read",
-  ADMIN_WRITE: "admin:write",
-  ADMIN_DELETE: "admin:delete",
-
-  // Member permissions
-  MEMBER_READ: "member:read",
-  MEMBER_WRITE: "member:write",
-
-  // Course permissions
-  COURSE_READ: "course:read",
-  COURSE_WRITE: "course:write",
-  COURSE_DELETE: "course:delete",
-
-  // Session permissions
-  SESSION_READ: "session:read",
-  SESSION_WRITE: "session:write",
-  SESSION_DELETE: "session:delete",
-
-  // Analytics permissions
-  ANALYTICS_READ: "analytics:read",
-  ANALYTICS_WRITE: "analytics:write",
-} as const;
-
-export type Permission = (typeof PERMISSIONS)[keyof typeof PERMISSIONS];
