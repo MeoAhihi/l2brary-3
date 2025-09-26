@@ -4,6 +4,7 @@ export const queryKeys = {
   auth: {
     user: ["auth", "user"] as const,
     session: ["auth", "session"] as const,
+    login: ["auth", "login"] as const,
   },
 
   // IAM (Identity & Access Management)
