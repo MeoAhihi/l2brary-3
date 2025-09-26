@@ -1,4 +1,5 @@
 /* eslint-disable max-lines */
+
 "use client";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { format } from "date-fns";
@@ -25,7 +26,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { RadioGroup } from "@/components/ui/radio-group";
 import {
   Select,
   SelectContent,
@@ -34,7 +35,6 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
-import recurrentOptions from "@/constants/recurrent-rule.json";
 import { cn } from "@/lib/utils";
 
 const formSchema = z.object({
@@ -155,7 +155,7 @@ export default function CreateCourseForm({
                       onValueChange={field.onChange}
                       className="flex flex-col space-y-1"
                     >
-                      {recurrentOptions["recurrent-options"].map(
+                      {/* {recurrentOptions["recurrent-options"].map(
                         (option, index) => (
                           <FormItem
                             className="flex items-center space-y-0 space-x-3"
@@ -169,7 +169,7 @@ export default function CreateCourseForm({
                             </FormLabel>
                           </FormItem>
                         ),
-                      )}
+                      )} */}
                     </RadioGroup>
                   </FormControl>
                   <FormDescription>Lớp học một lần/lặp lại</FormDescription>
@@ -200,7 +200,7 @@ export default function CreateCourseForm({
                           </SelectTrigger>
                         </FormControl>
                         <SelectContent>
-                          {recurrentOptions["weekly-recurrent-options"].map(
+                          {/* {recurrentOptions["weekly-recurrent-options"].map(
                             (option) => (
                               <SelectItem
                                 key={option.value}
@@ -209,7 +209,7 @@ export default function CreateCourseForm({
                                 {option.label}
                               </SelectItem>
                             ),
-                          )}
+                          )} */}
                         </SelectContent>
                       </Select>
 
@@ -238,7 +238,7 @@ export default function CreateCourseForm({
                           </SelectTrigger>
                         </FormControl>
                         <SelectContent>
-                          {recurrentOptions["monthly-recurrent-options"].map(
+                          {/* {recurrentOptions["monthly-recurrent-options"].map(
                             (option) => (
                               <SelectItem
                                 key={option.value}
@@ -247,7 +247,7 @@ export default function CreateCourseForm({
                                 {option.label}
                               </SelectItem>
                             ),
-                          )}
+                          )} */}
                         </SelectContent>
                       </Select>
 
@@ -315,7 +315,7 @@ export default function CreateCourseForm({
                           </SelectTrigger>
                         </FormControl>
                         <SelectContent>
-                          {recurrentOptions["one-time-recurrent-options"].map(
+                          {/* {recurrentOptions["one-time-recurrent-options"].map(
                             (option) => (
                               <SelectItem
                                 key={option.value}
@@ -324,7 +324,7 @@ export default function CreateCourseForm({
                                 {option.label}
                               </SelectItem>
                             ),
-                          )}
+                          )} */}
                         </SelectContent>
                       </Select>
 

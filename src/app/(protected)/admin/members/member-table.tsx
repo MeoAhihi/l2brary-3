@@ -2,7 +2,7 @@
 
 import { DataTable } from "@/components/ui/data-table/data-table";
 import { DataTablePagination } from "@/components/ui/data-table/data-table-pagination";
-import { Member } from "@/types/iam/iam.types";
+import { Member } from "@/types/member/response";
 
 import { columns, TableHeader } from "./table.config";
 
