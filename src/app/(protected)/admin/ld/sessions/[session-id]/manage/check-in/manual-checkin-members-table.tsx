@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { DataTable } from "@/components/ui/data-table/data-table";
 import { DataTablePagination } from "@/components/ui/data-table/data-table-pagination";
 import { Input } from "@/components/ui/input";
-import { Member } from "@/types/iam.types";
+import { Member } from "@/types/iam/iam.types";
 
 import { columns } from "./columns";
 

@@ -16,7 +16,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Input } from "@/components/ui/input";
-import { Member } from "@/types/iam.types";
+import { Member } from "@/types/iam/iam.types";
 
 export const columns: ColumnDef<Member>[] = [
   {
