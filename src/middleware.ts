@@ -1,10 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
 
 import { checkTokenExpired, decrypt } from "@/lib/authentication";
-import { Role } from "@/types/iam.types";
 
 import { ACCESS_TOKEN } from "./constants/authentication";
 import { PAGE_LINKS, X_PATHNAME_KEY } from "./constants/common";
+import { matchesRoutes } from "./lib/routes";
+import { RoleEnum } from "./types/auth/iam.response";
 import { PAGE_NAME } from "./types/common";
 
 // Define route patterns for different access levels
@@ -34,21 +35,11 @@ export async function middleware(req: NextRequest) {
   const requestHeaders = new Headers(req.headers);
   requestHeaders.set(X_PATHNAME_KEY, pathname);
 
-  // Helper function to check if path matches any route pattern
-  const matchesRoutes = (routes: string[]): boolean => {
-    return routes.some((route) => {
-      if (route === "/") {
-        return pathname === "/";
-      }
-      return pathname.startsWith(route);
-    });
-  };
-
   // Check route access requirements
-  const isAuthRoute = matchesRoutes(AUTH_ROUTES);
-  const isPublicRoute = matchesRoutes(PUBLIC_ROUTES);
-  const isProtectedRoute = matchesRoutes(PROTECTED_ROUTES);
-  const isAdminRoute = matchesRoutes(ADMIN_ROUTES);
+  const isAuthRoute = matchesRoutes(pathname, AUTH_ROUTES);
+  const isPublicRoute = matchesRoutes(pathname, PUBLIC_ROUTES);
+  const isProtectedRoute = matchesRoutes(pathname, PROTECTED_ROUTES);
+  const isAdminRoute = matchesRoutes(pathname, ADMIN_ROUTES);
 
   // Handle auth routes (login, register)
   if (isAuthRoute) {
@@ -75,7 +66,7 @@ export async function middleware(req: NextRequest) {
 
     // Check if user has admin role
     const userRole = token?.role;
-    if (userRole !== Role.Admin) {
+    if (userRole !== RoleEnum.Admin) {
       // Redirect non-admin users to dashboard
       return NextResponse.redirect(
         new URL(`/${PAGE_LINKS[PAGE_NAME.DASHBOARD]}`, req.url),
@@ -103,7 +94,11 @@ export async function middleware(req: NextRequest) {
   // Handle public routes and any other routes
   if (
     isPublicRoute ||
-    !matchesRoutes([...AUTH_ROUTES, ...PROTECTED_ROUTES, ...ADMIN_ROUTES])
+    !matchesRoutes(pathname, [
+      ...AUTH_ROUTES,
+      ...PROTECTED_ROUTES,
+      ...ADMIN_ROUTES,
+    ])
   ) {
     // Public routes are accessible to everyone
     return NextResponse.next({ headers: requestHeaders });
