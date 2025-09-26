@@ -1,7 +1,7 @@
 // Auth module exports
 
-export { AuthProvider, PERMISSIONS, useAuth } from "./AuthContext";
-export type { AuthAction, AuthState, Permission, User } from "./types";
+export { AuthProvider, useAuth } from "./AuthContext";
+export type { AuthAction, AuthState, Permission } from "./types";
 export {
   getUserDisplayName,
   getUserInitials,
