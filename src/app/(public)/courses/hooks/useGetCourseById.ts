@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import { useQuery } from '@tanstack/react-query';
+import { useQuery } from "@tanstack/react-query";
 
-import { getCourseById } from '@/apis/course.api';
-import { queryKeys } from '@/constants/query-keys';
+import { getCourseById } from "@/apis/course.api";
+import { queryKeys } from "@/constants/query-keys";
 
 export const useGetCourseById = (courseId: string) => {
   return useQuery({

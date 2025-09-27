@@ -1,3 +1,5 @@
+import { Suspense } from "react";
+
 import { CourseWrapper } from "./components/CourseWrapper";
 import { CourseProvider } from "./contexts";
 
@@ -15,7 +17,9 @@ export default function CoursesPage() {
           <p className="text-muted-foreground mb-8">
             Discover and enroll in courses to enhance your skills
           </p>
-          <CourseWrapper />
+          <Suspense>
+            <CourseWrapper />
+          </Suspense>
         </div>
       </div>
     </CourseProvider>

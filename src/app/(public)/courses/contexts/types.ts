@@ -1,4 +1,5 @@
 import { ReactNode } from "react";
+
 import { CoursesResponse } from "../types/response";
 
 // The state for the course context

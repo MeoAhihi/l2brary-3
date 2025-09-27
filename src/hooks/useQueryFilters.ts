@@ -3,9 +3,9 @@
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useCallback, useMemo } from "react";
 
+import { DEFAULT_PAGE_SIZE } from "@/constants/common";
 import { QUERY_PARAMS } from "@/constants/query-params";
 import { QueryParams } from "@/types/query";
-import { DEFAULT_PAGE_SIZE } from "@/constants/common";
 
 export const useQueryFilters = (
   defaultParams: QueryParams = { page: 1, limit: DEFAULT_PAGE_SIZE },

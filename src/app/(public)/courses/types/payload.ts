@@ -1,4 +1,5 @@
 import { PaginationParams } from "@/shared";
+
 import { ScheduleDetail, ScheduleTypeEnum } from "./type";
 
 export interface CoursePayload {

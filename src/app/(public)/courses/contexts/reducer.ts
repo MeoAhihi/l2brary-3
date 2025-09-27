@@ -1,4 +1,4 @@
-import { CourseState, CourseAction } from "./types";
+import { CourseAction, CourseState } from "./types";
 
 export const courseReducer = (
   state: CourseState,
