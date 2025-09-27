@@ -6,15 +6,15 @@ import { getCourseById } from "@/apis/course.api";
 import CourseDetailPage from "./components/CourseDetailPage";
 
 interface CoursePageProps {
-  params: {
+  params: Promise<{
     "course-id": string;
-  };
+  }>;
 }
 
 export async function generateMetadata({
   params,
 }: CoursePageProps): Promise<Metadata> {
-  const courseId = params["course-id"];
+  const { "course-id": courseId } = await params;
   const course = await getCourseById(courseId);
 
   if (!course) {
@@ -30,7 +30,7 @@ export async function generateMetadata({
 }
 
 export default async function CoursePage({ params }: CoursePageProps) {
-  const courseId = params["course-id"];
+  const { "course-id": courseId } = await params;
   const course = await getCourseById(courseId);
 
   if (!course) {
