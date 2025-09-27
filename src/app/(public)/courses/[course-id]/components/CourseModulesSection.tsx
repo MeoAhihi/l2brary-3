@@ -18,10 +18,12 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from "@/components/ui/collapsible";
-import { Course, CourseLesson, CourseModule } from "@/types/ld.types";
+import { CourseLesson, CourseModule } from "@/types/ld.types";
+
+import { CourseItem } from "../../types/response";
 
 interface CourseModulesSectionProps {
-  course: Course;
+  course: CourseItem;
 }
 
 const getLessonIcon = (type: CourseLesson["type"]) => {
@@ -142,39 +144,39 @@ function ModuleItem({ module }: { module: CourseModule }) {
 export default function CourseModulesSection({
   course,
 }: CourseModulesSectionProps) {
-  if (!course.modules || course.modules.length === 0) {
-    return (
-      <Card>
-        <CardHeader>
-          <CardTitle>Nội dung khóa học</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <p className="text-muted-foreground py-8 text-center">
-            Nội dung khóa học sẽ được cập nhật sớm.
-          </p>
-        </CardContent>
-      </Card>
-    );
-  }
+  // if (!course.modules || course.modules.length === 0) {
+  //   return (
+  //     <Card>
+  //       <CardHeader>
+  //         <CardTitle>Nội dung khóa học</CardTitle>
+  //       </CardHeader>
+  //       <CardContent>
+  //         <p className="text-muted-foreground py-8 text-center">
+  //           Nội dung khóa học sẽ được cập nhật sớm.
+  //         </p>
+  //       </CardContent>
+  //     </Card>
+  //   );
+  // }
 
   return (
     <Card>
       <CardHeader>
         <CardTitle>Nội dung khóa học</CardTitle>
         <p className="text-muted-foreground text-sm">
-          {course.modules.length} chương •{" "}
+          {/*{course.modules.length} chương •{" "}
           {course.modules.reduce(
             (total, module) => total + (module.lessons?.length || 0),
             0,
-          )}{" "}
+          )}{" "}*/}
           bài học
         </p>
       </CardHeader>
       <CardContent>
         <div className="space-y-3">
-          {course.modules.map((module) => (
+          {/*{course.modules.map((module) => (
             <ModuleItem key={module.id} module={module} />
-          ))}
+          ))}*/}
         </div>
       </CardContent>
     </Card>

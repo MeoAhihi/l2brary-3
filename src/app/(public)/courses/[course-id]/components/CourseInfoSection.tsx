@@ -5,10 +5,12 @@ import { Calendar, Clock, ExternalLink, Users } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Course } from "@/types/ld.types";
+import { formatScheduleDetail } from "@/lib/format";
+
+import { CourseItem } from "../../types/response";
 
 interface CourseInfoSectionProps {
-  course: Course;
+  course: CourseItem;
 }
 
 export default function CourseInfoSection({ course }: CourseInfoSectionProps) {
@@ -26,8 +28,8 @@ export default function CourseInfoSection({ course }: CourseInfoSectionProps) {
           <Clock className="text-muted-foreground h-4 w-4" />
           <div>
             <p className="font-medium">Lịch học</p>
-            <p className="text-muted-foreground text-sm">
-              {course.recurrentRule} - {course.time}
+            <p className="text-muted-foreground text-sm capitalize">
+              {formatScheduleDetail(course.scheduleDetail)}
             </p>
           </div>
         </div>
@@ -38,7 +40,7 @@ export default function CourseInfoSection({ course }: CourseInfoSectionProps) {
           <div>
             <p className="font-medium">Số lượng học viên</p>
             <div className="flex items-center gap-2">
-              <Badge variant="secondary">{course.studentsCount} học viên</Badge>
+              <Badge variant="secondary">{course.maxStudents} học viên</Badge>
               {course.maxStudents && (
                 <span className="text-muted-foreground text-sm">
                   / {course.maxStudents} tối đa
@@ -49,14 +51,14 @@ export default function CourseInfoSection({ course }: CourseInfoSectionProps) {
         </div>
 
         {/* External Chat */}
-        {course.externalChatUrl && (
+        {course.chatGroupUrl && (
           <div className="flex items-center gap-3">
             <ExternalLink className="text-muted-foreground h-4 w-4" />
             <div>
               <p className="font-medium">Nhóm chat</p>
               <Button variant="outline" size="sm" asChild className="mt-1">
                 <a
-                  href={course.externalChatUrl}
+                  href={course.chatGroupUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-2"
@@ -77,7 +79,7 @@ export default function CourseInfoSection({ course }: CourseInfoSectionProps) {
           <div>
             <p className="font-medium">Nhóm khóa học</p>
             <Badge variant="outline" className="mt-1">
-              {course.classGroup}
+              {course.group}
             </Badge>
           </div>
         </div>

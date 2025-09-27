@@ -5,10 +5,11 @@ import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import PageHeader from "@/components/ui/page-header";
-import { Course } from "@/types/ld.types";
+
+import { CourseItem } from "../../types/response";
 
 interface ThumbnailHeaderProps {
-  course: Course;
+  course: CourseItem;
   onRequestJoin?: () => void;
   isRequesting?: boolean;
 }
@@ -34,13 +35,13 @@ export default function ThumbnailHeader({
         {/* Course Group Badge */}
         <div className="absolute top-4 left-4">
           <Badge variant="secondary" className="bg-white/90 text-black">
-            {course.classGroup}
+            {course.group}
           </Badge>
         </div>
       </div>
 
       {/* Page Header with Title and Description */}
-      <PageHeader pageTitle={course.title} descriptions={[course.classGroup]}>
+      <PageHeader pageTitle={course.title} descriptions={[course.group]}>
         {/* CTA Button */}
         <Button
           onClick={onRequestJoin}
