@@ -32,3 +32,40 @@ export function getDisplayNameFromUrl(urlSegment: string): string {
   const decoded = decodeVietnameseUrl(urlSegment);
   return decoded.charAt(0).toUpperCase() + decoded.slice(1);
 }
+
+interface ScheduleDetail {
+  time: string;
+  daysOfMonth?: number[];
+  daysOfWeek?: string[];
+}
+
+const dayOfWeekMapping: { [key: string]: string } = {
+  MONDAY: "thứ 2",
+  TUESDAY: "thứ 3",
+  WEDNESDAY: "thứ 4",
+  THURSDAY: "thứ 5",
+  FRIDAY: "thứ 6",
+  SATURDAY: "thứ 7",
+  SUNDAY: "chủ nhật",
+};
+
+export const formatScheduleDetail = (
+  scheduleDetail: ScheduleDetail,
+): string => {
+  if (!scheduleDetail || !scheduleDetail.time) return "";
+  const time = scheduleDetail.time.replace("-", "đến");
+
+  if (scheduleDetail.daysOfMonth && scheduleDetail.daysOfMonth.length > 0) {
+    const sortedDays = [...scheduleDetail.daysOfMonth].sort((a, b) => a - b);
+    return `Ngày ${sortedDays.join(", ")} hằng tháng - ${time}`;
+  }
+
+  if (scheduleDetail.daysOfWeek && scheduleDetail.daysOfWeek.length > 0) {
+    const translatedDays = scheduleDetail.daysOfWeek.map(
+      (day) => dayOfWeekMapping[day.toUpperCase()] || day,
+    );
+    return `${translatedDays.join(", ")} hằng tuần - ${time}`;
+  }
+
+  return scheduleDetail.time; // Fallback
+};

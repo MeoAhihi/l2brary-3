@@ -13,3 +13,5 @@ export const PAGE_LINKS = {
   [PAGE_NAME.MEMBERS]: "dashboard/members",
   [PAGE_NAME.PROFILE]: "dashboard/profile",
 };
+
+export const DEFAULT_PAGE_SIZE = 8;

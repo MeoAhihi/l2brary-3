@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/card";
 
 type CourseCardProps = {
+  id: string;
   thumbnail: string;
   title: string;
   description?: string;
@@ -20,6 +21,7 @@ type CourseCardProps = {
 };
 
 export function CourseCard({
+  id,
   thumbnail,
   title,
   description = "",
@@ -57,7 +59,7 @@ export function CourseCard({
       </CardContent>
       <CardFooter className="flex justify-end gap-2 pt-0">
         <Button asChild variant="default" size="sm">
-          <Link href={`/courses/${encodeURIComponent(title)}`}>Xem thêm</Link>
+          <Link href={`/courses/${id}`}>Xem thêm</Link>
         </Button>
       </CardFooter>
     </Card>

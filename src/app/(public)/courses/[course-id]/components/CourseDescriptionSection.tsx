@@ -1,10 +1,11 @@
 "use client";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Course } from "@/types/ld.types";
+
+import { CourseItem } from "../../types/response";
 
 interface CourseDescriptionSectionProps {
-  course: Course;
+  course: CourseItem;
 }
 
 export default function CourseDescriptionSection({
