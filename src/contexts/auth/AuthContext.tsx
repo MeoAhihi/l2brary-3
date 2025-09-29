@@ -94,6 +94,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
   const logout = () => {
     deleteCookie(ACCESS_TOKEN);
     dispatch({ type: "LOGOUT" });
+    window.location.reload();
   };
 
   const updateUser = (userData: Partial<IAMProfileResponse>) => {

@@ -16,6 +16,7 @@ import { SidebarTrigger } from "@/components/ui/sidebar";
 import { getDisplayNameFromUrl } from "@/lib/format";
 
 import { ModeSwitcher } from "./mode-switcher";
+import { UserDropdown } from "./user-dropdown";
 
 export function SiteHeader() {
   const path = usePathname();
@@ -54,7 +55,10 @@ export function SiteHeader() {
             </BreadcrumbList>
           </Breadcrumb>
         </div>
-        <ModeSwitcher />
+        <div className="flex items-center gap-2">
+          <UserDropdown />
+          <ModeSwitcher />
+        </div>
       </div>
     </header>
   );
