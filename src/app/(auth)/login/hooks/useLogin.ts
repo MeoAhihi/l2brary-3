@@ -50,9 +50,9 @@ export const useLogin = (): UseLoginResult => {
           updateUser(profile);
           const redirectPath = resolveRedirectPath(profile.roles);
 
-          toast.success("Đăng nhập thành công");
-
           router.replace(redirectPath);
+
+          toast.success("Đăng nhập thành công");
         } else {
           throw new Error("Không lấy được thông tin người dùng");
         }

@@ -51,21 +51,26 @@ const dayOfWeekMapping: { [key: string]: string } = {
 
 export const formatScheduleDetail = (
   scheduleDetail: ScheduleDetail,
+  showTime = true,
 ): string => {
   if (!scheduleDetail || !scheduleDetail.time) return "";
   const time = scheduleDetail.time.replace("-", "đến");
 
   if (scheduleDetail.daysOfMonth && scheduleDetail.daysOfMonth.length > 0) {
     const sortedDays = [...scheduleDetail.daysOfMonth].sort((a, b) => a - b);
-    return `Ngày ${sortedDays.join(", ")} hằng tháng - ${time}`;
+    return showTime
+      ? `Ngày ${sortedDays.join(", ")} hằng tháng - ${time}`
+      : `Ngày ${sortedDays.join(", ")} hằng tháng`;
   }
 
   if (scheduleDetail.daysOfWeek && scheduleDetail.daysOfWeek.length > 0) {
     const translatedDays = scheduleDetail.daysOfWeek.map(
       (day) => dayOfWeekMapping[day.toUpperCase()] || day,
     );
-    return `${translatedDays.join(", ")} hằng tuần - ${time}`;
+    return showTime
+      ? `${translatedDays.join(", ")} hằng tuần - ${time}`
+      : `${translatedDays.join(", ")} hằng tuần`;
   }
 
-  return scheduleDetail.time; // Fallback
+  return showTime ? scheduleDetail.time : ""; // Fallback
 };
