@@ -30,18 +30,29 @@ axiosClient.interceptors.request.use(
 axiosClient.interceptors.response.use(
   (response) => response,
   async (error) => {
-    const status = error?.status;
-    const message = error?.message;
+    const status = error?.response?.status || error?.status;
+    const responseData = error?.response?.data;
+
+    // Get message from response data if available, fallback to error message
+    const message = responseData?.message || error?.message;
     const code = error?.code;
 
     if (status === 401) {
       deleteCookie(ACCESS_TOKEN);
-
       window.location.reload();
     }
-    if (!IS_PRODUCTION) console.log({ message, status, code });
 
-    const apiError: ApiError = { message, status, code };
+    // Only log errors in development, except 403
+    if (!IS_PRODUCTION && status !== 403) {
+      console.log({ message, status, code, responseData });
+    }
+
+    const apiError: ApiError = {
+      message,
+      status,
+      code,
+      responseData,
+    };
 
     return Promise.reject(apiError);
   },
