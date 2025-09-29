@@ -28,8 +28,8 @@ export async function middleware(req: NextRequest) {
   // Get authentication token
   const cookie = req.cookies.get(ACCESS_TOKEN)?.value;
   const token = await decrypt(cookie);
-  const isTokenExpired = checkTokenExpired(token);
-  const isAuthenticated = token?.id && !isTokenExpired;
+  const isTokenExpired = checkTokenExpired(token?.exp || 0);
+  const isAuthenticated = !isTokenExpired;
 
   // Create request headers for passing pathname
   const requestHeaders = new Headers(req.headers);

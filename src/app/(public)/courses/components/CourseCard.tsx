@@ -10,24 +10,29 @@ import {
   CardFooter,
   CardTitle,
 } from "@/components/ui/card";
+import { formatScheduleDetail } from "@/lib/format";
+
+import { ScheduleDetail } from "../types/type";
 
 type CourseCardProps = {
   id: string;
   thumbnail: string;
   title: string;
   description?: string;
-  recurrentRule: string; // e.g., "Every Monday", "Biweekly (Friday)", etc.
+  recurrentRule: ScheduleDetail;
   studentsCount?: number;
 };
 
-export function CourseCard({
-  id,
-  thumbnail,
-  title,
-  description = "",
-  recurrentRule,
-  studentsCount = 0,
-}: CourseCardProps) {
+export function CourseCard(props: CourseCardProps) {
+  const {
+    id,
+    thumbnail,
+    title,
+    description = "",
+    recurrentRule,
+    studentsCount = 0,
+  } = props;
+
   return (
     <Card className="flex flex-col overflow-hidden pt-0">
       <div className="relative aspect-3/2 w-full">
@@ -53,8 +58,9 @@ export function CourseCard({
             {description}
           </CardDescription>
         </div>
-        <div className="text-muted-foreground mt-2 flex flex-row items-center gap-1 text-xs">
-          <Calendar className="h-4 w-4" /> {recurrentRule}
+        <div className="text-muted-foreground mt-2 flex flex-row items-center gap-1 text-xs capitalize">
+          <Calendar className="h-4 w-4" />{" "}
+          {formatScheduleDetail(recurrentRule, false)}
         </div>
       </CardContent>
       <CardFooter className="flex justify-end gap-2 pt-0">

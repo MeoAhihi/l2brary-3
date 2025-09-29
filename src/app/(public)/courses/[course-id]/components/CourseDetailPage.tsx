@@ -1,12 +1,9 @@
 "use client";
 
-import React, { useState } from "react";
-import { toast } from "sonner";
-
 import { CourseItem as Course } from "../../types/response";
+import { useEnrollmentButton } from "../hooks/useEnrollmentButton";
 import CourseDescriptionSection from "./CourseDescriptionSection";
 import CourseInfoSection from "./CourseInfoSection";
-import CourseModulesSection from "./CourseModulesSection";
 import ThumbnailHeader from "./ThumbnailHeader";
 
 interface CourseDetailPageProps {
@@ -14,17 +11,9 @@ interface CourseDetailPageProps {
 }
 
 export default function CourseDetailPage({ course }: CourseDetailPageProps) {
-  const [isRequesting, setIsRequesting] = useState(false);
-
-  const handleRequestJoin = async () => {
-    setIsRequesting(true);
-
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 2000));
-
-    toast.success("Yêu cầu tham gia khóa học đã được gửi thành công!");
-    setIsRequesting(false);
-  };
+  const { loading, label, handleClick } = useEnrollmentButton({
+    course,
+  });
 
   return (
     <div className="container mx-auto px-4 py-8">
@@ -32,8 +21,9 @@ export default function CourseDetailPage({ course }: CourseDetailPageProps) {
         {/* Thumbnail Header with CTA */}
         <ThumbnailHeader
           course={course}
-          onRequestJoin={handleRequestJoin}
-          isRequesting={isRequesting}
+          ctaLabel={label}
+          ctaDisabled={loading}
+          onCtaClick={handleClick}
         />
 
         {/* Main Content Grid */}
@@ -44,7 +34,7 @@ export default function CourseDetailPage({ course }: CourseDetailPageProps) {
             <CourseDescriptionSection course={course} />
 
             {/* Course Modules */}
-            <CourseModulesSection course={course} />
+            {/* <CourseModulesSection course={course} /> */}
           </div>
 
           {/* Right Column - Course Info */}

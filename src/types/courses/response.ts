@@ -1,4 +1,5 @@
-import { PaginatedResponse } from "../../../../types/api";
+import { PaginatedResponse } from "@/types/api";
+
 import { ScheduleDetail, ScheduleTypeEnum } from "./type";
 
 export interface CourseItem {

@@ -1,9 +1,6 @@
-import {
-  CoursePayload,
-  GetCoursePayload,
-} from "@/app/(public)/courses/types/payload";
-import { CoursesResponse } from "@/app/(public)/courses/types/response";
 import axiosClient from "@/connectors/AxiosRestConnector";
+import { CoursePayload, GetCoursePayload } from "@/types/courses/payload";
+import { CourseItem, CoursesResponse } from "@/types/courses/response";
 
 export const createCourse = async (courseData: CoursePayload) => {
   const { data } = await axiosClient.post("/course", courseData);
@@ -34,7 +31,9 @@ export const getCourseGroups = async () => {
 };
 
 export const getCourseById = async (courseId: string) => {
-  const { data } = await axiosClient.get(`/course/${courseId}`);
+  const { data } = await axiosClient.get<CourseItem | null>(
+    `/course/${courseId}`,
+  );
 
   return data;
 };

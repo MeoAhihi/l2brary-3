@@ -5,19 +5,20 @@ import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import PageHeader from "@/components/ui/page-header";
-
-import { CourseItem } from "../../types/response";
+import { CourseItem } from "@/types/courses/response";
 
 interface ThumbnailHeaderProps {
   course: CourseItem;
-  onRequestJoin?: () => void;
-  isRequesting?: boolean;
+  ctaLabel: string;
+  ctaDisabled: boolean;
+  onCtaClick: () => void;
 }
 
 export default function ThumbnailHeader({
   course,
-  onRequestJoin,
-  isRequesting = false,
+  ctaLabel,
+  ctaDisabled,
+  onCtaClick,
 }: ThumbnailHeaderProps) {
   return (
     <div className="relative">
@@ -44,12 +45,12 @@ export default function ThumbnailHeader({
       <PageHeader pageTitle={course.title} descriptions={[course.group]}>
         {/* CTA Button */}
         <Button
-          onClick={onRequestJoin}
-          disabled={isRequesting}
+          onClick={onCtaClick}
+          disabled={ctaDisabled}
           size="lg"
-          className="bg-primary hover:bg-primary/90"
+          className="bg-primary hover:bg-primary/90 cursor-pointer"
         >
-          {isRequesting ? "Đang gửi yêu cầu..." : "Yêu cầu tham gia khóa học"}
+          {ctaLabel}
         </Button>
       </PageHeader>
     </div>
