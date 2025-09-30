@@ -1,8 +1,7 @@
 "use client";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-
-import { CourseItem } from "../../types/response";
+import { CourseItem } from "@/types/courses/response";
 
 interface CourseDescriptionSectionProps {
   course: CourseItem;

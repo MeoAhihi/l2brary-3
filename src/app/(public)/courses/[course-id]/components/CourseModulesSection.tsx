@@ -18,9 +18,8 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from "@/components/ui/collapsible";
+import { CourseItem } from "@/types/courses/response";
 import { CourseLesson, CourseModule } from "@/types/ld.types";
-
-import { CourseItem } from "../../types/response";
 
 interface CourseModulesSectionProps {
   course: CourseItem;

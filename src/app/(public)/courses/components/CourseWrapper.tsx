@@ -7,10 +7,10 @@ import { CourseCard } from "@/app/(public)/courses/components/CourseCard";
 import { SkeletonGrid } from "@/components/common/SkeletonGrid";
 import { PaginationButtons } from "@/components/ui/pagination-buttons";
 import { useQueryFilters } from "@/hooks/useQueryFilters";
+import { GetCoursePayload } from "@/types/courses/payload";
+import { CoursesResponse } from "@/types/courses/response";
 
 import { courseListQueryOptions } from "../queries";
-import type { GetCoursePayload } from "../types/payload";
-import type { CoursesResponse } from "../types/response";
 import { EmptyCourses } from "./EmptyCourses";
 
 interface CourseWrapperProps {

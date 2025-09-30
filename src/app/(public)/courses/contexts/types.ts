@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 
-import { CoursesResponse } from "../types/response";
+import { CoursesResponse } from "@/types/courses/response";
 
 // The state for the course context
 export interface CourseState {

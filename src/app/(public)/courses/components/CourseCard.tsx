@@ -11,8 +11,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { formatScheduleDetail } from "@/lib/format";
-
-import { ScheduleDetail } from "../types/type";
+import { ScheduleDetail } from "@/types/courses/type";
 
 type CourseCardProps = {
   id: string;
