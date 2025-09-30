@@ -22,14 +22,26 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { cn } from "@/lib/utils";
+
+// eslint-disable-next-line no-unused-vars
+type TableRenderer<TData> = (table: TableType<TData>) => React.ReactNode;
+// eslint-disable-next-line no-unused-vars
+type RowClickHandler<TData> = (row: TData) => void;
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data?: TData[];
-  header?: (table: TableType<TData>) => React.ReactNode;
-  footer?: (table: TableType<TData>) => React.ReactNode;
-  onRowClick?: (row: TData) => void;
+  header?: TableRenderer<TData>;
+  footer?: TableRenderer<TData>;
+  onRowClick?: RowClickHandler<TData>;
   selectedRowId?: string;
+  // Pagination props for URL synchronization
+  initialPageIndex?: number;
+  initialPageSize?: number;
+  // Server-side pagination props
+  manualPagination?: boolean;
+  pageCount?: number;
 }
 
 /**
@@ -59,26 +71,43 @@ export function DataTable<TData, TValue>({
   footer,
   onRowClick,
   selectedRowId,
+  initialPageIndex = 0,
+  initialPageSize = 10,
+  manualPagination = false,
+  pageCount,
 }: DataTableProps<TData, TValue>) {
   // State for sorting and column filters
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     [],
   );
+  const [globalFilter, setGlobalFilter] = React.useState<string>("");
 
   // Define the table instance using TanStack Table's useReactTable hook
   const table = useReactTable({
     data,
     columns,
     getCoreRowModel: getCoreRowModel(),
-    getPaginationRowModel: getPaginationRowModel(),
+    getPaginationRowModel: manualPagination
+      ? undefined
+      : getPaginationRowModel(),
     onSortingChange: setSorting,
     getSortedRowModel: getSortedRowModel(),
     onColumnFiltersChange: setColumnFilters,
     getFilteredRowModel: getFilteredRowModel(),
+    onGlobalFilterChange: setGlobalFilter,
+    manualPagination,
+    pageCount: manualPagination ? pageCount : undefined,
+    initialState: {
+      pagination: {
+        pageIndex: initialPageIndex,
+        pageSize: initialPageSize,
+      },
+    },
     state: {
       sorting,
       columnFilters,
+      globalFilter,
     },
   });
 
@@ -108,17 +137,28 @@ export function DataTable<TData, TValue>({
           <TableBody>
             {table.getRowModel().rows?.length ? (
               table.getRowModel().rows.map((row) => {
-                const isSelected =
-                  selectedRowId && (row.original as any)?.id === selectedRowId;
+                const original = row.original as unknown;
+                const candidateId =
+                  typeof original === "object" &&
+                  original !== null &&
+                  "id" in original
+                    ? (original as { id?: unknown }).id
+                    : undefined;
+                const resolvedId =
+                  typeof candidateId === "string" ? candidateId : undefined;
+                const isSelected = Boolean(
+                  selectedRowId && resolvedId && resolvedId === selectedRowId,
+                );
                 return (
                   <TableRow
                     key={row.id}
                     data-state={isSelected && "selected"}
-                    className={
-                      isSelected
-                        ? "bg-muted/50"
-                        : "hover:bg-muted/50 cursor-pointer"
-                    }
+                    className={cn(
+                      isSelected ? "bg-muted/50" : undefined,
+                      !isSelected && onRowClick
+                        ? "hover:bg-muted/50 cursor-pointer"
+                        : undefined,
+                    )}
                     onClick={() => onRowClick?.(row.original)}
                   >
                     <TableCell>{row.index + 1}</TableCell>
@@ -136,7 +176,7 @@ export function DataTable<TData, TValue>({
             ) : (
               <TableRow>
                 <TableCell
-                  colSpan={columns.length}
+                  colSpan={columns.length + 1}
                   className="h-24 text-center"
                 >
                   No results.
