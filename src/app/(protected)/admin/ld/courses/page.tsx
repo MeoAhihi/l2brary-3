@@ -11,11 +11,9 @@ export const metadata: Metadata = {
 
 export default async function AdminCoursesPage() {
   return (
-    <>
+    <div>
       <PageHeader pageTitle="Courses List" />
-      <div>
-        <CoursesTable courses={[]} />
-      </div>
-    </>
+      <CoursesTable />
+    </div>
   );
 }
