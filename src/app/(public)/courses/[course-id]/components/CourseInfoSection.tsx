@@ -6,8 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { formatScheduleDetail } from "@/lib/format";
-
-import { CourseItem } from "../../types/response";
+import { CourseItem } from "@/types/courses/response";
 
 interface CourseInfoSectionProps {
   course: CourseItem;

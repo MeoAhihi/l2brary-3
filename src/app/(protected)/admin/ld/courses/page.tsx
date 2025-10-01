@@ -1,5 +1,7 @@
 import { Metadata } from "next";
+import { Suspense } from "react";
 
+import { DataTableSkeleton } from "@/components/ui/data-table/data-table-skeleton";
 import PageHeader from "@/components/ui/page-header";
 
 import { CoursesTable } from "./courses-table";
@@ -9,13 +11,22 @@ export const metadata: Metadata = {
   description: "Manage all learning & development courses",
 };
 
-export default async function AdminCoursesPage() {
+export default function AdminCoursesPage() {
   return (
-    <>
+    <div>
       <PageHeader pageTitle="Courses List" />
-      <div>
-        <CoursesTable courses={[]} />
-      </div>
-    </>
+      <Suspense
+        fallback={
+          <DataTableSkeleton
+            rowCount={10}
+            columnCount={6}
+            showHeader={true}
+            showPagination={true}
+          />
+        }
+      >
+        <CoursesTable />
+      </Suspense>
+    </div>
   );
 }

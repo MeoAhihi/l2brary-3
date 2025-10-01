@@ -1,13 +1,14 @@
 "use client";
 
-import { CourseItem as Course } from "../../types/response";
+import { CourseItem } from "@/types/courses/response";
+
 import { useEnrollmentButton } from "../hooks/useEnrollmentButton";
 import CourseDescriptionSection from "./CourseDescriptionSection";
 import CourseInfoSection from "./CourseInfoSection";
 import ThumbnailHeader from "./ThumbnailHeader";
 
 interface CourseDetailPageProps {
-  course: Course;
+  course: CourseItem;
 }
 
 export default function CourseDetailPage({ course }: CourseDetailPageProps) {

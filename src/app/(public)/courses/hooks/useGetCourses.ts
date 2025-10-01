@@ -4,8 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 
 import { getPublicCourses } from "@/apis/course.api";
 import { queryKeys } from "@/constants/query-keys";
-
-import { GetCoursePayload } from "../types/payload";
+import { GetCoursePayload } from "@/types/courses/payload";
 
 export const useGetCourses = (params: Partial<GetCoursePayload>) => {
   return useQuery({
