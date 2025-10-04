@@ -4,13 +4,13 @@ import { ScheduleDetail, ScheduleTypeEnum } from "./type";
 
 export interface CoursePayload {
   title: string;
-  code: string;
+  code?: string;
   description: string;
   difficulty: string;
   isPublic: boolean;
   isRequireApproval: boolean;
   isAllowGuestAccess: boolean;
-  thumbnail: string;
+  thumbnail?: string;
   maxStudents: number;
   enrollmentDeadlineDate: string;
   group: string;
