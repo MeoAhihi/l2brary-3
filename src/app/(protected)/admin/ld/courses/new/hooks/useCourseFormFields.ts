@@ -15,7 +15,6 @@ export function useCourseFormFields(
   scheduleType: string,
   courseGroupOptions: LabelValue[],
 ) {
-  console.info("🚀 ~ useCourseFormFields ~ scheduleType:", scheduleType);
   const fields = useMemo((): FormFieldConfig[] => {
     const baseFields: FormFieldConfig[] = [
       {
