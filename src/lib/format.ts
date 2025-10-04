@@ -1,6 +1,10 @@
-import { SCHEDULE_TYPE_LABELS, WEEKDAY_LABELS } from "@/constants/common";
+import { SCHEDULE_TYPE_LABELS, WEEKDAY_LABELS } from "@/constants/course";
 import type { CourseItem } from "@/types/courses/response";
-import { ScheduleTypeEnum } from "@/types/courses/type";
+import {
+  ScheduleDetail,
+  ScheduleTypeEnum,
+  WeekTypeEnum,
+} from "@/types/courses/type";
 
 export function decodeVietnameseUrl(str: string): string {
   return decodeURIComponent(str);
@@ -37,26 +41,22 @@ export function getDisplayNameFromUrl(urlSegment: string): string {
   return decoded.charAt(0).toUpperCase() + decoded.slice(1);
 }
 
-interface ScheduleDetail {
-  time: string;
-  daysOfMonth?: number[];
-  daysOfWeek?: string[];
-}
-
 // Course schedule formatting functions
 export const formatDaysOfWeek = (days?: string[]): string | undefined => {
   if (!days?.length) {
     return undefined;
   }
-  return days.map((day) => WEEKDAY_LABELS[day] ?? day.toLowerCase()).join(", ");
+  return days
+    .map((day) => WEEKDAY_LABELS[day as WeekTypeEnum] ?? day.toLowerCase())
+    .join(", ");
 };
 
-export const formatDaysOfMonth = (days?: number[]): string | undefined => {
+export const formatDaysOfMonth = (days?: string[]): string | undefined => {
   if (!days?.length) {
     return undefined;
   }
   return days
-    .sort((a, b) => a - b)
+    .sort((a, b) => Number(a) - Number(b))
     .map((day) => `ngày ${day}`)
     .join(", ");
 };
@@ -93,12 +93,14 @@ export const formatTimeRange = (course: CourseItem): string => {
 export const formatScheduleDetail = (
   scheduleDetail: ScheduleDetail,
   showTime = true,
-): string => {
-  if (!scheduleDetail || !scheduleDetail.time) return "";
-  const time = scheduleDetail.time.replace("-", "đến");
+) => {
+  if (!scheduleDetail) return "";
+  const time = scheduleDetail?.time?.replace("-", "đến");
 
   if (scheduleDetail.daysOfMonth && scheduleDetail.daysOfMonth.length > 0) {
-    const sortedDays = [...scheduleDetail.daysOfMonth].sort((a, b) => a - b);
+    const sortedDays = [...scheduleDetail.daysOfMonth].sort(
+      (a, b) => Number(a) - Number(b),
+    );
     return showTime
       ? `Ngày ${sortedDays.join(", ")} hằng tháng - ${time}`
       : `Ngày ${sortedDays.join(", ")} hằng tháng`;
@@ -106,12 +108,41 @@ export const formatScheduleDetail = (
 
   if (scheduleDetail.daysOfWeek && scheduleDetail.daysOfWeek.length > 0) {
     const translatedDays = scheduleDetail.daysOfWeek.map(
-      (day) => WEEKDAY_LABELS[day.toUpperCase()] || day,
+      (day) => WEEKDAY_LABELS[day as WeekTypeEnum] || day,
     );
     return showTime
       ? `${translatedDays.join(", ")} hằng tuần - ${time}`
       : `${translatedDays.join(", ")} hằng tuần`;
   }
 
-  return showTime ? scheduleDetail.time : ""; // Fallback
+  return showTime ? scheduleDetail?.time : ""; // Fallback
+};
+
+/**
+ * Converts an array of objects (with a `value` property) to a comma-separated string.
+ * If the input is already a string, returns as is.
+ * If the input is an array, extracts `value` from each object or uses the item itself.
+ * Otherwise, returns the string representation of the input.
+ */
+export const arrayObjectToCommaString = (
+  input: unknown,
+): string | undefined => {
+  if (!input) return undefined;
+
+  if (typeof input === "string") {
+    return input;
+  }
+
+  if (Array.isArray(input)) {
+    return input
+      .map((item) =>
+        typeof item === "object" && item !== null && "value" in item
+          ? (item as { value?: string }).value
+          : item,
+      )
+      .filter(Boolean)
+      .join(",");
+  }
+
+  return String(input);
 };

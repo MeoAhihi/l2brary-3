@@ -23,11 +23,35 @@ export function CoursesTable() {
     handlePageSizeChange,
     paginationProps,
     isSkeletonMode,
-    skeletonRowCount,
   } = useCoursesTable();
 
   return (
     <div className="flex flex-col gap-4">
+      {(isLoading || isFetching) && !isSkeletonMode && (
+        <p className="text-muted-foreground text-sm">
+          Đang tải danh sách khoá học…
+        </p>
+      )}
+
+      {isError && error && (
+        <div className="border-destructive/30 bg-destructive/5 rounded-md border p-4 text-sm">
+          <p className="text-destructive font-semibold">
+            Không thể tải danh sách khoá học
+          </p>
+          <p className="text-destructive/80 mt-1">
+            {error?.message ?? "Vui lòng thử lại sau."}
+          </p>
+          <Button
+            variant="outline"
+            size="sm"
+            className="mt-3 w-fit"
+            onClick={() => refetch()}
+          >
+            Thử lại
+          </Button>
+        </div>
+      )}
+
       <DataTable
         columns={columns}
         data={courses}
@@ -37,14 +61,7 @@ export function CoursesTable() {
             <div className="space-y-1">
               <h2 className="text-lg font-semibold">Danh sách khoá học</h2>
               <p className="text-muted-foreground text-sm">
-                {isSkeletonMode ? (
-                  <>
-                    <span className="inline-flex items-center gap-1">
-                      <span className="h-2 w-2 animate-pulse rounded-full bg-blue-500"></span>
-                      Đang tải {skeletonRowCount} skeleton rows...
-                    </span>
-                  </>
-                ) : (
+                {totalCourses && (
                   <>Tổng cộng {totalCourses.toLocaleString("vi-VN")} khoá học</>
                 )}
               </p>
@@ -73,37 +90,6 @@ export function CoursesTable() {
           />
         )}
       />
-
-      {(isLoading || isFetching) && !isSkeletonMode && (
-        <p className="text-muted-foreground text-sm">
-          Đang tải danh sách khoá học…
-        </p>
-      )}
-
-      {isSkeletonMode && (
-        <p className="text-muted-foreground text-sm">
-          Đang hiển thị {skeletonRowCount} skeleton rows trong lúc loading…
-        </p>
-      )}
-
-      {isError && (
-        <div className="border-destructive/30 bg-destructive/5 rounded-md border p-4 text-sm">
-          <p className="text-destructive font-semibold">
-            Không thể tải danh sách khoá học
-          </p>
-          <p className="text-destructive/80 mt-1">
-            {error instanceof Error ? error.message : "Vui lòng thử lại sau."}
-          </p>
-          <Button
-            variant="outline"
-            size="sm"
-            className="mt-3 w-fit"
-            onClick={() => refetch()}
-          >
-            Thử lại
-          </Button>
-        </div>
-      )}
     </div>
   );
 }

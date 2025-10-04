@@ -16,14 +16,22 @@ const defaultOptions: DefaultOptions = {
     // Retry logic: retry 3 times with exponential backoff
     retry: (failureCount, error) => {
       // Do not retry for 4xx errors (client errors)
-      if (error instanceof Error && "status" in error) {
-        const status = (error as any).status;
-        if (status >= 400 && status < 500) {
+      // Check for both Error instances and plain objects with status property
+      const hasStatus =
+        (error instanceof Error && "status" in error) ||
+        (error && typeof error === "object" && "status" in error);
+
+      if (hasStatus) {
+        const errorWithStatus = error as { status: unknown };
+        const status = errorWithStatus.status;
+        if (typeof status === "number" && status >= 400 && status < 500) {
+          console.log(`🚫 No retry for ${status} error:`, error);
           return false;
         }
       }
 
       // Retry maximum 3 times for other errors
+      console.log(`🔄 Retry attempt ${failureCount + 1}/3 for error:`, error);
       return failureCount < 3;
     },
 
@@ -60,8 +68,8 @@ const queryCache = new QueryCache({
     console.error("Query error:", error, "Query:", query.queryKey);
 
     // Display toast error for user (optional)
-    if (error instanceof Error && !error.message.includes("AbortError")) {
-      toast.error("An error occurred while loading data");
+    if (error && error?.message) {
+      toast.error(error.message);
     }
   },
 });
@@ -78,7 +86,7 @@ if (IS_DEVELOPMENT) {
   if (typeof window !== "undefined") {
     // Import devtools dynamically to avoid SSR issues
     import("@tanstack/react-query-devtools")
-      .then((devtools) => {
+      .then(() => {
         // Devtools will be mounted automatically when component is used
       })
       .catch(() => {

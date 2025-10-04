@@ -2,7 +2,7 @@ import { Metadata } from "next";
 
 import PageHeader from "@/components/ui/page-header";
 
-import CreateCourseForm from "./create-course-form";
+import CreateCourseForm from "./CreateCourseForm";
 
 export const metadata: Metadata = {
   title: "Create New Course | Admin | L2brary",
@@ -15,13 +15,7 @@ export default function NewCoursePage() {
       <div className="mx-auto max-w-4xl">
         <PageHeader pageTitle="Tạo lớp học mới" />
 
-        <CreateCourseForm
-          courseGroupOptions={[
-            { label: "Nghiên cứu Khoa học", value: "course-id-001" },
-            { label: "Thí nghiệm Vật lý", value: "course-id-002" },
-            { label: "Hoạt động dã ngoại", value: "course-id-003" },
-          ]}
-        />
+        <CreateCourseForm />
       </div>
     </div>
   );
