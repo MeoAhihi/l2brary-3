@@ -22,7 +22,7 @@ export function useTableQuery<TParams, TItem>({
   apiParams,
   apiFunction,
   queryKeyPrefix,
-  staleTime = 5 * 60 * 1000, // 5 minutes default
+  staleTime,
   refetchOnWindowFocus = false,
 }: UseTableQueryOptions<TParams, TItem>) {
   // Generate query key

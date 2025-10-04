@@ -45,7 +45,6 @@ export function useCoursesQuery({
   } = useQuery({
     queryKey,
     queryFn: () => apiFunction(apiParams),
-    staleTime: 5 * 60 * 1000, // 5 minutes
     refetchOnWindowFocus: false,
   });
 

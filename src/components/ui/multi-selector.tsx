@@ -235,7 +235,7 @@ const MultiSelectorTrigger = forwardRef<
     <div
       ref={ref}
       className={cn(
-        "ring-muted bg-background flex flex-wrap gap-1 rounded-lg p-1 py-2 ring-1",
+        "ring-muted bg-background flex flex-wrap gap-1 rounded-md p-3 py-2 ring-1",
         {
           "focus-within:ring-ring ring-1": activeIndex === -1,
         },
@@ -275,7 +275,7 @@ MultiSelectorTrigger.displayName = "MultiSelectorTrigger";
 const MultiSelectorInput = forwardRef<
   React.ElementRef<typeof CommandPrimitive.Input>,
   React.ComponentPropsWithoutRef<typeof CommandPrimitive.Input>
->(({ className, ...props }) => {
+>(({ className, ...props }, ref) => {
   const {
     setOpen,
     inputValue,
@@ -289,7 +289,7 @@ const MultiSelectorInput = forwardRef<
     <CommandPrimitive.Input
       {...props}
       tabIndex={0}
-      ref={inputRef}
+      ref={ref || inputRef}
       value={inputValue}
       onValueChange={activeIndex === -1 ? setInputValue : undefined}
       onBlur={() => {
