@@ -4,7 +4,7 @@ import { Suspense } from "react";
 import { DataTableSkeleton } from "@/components/ui/data-table/data-table-skeleton";
 import PageHeader from "@/components/ui/page-header";
 
-import { CoursesTable } from "./courses-table";
+import { CoursesTable } from "./CoursesTable";
 
 export const metadata: Metadata = {
   title: "Courses | Admin | L2brary",
