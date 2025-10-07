@@ -22,6 +22,14 @@ export const queryKeys = {
     activities: ["ld", "activities"] as const,
   },
 
+  // Activity & Engagement
+  ae: {
+    activities: ["ae", "activity"] as const,
+    activity: (activityId: number) => ["ae", "activity", activityId] as const,
+    act_category: ["ae", "activity", "category"] as const,
+    gamification: ["ae", "gamification"] as const,
+  },
+
   // Analytics
   analytics: {
     growth: ["analytics", "growth"] as const,
