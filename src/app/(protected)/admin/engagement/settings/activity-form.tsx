@@ -37,14 +37,14 @@ import { ActivityType } from "./columns";
 
 const formSchema = z.object({
   "activity-name": z.string().min(1),
-  "engagement-score": z.number().min(1).max(20),
+  "engagement-score": z.any(),
   category: z.string(),
 });
 
 type ActivityFormProps = {
   categories?: LabelValue[];
   selectedActivity?: ActivityType | null;
-  onFormSubmit?: () => void;
+  onFormSubmit?: (values?: z.infer<typeof formSchema>) => void;
 };
 
 export default function ActivityForm({
@@ -77,12 +77,12 @@ export default function ActivityForm({
   function onSubmit(values: z.infer<typeof formSchema>) {
     try {
       console.log(values);
-      toast(
-        <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-          <code className="text-white">{JSON.stringify(values, null, 2)}</code>
-        </pre>,
+      toast.success(
+        selectedActivity
+          ? "Cập nhật hoạt động thành công!"
+          : "Thêm hoạt động mới thành công!",
       );
-      onFormSubmit?.();
+      onFormSubmit?.(values);
     } catch (error) {
       console.error("Form submission error", error);
       toast.error("Failed to submit the form. Please try again.");
@@ -198,9 +198,15 @@ export default function ActivityForm({
         <div className="flex flex-row justify-end gap-3">
           {selectedActivity ? (
             <>
-              {/* <Button variant={"outline"}>
+              <Button
+                variant={"outline"}
+                onClick={() => {
+                  // Set selectedActivity to null by triggering onFormSubmit with no values
+                  onFormSubmit?.();
+                }}
+              >
                 <X /> hủy bỏ
-              </Button> */}
+              </Button>
               <Button type="submit">
                 <Save /> Lưu thay đổi
               </Button>

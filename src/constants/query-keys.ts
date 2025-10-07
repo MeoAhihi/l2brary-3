@@ -20,6 +20,7 @@ export const queryKeys = {
     sessions: ["ld", "sessions"] as const,
     enrollments: ["ld", "enrollments"] as const,
     activities: ["ld", "activities"] as const,
+    activityCategories: ["ld", "activityCategories"] as const,
   },
 
   // Analytics
