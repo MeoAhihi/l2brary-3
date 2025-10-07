@@ -44,7 +44,7 @@ const formSchema = z.object({
 type ActivityFormProps = {
   categories?: LabelValue[];
   selectedActivity?: ActivityType | null;
-  onFormSubmit?: () => void;
+  onFormSubmit?: (values: z.infer<typeof formSchema>) => void;
 };
 
 export default function ActivityForm({
@@ -82,7 +82,7 @@ export default function ActivityForm({
           <code className="text-white">{JSON.stringify(values, null, 2)}</code>
         </pre>,
       );
-      onFormSubmit?.();
+      onFormSubmit?.(values);
     } catch (error) {
       console.error("Form submission error", error);
       toast.error("Failed to submit the form. Please try again.");

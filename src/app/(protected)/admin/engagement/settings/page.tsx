@@ -1,34 +1,71 @@
 "use client";
 // import { Metadata } from "next";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 
 import PageHeader from "@/components/ui/page-header";
 
 import ActivityForm from "./activity-form";
 import ActivityTable from "./activity-table";
 import { ActivityType } from "./columns";
+import {
+  useActivitiesQuery,
+  useActivityCategoriesQuery,
+  useCreateActivityMutation,
+  useUpdateActivityMutation,
+} from "@/hooks/activities";
+import type { LabelValue } from "@/types/common";
 
 // export const metadata: Metadata = {
 //   title: "Engagement Settings | Admin | L2brary",
 //   description: "Manage activity types and engagement settings",
 // };
-const mockData: ActivityType[] = [
-  { id: "1", name: "Chuẩn bị phòng", engagementScore: 5, category: "Hậu cần" },
-  { id: "2", name: "Thuyết trình", engagementScore: 10, category: "Nội dung" },
-  { id: "3", name: "Thảo luận nhóm", engagementScore: 7, category: "Hợp tác" },
-  { id: "4", name: "Dọn dẹp", engagementScore: 3, category: "Hậu cần" },
-];
 export default function EngagementSettingsPage() {
   const [selectedActivity, setSelectedActivity] = useState<ActivityType | null>(
     null,
+  );
+
+  // Queries
+  const { activities, isLoading: isLoadingActivities } = useActivitiesQuery();
+  const { data: categoriesData } = useActivityCategoriesQuery();
+
+  // Mutations
+  const createMutation = useCreateActivityMutation();
+  const updateMutation = useUpdateActivityMutation();
+
+  // Map API data to table type
+  const tableActivities: ActivityType[] = useMemo(
+    () =>
+      (activities ?? []).map((a) => ({
+        id: String(a.id),
+        name: a.name,
+        engagementScore: a.point,
+        category: a.category,
+      })),
+    [activities],
   );
 
   const handleActivitySelect = (activity: ActivityType) => {
     setSelectedActivity(activity);
   };
 
-  const handleFormSubmit = () => {
-    // Reset selection after form submission
+  const handleFormSubmit = async (values?: any) => {
+    if (values) {
+      const payload = {
+        name: values["activity-name"],
+        point: Number(values["engagement-score"]),
+        category: values.category,
+      };
+
+      if (selectedActivity?.id) {
+        await updateMutation.mutateAsync({
+          id: selectedActivity.id,
+          payload,
+        });
+      } else {
+        await createMutation.mutateAsync(payload);
+      }
+    }
+
     setSelectedActivity(null);
   };
 
@@ -47,16 +84,17 @@ export default function EngagementSettingsPage() {
             <ActivityForm
               selectedActivity={selectedActivity}
               onFormSubmit={handleFormSubmit}
-              categories={[
-                { label: "Hậu cần", value: "Hậu cần" },
-                { label: "Nội dung", value: "Nội dung" },
-                { label: "Hợp tác", value: "Hợp tác" },
-              ]}
+              categories={
+                (categoriesData ?? []).map<LabelValue>((c) => ({
+                  label: c,
+                  value: c,
+                }))
+              }
             />
           </div>
         </div>
         <ActivityTable
-          activities={mockData}
+          activities={tableActivities}
           onActivitySelect={handleActivitySelect}
           selectedActivityId={selectedActivity?.id}
         />
