@@ -4,7 +4,6 @@ import { DataTable } from "@/components/ui/data-table/data-table";
 
 import type { ActivityType } from "./columns";
 import { getColumns } from "./columns";
-import { table } from "console";
 import { DataTablePagination } from "@/components/ui/data-table/data-table-pagination";
 
 type ActivityTableProps = {

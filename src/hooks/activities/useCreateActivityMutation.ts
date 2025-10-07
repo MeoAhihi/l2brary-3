@@ -1,7 +1,6 @@
 import { useMutation } from "@tanstack/react-query";
 
 import { createActivity } from "@/apis/activity.api";
-import { queryKeys } from "@/constants/query-keys";
 import { invalidateQueries } from "@/lib/query-client";
 import type { ActivityCreatePayload } from "@/types/activities/activity";
 
