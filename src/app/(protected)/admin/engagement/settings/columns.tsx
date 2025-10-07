@@ -10,7 +10,9 @@ export type ActivityType = {
   category: string;
 };
 
-export const columns: ColumnDef<ActivityType>[] = [
+export const getColumns = (
+  onDelete?: (id: string) => void,
+): ColumnDef<ActivityType>[] => [
   {
     accessorKey: "name",
     header: "Tên Hoạt động",
@@ -28,14 +30,15 @@ export const columns: ColumnDef<ActivityType>[] = [
   },
   {
     id: "actions",
-    cell: () => (
+    cell: ({ row }) => (
       <Button
         variant="ghost"
         size="icon"
         aria-label="Remove"
-        onClick={() => {
-          // Implement remove logic here, e.g., call a prop or context
-          // Example: onRemove(row.original.id)
+        onClick={(e) => {
+          e.stopPropagation();
+          const original = row.original as ActivityType;
+          onDelete?.(original.id);
         }}
       >
         <Trash2 className="text-destructive h-4 w-4" />

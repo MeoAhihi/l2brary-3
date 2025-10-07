@@ -12,6 +12,7 @@ import {
   useActivityCategoriesQuery,
   useCreateActivityMutation,
   useUpdateActivityMutation,
+  useDeleteActivityMutation,
 } from "@/hooks/activities";
 import type { LabelValue } from "@/types/common";
 
@@ -31,6 +32,7 @@ export default function EngagementSettingsPage() {
   // Mutations
   const createMutation = useCreateActivityMutation();
   const updateMutation = useUpdateActivityMutation();
+  const deleteMutation = useDeleteActivityMutation();
 
   // Map API data to table type
   const tableActivities: ActivityType[] = useMemo(
@@ -97,6 +99,10 @@ export default function EngagementSettingsPage() {
           activities={tableActivities}
           onActivitySelect={handleActivitySelect}
           selectedActivityId={selectedActivity?.id}
+          onDeleteActivity={async (id) => {
+            await deleteMutation.mutateAsync(id);
+            if (selectedActivity?.id === id) setSelectedActivity(null);
+          }}
         />
       </div>
     </div>

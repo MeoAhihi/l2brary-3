@@ -17,7 +17,18 @@ export const createActivity = async (payload: ActivityCreatePayload) => {
 
 export const getActivities = async () => {
   const { data } = await axiosClient.get<ActivitiesListResponse>("/activity");
-  return data;
+  // Sort by category asc, then by point desc
+  return Array.isArray(data)
+    ? data.sort((a, b) => {
+        const categoryCompare = String(a.category).localeCompare(
+          String(b.category),
+          "vi",
+          { sensitivity: "base" },
+        );
+        if (categoryCompare !== 0) return categoryCompare;
+        return (b.point ?? 0) - (a.point ?? 0);
+      })
+    : data;
 };
 
 export const getActivityById = async (id: string | number) => {
