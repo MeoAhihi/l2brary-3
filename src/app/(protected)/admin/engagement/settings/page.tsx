@@ -86,12 +86,10 @@ export default function EngagementSettingsPage() {
             <ActivityForm
               selectedActivity={selectedActivity}
               onFormSubmit={handleFormSubmit}
-              categories={
-                (categoriesData ?? []).map<LabelValue>((c) => ({
-                  label: c,
-                  value: c,
-                }))
-              }
+              categories={(categoriesData ?? []).map<LabelValue>((c) => ({
+                label: c,
+                value: c,
+              }))}
             />
           </div>
         </div>

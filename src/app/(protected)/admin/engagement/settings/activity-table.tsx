@@ -32,9 +32,7 @@ export default function ActivityTable({
             <h2 className="text-bold text-xl">Bảng Hoạt động</h2>
           </div>
         )}
-        footer={table => (
-          <DataTablePagination table={table} />
-        )}
+        footer={(table) => <DataTablePagination table={table} />}
       />
     </div>
   );
