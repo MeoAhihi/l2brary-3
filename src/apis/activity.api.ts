@@ -1,10 +1,10 @@
 import axiosClient from "@/connectors/AxiosRestConnector";
 import type {
-  ActivityCreatePayload,
-  ActivityUpdatePayload,
-  ActivityResponseDto,
   ActivitiesListResponse,
   ActivityCategory,
+  ActivityCreatePayload,
+  ActivityResponseDto,
+  ActivityUpdatePayload,
 } from "@/types/activities/activity";
 
 export const createActivity = async (payload: ActivityCreatePayload) => {

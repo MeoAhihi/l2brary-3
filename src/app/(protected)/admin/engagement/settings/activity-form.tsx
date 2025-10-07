@@ -199,7 +199,7 @@ export default function ActivityForm({
           {selectedActivity ? (
             <>
               <Button
-                variant={"outline"}
+                variant="outline"
                 onClick={() => {
                   // Set selectedActivity to null by triggering onFormSubmit with no values
                   onFormSubmit?.();
