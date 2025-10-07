@@ -80,7 +80,7 @@ export default function ActivityForm({
       toast.success(
         selectedActivity
           ? "Cập nhật hoạt động thành công!"
-          : "Thêm hoạt động mới thành công!"
+          : "Thêm hoạt động mới thành công!",
       );
       onFormSubmit?.(values);
     } catch (error) {
