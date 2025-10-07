@@ -17,6 +17,7 @@ export const queryKeys = {
   // Learning & Development
   ld: {
     courses: ["ld", "courses"] as const,
+    coursesDetail: ["ld", "courses", "courseId"] as const,
     sessions: ["ld", "sessions"] as const,
     enrollments: ["ld", "enrollments"] as const,
     activities: ["ld", "activities"] as const,

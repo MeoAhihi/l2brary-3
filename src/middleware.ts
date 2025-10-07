@@ -55,28 +55,29 @@ export async function middleware(req: NextRequest) {
   }
 
   // Handle admin routes
-  // if (isAdminRoute) {
-  //   if (!isAuthenticated) {
-  //     // Redirect unauthenticated users to login
-  //     return NextResponse.redirect(
-  //       new URL(`/${PAGE_LINKS[PAGE_NAME.LOGIN]}`, req.url),
-  //       { headers: requestHeaders },
-  //     );
-  //   }
+  if (isAdminRoute) {
+    if (!isAuthenticated) {
+      // Redirect unauthenticated users to login
+      return NextResponse.redirect(
+        new URL(`/${PAGE_LINKS[PAGE_NAME.LOGIN]}`, req.url),
+        { headers: requestHeaders },
+      );
+    }
 
-  //   // Check if user has admin role
-  //   const userRole = token?.role;
-  //   if (userRole !== RoleEnum.Admin) {
-  //     // Redirect non-admin users to dashboard
-  //     return NextResponse.redirect(
-  //       new URL(`/${PAGE_LINKS[PAGE_NAME.DASHBOARD]}`, req.url),
-  //       { headers: requestHeaders },
-  //     );
-  //   }
+    // Check if user has admin role
+    const userRole = token?.roles;
 
-  //   // Allow access for authenticated admin users
-  //   return NextResponse.next({ headers: requestHeaders });
-  // }
+    if (!userRole.includes(RoleEnum.Admin)) {
+      // Redirect non-admin users to dashboard
+      return NextResponse.redirect(
+        new URL(`/${PAGE_LINKS[PAGE_NAME.DASHBOARD]}`, req.url),
+        { headers: requestHeaders },
+      );
+    }
+
+    // Allow access for authenticated admin users
+    return NextResponse.next({ headers: requestHeaders });
+  }
 
   // Handle protected routes (non-admin)
   if (isProtectedRoute) {

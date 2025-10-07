@@ -26,7 +26,7 @@ export function CoursesTable() {
   } = useCoursesTable();
 
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-4 pb-12">
       {(isLoading || isFetching) && !isSkeletonMode && (
         <p className="text-muted-foreground text-sm">
           Đang tải danh sách khoá học…

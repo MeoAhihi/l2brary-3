@@ -18,6 +18,8 @@ export interface CourseItem {
   scheduleType: ScheduleTypeEnum;
   startDate: string;
   endDate: string;
+  startTime: string;
+  endTime: string;
   scheduleDetail: ScheduleDetail;
   chatGroupUrl: string;
   createdAt: string;

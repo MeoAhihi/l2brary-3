@@ -245,7 +245,7 @@ const MultiSelectorTrigger = forwardRef<
     >
       {value.map((item, index) => (
         <Badge
-          key={item.value}
+          key={index}
           className={cn(
             "flex items-center gap-1 rounded-md px-1.5",
             activeIndex === index && "ring-muted-foreground ring-2",

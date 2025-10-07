@@ -3,7 +3,7 @@ import { queryKeys } from "@/constants/query-keys";
 import type { CourseItem } from "@/types/courses/response";
 
 export const courseDetailQueryOptions = (courseId: string) => ({
-  queryKey: [...queryKeys.ld.courses, "detail", courseId] as const,
+  queryKey: [...queryKeys.ld.coursesDetail, courseId] as const,
   queryFn: async (): Promise<CourseItem | null> => {
     const course = await getCourseById(courseId);
     return course ?? null;

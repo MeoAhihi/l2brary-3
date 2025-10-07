@@ -7,7 +7,7 @@ import { queryKeys } from "@/constants/query-keys";
 
 export const useGetCourseById = (courseId: string) => {
   return useQuery({
-    queryKey: [queryKeys.ld.courses, courseId],
+    queryKey: [queryKeys.ld.coursesDetail, courseId],
     queryFn: () => getCourseById(courseId),
     enabled: !!courseId, // Only run the query if courseId is available
   });
