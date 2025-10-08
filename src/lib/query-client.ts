@@ -113,4 +113,8 @@ export const invalidateQueries = {
     queryClient.invalidateQueries({
       queryKey: [queryKeys.ld.coursesDetail],
     }),
+  enrollments: (options?: { queryKey?: unknown[] }) =>
+    queryClient.invalidateQueries({
+      queryKey: options?.queryKey || [queryKeys.ld.enrollments],
+    }),
 };
