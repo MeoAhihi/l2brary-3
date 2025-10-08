@@ -146,3 +146,13 @@ export const arrayObjectToCommaString = (
 
   return String(input);
 };
+
+export const commaStringToArray = (str: string | undefined): string[] => {
+  if (!str) {
+    return [];
+  }
+  return str
+    .split(",")
+    .map((s) => s.trim())
+    .filter(Boolean);
+};

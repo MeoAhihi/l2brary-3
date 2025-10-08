@@ -30,7 +30,7 @@ export const RECURRENT_OPTIONS = Object.values(ScheduleTypeEnum).map(
 
 export const WEEKLY_RECURRENT_OPTIONS = Object.values(WeekTypeEnum).map(
   (type) => ({
-    label: type,
+    label: WEEKDAY_LABELS[type],
     value: type,
   }),
 );

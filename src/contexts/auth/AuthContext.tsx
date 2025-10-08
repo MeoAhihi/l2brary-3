@@ -15,7 +15,6 @@ import { ACCESS_TOKEN } from "@/constants/authentication";
 import { IS_DEVELOPMENT } from "@/constants/common";
 import { useGetCurrentUser } from "@/hooks/useGetCurrentUser";
 import { decodeJWT } from "@/lib/jwt";
-import { invalidateQueries } from "@/lib/query-client";
 import { IAMProfileResponse, Role } from "@/types/auth/iam.response";
 import { LoginPayload } from "@/types/auth/login.payload";
 

@@ -56,7 +56,11 @@ const defaultOptions: DefaultOptions = {
     // Error handling for mutations
     onError: (error) => {
       console.error("Mutation error:", error);
-      toast.error("An error occurred while performing the operation");
+      toast.error("Đã xảy ra lỗi khi thực hiện thao tác", {
+        description: Array.isArray(error)
+          ? error[0]?.message
+          : error?.message || "Vui lòng thử lại sau",
+      });
     },
   },
 };
@@ -105,4 +109,8 @@ export const invalidateQueries = {
   members: () => queryClient.invalidateQueries({ queryKey: queryKeys.members }),
   posts: () => queryClient.invalidateQueries({ queryKey: queryKeys.posts }),
   all: () => queryClient.invalidateQueries(),
+  courseDetail: () =>
+    queryClient.invalidateQueries({
+      queryKey: [queryKeys.ld.coursesDetail],
+    }),
 };

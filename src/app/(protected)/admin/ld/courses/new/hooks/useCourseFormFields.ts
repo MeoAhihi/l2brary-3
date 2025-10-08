@@ -11,6 +11,8 @@ import {
 import { LabelValue } from "@/types/common";
 import { ScheduleTypeEnum } from "@/types/courses/type";
 
+import { DIFFICULTY_OPTIONS } from "../../constants";
+
 export function useCourseFormFields(
   scheduleType: string,
   courseGroupOptions: LabelValue[],
@@ -35,9 +37,10 @@ export function useCourseFormFields(
       {
         name: "difficulty",
         label: "Độ khó",
-        type: "text",
+        type: "select",
         placeholder: "Nhập độ khó",
         description: "Mức độ khó của lớp học (dễ, trung bình, khó).",
+        options: DIFFICULTY_OPTIONS,
       },
       {
         name: "maxStudents",

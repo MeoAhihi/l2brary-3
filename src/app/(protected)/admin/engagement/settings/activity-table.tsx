@@ -1,10 +1,10 @@
 "use client";
 
 import { DataTable } from "@/components/ui/data-table/data-table";
+import { DataTablePagination } from "@/components/ui/data-table/data-table-pagination";
 
 import type { ActivityType } from "./columns";
 import { getColumns } from "./columns";
-import { DataTablePagination } from "@/components/ui/data-table/data-table-pagination";
 
 type ActivityTableProps = {
   activities: ActivityType[];
