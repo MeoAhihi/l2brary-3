@@ -17,7 +17,7 @@ export default async function AdminMembersPage() {
         <DownloadMembersListButton />
       </PageHeader>
       <div className="mb-4">
-        <MemberTable members={[]} />
+        <MemberTable />
       </div>
     </>
   );

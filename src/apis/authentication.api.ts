@@ -28,3 +28,23 @@ export const getCurrentUser = async (): Promise<IAMProfileResponse> => {
 
   return data;
 };
+
+/**
+ * Call API to invite a user by email
+ * @param email Email address to invite
+ * @returns Invitation result with message, email, and inviteCode
+ * @throws Error if invitation fails
+ */
+export const inviteUser = async (
+  email: string,
+): Promise<{ message: string; email: string; inviteCode: string }> => {
+  const { data } = await axiosClient.post<{
+    message: string;
+    email: string;
+    inviteCode: string;
+  }>("/authentication/invite", null, {
+    params: { email },
+  });
+
+  return data;
+};
