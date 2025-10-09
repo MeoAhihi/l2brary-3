@@ -1,6 +1,6 @@
 import { useMutation } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
 import { toast } from "sonner";
 
 import { applyForEnrollment } from "@/apis/enrollment.api";
@@ -50,6 +50,7 @@ export function useEnrollmentCTA({ course }: UseEnrollmentCTAStateParams) {
     data,
     isLoading: enrollmentLoading,
     isError: enrollmentError,
+    refetch,
   } = useGetMyEnrollment({
     params: { courseId: course.id },
     enabled: isAuthenticated && !!user,
@@ -84,6 +85,7 @@ export function useEnrollmentCTA({ course }: UseEnrollmentCTAStateParams) {
       return;
     }
     await enroll();
+    await refetch();
   };
 
   return { loading, buttonText, handleClick };

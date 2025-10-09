@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 
 import { getMyEnrollment } from "@/apis/enrollment.api";
+import { queryKeys } from "@/constants/query-keys";
 import { GetMyEnrollmentPayload } from "@/types/enrollment/payload";
 import { EnrollmentItem } from "@/types/enrollment/response";
 
@@ -19,8 +20,8 @@ export const useGetMyEnrollment = ({
   enabled = true,
 }: UseGetMyEnrollmentOptions) => {
   return useQuery<UseGetMyEnrollmentResponse>({
-    queryKey: ["my-enrollment", params],
+    queryKey: [...queryKeys.ld.myEnrollments, params.courseId],
     queryFn: () => getMyEnrollment(params),
-    enabled: Boolean(params.courseId) && enabled,
+    // enabled,
   });
 };

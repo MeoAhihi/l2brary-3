@@ -20,6 +20,7 @@ export const queryKeys = {
     coursesDetail: ["ld", "courses", "courseId"] as const,
     sessions: ["ld", "sessions"] as const,
     enrollments: ["ld", "enrollments"] as const,
+    myEnrollments: ["ld", "my-enrollments"] as const,
     activities: ["ld", "activities"] as const,
     activityCategories: ["ld", "activityCategories"] as const,
   },
