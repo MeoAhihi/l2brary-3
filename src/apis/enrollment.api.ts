@@ -12,7 +12,7 @@ import {
 
 /**
  * Đăng ký tham gia khóa học
- * @param payload Thông tin đăng ký (courseId, userId)
+ * @param payload Thông tin đăng ký (courseId)
  * @returns Thông tin enrollment đã tạo
  */
 export const applyForEnrollment = async (payload: ApplyEnrollmentPayload) => {
@@ -41,10 +41,8 @@ export const getEnrollments = async (
  * @param params Query params chứa courseId (bắt buộc)
  * @returns Thông tin enrollment của user hiện tại
  */
-export const getMyEnrollment = async (
-  params: GetMyEnrollmentPayload,
-): Promise<EnrollmentItem> => {
-  const { data } = await axiosClient.get<EnrollmentItem>("/enrollment/my", {
+export const getMyEnrollment = async (params: GetMyEnrollmentPayload) => {
+  const { data } = await axiosClient.get("/enrollment/my", {
     params,
   });
 

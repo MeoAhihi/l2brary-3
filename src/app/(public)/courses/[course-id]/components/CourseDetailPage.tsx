@@ -2,7 +2,7 @@
 
 import { CourseItem } from "@/types/courses/response";
 
-import { useEnrollmentButton } from "../hooks/useEnrollmentButton";
+import { useEnrollmentCTA } from "../hooks/useEnrollmentCTA";
 import CourseDescriptionSection from "./CourseDescriptionSection";
 import CourseInfoSection from "./CourseInfoSection";
 import ThumbnailHeader from "./ThumbnailHeader";
@@ -12,7 +12,7 @@ interface CourseDetailPageProps {
 }
 
 export default function CourseDetailPage({ course }: CourseDetailPageProps) {
-  const { loading, label, handleClick } = useEnrollmentButton({
+  const { loading, buttonText, handleClick } = useEnrollmentCTA({
     course,
   });
 
@@ -22,8 +22,8 @@ export default function CourseDetailPage({ course }: CourseDetailPageProps) {
         {/* Thumbnail Header with CTA */}
         <ThumbnailHeader
           course={course}
-          ctaLabel={label}
-          ctaDisabled={loading}
+          ctaLabel={buttonText}
+          ctaDisabled={loading || buttonText === "Đã ghi danh"}
           onCtaClick={handleClick}
         />
 

@@ -28,7 +28,10 @@ export default function CourseInfoSection({ course }: CourseInfoSectionProps) {
           <div>
             <p className="font-medium">Lịch học</p>
             <p className="text-muted-foreground text-sm capitalize">
-              {formatScheduleDetail(course.scheduleDetail)}
+              {formatScheduleDetail(
+                course.scheduleDetail,
+                Boolean(course.scheduleDetail?.time),
+              )}
             </p>
           </div>
         </div>

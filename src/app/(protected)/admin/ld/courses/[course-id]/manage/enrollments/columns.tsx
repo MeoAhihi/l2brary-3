@@ -68,7 +68,8 @@ export const createEnrollmentColumns = ({
       header: "Học sinh",
       cell: ({ row }) => {
         const user = row.original.user;
-        if (!user) {
+        if (!user || !user.fullName) {
+          console.info("🚀 ~ createEnrollmentColumns ~ user:", user);
           return (
             <div className="text-muted-foreground text-sm">
               Người dùng không xác định
@@ -79,16 +80,14 @@ export const createEnrollmentColumns = ({
           <div className="flex items-center space-x-3">
             <Avatar className="h-8 w-8">
               <AvatarFallback>
-                {user.name
-                  .split(" ")
-                  .map((n: string) => n[0])
-                  .join("")
-                  .toUpperCase()}
+                {user.fullName.charAt(0).toUpperCase()}
               </AvatarFallback>
             </Avatar>
             <div>
-              <div className="font-medium">{user.name}</div>
-              <div className="text-muted-foreground text-sm">{user.email}</div>
+              <div className="font-medium">{user.fullName}</div>
+              <div className="text-muted-foreground text-sm">
+                {user.internationalName || "Không có tên quốc tế"}
+              </div>
             </div>
           </div>
         );

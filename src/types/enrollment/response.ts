@@ -1,12 +1,14 @@
 import { PaginatedResponse } from "@/types/api";
 
+import { EnrollmentStatusEnum } from "./type";
+
 /**
  * Thông tin user trong enrollment (có thể null)
  */
 export interface EnrollmentUser {
   id: string;
-  name: string;
-  email: string;
+  fullName: string;
+  internationalName: string;
 }
 
 /**
@@ -25,7 +27,7 @@ export interface EnrollmentItem {
   id: number;
   user: EnrollmentUser | null;
   course: EnrollmentCourse;
-  status: "pending" | "approved" | "rejected";
+  status: EnrollmentStatusEnum;
   enrolledAt: string;
 }
 

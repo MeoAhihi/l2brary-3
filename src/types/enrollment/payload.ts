@@ -2,7 +2,6 @@ import { EnrollmentStatusEnum } from "./type";
 
 export interface ApplyEnrollmentPayload {
   courseId: string;
-  userId: string;
 }
 
 export interface GetEnrollmentsPayload {
