@@ -16,8 +16,9 @@ import {
  * @returns Thông tin enrollment đã tạo
  */
 export const applyForEnrollment = async (payload: ApplyEnrollmentPayload) => {
-  const { data } = await axiosClient.post("/enrollment", payload);
-
+  const { data } = await axiosClient.post("/enrollment", undefined, {
+    params: payload,
+  });
   return data;
 };
 
