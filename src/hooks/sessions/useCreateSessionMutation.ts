@@ -10,7 +10,9 @@ interface CreateSessionPayload {
   sessionData: CreateSessionDto;
 }
 
-export function useCreateSessionMutation() {
+export function useCreateSessionMutation(options?: {
+  onSuccess?: (data: SessionDto, variables: CreateSessionPayload) => void;
+}) {
   return useMutation({
     mutationFn: ({ courseId, sessionData }: CreateSessionPayload) =>
       createSession(courseId, sessionData),
@@ -20,6 +22,10 @@ export function useCreateSessionMutation() {
 
       // Show success toast
       // toast.success("Session created successfully");
+
+      if (options?.onSuccess) {
+        options.onSuccess(data, variables);
+      }
     },
     onError: (error) => {
       console.error("Failed to create session:", error);

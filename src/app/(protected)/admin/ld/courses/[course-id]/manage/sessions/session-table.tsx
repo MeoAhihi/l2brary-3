@@ -63,13 +63,15 @@ export default function SessionsTable() {
 
       <DataTable
         columns={columns}
-        data={sessions}
+        data={sessions as any}
         {...paginationProps}
         header={() => (
           <div className="flex flex-row justify-between">
             <h2 className="text-xl font-semibold">Danh sách các buổi học</h2>
             <Button>
-              <Link href="/">Tạo mới</Link>
+              <Link href={`/admin/ld/courses/${courseId}/manage/sessions/new`}>
+                Tạo mới
+              </Link>
             </Button>
           </div>
         )}

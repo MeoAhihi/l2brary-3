@@ -22,6 +22,6 @@ export type CreateSessionDto = {
 };
 
 export type CreateSessionPayload = {
-  id: number;
+  courseId: string;
   data: CreateSessionDto;
 };
