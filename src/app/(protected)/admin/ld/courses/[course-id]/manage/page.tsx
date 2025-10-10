@@ -22,6 +22,7 @@ import { usePathname } from "next/navigation";
 import Head from "next/head";
 import { useGetCourseById } from "@/hooks/courses/useGetCourseById";
 import { useEnrollmentsQuery } from "@/hooks/enrollments";
+import { useSessionsQuery } from "@/hooks";
 
 const getPositionIcon = (role: string) => {
   switch (role) {
@@ -73,8 +74,10 @@ export default function ManageCoursePage({
   const { "course-id": courseId } = use(params);
 
   const { data: enrolments, isLoading } = useEnrollmentsQuery({ courseId });
-  // { params }: ManageCoursePageProps
-  // const { "course-id": courseId } = use(params);
+
+  const { data: sessions } = useSessionsQuery({
+    apiParams: { courseId },
+  });
 
   if (isLoading) return "VUi lòng chờ giây lát...";
   return (
@@ -105,7 +108,7 @@ export default function ManageCoursePage({
               <BarChart3 className="text-muted-foreground h-4 w-4" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">89</div>
+              <div className="text-2xl font-bold">{sessions!.total}</div>
             </CardContent>
           </Card>
 
