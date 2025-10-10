@@ -1,7 +1,5 @@
 import { Metadata } from "next";
 
-import { getSessions } from "@/apis/ld.api";
-
 import SessionsTable from "./session-table";
 
 export const metadata: Metadata = {
@@ -17,11 +15,10 @@ type PageProps = {
 
 export default async function Page({ params }: PageProps) {
   const { "course-id": courseId } = await params;
-  const sessions = await getSessions(courseId);
 
   return (
     <div className="p-6">
-      <SessionsTable sessions={sessions} />
+      <SessionsTable sessions={[]} />
     </div>
   );
 }

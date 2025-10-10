@@ -10,6 +10,9 @@
 !.yarn/releases
 !.yarn/versions
 
+# npm lockfile (project uses pnpm)
+package-lock.json
+
 # testing
 /coverage
 
@@ -42,3 +45,8 @@ next-env.d.ts
 
 #error logs
 bash.exe.stackdump
+
+# test
+/test
+.gemini/
+gha-creds-*.json

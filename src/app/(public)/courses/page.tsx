@@ -1,46 +1,64 @@
-"use client";
+import { DEFAULT_PAGE_SIZE } from "@/constants/common";
+import { QUERY_PARAMS } from "@/constants/query-params";
+import { getNumericParam } from "@/lib/param";
+import { getServerQueryClient } from "@/lib/react-query-server";
+import type { GetCoursePayload } from "@/types/courses/payload";
 
-import Head from "next/head";
-import { useState } from "react";
+import { CourseWrapper } from "./components/CourseWrapper";
+import { CourseProvider } from "./contexts";
+import { courseListQueryOptions } from "./queries";
 
-import { CourseCard } from "@/components/course/course-card";
-import { PaginationButtons } from "@/components/ui/pagination-buttons";
-import courses from "@/constants/courses.json";
+export const metadata = {
+  title: "Courses | L2brary",
+  description: "Browse available courses and learning opportunities",
+};
 
-export default function CoursesPage() {
-  const pageSize = 8;
-  const [page, setPage] = useState(1);
-  const totalPages = Math.ceil(courses.length / pageSize);
-  const pagedCourses = courses.slice((page - 1) * pageSize, page * pageSize);
+export const revalidate = 600;
+
+type CoursesPageSearchParams = Record<string, string | string[] | undefined>;
+
+interface CoursesPageProps {
+  searchParams?: Promise<CoursesPageSearchParams>;
+}
+
+export default async function CoursesPage({ searchParams }: CoursesPageProps) {
+  const resolvedSearchParams =
+    searchParams !== undefined ? await searchParams : {};
+
+  const page = getNumericParam(resolvedSearchParams[QUERY_PARAMS.PAGE], 1);
+  const limit = getNumericParam(
+    resolvedSearchParams[QUERY_PARAMS.LIMIT],
+    DEFAULT_PAGE_SIZE,
+  );
+  const baseFilters: Partial<GetCoursePayload> = {
+    page,
+    limit,
+  };
+
+  const hasAdvancedFilters = Object.keys(resolvedSearchParams).some(
+    (key) => key !== QUERY_PARAMS.PAGE && key !== QUERY_PARAMS.LIMIT,
+  );
+
+  const queryClient = getServerQueryClient();
+  const courses = await queryClient.ensureQueryData(
+    courseListQueryOptions(baseFilters),
+  );
 
   return (
-    <>
-      <Head>
-        <title>Courses | L2brary</title>
-        <meta
-          name="description"
-          content="Browse available courses and learning opportunities"
-        />
-      </Head>
+    <CourseProvider>
       <div className="container mx-auto px-4 py-8">
         <div className="mx-auto max-w-6xl">
           <h1 className="mb-6 text-3xl font-bold">Courses</h1>
           <p className="text-muted-foreground mb-8">
             Discover and enroll in courses to enhance your skills
           </p>
-
-          <div className="mb-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {pagedCourses.map((course) => (
-              <CourseCard key={course.title} {...course} />
-            ))}
-          </div>
-          <PaginationButtons
-            page={page}
-            totalPages={totalPages}
-            onPageChange={setPage}
+          <CourseWrapper
+            initialData={courses}
+            baseFilters={baseFilters}
+            hasAdvancedFilters={hasAdvancedFilters}
           />
         </div>
       </div>
-    </>
+    </CourseProvider>
   );
 }

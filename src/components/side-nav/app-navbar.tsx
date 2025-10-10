@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
+import { UserDropdown } from "@/components/header/user-dropdown";
 import { Button } from "@/components/ui/button";
 import { appNavbar } from "@/constants/app-navbar";
 
@@ -54,13 +55,7 @@ export function AppNavbar() {
         <Button asChild variant="outline">
           <Link href="/contact">Contact</Link>
         </Button>
-        <Button
-          asChild
-          variant="default"
-          className="bg-primary text-primary-foreground"
-        >
-          <Link href="/login">Login</Link>
-        </Button>
+        <UserDropdown />
       </div>
     </nav>
   );

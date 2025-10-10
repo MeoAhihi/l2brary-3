@@ -1,23 +1,32 @@
 import { Metadata } from "next";
+import { Suspense } from "react";
 
-import { getCourses } from "@/apis/ld.api";
+import { DataTableSkeleton } from "@/components/ui/data-table/data-table-skeleton";
 import PageHeader from "@/components/ui/page-header";
 
-import { CoursesTable } from "./courses-table";
+import { CoursesTable } from "./CoursesTable";
 
 export const metadata: Metadata = {
   title: "Courses | Admin | L2brary",
   description: "Manage all learning & development courses",
 };
 
-export default async function AdminCoursesPage() {
-  const courses = await getCourses();
+export default function AdminCoursesPage() {
   return (
-    <>
+    <div>
       <PageHeader pageTitle="Courses List" />
-      <div>
-        <CoursesTable courses={courses} />
-      </div>
-    </>
+      <Suspense
+        fallback={
+          <DataTableSkeleton
+            rowCount={10}
+            columnCount={6}
+            showHeader={true}
+            showPagination={true}
+          />
+        }
+      >
+        <CoursesTable />
+      </Suspense>
+    </div>
   );
 }

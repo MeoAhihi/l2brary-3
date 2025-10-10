@@ -1,14 +1,7 @@
 "use client";
 
-import { zodResolver } from "@hookform/resolvers/zod";
-import { format } from "date-fns";
-import { Calendar as CalendarIcon } from "lucide-react";
-import { useForm } from "react-hook-form";
-import { toast } from "sonner";
-import { z } from "zod";
-
+import { adminModifyUserProfile } from "@/apis/user.api";
 import { Button } from "@/components/ui/button";
-import { Calendar } from "@/components/ui/calendar";
 import {
   Form,
   FormControl,
@@ -19,60 +12,84 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { PhoneInput } from "@/components/ui/phone-input";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { cn } from "@/lib/utils";
+import { invalidateQueries } from "@/lib/query-client";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { format } from "date-fns";
+import { useRouter } from "next/navigation";
+import { useForm } from "react-hook-form";
+import { toast } from "sonner";
+import { z } from "zod";
 
+// Rewritten schema: matches UpdateUserDto field names from @file_context_0
 const formSchema = z.object({
-  fullname: z.string().min(1), // delete require contraints
-  isMale: z.enum(["male", "female", "other"]),
-  birthday: z.coerce.date().optional(),
+  fullName: z.string().optional(),
+  internationalName: z.string().optional(),
+  gender: z.enum(["male", "female", "other"]).optional(),
+  birthdate: z.coerce.date().optional(),
   email: z.string().email().optional(),
-  phone_number: z.string().optional(),
-  school_class: z.string().min(1).optional(),
-  role: z.string().min(1).optional(),
+  phoneNumber: z.string().optional(),
+  rank: z.string().optional(), // Added rank field
+  // Add more fields here as needed to match backend DTO
 });
 
 export function MemberForm({ defaultValues }: any) {
+  const router = useRouter();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      fullname: defaultValues?.fullname || "",
-      isMale: "male", //defaultValues?.isMale || "",
-      birthday: defaultValues?.birthday
-        ? new Date(defaultValues?.birthday)
-        : new Date(),
+      fullName: defaultValues?.fullName || "",
+      internationalName: defaultValues?.internationalName || "",
+      gender: defaultValues?.gender ?? "male",
+      birthdate: defaultValues?.birthdate
+        ? new Date(defaultValues?.birthdate)
+        : undefined,
       email: defaultValues?.email || "",
-      phone_number: defaultValues?.phone_number || "",
-      school_class: defaultValues?.school_class || "",
-      role: defaultValues?.role || "",
+      phoneNumber: defaultValues?.phoneNumber || "",
+      rank: defaultValues?.rank || "",
+      // Add defaults for more fields if needed
     },
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
+  // UseUpdateUser
+
+  async function onSubmit(values: z.infer<typeof formSchema>) {
     try {
-      console.log(values);
-      toast(
-        <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-          <code className="text-white">{JSON.stringify(values, null, 2)}</code>
-        </pre>,
-      );
+      // Prepare payload for UpdateUserDto
+      const payload = {
+        ...values,
+        birthdate: values.birthdate
+          ? format(values.birthdate, "yyyy-MM-dd")
+          : undefined,
+      };
+
+      // Optionally, get user id from defaultValues or props if needed
+      // For now, assuming defaultValues.id is available
+      const userId = defaultValues?.id;
+      if (!userId) {
+        toast.error("Không tìm thấy ID người dùng để cập nhật.");
+        return;
+      }
+
+      // Call update API
+      const resp = await adminModifyUserProfile(userId, payload);
+      // Invalidate the users list query after updating user
+      invalidateQueries.members();
+      toast.success("Cập nhật thông tin thành viên thành công!");
+      router.push("/admin/members");
+      // Optionally, you can do other actions here, e.g., refresh page, etc.
     } catch (error) {
-      console.error("Lỗi Đăng ký", error);
-      toast.error("Đăng ký không thành công. Vui lòng thử lại.");
+      console.error("Lỗi cập nhật thành viên", error);
+      toast.error("Cập nhật thông tin không thành công. Vui lòng thử lại.");
     }
   }
+
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="w-100 space-y-8">
         <FormField
           control={form.control}
-          name="fullname"
+          name="fullName"
           render={({ field }) => (
             <FormItem>
               <FormLabel>Họ và Tên</FormLabel>
@@ -86,7 +103,25 @@ export function MemberForm({ defaultValues }: any) {
 
         <FormField
           control={form.control}
-          name="isMale"
+          name="internationalName"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Tên quốc tế</FormLabel>
+              <FormControl>
+                <Input
+                  placeholder="International Name (ví dụ: J. Doe)"
+                  type="text"
+                  {...field}
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={form.control}
+          name="gender"
           render={({ field }) => (
             <FormItem className="space-y-3">
               <FormLabel>Giới tính</FormLabel>
@@ -94,13 +129,7 @@ export function MemberForm({ defaultValues }: any) {
                 <RadioGroup
                   onValueChange={field.onChange}
                   className="flex flex-col space-y-1"
-                  defaultValue={
-                    defaultValues
-                      ? defaultValues.isMale
-                        ? "male"
-                        : "female"
-                      : ""
-                  }
+                  value={field.value}
                 >
                   {[
                     ["Nam", "male"],
@@ -126,41 +155,36 @@ export function MemberForm({ defaultValues }: any) {
 
         <FormField
           control={form.control}
-          name="birthday"
-          render={({ field }) => (
-            <FormItem className="flex flex-col">
-              <FormLabel>Ngày sinh</FormLabel>
-              <Popover>
-                <PopoverTrigger asChild>
-                  <FormControl>
-                    <Button
-                      variant="outline"
-                      className={cn(
-                        "w-[240px] pl-3 text-left font-normal",
-                        !field.value && "text-muted-foreground",
-                      )}
-                    >
-                      {field.value ? (
-                        format(field.value, "PPP")
-                      ) : (
-                        <span>Pick a date</span>
-                      )}
-                      <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
-                    </Button>
-                  </FormControl>
-                </PopoverTrigger>
-                <PopoverContent className="w-auto p-0" align="start">
-                  <Calendar
-                    mode="single"
-                    selected={field.value}
-                    onSelect={field.onChange}
-                    initialFocus
+          name="birthdate"
+          render={({ field }) => {
+            // Format the field value to yyyy-mm-dd if it's a valid date
+            const formattedValue = (() => {
+              if (field.value) {
+                const dateObj = new Date(field.value);
+                if (!isNaN(dateObj.getTime())) {
+                  const year = dateObj.getFullYear();
+                  const month = String(dateObj.getMonth() + 1).padStart(2, "0");
+                  const day = String(dateObj.getDate()).padStart(2, "0");
+                  return `${year}-${month}-${day}`;
+                }
+              }
+              return field.value?.toString();
+            })();
+            return (
+              <FormItem className="flex flex-col">
+                <FormLabel>Ngày sinh</FormLabel>
+                <FormControl>
+                  <Input
+                    type="date"
+                    {...field}
+                    value={formattedValue}
+                    className="w-[240px]"
                   />
-                </PopoverContent>
-              </Popover>
-              <FormMessage />
-            </FormItem>
-          )}
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            );
+          }}
         />
 
         <FormField
@@ -183,16 +207,22 @@ export function MemberForm({ defaultValues }: any) {
 
         <FormField
           control={form.control}
-          name="phone_number"
+          name="phoneNumber"
           render={({ field }) => (
             <FormItem className="flex flex-col items-start">
               <FormLabel>Số điện thoại</FormLabel>
               <FormControl className="w-full">
-                <PhoneInput
-                  defaultValue="123456789"
-                  placeholder="090-xxxx-xxx"
+                <Input
+                  placeholder="Chỉ nhập số điện thoại"
+                  type="tel"
+                  inputMode="numeric"
+                  pattern="[0-9]*"
                   {...field}
-                  defaultCountry="VN"
+                  onChange={(e) => {
+                    // Only allow numbers
+                    const onlyNums = e.target.value.replace(/\D/g, "");
+                    field.onChange(onlyNums);
+                  }}
                 />
               </FormControl>
               <FormDescription>Số điện thoại để kết bạn Zalo.</FormDescription>
@@ -201,38 +231,26 @@ export function MemberForm({ defaultValues }: any) {
           )}
         />
 
+        {/* Add rank field */}
         <FormField
           control={form.control}
-          name="school_class"
+          name="rank"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Lớp học</FormLabel>
+              <FormLabel>Rank</FormLabel>
               <FormControl>
-                <Input placeholder="12A3" type="text" {...field} />
+                <Input
+                  placeholder="Nhập rank hoặc chức vụ (ví dụ: member, leader, etc.)"
+                  type="text"
+                  {...field}
+                />
               </FormControl>
-              <FormDescription>Lớp học ở trường</FormDescription>
               <FormMessage />
             </FormItem>
           )}
         />
 
-        <FormField
-          control={form.control}
-          name="role"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Vai trò</FormLabel>
-              <FormControl>
-                <Input placeholder="Thành viên" type="text" {...field} />
-              </FormControl>
-              <FormDescription>
-                Vị trí làm việc trong CLB (VD: Thành viên, Thiết kế, Diễn giả,
-                ...)
-              </FormDescription>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+        {/* Extend with more fields as needed in the future */}
 
         <Button type="submit" className="w-full">
           Lưu thành viên

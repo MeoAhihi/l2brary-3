@@ -1,5 +1,5 @@
 import axios from "axios";
-import { cookies } from "next/headers";
+import { deleteCookie, getCookie } from "cookies-next";
 
 import { ACCESS_TOKEN } from "@/constants/authentication";
 import { IS_PRODUCTION, STATIC_API_URL } from "@/constants/common";
@@ -16,8 +16,7 @@ const axiosClient = axios.create({
 
 axiosClient.interceptors.request.use(
   async function (config) {
-    const cookieStore = await cookies();
-    const token = cookieStore.get(ACCESS_TOKEN)?.value;
+    const token = getCookie(ACCESS_TOKEN);
 
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
@@ -31,18 +30,29 @@ axiosClient.interceptors.request.use(
 axiosClient.interceptors.response.use(
   (response) => response,
   async (error) => {
-    const status = error.response?.status;
-    const message = error.response?.data?.message;
-    const cookieStore = await cookies();
+    const status = error?.response?.status || error?.status;
+    const responseData = error?.response?.data;
+
+    // Get message from response data if available, fallback to error message
+    const message = responseData?.message || error?.message;
+    const code = error?.code;
 
     if (status === 401) {
-      cookieStore.delete(ACCESS_TOKEN);
-
+      deleteCookie(ACCESS_TOKEN);
       window.location.reload();
     }
-    if (!IS_PRODUCTION) console.log(error);
 
-    const apiError: ApiError = { message, status };
+    // Only log errors in development, except 403
+    if (!IS_PRODUCTION && status !== 403) {
+      console.log({ message, status, code, responseData });
+    }
+
+    const apiError: ApiError = {
+      message,
+      status,
+      code,
+      responseData,
+    };
 
     return Promise.reject(apiError);
   },

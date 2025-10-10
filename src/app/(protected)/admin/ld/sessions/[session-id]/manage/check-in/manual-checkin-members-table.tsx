@@ -6,9 +6,8 @@ import { Button } from "@/components/ui/button";
 import { DataTable } from "@/components/ui/data-table/data-table";
 import { DataTablePagination } from "@/components/ui/data-table/data-table-pagination";
 import { Input } from "@/components/ui/input";
-import { Member } from "@/types/iam.types";
 
-import { columns } from "./columns";
+import { columns, Member } from "./columns";
 
 type ManualCheckinMembersTableProps = {
   members: Member[];

@@ -22,7 +22,6 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import studentsWithPositions from "@/constants/students.json";
 
 export const metadata: Metadata = {
   title: "Course Overview | Admin | L2brary",
@@ -210,7 +209,7 @@ export default function ManageCoursePage() {
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
-            {studentsWithPositions.map((student) => (
+            {/* {studentsWithPositions.map((student) => (
               <div
                 key={student.id}
                 className="hover:bg-accent rounded-lg border p-4 transition-colors"
@@ -266,7 +265,7 @@ export default function ManageCoursePage() {
                   </div>
                 </div>
               </div>
-            ))}
+            ))} */}
           </div>
         </CardContent>
       </Card>

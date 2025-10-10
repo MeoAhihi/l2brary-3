@@ -1,63 +1,117 @@
-import { BookOpen, Calendar, CheckCircle, Users } from "lucide-react";
-import { Metadata } from "next";
+"use client";
 
-import { getEnrollment } from "@/apis/ld.api";
+import { BookOpen, Calendar, CheckCircle, Users } from "lucide-react";
+import { useParams } from "next/navigation";
+
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { StatCard } from "@/components/ui/stat-card";
-import { Enrollment } from "@/types/ld.types";
+import { useDeleteEnrollment, useUpdateEnrollment } from "@/hooks/enrollments";
+import type { EnrollmentItem } from "@/types/enrollment/response";
+import { EnrollmentStatusEnum } from "@/types/enrollment/type";
 
+import { createEnrollmentColumns } from "./columns";
 import { EnrollmentTable } from "./enrollment-table";
+import { useEnrollmentsTable } from "./hooks/useEnrollmentsTable";
 
-export const metadata: Metadata = {
-  title: "Course Enrollments | Admin | L2brary",
-  description: "Manage course enrollments and approval requests",
-};
+export default function EnrollmentsPage() {
+  const { "course-id": courseId } = useParams();
 
-export default async function EnrollmentsPage(/*{ params }: EnrollmentsPageProps*/) {
-  // const { "course-id": courseId } = use(params);
-  const enrollments: Enrollment[] = await getEnrollment();
+  // Mutations
+  const { mutate: updateEnrollment } = useUpdateEnrollment();
+  const { mutate: deleteEnrollment } = useDeleteEnrollment();
+
+  // Create columns
+  const columns = createEnrollmentColumns({
+    onApprove: (enrollmentId: number) => {
+      updateEnrollment({
+        enrollmentId: enrollmentId.toString(),
+        payload: { status: EnrollmentStatusEnum.APPROVED },
+      });
+    },
+    onReject: (enrollmentId: number) => {
+      updateEnrollment({
+        enrollmentId: enrollmentId.toString(),
+        payload: { status: EnrollmentStatusEnum.REJECTED },
+      });
+    },
+    onDelete: (enrollmentId: number) => {
+      if (confirm("Bạn có chắc chắn muốn xóa enrollment này?")) {
+        deleteEnrollment(enrollmentId.toString());
+      }
+    },
+  });
+
+  // Sử dụng hook tổng hợp logic table
+  const {
+    enrollments,
+    totalEnrollments,
+    isLoading,
+    isFetching,
+    isError,
+    paginationProps,
+    handlePageChange,
+    handlePageSizeChange,
+  } = useEnrollmentsTable({
+    courseId: courseId as string,
+    defaultPageSize: 8, // hoặc ADMIN_COURSE_PAGE_SIZE nếu cần
+  });
+
+  // Calculate statistics
+  const pendingCount = enrollments.filter(
+    (e: EnrollmentItem) => e.status === EnrollmentStatusEnum.PENDING,
+  ).length;
+  const approvedCount = enrollments.filter(
+    (e: EnrollmentItem) => e.status === EnrollmentStatusEnum.APPROVED,
+  ).length;
 
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="text-2xl font-bold">Enrollments</h2>
+          <h2 className="text-2xl font-bold">Đăng ký học</h2>
           <p className="text-muted-foreground">
-            Manage student enrollments and approval requests
+            Quản lý đăng ký học và yêu cầu phê duyệt của học sinh
           </p>
         </div>
-        <Button>Export List</Button>
+        <Button>Xuất danh sách</Button>
       </div>
 
       <Card>
         <CardHeader>
-          <CardTitle>Enrollment Statistics</CardTitle>
+          <CardTitle>Thống kê đăng ký</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-1 gap-4 md:grid-cols-4">
             <div className="text-center">
-              <div className="text-2xl font-bold text-green-600">1,234</div>
+              <div className="text-2xl font-bold text-green-600">
+                {totalEnrollments}
+              </div>
               <div className="text-muted-foreground text-sm">
-                Total Enrolled
+                Tổng số đăng ký
               </div>
             </div>
             <div className="text-center">
-              <div className="text-2xl font-bold text-yellow-600">23</div>
-              <div className="text-muted-foreground text-sm">
-                Pending Approval
+              <div className="text-2xl font-bold text-yellow-600">
+                {pendingCount}
               </div>
+              <div className="text-muted-foreground text-sm">Chờ phê duyệt</div>
             </div>
             <div className="text-center">
-              <div className="text-2xl font-bold text-blue-600">89</div>
-              <div className="text-muted-foreground text-sm">
-                Active This Week
+              <div className="text-2xl font-bold text-blue-600">
+                {approvedCount}
               </div>
+              <div className="text-muted-foreground text-sm">Đã phê duyệt</div>
             </div>
             <div className="text-center">
-              <div className="text-2xl font-bold text-gray-600">78.5%</div>
+              <div className="text-2xl font-bold text-gray-600">
+                {totalEnrollments > 0
+                  ? ((approvedCount / totalEnrollments) * 100).toFixed(1)
+                  : 0}
+                %
+              </div>
               <div className="text-muted-foreground text-sm">
-                Completion Rate
+                Tỷ lệ phê duyệt
               </div>
             </div>
           </div>
@@ -66,35 +120,50 @@ export default async function EnrollmentsPage(/*{ params }: EnrollmentsPageProps
 
       <Card>
         <CardContent>
-          <EnrollmentTable enrollments={enrollments} />
+          {isLoading ? (
+            <div className="py-8 text-center">Đang tải đăng ký...</div>
+          ) : isError ? (
+            <div className="py-8 text-center text-red-600">Lỗi tải đăng ký</div>
+          ) : (
+            <EnrollmentTable
+              enrollments={enrollments}
+              columns={columns}
+              totalEnrollments={totalEnrollments}
+              isLoading={isLoading}
+              isFetching={isFetching}
+              paginationProps={paginationProps}
+              onPageChange={handlePageChange}
+              onPageSizeChange={handlePageSizeChange}
+            />
+          )}
         </CardContent>
       </Card>
 
       {/* Student Performance Summary */}
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
         <StatCard
-          title="Average Grade"
+          title="Điểm trung bình"
           value="B+"
           icon={<BookOpen className="text-muted-foreground h-4 w-4" />}
-          description="+0.3 from last week"
+          description="+0.3 so với tuần trước"
         />
         <StatCard
-          title="Average Attendance"
+          title="Tỷ lệ tham gia trung bình"
           value="87%"
           icon={<Calendar className="text-muted-foreground h-4 w-4" />}
-          description="+2% from last week"
+          description="+2% so với tuần trước"
         />
         <StatCard
-          title="Assignment Completion"
+          title="Hoàn thành bài tập"
           value="73%"
           icon={<CheckCircle className="text-muted-foreground h-4 w-4" />}
-          description="23 of 32 assignments"
+          description="23 trên 32 bài tập"
         />
         <StatCard
-          title="Active Students"
+          title="Học sinh hoạt động"
           value="89%"
           icon={<Users className="text-muted-foreground h-4 w-4" />}
-          description="4 of 6 students active"
+          description="4 trên 6 học sinh hoạt động"
         />
       </div>
     </div>

@@ -1,8 +1,6 @@
 import { CheckSquare, Clock, UserCheck, Users, UserX, X } from "lucide-react";
 import { Metadata } from "next";
 
-import { getMembers } from "@/apis/iam.api";
-import { getStudentAttendances } from "@/apis/ld.api";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -14,21 +12,47 @@ import { StatCard } from "@/components/ui/stat-card";
 
 import ManualCheckinMembersTable from "./manual-checkin-members-table";
 
-const studentAttendances = await getStudentAttendances();
-
 export const metadata: Metadata = {
   title: "Check-in Management | Admin | L2brary",
   description: "Manage student check-ins for the session",
 };
 
-export default async function CheckInPage() {
-  const members = await getMembers();
+const members = [
+  {
+    id: 1,
+    name: "Nguyễn Văn A",
+    email: "a@example.com",
+    checkedIn: true,
+    status: "present",
+    checkInTime: "09:00",
+    avatar: "/path/to/avatar1.png",
+  },
+  {
+    id: 2,
+    name: "Trần Thị B",
+    email: "b@example.com",
+    checkedIn: false,
+    status: "absent",
+    avatar: "/path/to/avatar2.png",
+  },
+  {
+    id: 3,
+    name: "Lê Văn C",
+    email: "c@example.com",
+    checkedIn: true,
+    status: "late",
+    checkInTime: "09:05",
+    avatar: "/path/to/avatar3.png",
+  },
+];
 
-  const presentCount = studentAttendances.filter((s) => s.checkedIn).length;
-  const absentCount = studentAttendances.filter((s) => !s.checkedIn).length;
-  const lateCount = studentAttendances.filter(
-    (s) => s.status === "late",
+export default async function CheckInPage() {
+  // Định nghĩa các biến đếm
+  const presentCount = members.filter(
+    (member) => member.checkedIn && member.status !== "late",
   ).length;
+  const absentCount = members.filter((member) => !member.checkedIn).length;
+  const lateCount = members.filter((member) => member.status === "late").length;
 
   return (
     <div className="space-y-6">
@@ -38,20 +62,19 @@ export default async function CheckInPage() {
           title="Present"
           icon={<UserCheck className="h-4 w-4 text-green-600" />}
           value={<span className="text-green-600">{presentCount}</span>}
-          description={`${((presentCount / studentAttendances.length) * 100).toFixed(1)}% of total`}
+          description={`${((presentCount / members.length) * 100).toFixed(1)}% of total`}
         />
         <StatCard
           title="Absent"
           icon={<UserX className="h-4 w-4 text-red-600" />}
           value={<span className="text-red-600">{absentCount}</span>}
-          description={`${((absentCount / studentAttendances.length) * 100).toFixed(1)}% of total
-`}
+          description={`${((absentCount / members.length) * 100).toFixed(1)}% of total`}
         />
         <StatCard
           title="Late"
           icon={<Clock className="h-4 w-4 text-yellow-600" />}
           value={<span className="text-yellow-600">{lateCount}</span>}
-          description={`${((lateCount / studentAttendances.length) * 100).toFixed(1)}% of total`}
+          description={`${((lateCount / members.length) * 100).toFixed(1)}% of total`}
         />
       </div>
 
@@ -92,7 +115,7 @@ export default async function CheckInPage() {
           </CardHeader>
           <CardContent className="space-y-4">
             {/* Manual check in */}
-            <ManualCheckinMembersTable members={members} />
+            <ManualCheckinMembersTable members={[]} />
           </CardContent>
         </Card>
       </div>
@@ -107,7 +130,7 @@ export default async function CheckInPage() {
         </CardHeader>
         <CardContent>
           <div className="space-y-4">
-            {studentAttendances.map((student) => (
+            {members.map((student) => (
               <div
                 key={student.id}
                 className="flex items-center justify-between rounded-lg border p-4"

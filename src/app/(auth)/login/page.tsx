@@ -1,4 +1,3 @@
-import { LoginForm } from "@/components/auth/login-form";
 import {
   Card,
   CardContent,
@@ -7,7 +6,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 
-import { login } from "./action";
+import LoginForm from "./forms/LoginForm";
 
 export default function Page() {
   return (
@@ -22,7 +21,7 @@ export default function Page() {
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <LoginForm loginAction={login} />
+              <LoginForm />
             </CardContent>
           </Card>
         </div>

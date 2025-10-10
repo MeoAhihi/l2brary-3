@@ -1,18 +1,23 @@
 export interface ErrorResponse {
-  success: false;
   message: string;
-  code: string;
-  httpCode: number;
+  error: string;
+  statusCode: number;
 }
 
-export interface SuccessResponse<T> {
-  success: true;
-  data: T;
+export interface PaginatedResponse<T> {
+  items: T[];
+  total: number;
+  page: number;
+  limit: number;
+  pageCount: number;
 }
 
 export interface ApiError {
   message: string;
   status: number;
+  code: string;
+  responseData?: any; // Raw response data from API
 }
 
-export type ApiResponse<T> = SuccessResponse<T> | ErrorResponse;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type ApiResponse<T> = PaginatedResponse<T> | ErrorResponse | any;

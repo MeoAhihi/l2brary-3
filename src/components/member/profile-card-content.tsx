@@ -9,7 +9,7 @@ type ProfileCardContentProps = {
   name: string;
   phone: string;
   email: string;
-  className: string;
+  // className: string;
   gender: string;
   birthday: string;
 };
@@ -20,7 +20,7 @@ export default function ProfileCardContent({
   name,
   phone,
   email,
-  className,
+  // className,
   gender,
   birthday,
 }: ProfileCardContentProps) {
@@ -46,10 +46,10 @@ export default function ProfileCardContent({
           <Mail opacity={0.3} size={18} />
           {email}
         </div>
-        <div className="flex flex-row items-center gap-3">
+        {/* <div className="flex flex-row items-center gap-3">
           <Users opacity={0.3} size={18} />
           {className}
-        </div>
+        </div> */}
         <div className="flex flex-row items-center gap-3">
           <VenusAndMars opacity={0.3} size={18} />
           {gender}

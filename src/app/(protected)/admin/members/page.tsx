@@ -1,6 +1,5 @@
 import { Metadata } from "next";
 
-import { getMembers } from "@/apis/iam.api";
 import PageHeader from "@/components/ui/page-header";
 
 import DownloadMembersListButton from "./download_members_list_btn";
@@ -12,15 +11,13 @@ export const metadata: Metadata = {
 };
 
 export default async function AdminMembersPage() {
-  const members = await getMembers();
-
   return (
     <>
       <PageHeader pageTitle="Danh sách thành viên CLB">
-        <DownloadMembersListButton />
+        {/* <DownloadMembersListButton /> */}
       </PageHeader>
       <div className="mb-4">
-        <MemberTable members={members} />
+        <MemberTable />
       </div>
     </>
   );
