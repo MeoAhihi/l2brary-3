@@ -29,6 +29,7 @@ const formSchema = z.object({
   birthdate: z.coerce.date().optional(),
   email: z.string().email().optional(),
   phoneNumber: z.string().optional(),
+  rank: z.string().optional(), // Added rank field
   // Add more fields here as needed to match backend DTO
 });
 
@@ -45,6 +46,7 @@ export function MemberForm({ defaultValues }: any) {
         : undefined,
       email: defaultValues?.email || "",
       phoneNumber: defaultValues?.phoneNumber || "",
+      rank: defaultValues?.rank || "",
       // Add defaults for more fields if needed
     },
   });
@@ -224,6 +226,25 @@ export function MemberForm({ defaultValues }: any) {
                 />
               </FormControl>
               <FormDescription>Số điện thoại để kết bạn Zalo.</FormDescription>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        {/* Add rank field */}
+        <FormField
+          control={form.control}
+          name="rank"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Rank</FormLabel>
+              <FormControl>
+                <Input
+                  placeholder="Nhập rank hoặc chức vụ (ví dụ: member, leader, etc.)"
+                  type="text"
+                  {...field}
+                />
+              </FormControl>
               <FormMessage />
             </FormItem>
           )}

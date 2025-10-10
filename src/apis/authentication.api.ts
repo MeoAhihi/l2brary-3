@@ -37,12 +37,14 @@ export const getCurrentUser = async (): Promise<IAMProfileResponse> => {
  */
 export const inviteUser = async (
   email: string,
-): Promise<{ message: string; email: string; inviteCode: string }> => {
+): Promise<{
+  message: string;
+  inviteCode: { code: string; email: string };
+}> => {
   const { data } = await axiosClient.post<{
     message: string;
-    email: string;
-    inviteCode: string;
-  }>("/authentication/invite", null, {
+    inviteCode: { code: string; email: string };
+  }>("/authentication/invite", "{}", {
     params: { email },
   });
 

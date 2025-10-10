@@ -7,6 +7,26 @@ import { inviteUser } from "@/apis/authentication.api";
  */
 export function useInviteUser() {
   return useMutation({
-    mutationFn: (email: string) => inviteUser(email),
+    mutationFn: (email: string) => {
+      return inviteUser(email);
+    },
+    onSuccess: (data) => {
+      if (typeof window !== "undefined") {
+        // dynamically import toast to avoid SSR issues
+        import("sonner").then(({ toast }) => {
+          toast(
+            `Mã mời: ${data.inviteCode.code} đã gửi tới ${data.inviteCode.email}`,
+            {
+              duration: 60_000,
+              action: {
+                label: "Copy",
+                onClick: () =>
+                  navigator.clipboard.writeText(data.inviteCode.code),
+              },
+            },
+          );
+        });
+      }
+    },
   });
 }

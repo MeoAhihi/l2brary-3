@@ -46,7 +46,7 @@ export default function MemberDetailPage({ params }: MemberDetailPageProps) {
         <div className="col-span-4 space-y-4">
           <Card className="relative">
             <Badge className="absolute top-2.5 left-2.5 text-xs font-semibold">
-              Quản lý
+              {userInfo.rank ?? "Newbie"}
             </Badge>
             {/* {JSON.stringify(data)} */}
             <ProfileCardContent

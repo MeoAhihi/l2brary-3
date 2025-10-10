@@ -7,6 +7,9 @@ import { MemberForm } from "@/components/member/member-form";
 import PageHeader from "@/components/ui/page-header";
 import Head from "next/head";
 import { useGetUserById } from "@/hooks/users";
+import { CourseCertificateForm } from "./course-certificate";
+import { EventCertificateForm } from "./event-certificate";
+import { ExperienceForm } from "./experience";
 
 interface EditMemberPageProps {
   params: Promise<{
@@ -46,17 +49,13 @@ export default function EditMemberPage({ params }: EditMemberPageProps) {
             </div>
 
             <div className="rounded-lg border p-6">
-              <h3 className="mb-2 font-semibold">Rank Management</h3>
-              <p className="text-muted-foreground text-sm">
-                Rank and status management options will be implemented here
-              </p>
+              <CourseCertificateForm user={userInfo!} />
             </div>
-
             <div className="rounded-lg border p-6">
-              <h3 className="mb-2 font-semibold">Save Actions</h3>
-              <p className="text-muted-foreground text-sm">
-                Save and cancel buttons will be implemented here
-              </p>
+              <EventCertificateForm user={userInfo!} />
+            </div>
+            <div className="rounded-lg border p-6">
+              <ExperienceForm user={userInfo!} />
             </div>
           </div>
         </div>
