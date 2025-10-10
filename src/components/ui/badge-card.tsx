@@ -18,11 +18,15 @@ export function BadgeCard({
         <h3 className="font-semibold">{title}</h3>
       </CardHeader>
       <CardContent className="flex flex-wrap gap-2">
-        {items.map((item) => (
-          <Badge key={item} variant={variant}>
-            {item}
-          </Badge>
-        ))}
+        {items && items.length > 0 ? (
+          items.map((item) => (
+            <Badge key={item} variant={variant}>
+              {item}
+            </Badge>
+          ))
+        ) : (
+          <span className="text-gray-500">Chưa có thông tin</span>
+        )}
       </CardContent>
     </Card>
   );
