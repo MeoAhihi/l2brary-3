@@ -14,6 +14,7 @@ import { useGetUserById } from "@/hooks/users";
 import { MyChart } from "./chart";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Gender } from "@/types/gender.enum";
+import { ActivityCard } from "./activity-card";
 
 // export const metadata: Metadata = {
 //   title: "Member Details | Admin | L2brary",
@@ -33,35 +34,7 @@ export default function MemberDetailPage({ params }: MemberDetailPageProps) {
 
   if (isLoading) return <div>Vui lòng chờ giây lát...</div>;
 
-  console.log("🚀 ~ MemberDetailPage ~ data:", data!.data);
   const userInfo = data!.data;
-  const classCerts = [
-    "Chuyên đề Vật lý hiện đại",
-    "Thực hành Quang học",
-    "Hội thảo Vật lý lượng tử",
-    "Workshop Điện từ học",
-    "Khóa học Cơ học cổ điển",
-    "Thí nghiệm Vật lý hạt nhân",
-    "Chuyên đề Vật lý thiên văn",
-  ];
-  const experiences = [
-    "Olympic Vật lý",
-    "Thực tập lab",
-    "CLB Vật lý",
-    "Trợ giảng",
-    "Hội thảo",
-    "Nghiên cứu",
-    "Tình nguyện",
-  ];
-  const seminars = [
-    "Hội thảo Khoa học",
-    "Seminar Vật lý ứng dụng",
-    "Hội nghị Nghiên cứu trẻ",
-    "Workshop STEM",
-    "Hội thảo Công nghệ mới",
-    "Seminar Đổi mới sáng tạo",
-    "Hội thảo Giáo dục",
-  ];
   return (
     <>
       <PageHeader pageTitle={`Hồ sơ: ${userInfo.fullName}`} />
@@ -106,26 +79,7 @@ export default function MemberDetailPage({ params }: MemberDetailPageProps) {
             title="Tham gia Sự kiện"
             items={userInfo.eventCertificates ?? []}
           />
-          <Card>
-            <CardContent>
-              <h2 className="mb-4 text-2xl font-medium">Hoạt động Gần đây</h2>
-              <Timeline className="mt-8">
-                {/* {timelineData.map((item) => (
-                  <TimelineItem key={item.id}>
-                    <TimelineHeader>
-                      <TimelineTime>{item.time}</TimelineTime>
-                      <TimelineTitle>{item.title}</TimelineTitle>
-                    </TimelineHeader>
-                    {item.description && (
-                      <TimelineDescription>
-                        {item.description}
-                      </TimelineDescription>
-                    )}
-                  </TimelineItem>
-                ))} */}
-              </Timeline>
-            </CardContent>
-          </Card>
+          <ActivityCard userId={user_id} />
         </div>
       </div>
       <div className="mb-4" />

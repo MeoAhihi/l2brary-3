@@ -6,6 +6,14 @@ import type {
   ActivityResponseDto,
   ActivityUpdatePayload,
 } from "@/types/activities/activity";
+import type { PaginatedResponse } from "@/types/api";
+
+import {
+  LogActivityDto,
+  ActivityLogType,
+  GetAllActivityLogsQuery,
+  UserActivityReport,
+} from "@/types/activities/gamification";
 
 export const createActivity = async (payload: ActivityCreatePayload) => {
   const { data } = await axiosClient.post<ActivityResponseDto>(
@@ -57,6 +65,34 @@ export const deleteActivity = async (id: string | number) => {
 export const getActivityCategories = async () => {
   const { data } = await axiosClient.get<ActivityCategory[]>(
     "/activity/categories",
+  );
+  return data;
+};
+
+// POST /v1/api/gamification/log-activity
+export const logGamificationActivity = async (payload: LogActivityDto) => {
+  const { data } = await axiosClient.post<ActivityLogType>(
+    "/gamification/log-activity",
+    payload,
+  );
+  return data;
+};
+
+// GET /v1/api/gamification
+export const getGamificationData = async (query: GetAllActivityLogsQuery) => {
+  const { data } = await axiosClient.get<PaginatedResponse<ActivityLogType>>(
+    "/gamification",
+    {
+      params: query,
+    },
+  );
+  return data;
+};
+
+// GET /v1/api/gamification/report/{userId}
+export const getUserActivityReport = async (userId: string) => {
+  const { data } = await axiosClient.get<UserActivityReport>(
+    `/gamification/report/${userId}`,
   );
   return data;
 };

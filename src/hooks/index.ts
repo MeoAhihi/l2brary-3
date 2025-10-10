@@ -1,5 +1,6 @@
 // Global hooks barrel exports
 export * from "./courses";
+export * from "./activity-log";
 
 // Re-export specific hooks for convenience
 export { useCourseFilters } from "./courses/useCourseFilters";

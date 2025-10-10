@@ -23,6 +23,8 @@ export const queryKeys = {
     myEnrollments: ["ld", "my-enrollments"] as const,
     activities: ["ld", "activities"] as const,
     activityCategories: ["ld", "activityCategories"] as const,
+    activityLogs: ["ld", "activityLogs"] as const,
+    userActivityReport: ["ld", "userActivityReport"] as const,
   },
 
   // Analytics
