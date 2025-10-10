@@ -74,7 +74,7 @@ export default function EnrollmentsPage() {
             Quản lý đăng ký học và yêu cầu phê duyệt của học sinh
           </p>
         </div>
-        <Button>Xuất danh sách</Button>
+        {/* <Button>Xuất danh sách</Button> */}
       </div>
 
       <Card>
@@ -140,7 +140,7 @@ export default function EnrollmentsPage() {
       </Card>
 
       {/* Student Performance Summary */}
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
+      {/* <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
         <StatCard
           title="Điểm trung bình"
           value="B+"
@@ -165,7 +165,7 @@ export default function EnrollmentsPage() {
           icon={<Users className="text-muted-foreground h-4 w-4" />}
           description="4 trên 6 học sinh hoạt động"
         />
-      </div>
+      </div> */}
     </div>
   );
 }

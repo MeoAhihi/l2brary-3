@@ -1,6 +1,7 @@
 import PageHeader from "@/components/ui/page-header";
 
 import ScoreTable from "./score-table";
+import { StarIcon } from "lucide-react";
 
 const data = [
   {
@@ -164,6 +165,12 @@ const data = [
 export default function Page() {
   return (
     <>
+      <div className="mb-4 flex items-center gap-3 rounded-lg bg-yellow-50 px-4 py-2">
+        <StarIcon className="text-yellow-400" />
+        <p className="font-semibold text-yellow-700">
+          Coming Soon: Chức năng sẽ sớm có trong tương lai
+        </p>
+      </div>
       <PageHeader pageTitle="Bảng điểm" />
       <ScoreTable scores={data} />
     </>
