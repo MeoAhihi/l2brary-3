@@ -7,6 +7,7 @@ import { use } from "react";
 
 import PageHeader from "@/components/ui/page-header";
 import { cn } from "@/lib/utils";
+import { useGetCourseById } from "@/hooks/courses/useGetCourseById";
 interface ManageCourseLayoutProps {
   children: React.ReactNode;
   params: Promise<{
@@ -53,12 +54,16 @@ export default function ManageCourseLayout({
 }: ManageCourseLayoutProps) {
   const pathname = usePathname();
   const { "course-id": courseId } = use(params);
-  const courseName = "Vật lý Lý thuyết";
+  const { data, isLoading } = useGetCourseById(courseId);
 
+  if (isLoading) return "Vui lòng chờ trong giây lát...";
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="mx-auto max-w-6xl">
-        <PageHeader pageTitle={courseName} descriptions={[`ID: ${courseId}`]} />
+        <PageHeader
+          pageTitle={data?.title!}
+          descriptions={[`ID: ${courseId}`]}
+        />
 
         {/* Tab Navigation */}
         <div className="border-b">

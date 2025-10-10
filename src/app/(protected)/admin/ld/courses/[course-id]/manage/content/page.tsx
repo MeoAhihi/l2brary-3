@@ -9,6 +9,7 @@ import {
   Link as LinkIcon,
   MoreHorizontal,
   Plus,
+  StarIcon,
   Trash2,
   Video,
 } from "lucide-react";
@@ -151,6 +152,12 @@ export default function ContentPage(/*{ params }: ContentPageProps*/) {
 
   return (
     <div className="space-y-6">
+      <div className="mb-4 flex items-center gap-3 rounded-lg bg-yellow-50 px-4 py-2">
+        <StarIcon className="text-yellow-400" />
+        <p className="font-semibold text-yellow-700">
+          Coming Soon: Chức năng sẽ sớm có trong tương lai
+        </p>
+      </div>
       <div className="flex items-center justify-between">
         <div>
           <h2 className="text-2xl font-bold">Course Content</h2>

@@ -63,14 +63,14 @@ export function EnrollmentTable({
               </p>
             </div>
             <div className="flex w-full items-center gap-2 sm:w-auto">
-              <Button variant="outline" size="sm">
+              {/* <Button variant="outline" size="sm">
                 <Filter className="mr-2 h-4 w-4" />
                 Lọc
               </Button>
               <Button variant="outline" size="sm">
                 <Mail className="mr-2 h-4 w-4" />
                 Gửi email
-              </Button>
+              </Button> */}
               <div className="relative">
                 <Search className="text-muted-foreground absolute top-2.5 left-2 h-4 w-4" />
                 <Input

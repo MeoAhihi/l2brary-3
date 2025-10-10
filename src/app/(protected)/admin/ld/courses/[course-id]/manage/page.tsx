@@ -1,10 +1,11 @@
+"use client";
+
 // import { use } from "react";
 import {
   Award,
   BarChart3,
   BookOpen,
   Crown,
-  MoreHorizontal,
   Shield,
   Star,
   TrendingUp,
@@ -12,21 +13,16 @@ import {
 } from "lucide-react";
 import { Metadata } from "next";
 
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-
-export const metadata: Metadata = {
-  title: "Course Overview | Admin | L2brary",
-  description: "Course overview and analytics",
-};
+import { getEnrollments } from "@/apis/enrollment.api";
+import { use } from "react";
+import { usePathname } from "next/navigation";
+import Head from "next/head";
+import { useGetCourseById } from "@/hooks/courses/useGetCourseById";
+import { useEnrollmentsQuery } from "@/hooks/enrollments";
+import { useSessionsQuery } from "@/hooks";
 
 const getPositionIcon = (role: string) => {
   switch (role) {
@@ -68,148 +64,157 @@ const getPositionBadge = (role: string) => {
   }
 };
 
-export default function ManageCoursePage() {
-  // { params }: ManageCoursePageProps
-  // const { "course-id": courseId } = use(params);
+export default function ManageCoursePage({
+  params,
+}: {
+  params: Promise<{
+    "course-id": string;
+  }>;
+}) {
+  const { "course-id": courseId } = use(params);
 
+  const { data: enrolments, isLoading } = useEnrollmentsQuery({ courseId });
+
+  const { data: sessions } = useSessionsQuery({
+    apiParams: { courseId },
+  });
+
+  if (isLoading) return "VUi lòng chờ giây lát...";
   return (
-    <div className="space-y-6">
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">
-              Total Students
-            </CardTitle>
-            <Users className="text-muted-foreground h-4 w-4" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">1,234</div>
-            <p className="text-muted-foreground text-xs">
-              +20.1% from last month
-            </p>
-          </CardContent>
-        </Card>
+    <>
+      <Head>
+        <title>Course Overview | Admin | L2brary</title>
+        <meta name="description" content="Course overview and analytics" />
+      </Head>
+      <div className="space-y-6">
+        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+          <Card>
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardTitle className="text-sm font-medium">
+                Tổng số tham gia
+              </CardTitle>
+              <Users className="text-muted-foreground h-4 w-4" />
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold">{enrolments!.total}</div>
+            </CardContent>
+          </Card>
 
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">
-              Active Sessions
-            </CardTitle>
-            <BarChart3 className="text-muted-foreground h-4 w-4" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">89</div>
-            <p className="text-muted-foreground text-xs">+12% from last week</p>
-          </CardContent>
-        </Card>
+          <Card>
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardTitle className="text-sm font-medium">
+                Số tiết đã học
+              </CardTitle>
+              <BarChart3 className="text-muted-foreground h-4 w-4" />
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold">{sessions!.total}</div>
+            </CardContent>
+          </Card>
 
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">
-              Course Modules
-            </CardTitle>
-            <BookOpen className="text-muted-foreground h-4 w-4" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">12</div>
-            <p className="text-muted-foreground text-xs">
-              3 modules in progress
-            </p>
-          </CardContent>
-        </Card>
+          <Card>
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardTitle className="text-sm font-medium">Số mô-đun</CardTitle>
+              <BookOpen className="text-muted-foreground h-4 w-4" />
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold">12</div>
+            </CardContent>
+          </Card>
 
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">
-              Completion Rate
-            </CardTitle>
-            <TrendingUp className="text-muted-foreground h-4 w-4" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">78.5%</div>
-            <p className="text-muted-foreground text-xs">
-              +5.2% from last month
-            </p>
-          </CardContent>
-        </Card>
-      </div>
+          <Card>
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardTitle className="text-sm font-medium">
+                Tỉ lệ hoàn thành
+              </CardTitle>
+              <TrendingUp className="text-muted-foreground h-4 w-4" />
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold">78.5%</div>
+            </CardContent>
+          </Card>
+        </div>
 
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
-        <Card className="col-span-4">
+        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
+          <Card className="col-span-4">
+            <CardHeader>
+              <CardTitle>Hoạt động gần đây</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-4">
+                <div className="flex items-center space-x-4">
+                  <div className="h-2 w-2 rounded-full bg-green-500"></div>
+                  <div className="flex-1">
+                    <p className="text-sm font-medium">
+                      Một thành viên vừa đăng ký
+                    </p>
+                    <p className="text-muted-foreground text-xs">
+                      2 phút trước
+                    </p>
+                  </div>
+                </div>
+                <div className="flex items-center space-x-4">
+                  <div className="h-2 w-2 rounded-full bg-blue-500"></div>
+                  <div className="flex-1">
+                    <p className="text-sm font-medium">Mô-đun vừa hoàn thành</p>
+                    <p className="text-muted-foreground text-xs">
+                      15 phút trước
+                    </p>
+                  </div>
+                </div>
+                <div className="flex items-center space-x-4">
+                  <div className="h-2 w-2 rounded-full bg-yellow-500"></div>
+                  <div className="flex-1">
+                    <p className="text-sm font-medium">Game log vừa hoàn tất</p>
+                    <p className="text-muted-foreground text-xs">1 giờ trước</p>
+                  </div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card className="col-span-3">
+            <CardHeader>
+              <CardTitle>Thao tác nhanh</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-2">
+                <button className="hover:bg-accent w-full rounded-lg border p-3 text-left transition-colors">
+                  <div className="font-medium">Thêm Mô-đun mới</div>
+                  <div className="text-muted-foreground text-sm">
+                    Tạo nội dung cho khóa học
+                  </div>
+                </button>
+                <button className="hover:bg-accent w-full rounded-lg border p-3 text-left transition-colors">
+                  <div className="font-medium">Duyệt đăng ký</div>
+                  <div className="text-muted-foreground text-sm">
+                    Phê duyệt các yêu cầu chờ xử lý
+                  </div>
+                </button>
+                <button className="hover:bg-accent w-full rounded-lg border p-3 text-left transition-colors">
+                  <div className="font-medium">Xuất báo cáo</div>
+                  <div className="text-muted-foreground text-sm">
+                    Tải xuống dữ liệu phân tích khóa học
+                  </div>
+                </button>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+
+        {/* Students with Special Positions */}
+        {/* <Card>
           <CardHeader>
-            <CardTitle>Recent Activity</CardTitle>
+            <div className="flex items-center justify-between">
+              <CardTitle>Students with Special Positions</CardTitle>
+              <Button variant="outline" size="sm">
+                Manage Positions
+              </Button>
+            </div>
           </CardHeader>
           <CardContent>
-            <div className="space-y-4">
-              <div className="flex items-center space-x-4">
-                <div className="h-2 w-2 rounded-full bg-green-500"></div>
-                <div className="flex-1">
-                  <p className="text-sm font-medium">New student enrolled</p>
-                  <p className="text-muted-foreground text-xs">2 minutes ago</p>
-                </div>
-              </div>
-              <div className="flex items-center space-x-4">
-                <div className="h-2 w-2 rounded-full bg-blue-500"></div>
-                <div className="flex-1">
-                  <p className="text-sm font-medium">Module completed</p>
-                  <p className="text-muted-foreground text-xs">
-                    15 minutes ago
-                  </p>
-                </div>
-              </div>
-              <div className="flex items-center space-x-4">
-                <div className="h-2 w-2 rounded-full bg-yellow-500"></div>
-                <div className="flex-1">
-                  <p className="text-sm font-medium">Assignment submitted</p>
-                  <p className="text-muted-foreground text-xs">1 hour ago</p>
-                </div>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-
-        <Card className="col-span-3">
-          <CardHeader>
-            <CardTitle>Quick Actions</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-2">
-              <button className="hover:bg-accent w-full rounded-lg border p-3 text-left transition-colors">
-                <div className="font-medium">Add New Module</div>
-                <div className="text-muted-foreground text-sm">
-                  Create course content
-                </div>
-              </button>
-              <button className="hover:bg-accent w-full rounded-lg border p-3 text-left transition-colors">
-                <div className="font-medium">Review Enrollments</div>
-                <div className="text-muted-foreground text-sm">
-                  Approve pending requests
-                </div>
-              </button>
-              <button className="hover:bg-accent w-full rounded-lg border p-3 text-left transition-colors">
-                <div className="font-medium">Generate Report</div>
-                <div className="text-muted-foreground text-sm">
-                  Export course analytics
-                </div>
-              </button>
-            </div>
-          </CardContent>
-        </Card>
-      </div>
-
-      {/* Students with Special Positions */}
-      <Card>
-        <CardHeader>
-          <div className="flex items-center justify-between">
-            <CardTitle>Students with Special Positions</CardTitle>
-            <Button variant="outline" size="sm">
-              Manage Positions
-            </Button>
-          </div>
-        </CardHeader>
-        <CardContent>
-          <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
-            {/* {studentsWithPositions.map((student) => (
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
+              {/* {studentsWithPositions.map((student) => (
               <div
                 key={student.id}
                 className="hover:bg-accent rounded-lg border p-4 transition-colors"
@@ -265,10 +270,11 @@ export default function ManageCoursePage() {
                   </div>
                 </div>
               </div>
-            ))} */}
-          </div>
-        </CardContent>
-      </Card>
-    </div>
+            ))} 
+            </div>
+          </CardContent>
+        </Card> */}
+      </div>
+    </>
   );
 }
