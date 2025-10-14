@@ -1,5 +1,5 @@
-import { RefRoleDto } from "./ref-role.dto";
 import { PermissionDto } from "./permission.dto";
+import { RefRoleDto } from "./ref-role.dto";
 
 /**
  * Payload for updating a role.

@@ -1,15 +1,16 @@
 "use client";
 
 import * as React from "react";
+
+import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
+  DialogDescription,
+  DialogFooter,
   DialogHeader,
   DialogTitle,
-  DialogFooter,
-  DialogDescription,
 } from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
 import { useInviteUser } from "@/hooks/invite-code/use-invite";
 
 interface InviteUserModalProps {

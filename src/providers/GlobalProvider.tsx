@@ -15,18 +15,11 @@ interface GlobalProviderProps {
 export function GlobalProvider({ children }: GlobalProviderProps) {
   return (
     <QueryProvider>
-      <ThemeProvider
-        attribute="class"
-        defaultTheme="system"
-        enableSystem
-        disableTransitionOnChange
-      >
-        <AuthProvider>
-          <AppProvider>
-            <DataProvider>{children}</DataProvider>
-          </AppProvider>
-        </AuthProvider>
-      </ThemeProvider>
+      <AuthProvider>
+        <AppProvider>
+          <DataProvider>{children}</DataProvider>
+        </AppProvider>
+      </AuthProvider>
     </QueryProvider>
   );
 }

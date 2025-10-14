@@ -2,8 +2,8 @@ import { useMutation } from "@tanstack/react-query";
 
 import { updateSession } from "@/apis/session.api";
 import { invalidateQueries } from "@/lib/query-client";
-import type { UpdateSessionDto } from "@/types/session/update-session.api.dto";
 import type { SessionDto } from "@/types/session/session.dto";
+import type { UpdateSessionDto } from "@/types/session/update-session.api.dto";
 
 interface UpdateSessionPayload {
   sessionId: string;

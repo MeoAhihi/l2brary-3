@@ -1,7 +1,8 @@
+import { StarIcon } from "lucide-react";
+
 import PageHeader from "@/components/ui/page-header";
 
 import ScoreTable from "./score-table";
-import { StarIcon } from "lucide-react";
 
 const data = [
   {

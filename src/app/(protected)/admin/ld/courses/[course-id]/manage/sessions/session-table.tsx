@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useParams } from "next/navigation";
 
 import { Button } from "@/components/ui/button";
 import { DataTable } from "@/components/ui/data-table/data-table";
@@ -8,8 +9,6 @@ import { DataTablePagination } from "@/components/ui/data-table/data-table-pagin
 import { Session } from "@/types/ld.types";
 
 import { columns } from "./column";
-
-import { useParams } from "next/navigation";
 import { useSessionTable } from "./use-session-table";
 
 export default function SessionsTable() {

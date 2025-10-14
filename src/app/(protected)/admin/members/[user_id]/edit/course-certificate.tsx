@@ -1,11 +1,12 @@
 "use client";
 
 import { useState } from "react";
-import { Input } from "@/components/ui/input";
+
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { useUpdateUser } from "@/hooks/users";
 import { GetOneUserResponse } from "@/types/user/get-one.api.dto";
-import { Badge } from "@/components/ui/badge";
 
 export function CourseCertificateForm({ user }: { user: GetOneUserResponse }) {
   const userId = user.id;

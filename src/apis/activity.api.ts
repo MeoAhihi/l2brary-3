@@ -6,14 +6,13 @@ import type {
   ActivityResponseDto,
   ActivityUpdatePayload,
 } from "@/types/activities/activity";
-import type { PaginatedResponse } from "@/types/api";
-
 import {
-  LogActivityDto,
   ActivityLogType,
   GetAllActivityLogsQuery,
+  LogActivityDto,
   UserActivityReport,
 } from "@/types/activities/gamification";
+import type { PaginatedResponse } from "@/types/api";
 
 export const createActivity = async (payload: ActivityCreatePayload) => {
   const { data } = await axiosClient.post<ActivityResponseDto>(

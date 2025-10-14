@@ -71,24 +71,23 @@ const LoginForm = () => {
           >
             {status === "loading" ? "Đang đăng nhập..." : "Đăng nhập"}
           </Button>
-          <Button variant="outline" className="w-full">
-            <Image
-              src="/icons8-google.svg"
-              alt="Google Icon"
-              width={20}
-              height={20}
-            />
-            Đăng nhập với Google
-          </Button>
         </div>
         <div className="mt-4 text-center text-sm">
-          Chưa có tài khoản?{" "}
+          👋 Sau khi nhận{" "}
+          <span
+            className="cursor-help underline decoration-dotted"
+            title="Mã mời là mã đăng ký nhận qua email sau khi phỏng vấn. Nếu chưa có, hãy liên hệ CLB nhé."
+          >
+            mã mời
+          </span>
+          , hãy nhấn{" "}
           <Link
             href={`/${PAGE_LINKS[PAGE_NAME.SIGN_UP]}`}
             className="underline underline-offset-4"
           >
-            Đăng ký
-          </Link>
+            vào đây
+          </Link>{" "}
+          nhé
         </div>
       </form>
     </Form>

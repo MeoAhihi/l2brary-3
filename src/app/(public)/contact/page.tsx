@@ -30,7 +30,7 @@ export default function ContactPage() {
     <div className="bg-background flex min-h-screen w-full items-center justify-center py-16">
       <div className="flex w-full max-w-4xl flex-col overflow-hidden rounded-lg bg-white shadow-lg md:flex-row dark:bg-zinc-900">
         {/* Image Section */}
-        <div className="justfy-center flex w-full items-center bg-zinc-100 p-8 md:w-1/2 dark:bg-zinc-800">
+        <div className="flex w-full items-center justify-center bg-zinc-100 p-8 md:w-1/2 dark:bg-zinc-800">
           <Image
             src="/l2brary.ico"
             alt="Contact us"

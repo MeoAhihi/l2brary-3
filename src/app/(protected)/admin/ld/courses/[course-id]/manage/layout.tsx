@@ -6,8 +6,8 @@ import { usePathname } from "next/navigation";
 import { use } from "react";
 
 import PageHeader from "@/components/ui/page-header";
-import { cn } from "@/lib/utils";
 import { useGetCourseById } from "@/hooks/courses/useGetCourseById";
+import { cn } from "@/lib/utils";
 interface ManageCourseLayoutProps {
   children: React.ReactNode;
   params: Promise<{
@@ -61,7 +61,7 @@ export default function ManageCourseLayout({
     <div className="container mx-auto px-4 py-8">
       <div className="mx-auto max-w-6xl">
         <PageHeader
-          pageTitle={data?.title!}
+          pageTitle={data!.title}
           descriptions={[`ID: ${courseId}`]}
         />
 

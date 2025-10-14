@@ -1,9 +1,9 @@
 import { getCourseSessions } from "@/apis/session.api";
 import { ADMIN_COURSE_PAGE_SIZE } from "@/constants/common";
 import { queryKeys } from "@/constants/query-keys";
+import { useTable } from "@/hooks/table";
 import type { GetAllSessionPayload } from "@/types/session/get-all-session.api.dto";
 import type { SessionDto } from "@/types/session/session.dto";
-import { useTable } from "@/hooks/table";
 
 interface UseSessionsTableOptions {
   defaultPageSize?: number;

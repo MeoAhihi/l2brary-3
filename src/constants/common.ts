@@ -9,7 +9,7 @@ export const DEFAULT_PAGE_INDEX = 1;
 
 export const PAGE_LINKS = {
   [PAGE_NAME.LOGIN]: "login",
-  [PAGE_NAME.SIGN_UP]: "sign-up",
+  [PAGE_NAME.SIGN_UP]: "register",
   [PAGE_NAME.DASHBOARD]: "dashboard",
   [PAGE_NAME.BIRTHDAY]: "dashboard/birthday",
   [PAGE_NAME.MEMBERS]: "dashboard/members",

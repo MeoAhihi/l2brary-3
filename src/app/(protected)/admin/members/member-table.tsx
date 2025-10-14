@@ -1,10 +1,12 @@
 "use client";
 
+import { useState } from "react";
+
 import { DataTable } from "@/components/ui/data-table/data-table";
 import { DataTablePagination } from "@/components/ui/data-table/data-table-pagination";
 import { useGetAllUsers } from "@/hooks/users";
 import { Member } from "@/types/member/response";
-import { useState } from "react";
+
 import { columns, TableHeader } from "./table.config";
 import { useMemberTable } from "./use-member-table";
 
