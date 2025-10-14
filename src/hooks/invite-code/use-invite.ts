@@ -1,4 +1,5 @@
 import { useMutation } from "@tanstack/react-query";
+
 import { inviteUser } from "@/apis/authentication.api";
 
 /**

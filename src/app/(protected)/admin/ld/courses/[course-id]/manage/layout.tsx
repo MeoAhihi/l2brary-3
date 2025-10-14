@@ -6,8 +6,8 @@ import { usePathname } from "next/navigation";
 import { use } from "react";
 
 import PageHeader from "@/components/ui/page-header";
-import { cn } from "@/lib/utils";
 import { useGetCourseById } from "@/hooks/courses/useGetCourseById";
+import { cn } from "@/lib/utils";
 interface ManageCourseLayoutProps {
   children: React.ReactNode;
   params: Promise<{

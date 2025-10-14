@@ -1,12 +1,13 @@
 "use client";
 
 import { Metadata } from "next";
+import Head from "next/head";
 import React from "react";
 
 import { MemberForm } from "@/components/member/member-form";
 import PageHeader from "@/components/ui/page-header";
-import Head from "next/head";
 import { useGetUserById } from "@/hooks/users";
+
 import { CourseCertificateForm } from "./course-certificate";
 import { EventCertificateForm } from "./event-certificate";
 import { ExperienceForm } from "./experience";

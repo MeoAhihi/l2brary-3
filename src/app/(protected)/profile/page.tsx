@@ -97,7 +97,7 @@ export default function ProfilePage() {
               name={user.name}
               phone={user.phone}
               email={user.email}
-              className={user.className}
+              // className={user.className}
               gender={user.gender}
               birthday={user.birthday}
             />

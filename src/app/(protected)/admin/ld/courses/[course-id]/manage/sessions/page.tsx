@@ -18,7 +18,7 @@ export default async function Page({ params }: PageProps) {
 
   return (
     <div className="p-6">
-      <SessionsTable sessions={[]} />
+      <SessionsTable />
     </div>
   );
 }
