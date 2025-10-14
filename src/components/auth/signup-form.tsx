@@ -241,20 +241,11 @@ export function SignupForm({
         <Button type="submit" className="w-full">
           Đăng ký
         </Button>
-        <p>Hoặc đăng nhập với</p>
-        <Button variant="outline" className="w-full">
-          <Image
-            src="/icons8-google.svg"
-            alt="Google Icon"
-            width={20}
-            height={20}
-          />
-          Google
-        </Button>
+
         <div className="mt-4 text-center text-sm">
           Đã có tài khoản?{" "}
           <a href={loginUrl} className="underline underline-offset-4">
-            Đăng ký
+            Đăng nhập
           </a>
         </div>
       </form>

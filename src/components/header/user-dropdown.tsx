@@ -1,8 +1,8 @@
 "use client";
 
-import { LogOut, User } from "lucide-react";
-import { ChevronDown } from "lucide-react";
+import { ChartNetwork, ChevronDown, LogOut, User } from "lucide-react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -17,6 +17,7 @@ import { useAuth } from "@/contexts/auth/AuthContext";
 
 export function UserDropdown() {
   const { user, getUserDisplayName, logout } = useAuth();
+  const router = useRouter();
 
   // Nếu không có user, hiển thị button Login
   if (!user) {
@@ -55,6 +56,10 @@ export function UserDropdown() {
           </div>
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
+        <DropdownMenuItem onClick={() => router.push("/admin/dashboard")}>
+          <ChartNetwork className="mr-2 h-4 w-4" />
+          <span>Quản lý</span>
+        </DropdownMenuItem>
         <DropdownMenuItem
           onClick={logout}
           className="text-red-600 focus:text-red-600 dark:text-red-400 dark:focus:text-red-400"

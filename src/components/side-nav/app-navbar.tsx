@@ -47,7 +47,7 @@ export function AppNavbar() {
             </Button>
           );
         })}
-        <CollapsibleSearch />
+        {/* <CollapsibleSearch /> */}
       </div>
 
       {/* Login on the right */}
