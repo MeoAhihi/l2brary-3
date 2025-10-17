@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import Image from "next/image";
 
 export const metadata: Metadata = {
   title: "Authentication | L2brary",
@@ -12,8 +13,14 @@ export default function AuthLayout({
 }) {
   return (
     <div className="bg-background min-h-screen">
-      <div className="flex min-h-screen items-center justify-center">
-        <div className="w-full max-w-md">{children}</div>
+      <Image
+        src="/il_fullxfull.4264851559_osx8.jpg"
+        alt="Background"
+        fill
+        className="object-cover"
+      />
+      <div className="z-10 flex min-h-screen items-center justify-center">
+        {children}
       </div>
     </div>
   );

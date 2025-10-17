@@ -9,3 +9,8 @@ export type RegisterDto = {
   email?: string;
   password: string;
 };
+
+export type RegisterPayload = {
+  inviteCode: string;
+  data: RegisterDto;
+};

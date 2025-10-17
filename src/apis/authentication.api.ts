@@ -2,6 +2,8 @@ import axiosClient from "@/connectors/AxiosRestConnector";
 import { IAMProfileResponse } from "@/types/auth/iam.response";
 import { LoginPayload } from "@/types/auth/login.payload";
 import { LoginResponse } from "@/types/auth/login.response";
+import { RegisterPayload } from "@/types/auth/register.api.dto";
+import axios from "axios";
 
 /**
  * Call login API
@@ -50,3 +52,13 @@ export const inviteUser = async (
 
   return data;
 };
+
+export async function registerUser({ inviteCode, data }: RegisterPayload) {
+  // Replace with your API endpoint
+
+  const response = await axiosClient.post(
+    "/authentication/register/" + inviteCode,
+    data,
+  );
+  return response.data;
+}
