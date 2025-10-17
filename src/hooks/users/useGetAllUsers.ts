@@ -13,7 +13,7 @@ import type { GetAllUsersPayload } from "@/types/user/get-all.api.dto";
  */
 export const useGetAllUsers = (params: GetAllUsersPayload = {}) => {
   return useQuery({
-    queryKey: [queryKeys.iam.users, params],
+    queryKey: [...queryKeys.iam.users, params],
     queryFn: () => getAllUsers(params),
     refetchOnWindowFocus: false,
   });

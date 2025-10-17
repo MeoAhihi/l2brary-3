@@ -8,7 +8,7 @@ import { inviteUser } from "@/apis/authentication.api";
  */
 export function useInviteUser() {
   return useMutation({
-    mutationFn: (email: string) => {
+    mutationFn: (email?: string) => {
       return inviteUser(email);
     },
     onSuccess: (data) => {
@@ -18,9 +18,9 @@ export function useInviteUser() {
           toast(
             `Mã mời: ${data.inviteCode.code} đã gửi tới ${data.inviteCode.email}`,
             {
-              duration: 60_000,
+              duration: 10_000,
               action: {
-                label: "Copy",
+                label: "Sao chép",
                 onClick: () =>
                   navigator.clipboard.writeText(data.inviteCode.code),
               },

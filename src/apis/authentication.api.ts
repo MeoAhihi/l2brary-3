@@ -38,7 +38,7 @@ export const getCurrentUser = async (): Promise<IAMProfileResponse> => {
  * @throws Error if invitation fails
  */
 export const inviteUser = async (
-  email: string,
+  email?: string,
 ): Promise<{
   message: string;
   inviteCode: { code: string; email: string };
