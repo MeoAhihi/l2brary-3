@@ -87,7 +87,24 @@ export const formatScheduleRule = (course: CourseItem): string => {
 };
 
 export const formatTimeRange = (course: CourseItem): string => {
-  return course.scheduleDetail?.time ?? "—";
+  switch (course.scheduleType) {
+    case ScheduleTypeEnum.Weekly:
+      return `Hàng tuần • ${course.scheduleDetail.daysOfWeek?.map((d) => WEEKDAY_LABELS[d as WeekTypeEnum]).join(", ")} • ${course.startTime.slice(0, 5)}-${course.endTime.slice(0, 5)}`;
+    case ScheduleTypeEnum.BiWeekly:
+      return `Cách tuần • ${course.scheduleDetail.daysOfWeek?.map((d) => WEEKDAY_LABELS[d as WeekTypeEnum]).join(", ")} • ${course.startTime.slice(0, 5)}-${course.endTime.slice(0, 5)}`;
+    case ScheduleTypeEnum.Monthly:
+      return `Hàng tháng • ${course.scheduleDetail.daysOfMonth?.join(", ") ?? "—"} • ${course.startTime.slice(0, 5)}-${course.endTime.slice(0, 5)}`;
+    case ScheduleTypeEnum.OneTime:
+      // get first and last date from course.scheduleDetail.dates, if there's only 1 date, make indication
+      if (new Date(course.startDate) === new Date(course.endDate)) {
+        return `Một lần • ngày ${course.startDate} • ${course.startTime.slice(0, 5)}-${course.endTime.slice(0, 5)}`;
+      }
+      return `Một lần • từ ${course.startDate} đến ${course.endDate} • ${course.startTime.slice(0, 5)}-${course.endTime.slice(0, 5)}`;
+    case ScheduleTypeEnum.LunarMonthly:
+      return `Âm lịch • ${course.scheduleDetail.daysOfMonth?.join(", ") ?? "—"} • ${course.startTime.slice(0, 5)}-${course.endTime.slice(0, 5)}`;
+    default:
+      return "—";
+  }
 };
 
 export const formatScheduleDetail = (
