@@ -19,6 +19,8 @@ import { PAGE_LINKS } from "@/constants/common";
 import { PAGE_NAME } from "@/types/common";
 
 import { useLogin } from "../hooks/useLogin";
+import ForgotPasswordForm from "./forgot-pasword-dialog";
+import ForgotPasswordDialog from "./forgot-pasword-dialog";
 
 const LoginForm = () => {
   const { form, login, status, error } = useLogin();
@@ -59,10 +61,14 @@ const LoginForm = () => {
             </FormItem>
           )}
         />
-
-        {error && (
-          <div className="text-center text-sm text-red-500">{error}</div>
-        )}
+        <div className="flex w-full flex-row justify-between">
+          <div className="bg-amber-100 text-center text-sm text-red-500">
+            {error ?? ""}
+          </div>
+          <div className="text-center text-sm text-blue-900">
+            <ForgotPasswordDialog />
+          </div>
+        </div>
         <div className="flex flex-col gap-3">
           <Button
             type="submit"

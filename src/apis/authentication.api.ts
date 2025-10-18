@@ -62,3 +62,39 @@ export async function registerUser({ inviteCode, data }: RegisterPayload) {
   );
   return response.data;
 }
+
+/**
+ * Call API to request a password reset for the given email
+ * @param email Email address to request password reset
+ * @returns API response or throws error if request fails
+ */
+export const requestPasswordReset = async (
+  email: string,
+): Promise<{ message: string }> => {
+  const { data } = await axiosClient.post<{ message: string }>(
+    `/authentication/forgot-password`,
+    {},
+    { params: { email } },
+  );
+  return data;
+};
+
+/**
+ * Call API to reset password using resetPasswordCode
+ * @param resetPasswordCode OTP code received by user (path param)
+ * @param newPassword The new password to set
+ * @returns API response or throws error if reset fails
+ */
+export const resetPassword = async ({
+  resetPasswordCode,
+  newPassword,
+}: {
+  resetPasswordCode: string;
+  newPassword: string;
+}): Promise<{ message: string }> => {
+  const { data } = await axiosClient.post<{ message: string }>(
+    `/authentication/reset-password/${encodeURIComponent(resetPasswordCode)}`,
+    { newPassword },
+  );
+  return data;
+};
