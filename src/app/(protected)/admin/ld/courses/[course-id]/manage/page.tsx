@@ -23,6 +23,13 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useSessionsQuery } from "@/hooks";
 import { useGetCourseById } from "@/hooks/courses/useGetCourseById";
 import { useEnrollmentsQuery } from "@/hooks/enrollments";
+import { getWeeklyDates } from "@/lib/get-weekly-dates";
+import {
+  ScheduleTypeEnum,
+  WeekDayMap,
+  WeekTypeEnum,
+} from "@/types/courses/type";
+import { getMonthlyDates } from "@/lib/get-monthly-dates";
 
 const getPositionIcon = (role: string) => {
   switch (role) {
@@ -73,13 +80,53 @@ export default function ManageCoursePage({
 }) {
   const { "course-id": courseId } = use(params);
 
-  const { data: enrolments, isLoading } = useEnrollmentsQuery({ courseId });
+  const { data: course, isLoading: isLoadingCourse } =
+    useGetCourseById(courseId);
 
-  const { data: sessions } = useSessionsQuery({
+  const { data: enrolments, isLoading: isLoadingEnrollment } =
+    useEnrollmentsQuery({ courseId });
+
+  const { data: sessions, isLoading: isLoadingSession } = useSessionsQuery({
     apiParams: { courseId },
   });
 
-  if (isLoading) return "VUi lòng chờ giây lát...";
+  if (isLoadingCourse || isLoadingEnrollment || isLoadingSession)
+    return "Vui lòng chờ giây lát...";
+
+  let totalSessions = 0;
+  switch (course?.scheduleType) {
+    case ScheduleTypeEnum.Weekly:
+    case ScheduleTypeEnum.BiWeekly:
+      totalSessions =
+        course.scheduleDetail.daysOfWeek?.reduce(
+          (sum, d) =>
+            sum +
+            getWeeklyDates(
+              course.startDate,
+              course.endDate,
+              WeekDayMap[d as WeekTypeEnum],
+            ).length,
+          0,
+        ) ?? 0;
+      break;
+    case ScheduleTypeEnum.OneTime:
+      totalSessions = course?.scheduleDetail.dates?.length ?? 0;
+      break;
+    case ScheduleTypeEnum.Monthly:
+    case ScheduleTypeEnum.LunarMonthly:
+      totalSessions =
+        course.scheduleDetail.daysOfMonth?.reduce(
+          (sum, d) =>
+            sum +
+            getMonthlyDates(course.startDate, course.endDate, Number(d)).length,
+          0,
+        ) ?? 0;
+      break;
+    default:
+      totalSessions = 0;
+      break;
+  }
+
   return (
     <>
       <Head>
@@ -87,6 +134,7 @@ export default function ManageCoursePage({
         <meta name="description" content="Course overview and analytics" />
       </Head>
       <div className="space-y-6">
+        {JSON.stringify(course?.scheduleDetail.dates?.length, null, 2)}
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
@@ -96,7 +144,7 @@ export default function ManageCoursePage({
               <Users className="text-muted-foreground h-4 w-4" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">{enrolments!.total}</div>
+              <div className="text-2xl font-bold">{enrolments?.total || 0}</div>
             </CardContent>
           </Card>
 
@@ -108,17 +156,19 @@ export default function ManageCoursePage({
               <BarChart3 className="text-muted-foreground h-4 w-4" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">{sessions!.total}</div>
+              <div className="text-2xl font-bold">{sessions?.total || 0}</div>
             </CardContent>
           </Card>
 
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Số mô-đun</CardTitle>
+              <CardTitle className="text-sm font-medium">
+                Tổng số buổi
+              </CardTitle>
               <BookOpen className="text-muted-foreground h-4 w-4" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">12</div>
+              <div className="text-2xl font-bold">{totalSessions}</div>
             </CardContent>
           </Card>
 
@@ -130,7 +180,9 @@ export default function ManageCoursePage({
               <TrendingUp className="text-muted-foreground h-4 w-4" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">78.5%</div>
+              <div className="text-2xl font-bold">
+                {(((sessions?.total || 0) / totalSessions) * 100).toFixed(1)}%
+              </div>
             </CardContent>
           </Card>
         </div>

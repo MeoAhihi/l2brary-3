@@ -17,7 +17,7 @@ export default function AuthLayout({
         src="/il_fullxfull.4264851559_osx8.jpg"
         alt="Background"
         fill
-        className="object-cover"
+        className="object-cover blur-sm"
       />
       <div className="z-10 flex min-h-screen items-center justify-center">
         {children}

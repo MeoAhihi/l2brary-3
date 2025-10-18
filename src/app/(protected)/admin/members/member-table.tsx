@@ -31,6 +31,7 @@ import {
   Mail,
   Mars,
   MinusCircle,
+  PencilLine,
   Phone,
   User,
   UserPlus,
@@ -181,6 +182,19 @@ export default function MemberTable() {
               </Button>
               <OffboardButton user={user} />
             </CardFooter>
+            <div className="flex flex-col items-center justify-between gap-2 border-l-2 border-gray-200 pl-1">
+              <Button size="sm" variant="ghost" asChild>
+                <Link href={`/admin/members/${user.id}/edit`}>
+                  <PencilLine />
+                </Link>
+              </Button>
+              {/* <Button size="sm" variant="ghost">
+                Action 2
+              </Button>
+              <Button size="sm" variant="ghost">
+                Action 3
+              </Button> */}
+            </div>
           </Card>
         ))}
       </div>

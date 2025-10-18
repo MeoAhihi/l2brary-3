@@ -24,7 +24,6 @@ export function AssignRoleBadge({ user }: AssignRoleBadgeProps) {
   const assignRole = useAssignRole();
   const { data: roles, isLoading } = useGetAllRolesQuery();
   const router = useRouter();
-  const [loadingRoleId, setLoadingRoleId] = useState<string | null>(null);
 
   if (isLoading)
     return (

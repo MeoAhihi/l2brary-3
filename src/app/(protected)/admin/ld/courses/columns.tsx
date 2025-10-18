@@ -38,6 +38,12 @@ export const columns: ColumnDef<CourseItem>[] = [
             width={64}
             height={40}
             className="h-10 w-16 rounded object-cover"
+            onError={(e) => {
+              const target = e.target as HTMLImageElement;
+              if (target.src !== "/images.png") {
+                target.src = "/images.png";
+              }
+            }}
           />
         </SkeletonCell>
       );
@@ -89,23 +95,6 @@ export const columns: ColumnDef<CourseItem>[] = [
     filterFn: "equalsString",
   },
   {
-    id: "scheduleRule",
-    header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="Lịch lặp lại" />
-    ),
-    accessorFn: (course) => formatScheduleRule(course),
-    cell: ({ row }) => (
-      <SkeletonCell
-        item={row.original}
-        skeletonHeight="h-4"
-        skeletonWidth="w-24"
-      >
-        <span className="text-sm">{formatScheduleRule(row.original)}</span>
-      </SkeletonCell>
-    ),
-    filterFn: "includesString",
-  },
-  {
     id: "time",
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Thời gian" />
@@ -117,9 +106,7 @@ export const columns: ColumnDef<CourseItem>[] = [
         skeletonHeight="h-4"
         skeletonWidth="w-32"
       >
-        <span className="font-mono text-sm">
-          {formatTimeRange(row.original)}
-        </span>
+        <span className="text-sm">{formatTimeRange(row.original)}</span>
       </SkeletonCell>
     ),
     sortingFn: (rowA, rowB, columnId) => {

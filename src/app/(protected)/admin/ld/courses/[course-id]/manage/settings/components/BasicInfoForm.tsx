@@ -82,6 +82,7 @@ export function BasicInfoForm({ control }: BasicInfoFormProps) {
             name="difficulty"
             render={({ field }) => (
               <FormItem>
+                <FormLabel>Độ khó</FormLabel>
                 <Select
                   key={field.value}
                   onValueChange={field.onChange}

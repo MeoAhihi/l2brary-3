@@ -94,19 +94,6 @@ export const createEnrollmentColumns = ({
       },
     },
     {
-      accessorKey: "course",
-      header: "Khóa học",
-      cell: ({ row }) => {
-        const course = row.original.course;
-        return (
-          <div>
-            <div className="font-medium">{course.title}</div>
-            <div className="text-muted-foreground text-sm">{course.code}</div>
-          </div>
-        );
-      },
-    },
-    {
       accessorKey: "status",
       header: "Trạng thái",
       cell: ({ row }) => (

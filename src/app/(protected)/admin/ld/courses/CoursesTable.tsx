@@ -51,7 +51,6 @@ export function CoursesTable() {
           </Button>
         </div>
       )}
-
       <DataTable
         columns={columns}
         data={courses}

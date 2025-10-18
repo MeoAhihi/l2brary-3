@@ -62,7 +62,7 @@ export default function ManageCourseLayout({
       <div className="mx-auto max-w-6xl">
         <PageHeader
           pageTitle={data!.title}
-          descriptions={[`ID: ${courseId}`]}
+          descriptions={[`ID: ${courseId}`, data?.code ?? ""]}
         />
 
         {/* Tab Navigation */}
