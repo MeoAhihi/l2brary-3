@@ -10,38 +10,30 @@ import { Session } from "@/types/ld.types";
 
 import { columns } from "./column";
 import { useSessionTable } from "./use-session-table";
+import { useSessionsQuery } from "@/hooks";
+import { useState } from "react";
 
 export default function SessionsTable() {
-  const params = useParams();
-  const courseId =
-    typeof params["course-id"] === "string"
-      ? params["course-id"]
-      : Array.isArray(params["course-id"])
-        ? params["course-id"][0]
-        : "";
-  const {
-    sessions,
-    totalSessions,
-    isLoading,
-    isFetching,
-    isError,
-    error,
-    refetch,
-    handlePageChange,
-    handlePageSizeChange,
-    paginationProps,
-    isSkeletonMode,
-  } = useSessionTable({ courseId });
+  const { "course-id": courseId } = useParams<{ "course-id": string }>();
+  const [page, setPage] = useState(1);
+  const { data, isLoading, isError, refetch, error } = useSessionsQuery({
+    courseId: courseId ?? "",
+    page,
+    limit: 10,
+  });
 
-  return (
-    <div className="flex flex-col gap-4 pb-12">
-      {(isLoading || isFetching) && !isSkeletonMode && (
+  if (isLoading)
+    return (
+      <div className="flex flex-col gap-4 pb-12">
         <p className="text-muted-foreground text-sm">
           Đang tải danh sách buổi học…
         </p>
-      )}
+      </div>
+    );
 
-      {isError && error && (
+  if (isError)
+    return (
+      <div className="flex flex-col gap-4 pb-12">
         <div className="border-destructive/30 bg-destructive/5 rounded-md border p-4 text-sm">
           <p className="text-destructive font-semibold">
             Không thể tải danh sách buổi học
@@ -58,12 +50,14 @@ export default function SessionsTable() {
             Thử lại
           </Button>
         </div>
-      )}
+      </div>
+    );
 
+  return (
+    <div className="flex flex-col gap-4 pb-12">
       <DataTable
         columns={columns}
-        data={sessions as any}
-        {...paginationProps}
+        data={data?.items}
         header={() => (
           <div className="flex flex-row justify-between">
             <h2 className="text-xl font-semibold">Danh sách các buổi học</h2>

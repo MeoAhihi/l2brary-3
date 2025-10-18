@@ -15,8 +15,9 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import type { Session } from "@/types/ld.types";
+import { SessionDto } from "@/types/session/session.dto";
 
-export const columns: ColumnDef<Session>[] = [
+export const columns: ColumnDef<SessionDto>[] = [
   {
     id: "thumbnail",
     cell: ({ row }) => {
@@ -195,7 +196,7 @@ export const columns: ColumnDef<Session>[] = [
       </Button>
     ),
     cell: ({ row }) =>
-      row.original.presenter || (
+      row.original.presenterName || (
         <span className="text-muted-foreground italic">Chưa có</span>
       ),
     filterFn: "includesString",
@@ -212,7 +213,7 @@ export const columns: ColumnDef<Session>[] = [
       </Button>
     ),
     cell: ({ row }) => (
-      <div className="w-full text-center">{row.original.attended}</div>
+      <div className="w-full text-center">{row.original.checked}</div>
     ),
     sortingFn: (rowA, rowB, columnId) => {
       const a = Number(rowA.getValue(columnId)) || 0;
@@ -244,7 +245,7 @@ export const columns: ColumnDef<Session>[] = [
       };
 
       const handleCopyId = () => {
-        navigator.clipboard.writeText(session.id ?? "");
+        navigator.clipboard.writeText(session.id.toString() ?? "");
         toast("Đã sao chép ID buổi học", {
           description: session.id,
           action: {

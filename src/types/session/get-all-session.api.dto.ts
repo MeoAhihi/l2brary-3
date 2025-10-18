@@ -7,7 +7,9 @@ export type GetAllSessionPayload = {
 };
 
 export type GetAllSessionResponse = {
-  data: SessionDto[];
+  items: SessionDto[];
   total: number;
+  page: number;
+  limit: number;
   totalPage: number;
 };

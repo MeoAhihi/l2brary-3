@@ -87,7 +87,7 @@ export default function ManageCoursePage({
     useEnrollmentsQuery({ courseId });
 
   const { data: sessions, isLoading: isLoadingSession } = useSessionsQuery({
-    apiParams: { courseId },
+    courseId,
   });
 
   if (isLoadingCourse || isLoadingEnrollment || isLoadingSession)
