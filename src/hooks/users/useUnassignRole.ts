@@ -23,7 +23,7 @@ export const useUnassignRole = (options?: UseUnassignRoleOptions) => {
       unassignRoleFromUser(id, roleId),
     onSuccess: () => {
       // Invalidate users queries to refetch data
-      queryClient.invalidateQueries({ queryKey: [queryKeys.iam.users] });
+      queryClient.invalidateQueries({ queryKey: ["members"] });
       toast.success("Hủy gán vai trò cho người dùng thành công!");
       options?.onSuccess?.();
     },

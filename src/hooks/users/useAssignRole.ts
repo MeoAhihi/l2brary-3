@@ -27,7 +27,7 @@ export const useAssignRole = (options?: UseAssignRoleOptions) => {
       assignRoleToUser(id, roleId),
     onSuccess: () => {
       // Invalidate users queries to refetch data
-      queryClient.invalidateQueries({ queryKey: [queryKeys.iam.users] });
+      queryClient.invalidateQueries({ queryKey: ["members"] });
       toast.success("Gán vai trò cho người dùng thành công!");
       options?.onSuccess?.();
     },
