@@ -6,6 +6,7 @@ import {
   GraduationCap,
   TrendingUp,
   Users,
+  ShieldCheck,
 } from "lucide-react";
 
 export const adminSidebar = {
@@ -52,6 +53,11 @@ export const adminSidebar = {
       name: "Engagement Settings",
       url: "/admin/engagement/settings",
       icon: BarChart3,
+    },
+    {
+      name: "Bảo mật",
+      url: "/admin/security",
+      icon: ShieldCheck,
     },
   ],
   navMain: [
