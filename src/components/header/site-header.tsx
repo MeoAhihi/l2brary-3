@@ -56,7 +56,7 @@ export function SiteHeader() {
           </Breadcrumb>
         </div>
         <div className="flex items-center gap-2">
-          <UserDropdown />
+          {/* <UserDropdown /> */}
           <ModeSwitcher />
         </div>
       </div>
