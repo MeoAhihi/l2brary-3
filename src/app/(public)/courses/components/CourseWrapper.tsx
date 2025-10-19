@@ -4,11 +4,14 @@ import { useQuery } from "@tanstack/react-query";
 import { useMemo, useTransition } from "react";
 
 import { CourseCard } from "@/app/(public)/courses/components/CourseCard";
+import { CourseFilters } from "@/app/(public)/courses/components/CourseFilters";
 import { SkeletonGrid } from "@/components/common/SkeletonGrid";
 import { PaginationButtons } from "@/components/ui/pagination-buttons";
 import { useQueryFilters } from "@/hooks/useQueryFilters";
+import { QUERY_PARAMS } from "@/constants/query-params";
 import { GetCoursePayload } from "@/types/courses/payload";
 import { CoursesResponse } from "@/types/courses/response";
+import { ScheduleTypeEnum } from "@/types/courses/type";
 
 import { courseListQueryOptions } from "../queries";
 import { EmptyCourses } from "./EmptyCourses";
@@ -31,6 +34,36 @@ export const CourseWrapper = ({
     startTransition(() => {
       setQueryParams({ page: newPage });
     });
+  };
+
+  const handleFiltersChange = (filters: {
+    title?: string;
+    group?: string;
+    scheduleType?: ScheduleTypeEnum;
+  }) => {
+    startTransition(() => {
+      setQueryParams({ ...filters, page: 1 }); // Reset to first page when filtering
+    });
+  };
+
+  const handleClearFilters = () => {
+    startTransition(() => {
+      setQueryParams({
+        [QUERY_PARAMS.TITLE]: undefined,
+        [QUERY_PARAMS.GROUP]: undefined,
+        [QUERY_PARAMS.SCHEDULE_TYPE]: undefined,
+        page: 1,
+      });
+    });
+  };
+
+  // Extract current filter values from query params
+  const currentFilters = {
+    title: queryParams[QUERY_PARAMS.TITLE] as string | undefined,
+    group: queryParams[QUERY_PARAMS.GROUP] as string | undefined,
+    scheduleType: queryParams[QUERY_PARAMS.SCHEDULE_TYPE] as
+      | ScheduleTypeEnum
+      | undefined,
   };
 
   const queryOptions = useMemo(
@@ -86,6 +119,12 @@ export const CourseWrapper = ({
 
   return (
     <div className="space-y-8">
+      <CourseFilters
+        filters={currentFilters}
+        onFiltersChange={handleFiltersChange}
+        onClearFilters={handleClearFilters}
+      />
+
       <div className="min-h-[16rem]">{renderCourses()}</div>
 
       {shouldShowPagination && data && (

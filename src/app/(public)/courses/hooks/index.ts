@@ -1,0 +1,1 @@
+export { useCourseGroupsQuery } from "./useCourseGroupsQuery";
