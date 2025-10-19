@@ -1,4 +1,9 @@
 import {
+  attachPermissionsToRole,
+  detachPermissionsFromRole,
+} from "@/apis/authorization.api";
+import axiosClient from "@/connectors/AxiosRestConnector";
+import {
   AttachPermissionPayload,
   AttachPermissionResponse,
 } from "@/types/authorization/attach-permission.api.dto";
@@ -8,6 +13,7 @@ import {
 } from "@/types/authorization/update.api.dto";
 import { useQueryClient, useMutation } from "@tanstack/react-query";
 import axios from "axios";
+import { toast } from "sonner";
 
 // Update a role's info by id
 export function useUpdateRoleMutation() {
@@ -34,15 +40,33 @@ export function useAttachPermissionsMutation() {
   return useMutation({
     mutationFn: async (payload: AttachPermissionPayload) => {
       const { roleId, data } = payload;
-      const res = await axios.post<AttachPermissionResponse>(
-        `/api/admin/roles/${roleId}/attach-permissions`,
-        data,
-      );
+      const res = await attachPermissionsToRole(roleId, data.permissionIds);
       return res.data;
     },
     onSuccess: (data, variables) => {
       queryClient.invalidateQueries({ queryKey: ["role", variables.roleId] });
       queryClient.invalidateQueries({ queryKey: ["roles"] });
+      queryClient.invalidateQueries({ queryKey: ["permissions"] });
+      toast.success(`Gán quyền hạn vào vai trò ${data.name} thành công`);
+    },
+  });
+}
+
+// Detach permissions from a role
+export function useDetachPermissionsMutation() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (payload: AttachPermissionPayload) => {
+      const { roleId, data } = payload;
+      // Use the API helper for detaching permissions (standardize with useAttachPermissionsMutation)
+      const res = await detachPermissionsFromRole(roleId, data.permissionIds);
+      return res.data;
+    },
+    onSuccess: (data, variables) => {
+      queryClient.invalidateQueries({ queryKey: ["role", variables.roleId] });
+      queryClient.invalidateQueries({ queryKey: ["roles"] });
+      queryClient.invalidateQueries({ queryKey: ["permissions"] });
+      toast.success(`Gỡ quyền hạn khỏi vai trò ${data.name} thành công`);
     },
   });
 }

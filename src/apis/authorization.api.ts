@@ -72,9 +72,9 @@ export const attachPermissionsToRole = async (
 ) => {
   const response = await axiosClient.post<AttachPermissionResponse>(
     `/authorization/roles/${roleId}/permissions/attach`,
-    { permissions },
+    { permissionIds: permissions },
   );
-  return response.data;
+  return response;
 };
 
 // Detach permissions from role
@@ -84,7 +84,7 @@ export const detachPermissionsFromRole = async (
 ) => {
   const response = await axiosClient.post<AttachPermissionResponse>(
     `/authorization/roles/${roleId}/permissions/detach`,
-    { permissions },
+    { permissionIds: permissions },
   );
-  return response.data;
+  return response;
 };

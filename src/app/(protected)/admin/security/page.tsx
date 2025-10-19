@@ -22,16 +22,18 @@ function SecurityPage() {
         <Spinner className="h-10 w-10" />
       </div>
     );
-  const data = permissions.map((p) => ({
-    id: p.id,
-    name: p.name,
-    ...roles
-      .map((r) => ({
-        key: r.id,
-        value: p.roles?.map((role) => role.id).includes(r.id),
-      }))
-      .reduce((acc, cur) => ({ ...acc, [cur.key]: cur.value }), {}),
-  }));
+  const data = permissions
+    .map((p) => ({
+      id: p.id,
+      name: p.name,
+      ...roles
+        .map((r) => ({
+          key: r.id,
+          value: p.roles?.map((role) => role.id).includes(r.id),
+        }))
+        .reduce((acc, cur) => ({ ...acc, [cur.key]: cur.value }), {}),
+    }))
+    .sort((a, b) => a.name.localeCompare(b.name));
   return (
     <div>
       <DataTable columns={columns as any} data={data} manualPagination />
