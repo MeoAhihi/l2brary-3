@@ -1,5 +1,7 @@
 /* eslint-disable no-unused-vars */
 
+import { Gender } from "../gender.enum";
+
 export enum RoleEnum {
   Admin = "admin",
   Monitor = "monitor",
@@ -13,12 +15,17 @@ export interface Role {
 
 export interface IAMProfileResponse {
   id: string; // UUID
+  avatarUrl: string;
   fullName: string;
   internationalName: string;
-  gender: string;
+  gender: Gender;
   birthdate: string;
   phoneNumber: string;
   email: string;
+  rank: string;
+  courseCertificates: string[];
+  eventCertificates: string[];
+  experiences: string[];
   createdAt: string;
   updatedAt: string;
   roles: Array<Role>;
