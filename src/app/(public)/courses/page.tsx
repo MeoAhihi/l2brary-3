@@ -3,6 +3,7 @@ import { QUERY_PARAMS } from "@/constants/query-params";
 import { getNumericParam } from "@/lib/param";
 import { getServerQueryClient } from "@/lib/react-query-server";
 import type { GetCoursePayload } from "@/types/courses/payload";
+import { ScheduleTypeEnum } from "@/types/courses/type";
 
 import { CourseWrapper } from "./components/CourseWrapper";
 import { CourseProvider } from "./contexts";
@@ -30,13 +31,28 @@ export default async function CoursesPage({ searchParams }: CoursesPageProps) {
     resolvedSearchParams[QUERY_PARAMS.LIMIT],
     DEFAULT_PAGE_SIZE,
   );
+
+  // Extract filter parameters
+  const title = resolvedSearchParams[QUERY_PARAMS.TITLE] as string | undefined;
+  const group = resolvedSearchParams[QUERY_PARAMS.GROUP] as string | undefined;
+  const scheduleType = resolvedSearchParams[QUERY_PARAMS.SCHEDULE_TYPE] as
+    | ScheduleTypeEnum
+    | undefined;
+
   const baseFilters: Partial<GetCoursePayload> = {
     page,
     limit,
+    ...(title && { title }),
+    ...(group && { group }),
+    ...(scheduleType && { scheduleType }),
   };
 
   const hasAdvancedFilters = Object.keys(resolvedSearchParams).some(
-    (key) => key !== QUERY_PARAMS.PAGE && key !== QUERY_PARAMS.LIMIT,
+    (key) =>
+      key !== QUERY_PARAMS.PAGE &&
+      key !== QUERY_PARAMS.LIMIT &&
+      resolvedSearchParams[key] !== undefined &&
+      resolvedSearchParams[key] !== "",
   );
 
   const queryClient = getServerQueryClient();

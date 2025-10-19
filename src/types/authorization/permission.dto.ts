@@ -1,3 +1,5 @@
+import { RefRoleDto } from "./ref-role.dto";
+
 /**
  * Permission DTO
  */
@@ -10,4 +12,6 @@ export type PermissionDto = {
    * Name of the permission
    */
   name: string;
+
+  roles?: RefRoleDto[];
 };

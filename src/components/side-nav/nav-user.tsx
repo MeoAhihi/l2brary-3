@@ -5,13 +5,17 @@ import {
   Bell,
   ChevronsUpDown,
   CreditCard,
+  Home,
   LogOut,
+  Pencil,
+  RectangleEllipsis,
   Sparkles,
+  User,
 } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -38,9 +42,9 @@ interface NavUserProps {
 }
 
 export function NavUser(props: NavUserProps) {
-  const { user } = props;
+  const { user: a } = props;
   const { isMobile } = useSidebar();
-  const { logout } = useAuth();
+  const { user, logout } = useAuth();
   const router = useRouter();
 
   const handleLogout = () => {
@@ -63,7 +67,7 @@ export function NavUser(props: NavUserProps) {
             >
               <Avatar className="h-8 w-8 rounded-lg">
                 {/* Use avatarUrl field if available, otherwise fallback */}
-                {/* <AvatarImage src={user.avatarUrl} alt={user.fullName} /> */}
+                <AvatarImage src={user.avatarUrl} alt={user.fullName} />
                 <AvatarFallback className="rounded-lg">
                   {formatUtils.truncateText(user.fullName, 2)}
                 </AvatarFallback>
@@ -81,10 +85,10 @@ export function NavUser(props: NavUserProps) {
             align="end"
             sideOffset={4}
           >
-            <DropdownMenuLabel className="p-0 font-normal">
+            {/* <DropdownMenuLabel className="p-0 font-normal">
               <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
                 <Avatar className="h-8 w-8 rounded-lg">
-                  {/* <AvatarImage src={user.avatarUrl} alt={user.fullName} /> */}
+                  <AvatarImage src={user.avatarUrl} alt={user.fullName} />
                   <AvatarFallback className="rounded-lg">
                     {formatUtils.truncateText(user.fullName, 2)}
                   </AvatarFallback>
@@ -95,34 +99,40 @@ export function NavUser(props: NavUserProps) {
                 </div>
               </div>
             </DropdownMenuLabel>
-            <DropdownMenuSeparator />
+            <DropdownMenuSeparator /> */}
             <DropdownMenuGroup>
-              <DropdownMenuItem>
-                <Sparkles />
-                Upgrade to Pro
+              <DropdownMenuItem asChild>
+                <Link href="/">
+                  <Home />
+                  Xem trang chủ
+                </Link>
               </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
               <DropdownMenuItem asChild>
-                <Link href="/dashboard/profile">
-                  <BadgeCheck />
+                <Link href="/profile">
+                  <User />
                   Hồ sơ
                 </Link>
               </DropdownMenuItem>
-              <DropdownMenuItem>
-                <CreditCard />
-                Billing
+              <DropdownMenuItem asChild>
+                <Link href="/profile/edit">
+                  <Pencil />
+                  Chỉnh sửa hồ sơ
+                </Link>
               </DropdownMenuItem>
-              <DropdownMenuItem>
-                <Bell />
-                Notifications
+              <DropdownMenuItem asChild>
+                <Link href="/profile/change-pasword">
+                  <RectangleEllipsis />
+                  Đổi mật khẩu
+                </Link>
               </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
-            <DropdownMenuItem onClick={handleLogout}>
+            <DropdownMenuItem onClick={handleLogout} className="text-red-500">
               <LogOut />
-              Log out
+              Đăng xuất
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>

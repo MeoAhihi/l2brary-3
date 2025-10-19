@@ -98,3 +98,26 @@ export const resetPassword = async ({
   );
   return data;
 };
+
+/**
+ * Call API to change the user's password
+ * @param currentPassword The user's current password
+ * @param newPassword The new password to set
+ * @returns API response or throws error if change fails
+ */
+export const changePassword = async ({
+  currentPassword,
+  newPassword,
+}: {
+  currentPassword: string;
+  newPassword: string;
+}): Promise<{ message: string }> => {
+  const { data } = await axiosClient.post<{ message: string }>(
+    "/authentication/change-password",
+    {
+      currentPassword,
+      newPassword,
+    },
+  );
+  return data;
+};

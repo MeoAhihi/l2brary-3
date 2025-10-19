@@ -8,22 +8,27 @@ import { PermissionDto } from "@/types/authorization/permission.dto";
 import { RefRoleDto } from "@/types/authorization/ref-role.dto";
 import { UpdateRoleResponse } from "@/types/authorization/update.api.dto";
 import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
 
 // Fetch all permissions
-export function usePermissionsQuery(options: any = {}) {
+export function usePermissionsQuery(
+  params: { attachRoles: boolean },
+  options: any = {},
+) {
   return useQuery<PermissionDto[]>({
-    queryKey: ["permissions"],
-    queryFn: getPermissions,
+    queryKey: ["permissions", params],
+    queryFn: () => getPermissions(params),
     ...options,
   });
 }
 
 // Fetch all roles
-export function useGetAllRolesQuery(options: any = {}) {
+export function useGetAllRolesQuery(
+  params: { permissions?: boolean } = {},
+  options: any = {},
+) {
   return useQuery<RefRoleDto[]>({
-    queryKey: ["roles"],
-    queryFn: getRoles,
+    queryKey: ["roles", params],
+    queryFn: () => getRoles(params),
     ...options,
   });
 }
