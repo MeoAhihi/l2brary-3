@@ -15,16 +15,21 @@ import {
 } from "@/types/authorization/update.api.dto";
 
 // Get all permissions
-export const getPermissions = async () => {
+export const getPermissions = async (
+  params: { attachRoles?: boolean } = {},
+) => {
   const response = await axiosClient.get<PermissionDto[]>(
     "/authorization/permissions",
+    { params },
   );
   return response.data;
 };
 
 // Get all roles
-export const getRoles = async () => {
-  const response = await axiosClient.get<RefRoleDto[]>("/authorization/roles");
+export const getRoles = async (params: { permissions?: boolean } = {}) => {
+  const response = await axiosClient.get<RefRoleDto[]>("/authorization/roles", {
+    params,
+  });
   return response.data;
 };
 
