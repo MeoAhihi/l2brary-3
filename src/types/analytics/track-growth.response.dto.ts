@@ -1,13 +1,13 @@
-export type countingResponse = {
+export type CountingResponse = {
   count: number;
 };
-export type getUserItem = {
+export type GetUserItem = {
   userId: string;
   name: string;
   totalScore: string;
 };
-export type getUserListResponse = getUserItem[];
-export type retentionRateResponse = {
+export type GetUserListResponse = GetUserItem[];
+export type RetentionRateResponse = {
   retentionRate: number;
 };
 export type MonthlyUserGrowthItem = {
