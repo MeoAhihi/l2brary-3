@@ -1,23 +1,5 @@
 "use client";
 
-import { Avatar, AvatarImage } from "@/components/ui/avatar";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { ButtonGroup } from "@/components/ui/button-group";
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-} from "@/components/ui/card";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuShortcut,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { Skeleton } from "@/components/ui/skeleton";
 import { formatDistanceToNow } from "date-fns";
 import { vi } from "date-fns/locale";
 import {
@@ -30,7 +12,6 @@ import {
   Clipboard,
   Mail,
   Mars,
-  MinusCircle,
   PencilLine,
   Phone,
   User,
@@ -38,13 +19,25 @@ import {
   Venus,
 } from "lucide-react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { toast } from "sonner";
+
+import { Avatar, AvatarImage } from "@/components/ui/avatar";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { ButtonGroup } from "@/components/ui/button-group";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+} from "@/components/ui/card";
+import { Skeleton } from "@/components/ui/skeleton";
+
+import { AssignRoleBadge } from "./assign-role-badge";
+import { ClickableRoleBadge } from "./clickable-role-badge";
 import { useExample } from "./example";
 import { OffboardButton } from "./offboard-button";
-import { useUnassignRole } from "@/hooks/users";
-import { ClickableRoleBadge } from "./clickable-role-badge";
-import { AssignRoleBadge } from "./assign-role-badge";
-import { useRouter } from "next/navigation";
 
 export default function MemberTable() {
   const { isLoading, setPage, page, data, isError } = useExample();
@@ -107,8 +100,8 @@ export default function MemberTable() {
                   <span>-Chưa phân cấp-</span>
                 )}
                 {(user.roles ?? []).length !== 0 ? (
-                  user.roles.map((r: any) => (
-                    <ClickableRoleBadge role={r} userId={user.id} />
+                  user.roles.map((r: any, index: number) => (
+                    <ClickableRoleBadge role={r} userId={user.id} key={index} />
                   ))
                 ) : (
                   <span>-chưa có role-</span>

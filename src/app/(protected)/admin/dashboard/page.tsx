@@ -1,5 +1,9 @@
 "use client";
 
+import { User, UserPlus } from "lucide-react";
+import Head from "next/head";
+import { useState } from "react";
+
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -12,13 +16,11 @@ import {
   useTotalUserCount,
   useUserRetentionRate,
 } from "@/hooks/analytics/track-growth.queries";
-import { User, UserPlus } from "lucide-react";
-import Head from "next/head";
-import { useState } from "react";
-import TrackGrowthChart from "./track-growth";
+
 import DemographicAgePieChart from "./demographic-age";
 import DemographicGenderPieChart from "./demographic-gender";
 import DemographicRankPieChart from "./demographic-rank";
+import TrackGrowthChart from "./track-growth";
 
 export default function DashboardPage() {
   const [cutoff, setCutoff] = useState(50);

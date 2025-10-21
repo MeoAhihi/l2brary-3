@@ -4,9 +4,9 @@ import {
   BookOpen,
   BookUser,
   GraduationCap,
+  ShieldCheck,
   TrendingUp,
   Users,
-  ShieldCheck,
 } from "lucide-react";
 
 export const adminSidebar = {

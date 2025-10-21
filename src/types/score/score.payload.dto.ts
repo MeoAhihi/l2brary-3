@@ -1,12 +1,13 @@
-export type UpsertScoreColumnRequest = {
+export interface UpsertScoreColumnRequest {
   userId: string;
-  scoer: number;
-};
-export type UpsertScoreColumnPayload = {
+  score: number;
+}
+
+export interface UpsertScoreColumnPayload {
   scoreColumnId: number;
   data: UpsertScoreColumnRequest[];
-};
+}
 
-export type ScoreTablePayload = {
+export interface ScoreTablePayload {
   courseId: string;
-};
+}

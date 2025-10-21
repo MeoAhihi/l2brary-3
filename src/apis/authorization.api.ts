@@ -1,4 +1,3 @@
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import axiosClient from "@/connectors/AxiosRestConnector";
 import { AttachPermissionResponse } from "@/types/authorization/attach-permission.api.dto";
 import {

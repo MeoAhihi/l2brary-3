@@ -49,7 +49,7 @@ export function useSessionTable(options: UseSessionsTableOptions) {
     apiFunction: async (params) => {
       const res = await getCourseSessions(params as GetAllSessionPayload);
       return {
-        items: res.data,
+        items: res.items,
         total: res.total,
       };
     },

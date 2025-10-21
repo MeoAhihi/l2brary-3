@@ -1,6 +1,7 @@
-import axiosClient from "@/connectors/AxiosRestConnector";
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
+
+import axiosClient from "@/connectors/AxiosRestConnector";
 
 export function useExample() {
   const [page, setPage] = useState(1);

@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
-import { queryKeys } from "@/constants/query-keys";
+
 import { getCourseGroups } from "@/apis/course.api";
+import { queryKeys } from "@/constants/query-keys";
 
 export const useCourseGroupsQuery = () => {
   return useQuery({

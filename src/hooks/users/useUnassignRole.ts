@@ -4,8 +4,6 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 
 import { unassignRoleFromUser } from "@/apis/user.api";
-import { invalidateQueries } from "@/lib/query-client";
-import { queryKeys } from "@/constants/query-keys";
 
 interface UseUnassignRoleOptions {
   onSuccess?: () => void;

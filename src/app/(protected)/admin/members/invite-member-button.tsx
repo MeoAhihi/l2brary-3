@@ -1,5 +1,8 @@
 "use client";
 
+import { PlusCircle, Send } from "lucide-react";
+import { useState } from "react";
+
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -12,10 +15,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { useInviteUser } from "@/hooks/invite-code/use-invite";
-import { Plus, PlusCircle, Send } from "lucide-react";
-import { useState } from "react";
 
 export function InviteMemberButton() {
   const inviteMember = useInviteUser();
