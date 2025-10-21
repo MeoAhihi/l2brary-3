@@ -1,16 +1,17 @@
 "use client";
 
-import { Badge } from "@/components/ui/badge";
-import {
-  DropdownMenu,
-  DropdownMenuTrigger,
-  DropdownMenuContent,
-  DropdownMenuItem,
-} from "@/components/ui/dropdown-menu";
-import { useUnassignRole } from "@/hooks/users";
 import { MinusCircle } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
+
+import { Badge } from "@/components/ui/badge";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { useUnassignRole } from "@/hooks/users";
 
 interface ClickableRoleBadgeProps {
   role: { id: string; name: string };

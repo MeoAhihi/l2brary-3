@@ -1,9 +1,10 @@
+import axios from "axios";
+
 import axiosClient from "@/connectors/AxiosRestConnector";
 import { IAMProfileResponse } from "@/types/auth/iam.response";
 import { LoginPayload } from "@/types/auth/login.payload";
 import { LoginResponse } from "@/types/auth/login.response";
 import { RegisterPayload } from "@/types/auth/register.api.dto";
-import axios from "axios";
 
 /**
  * Call login API

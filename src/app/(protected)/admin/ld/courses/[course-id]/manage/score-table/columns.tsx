@@ -6,8 +6,8 @@ import { ArrowUpDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useScoreContext } from "@/contexts/score/ScoreContext";
-import { ScoreColumnItem } from "@/types/score/score-column.response.dto";
 import { ScoreTableRow } from "@/types/score/score.response.dto";
+import { ScoreColumnItem } from "@/types/score/score-column.response.dto";
 
 // Extend ScoreTableRow với id và index signature để satisfy ScoreData constraint
 export type ScoreRowWithId = ScoreTableRow & {

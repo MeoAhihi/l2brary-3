@@ -1,7 +1,8 @@
-import { registerUser } from "@/apis/authentication.api";
-import { RegisterPayload } from "@/types/auth/register.api.dto";
 import { useMutation } from "@tanstack/react-query";
 import { toast } from "sonner";
+
+import { registerUser } from "@/apis/authentication.api";
+import { RegisterPayload } from "@/types/auth/register.api.dto";
 
 export function useRegister() {
   return useMutation({

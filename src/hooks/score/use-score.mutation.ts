@@ -1,8 +1,9 @@
+import { useMutation } from "@tanstack/react-query";
+import { toast } from "sonner";
+
 import { upsertScores } from "@/apis/score.api";
 import { invalidateQueries } from "@/lib/query-client";
 import { UpsertScoreColumnPayload } from "@/types/score/score.payload.dto";
-import { useMutation } from "@tanstack/react-query";
-import { toast } from "sonner";
 
 export const useUpsertScoresMutation = (courseId?: string) => {
   return useMutation({

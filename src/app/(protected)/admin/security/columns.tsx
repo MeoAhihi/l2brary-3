@@ -1,17 +1,46 @@
 "use client";
 
+import { ColumnDef } from "@tanstack/react-table";
+
 import { getRoles } from "@/apis/authorization.api";
 import { Checkbox } from "@/components/ui/checkbox";
 import {
   useAttachPermissionsMutation,
   useDetachPermissionsMutation,
 } from "@/hooks/authorization/use-role-mutation";
-import { ColumnDef } from "@tanstack/react-table";
-import { toast } from "sonner";
+
+// Component riêng để sử dụng hooks
+function PermissionCheckbox({
+  permissionId,
+  roleId,
+  checked,
+}: {
+  permissionId: string;
+  roleId: string;
+  checked: boolean;
+}) {
+  const attachPermission = useAttachPermissionsMutation();
+  const detachPermission = useDetachPermissionsMutation();
+
+  const handleClick = () => {
+    if (checked) {
+      detachPermission.mutate({
+        roleId,
+        data: { permissionIds: [permissionId] },
+      });
+    } else {
+      attachPermission.mutate({
+        roleId,
+        data: { permissionIds: [permissionId] },
+      });
+    }
+  };
+
+  return <Checkbox checked={checked} onClick={handleClick} />;
+}
 
 const roles = await getRoles();
-const roleName = roles.map((r) => r.id);
-type RoleIds = (typeof roleName)[number];
+type RoleIds = (typeof roles)[number]["id"];
 export const columns: ColumnDef<
   { id: string; name: string } & Record<RoleIds, boolean>
 >[] =
@@ -28,27 +57,11 @@ export const columns: ColumnDef<
       accessorKey: r.id,
       header: () => r.name,
       cell: ({ row }) => {
-        const attachPermission = useAttachPermissionsMutation();
-        const detachPermission = useDetachPermissionsMutation();
         return (
-          <Checkbox
+          <PermissionCheckbox
+            permissionId={row.original.id}
+            roleId={r.id}
             checked={row.original[r.id]}
-            onClick={(e) => {
-              const permId = row.original.id;
-              const roleId = r.id;
-              const checked = row.original[r.id];
-              if (checked) {
-                detachPermission.mutate({
-                  roleId,
-                  data: { permissionIds: [permId] },
-                });
-              } else {
-                attachPermission.mutate({
-                  roleId,
-                  data: { permissionIds: [permId] },
-                });
-              }
-            }}
           />
         );
       },

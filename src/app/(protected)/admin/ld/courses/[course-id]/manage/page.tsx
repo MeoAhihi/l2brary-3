@@ -11,25 +11,21 @@ import {
   TrendingUp,
   Users,
 } from "lucide-react";
-import { Metadata } from "next";
 import Head from "next/head";
-import { usePathname } from "next/navigation";
 import { use } from "react";
 
-import { getEnrollments } from "@/apis/enrollment.api";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useSessionsQuery } from "@/hooks";
 import { useGetCourseById } from "@/hooks/courses/useGetCourseById";
 import { useEnrollmentsQuery } from "@/hooks/enrollments";
+import { getMonthlyDates } from "@/lib/get-monthly-dates";
 import { getWeeklyDates } from "@/lib/get-weekly-dates";
 import {
   ScheduleTypeEnum,
   WeekDayMap,
   WeekTypeEnum,
 } from "@/types/courses/type";
-import { getMonthlyDates } from "@/lib/get-monthly-dates";
 
 const getPositionIcon = (role: string) => {
   switch (role) {
@@ -322,7 +318,7 @@ export default function ManageCoursePage({
                   </div>
                 </div>
               </div>
-            ))} 
+            ))}
             </div>
           </CardContent>
         </Card> */}

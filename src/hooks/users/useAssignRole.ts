@@ -1,15 +1,9 @@
 "use client";
 
-import {
-  QueryClient,
-  useMutation,
-  useQueryClient,
-} from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 
 import { assignRoleToUser } from "@/apis/user.api";
-import { invalidateQueries } from "@/lib/query-client";
-import { queryKeys } from "@/constants/query-keys";
 
 interface UseAssignRoleOptions {
   onSuccess?: () => void;

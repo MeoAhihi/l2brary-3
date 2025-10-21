@@ -1,12 +1,12 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { toast } from "sonner";
+
 import {
   createGame,
   deleteGame,
   logGameActivity,
   submitGame,
 } from "@/apis/game.api";
-import { toast } from "sonner";
-import { queryClient } from "@/lib/query-client";
 import { LogGameRequest } from "@/types/game/game.payload.dto";
 
 /**

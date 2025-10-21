@@ -1,6 +1,7 @@
+import { useQuery } from "@tanstack/react-query";
+
 import { getScoreColumnDetails, getScoreColumns } from "@/apis/score.api";
 import { queryKeys } from "@/constants/query-keys";
-import { useQuery } from "@tanstack/react-query";
 
 export const useScoreColumns = (
   courseId: string,

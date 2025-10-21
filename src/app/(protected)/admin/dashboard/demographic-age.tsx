@@ -1,6 +1,7 @@
 import React from "react";
-import { ChartConfig, ChartContainer } from "@/components/ui/chart";
 import { Cell, Legend, Pie, PieChart, Tooltip } from "recharts";
+
+import { ChartConfig, ChartContainer } from "@/components/ui/chart";
 import { useUsersByAge } from "@/hooks/analytics/demographic.queries";
 
 function DemographicAgePieChart() {

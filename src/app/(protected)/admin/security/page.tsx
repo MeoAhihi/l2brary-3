@@ -1,12 +1,14 @@
 "use client";
 
+import React from "react";
+
 import { DataTable } from "@/components/ui/data-table/data-table";
 import { Spinner } from "@/components/ui/spinner";
 import {
   useGetAllRolesQuery,
   usePermissionsQuery,
 } from "@/hooks/authorization/use-role-query";
-import React from "react";
+
 import { columns } from "./columns";
 
 function SecurityPage() {

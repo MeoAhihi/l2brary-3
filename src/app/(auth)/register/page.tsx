@@ -1,8 +1,14 @@
+/* eslint-disable max-lines */
+
 "use client";
-import { cn } from "@/lib/utils";
-import { Gender } from "@/types/gender.enum";
+
+import { zodResolver } from "@hookform/resolvers/zod";
+import { ArrowLeft, ArrowRight, UserPlus } from "lucide-react";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { z, ZodSchema } from "zod";
+import { useForm } from "react-hook-form";
+import { toast } from "sonner";
+import { z } from "zod";
 
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -22,13 +28,10 @@ import {
   InputOTPSlot,
 } from "@/components/ui/input-otp";
 import { Tabs, TabsContent } from "@/components/ui/tabs";
-import { RegisterDto } from "@/types/auth/register.api.dto";
-import { ArrowLeft, ArrowRight, UserPlus } from "lucide-react";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { useRegister } from "@/hooks/auth/use-register";
-import { useRouter } from "next/navigation";
-import { toast } from "sonner";
+import { cn } from "@/lib/utils";
+import { RegisterDto } from "@/types/auth/register.api.dto";
+import { Gender } from "@/types/gender.enum";
 
 export default function ControlledTabsDemo() {
   const [tab, setTab] = useState("1"); // 👈 state to track current tab

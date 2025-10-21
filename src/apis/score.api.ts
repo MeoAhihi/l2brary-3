@@ -1,14 +1,14 @@
 import axiosClient from "@/connectors/AxiosRestConnector";
 import { CreateScoreColumnDto } from "@/types/score/create-score-column.api.dto";
 import {
-  ScoreColumnItem,
-  ScoreColumnResponseDto,
-} from "@/types/score/score-column.response.dto";
-import {
   ScoreTablePayload,
   UpsertScoreColumnPayload,
 } from "@/types/score/score.payload.dto";
 import { ScoreTableRow } from "@/types/score/score.response.dto";
+import {
+  ScoreColumnItem,
+  ScoreColumnResponseDto,
+} from "@/types/score/score-column.response.dto";
 import { UpdateScoreColumnDto } from "@/types/score/update-score-column.api.dto";
 
 // Score Column APIs

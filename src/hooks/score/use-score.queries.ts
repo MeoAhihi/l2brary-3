@@ -1,6 +1,7 @@
+import { useQuery } from "@tanstack/react-query";
+
 import { getScoreTable } from "@/apis/score.api";
 import { queryKeys } from "@/constants/query-keys";
-import { useQuery } from "@tanstack/react-query";
 
 /**
  * Custom hook to fetch score table data by course ID.

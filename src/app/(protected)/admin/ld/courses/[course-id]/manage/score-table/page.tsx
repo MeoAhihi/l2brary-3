@@ -1,13 +1,13 @@
 "use client";
 
-import { useMemo } from "react";
 import { StarIcon } from "lucide-react";
 import { useParams } from "next/navigation";
+import { useMemo } from "react";
 
 import PageHeader from "@/components/ui/page-header";
 import { ScoreProvider } from "@/contexts/score/ScoreContext";
-import { useScoreColumns } from "@/hooks/score/use-score-column.queries";
 import { useScoreTableQuery } from "@/hooks/score/use-score.queries";
+import { useScoreColumns } from "@/hooks/score/use-score-column.queries";
 
 import { ScoreRowWithId } from "./columns";
 import ScoreTable from "./score-table";

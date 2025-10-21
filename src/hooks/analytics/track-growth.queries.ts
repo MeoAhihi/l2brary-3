@@ -1,8 +1,5 @@
-import {
-  GetActiveUserPayload,
-  GetInactiveUserPayload,
-  GetRetentionRatePayload,
-} from "@/types/analytics/track-growth.payload.dto";
+import { useQuery } from "@tanstack/react-query";
+
 import {
   getActiveUsersCount,
   getInactiveUsersCount,
@@ -10,8 +7,12 @@ import {
   getNewUsersCount,
   getUserRetentionRate,
 } from "@/apis/track-growth.api";
-import { useQuery } from "@tanstack/react-query";
 import { getTotalUserCount } from "@/apis/track-growth.api";
+import {
+  GetActiveUserPayload,
+  GetInactiveUserPayload,
+  GetRetentionRatePayload,
+} from "@/types/analytics/track-growth.payload.dto";
 import { CountNewUserPayload } from "@/types/analytics/track-growth.payload.dto";
 
 /**
