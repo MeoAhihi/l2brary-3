@@ -25,7 +25,10 @@ const eslintConfig = [
       "simple-import-sort/imports": "error",
       "simple-import-sort/exports": "error",
       "react-hooks/exhaustive-deps": "warn",
-      "no-unused-vars": "warn",
+      "no-unused-vars": {
+        argsIgnorePattern: "^_",
+        varsIgnorePattern: "^_",
+      },
       "prefer-const": "off",
       "@typescript-eslint/no-explicit-any": "warn",
       "@typescript-eslint/no-unused-vars": "warn",

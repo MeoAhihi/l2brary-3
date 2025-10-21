@@ -19,7 +19,7 @@ export const createScoreColumn = (
   data: CreateScoreColumnDto,
 ) => {
   return axiosClient.post<ScoreColumnResponseDto>(
-    `/v1/api/score/column/${courseId}`,
+    `/score/column/${courseId}`,
     data,
   );
 };
@@ -29,30 +29,24 @@ export const getScoreColumns = (
   courseId: string,
   params: { summarize: boolean },
 ) => {
-  return axiosClient.get<ScoreColumnItem[]>(
-    `/v1/api/score/column/${courseId}`,
-    { params },
-  );
+  return axiosClient.get<ScoreColumnItem[]>(`/score/column/${courseId}`, {
+    params,
+  });
 };
 
 // Get score column details
 export const getScoreColumnDetails = (id: string) => {
-  return axiosClient.get<ScoreColumnResponseDto>(
-    `/v1/api/score/column/detail/${id}`,
-  );
+  return axiosClient.get<ScoreColumnResponseDto>(`/score/column/detail/${id}`);
 };
 
 // Update score column
 export const updateScoreColumn = (id: string, data: UpdateScoreColumnDto) => {
-  return axiosClient.patch<ScoreColumnResponseDto>(
-    `/v1/api/score/column/${id}`,
-    data,
-  );
+  return axiosClient.patch<ScoreColumnResponseDto>(`/score/column/${id}`, data);
 };
 
 // Delete score column
 export const deleteScoreColumn = (id: string) => {
-  return axiosClient.delete(`/v1/api/score/column/${id}`);
+  return axiosClient.delete(`/score/column/${id}`);
 };
 
 // Upsert scores
@@ -60,10 +54,10 @@ export const upsertScores = ({
   scoreColumnId,
   data,
 }: UpsertScoreColumnPayload) => {
-  return axiosClient.post(`/v1/api/score`, data, { params: { scoreColumnId } });
+  return axiosClient.post(`/score`, data, { params: { scoreColumnId } });
 };
 
 // Get score table
 export const getScoreTable = (params: { courseId: string }) => {
-  return axiosClient.get<ScoreTableRow[]>(`/v1/api/score/table`, { params });
+  return axiosClient.get<ScoreTableRow[]>(`/score/table`, { params });
 };

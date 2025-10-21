@@ -1,4 +1,5 @@
-import { getScoreColumns, getScoreColumnDetails } from "@/apis/score.api";
+import { getScoreColumnDetails, getScoreColumns } from "@/apis/score.api";
+import { queryKeys } from "@/constants/query-keys";
 import { useQuery } from "@tanstack/react-query";
 
 export const useScoreColumns = (
@@ -6,14 +7,16 @@ export const useScoreColumns = (
   params: { summarize: boolean },
 ) => {
   return useQuery({
-    queryKey: ["score-columns", courseId, params],
+    queryKey: [...queryKeys.ld.scoreColumns, courseId, params] as const,
     queryFn: () => getScoreColumns(courseId, params),
+    select: (data) => data.data, // ← Extract data từ AxiosResponse
   });
 };
 
 export const useScoreColumnDetails = (id: string) => {
   return useQuery({
-    queryKey: ["score-column-details", id],
+    queryKey: queryKeys.ld.scoreColumnDetails(id),
     queryFn: () => getScoreColumnDetails(id),
+    select: (data) => data.data, // ← Extract data từ AxiosResponse
   });
 };
