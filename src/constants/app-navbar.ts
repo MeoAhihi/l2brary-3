@@ -19,10 +19,4 @@ export const appNavbar = [
     icon: GraduationCap,
     public: true,
   },
-  {
-    title: "Knowledge",
-    url: "/knowledge",
-    icon: BookOpen,
-    public: true,
-  },
 ];
