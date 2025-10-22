@@ -1,6 +1,7 @@
 import { useMutation } from "@tanstack/react-query";
-import { changePassword } from "@/apis/authentication.api";
 import { toast } from "sonner";
+
+import { changePassword } from "@/apis/authentication.api";
 
 /**
  * Custom hook to change user's password using React Query's useMutation.

@@ -1,5 +1,10 @@
 "use client";
 
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useRouter } from "next/navigation";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import {
@@ -18,10 +23,6 @@ import {
 } from "@/components/ui/input-otp";
 import { PasswordInput } from "@/components/ui/password-input";
 import { useResetPassword } from "@/hooks/auth/use-reset-pasword";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useRouter } from "next/navigation";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
 
 const formSchema = z
   .object({

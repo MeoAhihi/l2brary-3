@@ -2,16 +2,14 @@
 
 import Link from "next/link";
 import { useParams } from "next/navigation";
+import { useState } from "react";
 
 import { Button } from "@/components/ui/button";
 import { DataTable } from "@/components/ui/data-table/data-table";
 import { DataTablePagination } from "@/components/ui/data-table/data-table-pagination";
-import { Session } from "@/types/ld.types";
+import { useSessionsQuery } from "@/hooks";
 
 import { columns } from "./column";
-import { useSessionTable } from "./use-session-table";
-import { useSessionsQuery } from "@/hooks";
-import { useState } from "react";
 
 export default function SessionsTable() {
   const { "course-id": courseId } = useParams<{ "course-id": string }>();

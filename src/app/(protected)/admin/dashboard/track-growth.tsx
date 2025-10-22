@@ -1,19 +1,18 @@
 "use client";
 
+import {
+  CartesianGrid,
+  Legend,
+  Line,
+  LineChart,
+  Tooltip,
+  XAxis,
+  YAxis,
+} from "recharts";
+
 import { ChartConfig, ChartContainer } from "@/components/ui/chart";
 import { Spinner } from "@/components/ui/spinner";
 import { useMonthlyUserGrowth } from "@/hooks/analytics/track-growth.queries";
-import React from "react";
-import {
-  LineChart,
-  Line,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  ResponsiveContainer,
-  Legend,
-} from "recharts";
 
 function TrackGrowthChart() {
   const { data: monthlyUserGrowth, isLoading, error } = useMonthlyUserGrowth();

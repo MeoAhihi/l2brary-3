@@ -1,3 +1,3 @@
-export type GetOneScoreColumnPayload = {
+export interface GetOneScoreColumnPayload {
   summarize: boolean;
-};
+}

@@ -1,17 +1,16 @@
+import { useMutation } from "@tanstack/react-query";
+import { toast } from "sonner";
+
 import {
   createScoreColumn,
-  updateScoreColumn,
   deleteScoreColumn,
+  updateScoreColumn,
 } from "@/apis/score.api";
+import { invalidateQueries } from "@/lib/query-client";
 import { CreateScoreColumnDto } from "@/types/score/create-score-column.api.dto";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { toast } from "sonner";
 import { UpdateScoreColumnDto } from "@/types/score/update-score-column.api.dto";
-import { queryKeys } from "@/constants/query-keys";
 
 export const useCreateScoreColumnMutation = () => {
-  const queryClient = useQueryClient();
-
   return useMutation({
     mutationFn: ({
       courseId,
@@ -23,18 +22,17 @@ export const useCreateScoreColumnMutation = () => {
 
     onSuccess: (data, variables) => {
       // invalidate any relevant query keys so UI stays in sync
-      queryClient.invalidateQueries({ queryKey: ["score-columns"] });
+      invalidateQueries.scoreColumns();
+      invalidateQueries.scoreTable(variables.courseId);
       toast.success("Tạo cột điểm thành công");
     },
-    onError: (err) => {
+    onError: () => {
       toast.error("Tạo cột điểm thất bại");
     },
   });
 };
 
 export const useUpdateScoreColumnMutation = () => {
-  const queryClient = useQueryClient();
-
   return useMutation({
     mutationFn: ({
       columnId,
@@ -44,8 +42,10 @@ export const useUpdateScoreColumnMutation = () => {
       data: UpdateScoreColumnDto;
     }) => updateScoreColumn(columnId, data),
 
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["score-columns"] });
+    onSuccess: (data, variables) => {
+      invalidateQueries.scoreColumns();
+      invalidateQueries.scoreColumnDetails(variables.columnId);
+      invalidateQueries.scoreTable();
       toast.success("Cập nhật cột điểm thành công");
     },
     onError: () => {
@@ -55,13 +55,12 @@ export const useUpdateScoreColumnMutation = () => {
 };
 
 export const useDeleteScoreColumnMutation = () => {
-  const queryClient = useQueryClient();
-
   return useMutation({
     mutationFn: (columnId: string) => deleteScoreColumn(columnId),
 
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["score-columns"] });
+      invalidateQueries.scoreColumns();
+      invalidateQueries.scoreTable();
       toast.success("Xóa cột điểm thành công");
     },
     onError: () => {

@@ -1,11 +1,11 @@
 import { RefUserDto } from "../user/ref-user.dto";
 import { ScoreColumnItem } from "./score-column.response.dto";
 
-export type ScoreTableRow = {
+export interface ScoreTableRow {
   user: RefUserDto;
-  score: {
+  scores: {
     score: number;
     scoreColumn: ScoreColumnItem;
-  };
-  average: number;
-};
+  }[]; // ← Array of scores for multiple columns
+  average?: number;
+}

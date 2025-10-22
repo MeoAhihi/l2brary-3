@@ -1,9 +1,12 @@
 "use client";
 
-import { useState } from "react";
 import { Search, X } from "lucide-react";
+import { useState } from "react";
 
 import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import {
   Select,
   SelectContent,
@@ -11,11 +14,9 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { QUERY_PARAMS } from "@/constants/query-params";
 import { ScheduleTypeEnum } from "@/types/courses/type";
+
 import { useCourseGroupsQuery } from "../hooks/useCourseGroupsQuery";
 
 interface CourseFiltersProps {

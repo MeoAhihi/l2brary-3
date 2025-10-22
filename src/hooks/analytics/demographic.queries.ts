@@ -1,8 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
+
 import {
-  getUsersByRank,
-  getUsersByGender,
   getUsersByAge,
+  getUsersByGender,
+  getUsersByRank,
 } from "@/apis/demographic.api";
 
 export function useUsersByRank() {

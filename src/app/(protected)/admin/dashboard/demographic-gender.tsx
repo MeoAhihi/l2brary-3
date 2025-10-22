@@ -1,13 +1,14 @@
 import React from "react";
-import { useUsersByGender } from "@/hooks/analytics/demographic.queries";
 import {
-  PieChart,
-  Pie,
   Cell,
+  Legend,
+  Pie,
+  PieChart,
   ResponsiveContainer,
   Tooltip,
-  Legend,
 } from "recharts";
+
+import { useUsersByGender } from "@/hooks/analytics/demographic.queries";
 
 const COLORS = ["#8884d8", "#82ca9d", "#ffc658", "#ff7f50", "#a4de6c"];
 
@@ -45,12 +46,14 @@ function DemographicGenderPieChart() {
               `${name}: ${value} (${(percent * 100).toFixed(1)}%)`
             }
           >
-            {pieData.map((entry: { name: string }, index: number) => (
-              <Cell
-                key={`cell-${entry.name}`}
-                fill={COLORS[index % COLORS.length]}
-              />
-            ))}
+            {pieData.map(
+              (entry: { name: string; value: number }, index: number) => (
+                <Cell
+                  key={`cell-${entry.name}`}
+                  fill={COLORS[index % COLORS.length]}
+                />
+              ),
+            )}
           </Pie>
           <Tooltip formatter={(value: number, name: string) => [value, name]} />
           <Legend />

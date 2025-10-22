@@ -1,19 +1,16 @@
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import axios from "axios";
+import { toast } from "sonner";
+
 import {
   attachPermissionsToRole,
   detachPermissionsFromRole,
 } from "@/apis/authorization.api";
-import axiosClient from "@/connectors/AxiosRestConnector";
-import {
-  AttachPermissionPayload,
-  AttachPermissionResponse,
-} from "@/types/authorization/attach-permission.api.dto";
+import { AttachPermissionPayload } from "@/types/authorization/attach-permission.api.dto";
 import {
   UpdateRoleByIdPayload,
   UpdateRoleResponse,
 } from "@/types/authorization/update.api.dto";
-import { useQueryClient, useMutation } from "@tanstack/react-query";
-import axios from "axios";
-import { toast } from "sonner";
 
 // Update a role's info by id
 export function useUpdateRoleMutation() {

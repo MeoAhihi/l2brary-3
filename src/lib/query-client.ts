@@ -121,4 +121,20 @@ export const invalidateQueries = {
     queryClient.invalidateQueries({
       queryKey: [queryKeys.ld.myEnrollments],
     }),
+
+  // Score-related invalidations
+  scoreColumns: () =>
+    queryClient.invalidateQueries({ queryKey: queryKeys.ld.scoreColumns }),
+  scoreTable: (courseId?: string) =>
+    queryClient.invalidateQueries({
+      queryKey: courseId
+        ? queryKeys.ld.scoreTable(courseId)
+        : ["ld", "score-table"],
+    }),
+  scoreColumnDetails: (columnId?: string) =>
+    queryClient.invalidateQueries({
+      queryKey: columnId
+        ? queryKeys.ld.scoreColumnDetails(columnId)
+        : ["ld", "score-column-details"],
+    }),
 };

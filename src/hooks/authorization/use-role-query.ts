@@ -1,3 +1,5 @@
+import { useQuery } from "@tanstack/react-query";
+
 import {
   getPermissions,
   getRoleById,
@@ -6,8 +8,6 @@ import {
 import { GetOneRoleResponse } from "@/types/authorization/get-one.api.dto";
 import { PermissionDto } from "@/types/authorization/permission.dto";
 import { RefRoleDto } from "@/types/authorization/ref-role.dto";
-import { UpdateRoleResponse } from "@/types/authorization/update.api.dto";
-import { useQuery } from "@tanstack/react-query";
 
 // Fetch all permissions
 export function usePermissionsQuery(

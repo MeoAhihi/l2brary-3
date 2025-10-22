@@ -1,15 +1,21 @@
-import { upsertScores } from "@/apis/score.api";
-import { UpsertScoreColumnPayload } from "@/types/score/score.payload.dto";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 import { toast } from "sonner";
 
-export const useUpsertScoresMutation = () => {
-  const queryClient = useQueryClient();
+import { upsertScores } from "@/apis/score.api";
+import { invalidateQueries } from "@/lib/query-client";
+import { UpsertScoreColumnPayload } from "@/types/score/score.payload.dto";
 
+export const useUpsertScoresMutation = (courseId?: string) => {
   return useMutation({
     mutationFn: (payload: UpsertScoreColumnPayload) => upsertScores(payload),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["score-columns"] });
+      invalidateQueries.scoreColumns();
+      // Invalidate với courseId nếu có
+      if (courseId) {
+        invalidateQueries.scoreTable(courseId);
+      } else {
+        invalidateQueries.scoreTable();
+      }
       toast.success("Cập nhật điểm thành công");
     },
     onError: () => {

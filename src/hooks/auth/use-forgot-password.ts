@@ -1,6 +1,7 @@
 import { useMutation } from "@tanstack/react-query";
-import { requestPasswordReset } from "@/apis/authentication.api";
 import { toast } from "sonner";
+
+import { requestPasswordReset } from "@/apis/authentication.api";
 
 /**
  * useForgotPassword provides a mutation to request a password reset email.

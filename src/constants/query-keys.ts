@@ -25,6 +25,12 @@ export const queryKeys = {
     activityCategories: ["ld", "activityCategories"] as const,
     activityLogs: ["ld", "activityLogs"] as const,
     userActivityReport: ["ld", "userActivityReport"] as const,
+
+    // Score management
+    scoreColumns: ["ld", "score-columns"] as const,
+    scoreTable: (courseId: string) => ["ld", "score-table", courseId] as const,
+    scoreColumnDetails: (columnId: string) =>
+      ["ld", "score-column-details", columnId] as const,
   },
 
   // Analytics

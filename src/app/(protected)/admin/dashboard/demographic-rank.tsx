@@ -1,12 +1,7 @@
-import React from "react";
-import { useUsersByRank } from "@/hooks/analytics/demographic.queries";
-import {
-  ChartConfig,
-  ChartContainer,
-  ChartTooltip,
-  ChartTooltipContent,
-} from "@/components/ui/chart";
 import { Cell, Legend, Pie, PieChart, Tooltip } from "recharts";
+
+import { ChartConfig, ChartContainer } from "@/components/ui/chart";
+import { useUsersByRank } from "@/hooks/analytics/demographic.queries";
 
 function DemographicRankPieChart() {
   const { data, isLoading, error } = useUsersByRank();

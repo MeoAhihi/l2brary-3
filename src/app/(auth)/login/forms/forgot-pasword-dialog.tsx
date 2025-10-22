@@ -1,8 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { SendHorizonal, X } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { Input } from "@/components/ui/input";
+import { useState } from "react";
+
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -14,9 +15,9 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { SendHorizonal, X } from "lucide-react";
-import { useForgotPassword } from "@/hooks/auth/use-forgot-password";
+import { Input } from "@/components/ui/input";
 import { Spinner } from "@/components/ui/spinner";
+import { useForgotPassword } from "@/hooks/auth/use-forgot-password";
 
 export default function ForgotPasswordDialog() {
   const [email, setEmail] = useState("");
