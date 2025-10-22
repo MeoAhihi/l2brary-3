@@ -45,7 +45,7 @@ function DemographicGenderPieChart() {
               `${name}: ${value} (${(percent * 100).toFixed(1)}%)`
             }
           >
-            {pieData.map((entry, index) => (
+            {pieData.map((entry: { name: string }, index: number) => (
               <Cell
                 key={`cell-${entry.name}`}
                 fill={COLORS[index % COLORS.length]}
