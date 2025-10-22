@@ -39,7 +39,10 @@ axiosClient.interceptors.response.use(
 
     if (status === 401) {
       deleteCookie(ACCESS_TOKEN);
-      window.location.reload();
+      // Chỉ reload khi chạy trong browser, không phải server-side
+      if (typeof window !== "undefined") {
+        window.location.reload();
+      }
     }
 
     // Only log errors in development, except 403

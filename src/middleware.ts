@@ -13,12 +13,7 @@ const AUTH_ROUTES = ["/login", "/sign-up", "/register"];
 
 const PUBLIC_ROUTES = ["/", "/about", "/contact", "/courses", "/knowledge"];
 
-const PROTECTED_ROUTES = [
-  "/profile",
-  "/my-progress",
-  "/log-activity",
-  "/dashboard",
-];
+const PROTECTED_ROUTES = ["/profile", "/my-progress", "/log-activity"];
 
 const ADMIN_ROUTES = ["/admin"];
 
@@ -44,11 +39,30 @@ export async function middleware(req: NextRequest) {
   // Handle auth routes (login, register)
   if (isAuthRoute) {
     if (isAuthenticated) {
+      const userRoles = token?.roles || [];
+
+      if (userRoles.includes(RoleEnum.Admin)) {
+        return NextResponse.redirect(
+          new URL(`/${PAGE_LINKS[PAGE_NAME.ADMIN_DASHBOARD]}`, req.url),
+          {
+            headers: requestHeaders,
+          },
+        );
+      }
+
+      if (userRoles.includes(RoleEnum.Monitor)) {
+        return NextResponse.redirect(
+          new URL(`/${PAGE_LINKS[PAGE_NAME.LOG_ACTIVITY]}`, req.url),
+          {
+            headers: requestHeaders,
+          },
+        );
+      }
+
       // Redirect authenticated users away from auth pages
-      return NextResponse.redirect(
-        new URL(`/${PAGE_LINKS[PAGE_NAME.DASHBOARD]}`, req.url),
-        { headers: requestHeaders },
-      );
+      return NextResponse.redirect(new URL("/", req.url), {
+        headers: requestHeaders,
+      });
     }
     // Allow access to auth routes for unauthenticated users
     return NextResponse.next({ headers: requestHeaders });
@@ -69,10 +83,9 @@ export async function middleware(req: NextRequest) {
 
     if (!userRole.includes(RoleEnum.Admin)) {
       // Redirect non-admin users to dashboard
-      return NextResponse.redirect(
-        new URL(`/${PAGE_LINKS[PAGE_NAME.DASHBOARD]}`, req.url),
-        { headers: requestHeaders },
-      );
+      return NextResponse.redirect(new URL("/", req.url), {
+        headers: requestHeaders,
+      });
     }
 
     // Allow access for authenticated admin users
@@ -88,6 +101,22 @@ export async function middleware(req: NextRequest) {
         { headers: requestHeaders },
       );
     }
+
+    // Check if user has monitor role for log-activity page
+    if (pathname.startsWith("/log-activity")) {
+      const userRoles = token?.roles || [];
+      if (
+        !userRoles.includes(RoleEnum.Monitor) &&
+        !userRoles.includes(RoleEnum.Admin)
+      ) {
+        // Redirect non-monitor users to home
+        return NextResponse.redirect(
+          new URL(`/${PAGE_LINKS[PAGE_NAME.HOME]}`, req.url),
+          { headers: requestHeaders },
+        );
+      }
+    }
+
     // Allow access for authenticated users
     return NextResponse.next({ headers: requestHeaders });
   }

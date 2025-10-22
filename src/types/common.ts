@@ -3,7 +3,9 @@
 export enum PAGE_NAME {
   LOGIN = "login",
   SIGN_UP = "signUp",
-  DASHBOARD = "dashboard",
+  HOME = "/",
+  ADMIN_DASHBOARD = "admin/dashboard",
+  LOG_ACTIVITY = "log-activity",
   BIRTHDAY = "birthday",
   MEMBERS = "members",
   PROFILE = "profile",

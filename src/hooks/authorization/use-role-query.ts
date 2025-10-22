@@ -37,7 +37,7 @@ export function useGetAllRolesQuery(
 export function useGetOneRoleQuery(roleId: string, options: any = {}) {
   return useQuery<GetOneRoleResponse>({
     queryKey: ["role", roleId],
-    queryFn: getRoleById,
+    queryFn: () => getRoleById(roleId),
     enabled: !!roleId,
     ...options,
   });

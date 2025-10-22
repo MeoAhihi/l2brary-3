@@ -1,46 +1,27 @@
 "use client";
 
-import React from "react";
-
 import { DataTable } from "@/components/ui/data-table/data-table";
 import { Spinner } from "@/components/ui/spinner";
-import {
-  useGetAllRolesQuery,
-  usePermissionsQuery,
-} from "@/hooks/authorization/use-role-query";
 
-import { columns } from "./columns";
+import { useSecurityData } from "./useSecurityData";
 
-function SecurityPage() {
-  const { data: roles, isLoading: isLoadingRoles } = useGetAllRolesQuery({
-    permissions: true,
-  });
-  const { data: permissions, isLoading: isLoadingPermissions } =
-    usePermissionsQuery({ attachRoles: true });
-  if (isLoadingRoles || isLoadingPermissions)
+export const dynamic = "force-dynamic";
+
+export default function SecurityPage() {
+  const { data, columns, isLoading } = useSecurityData();
+
+  if (isLoading) {
     return (
       <div className="flex min-h-56 w-full flex-col items-center justify-center gap-3">
-        Đang tải...
+        đang tải...
         <Spinner className="h-10 w-10" />
       </div>
     );
-  const data = permissions
-    .map((p) => ({
-      id: p.id,
-      name: p.name,
-      ...roles
-        .map((r) => ({
-          key: r.id,
-          value: p.roles?.map((role) => role.id).includes(r.id),
-        }))
-        .reduce((acc, cur) => ({ ...acc, [cur.key]: cur.value }), {}),
-    }))
-    .sort((a, b) => a.name.localeCompare(b.name));
+  }
+
   return (
     <div>
-      <DataTable columns={columns as any} data={data} manualPagination />
+      <DataTable columns={columns} data={data} manualPagination />
     </div>
   );
 }
-
-export default SecurityPage;
