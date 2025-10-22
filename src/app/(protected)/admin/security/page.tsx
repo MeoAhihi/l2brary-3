@@ -38,7 +38,7 @@ function SecurityPage() {
     .sort((a, b) => a.name.localeCompare(b.name));
   return (
     <div>
-      <DataTable columns={columns as any} data={data} manualPagination />
+      {/* <DataTable columns={columns} data={data} manualPagination /> */}
     </div>
   );
 }
