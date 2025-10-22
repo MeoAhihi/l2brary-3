@@ -8,7 +8,6 @@ import { GetOneRoleResponse } from "@/types/authorization/get-one.api.dto";
 import { PermissionDto } from "@/types/authorization/permission.dto";
 import { RefRoleDto } from "@/types/authorization/ref-role.dto";
 import {
-  UpdateRoleByIdPayload,
   UpdateRolePayload,
   UpdateRoleResponse,
 } from "@/types/authorization/update.api.dto";

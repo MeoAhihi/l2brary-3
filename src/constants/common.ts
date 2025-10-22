@@ -10,10 +10,12 @@ export const DEFAULT_PAGE_INDEX = 1;
 export const PAGE_LINKS = {
   [PAGE_NAME.LOGIN]: "login",
   [PAGE_NAME.SIGN_UP]: "register",
-  [PAGE_NAME.DASHBOARD]: "dashboard",
-  [PAGE_NAME.BIRTHDAY]: "dashboard/birthday",
-  [PAGE_NAME.MEMBERS]: "dashboard/members",
-  [PAGE_NAME.PROFILE]: "dashboard/profile",
+  [PAGE_NAME.HOME]: "/",
+  [PAGE_NAME.ADMIN_DASHBOARD]: "admin/dashboard",
+  [PAGE_NAME.LOG_ACTIVITY]: "log-activity",
+  [PAGE_NAME.BIRTHDAY]: "admin/dashboard/birthday",
+  [PAGE_NAME.MEMBERS]: "admin/dashboard/members",
+  [PAGE_NAME.PROFILE]: "admin/dashboard/profile",
 };
 
 export const DEFAULT_PAGE_SIZE = 8;
