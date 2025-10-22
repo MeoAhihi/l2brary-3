@@ -1,7 +1,6 @@
 import { useState } from "react";
 
 import { useGetAllUsers } from "@/hooks/users";
-import type { Member } from "@/types/member/response";
 
 export function useMemberTable() {
   const [page, setPage] = useState(1);

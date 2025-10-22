@@ -1,5 +1,8 @@
 "use client";
 
+import { UserPlus } from "lucide-react";
+import { useRouter } from "next/navigation";
+
 import { Badge } from "@/components/ui/badge";
 import {
   DropdownMenu,
@@ -11,10 +14,6 @@ import { Spinner } from "@/components/ui/spinner";
 import { useGetAllRolesQuery } from "@/hooks/authorization/use-role-query";
 import { useAssignRole } from "@/hooks/users";
 import { Role } from "@/types/auth/iam.response";
-import { PlusCircle, UserPlus } from "lucide-react";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
-import { toast } from "sonner";
 
 interface AssignRoleBadgeProps {
   user: { id: string; roles: Role[] };
