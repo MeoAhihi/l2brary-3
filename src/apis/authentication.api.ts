@@ -1,5 +1,3 @@
-import axios from "axios";
-
 import axiosClient from "@/connectors/AxiosRestConnector";
 import { IAMProfileResponse } from "@/types/auth/iam.response";
 import { LoginPayload } from "@/types/auth/login.payload";

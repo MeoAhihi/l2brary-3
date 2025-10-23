@@ -93,3 +93,14 @@ export const deleteEnrollment = async (enrollmentId: string) => {
 
   return data;
 };
+
+/**
+ * Lấy danh sách học viên của một khóa học (roster) (Yêu cầu quyền admin)
+ * @param courseId ID của khóa học
+ * @returns Danh sách học viên trong khóa học đó
+ */
+export const getEnrollmentRosterByCourseId = async (courseId: string) => {
+  return await axiosClient.get<EnrollmentItem[]>(
+    `/enrollment/course/${courseId}/roster`,
+  );
+};
