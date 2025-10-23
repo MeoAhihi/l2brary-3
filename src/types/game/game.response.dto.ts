@@ -1,4 +1,3 @@
-import { ReferenceCourseDto } from "../courses/reference-course.dto";
 import { ScoreColumnItem } from "../score/score-column.response.dto";
 import { ReferenceSessionDto } from "../session/ref-session.dto";
 import { RefUserDto } from "../user/ref-user.dto";

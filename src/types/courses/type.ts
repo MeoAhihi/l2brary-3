@@ -34,3 +34,15 @@ export interface ScheduleDetail {
   daysOfMonth?: string[];
   dates?: string[];
 }
+
+export enum CourseStatus {
+  NotStartedYet = "not_started_yet",
+  OnGoing = "on_going",
+  Ended = "ended",
+}
+
+export const CourseStatusMap: Record<CourseStatus, string> = {
+  [CourseStatus.NotStartedYet]: "Chưa bắt đầu",
+  [CourseStatus.OnGoing]: "Đang diễn ra",
+  [CourseStatus.Ended]: "Đã kết thúc",
+};

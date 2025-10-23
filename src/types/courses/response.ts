@@ -1,6 +1,6 @@
 import { PaginatedResponse } from "@/types/api";
 
-import { ScheduleDetail, ScheduleTypeEnum } from "./type";
+import { CourseStatus, ScheduleDetail, ScheduleTypeEnum } from "./type";
 
 export interface CourseItem {
   id: string;
@@ -25,6 +25,7 @@ export interface CourseItem {
   createdAt: string;
   updatedAt: string;
   isEnrollable?: boolean;
+  status: CourseStatus;
 }
 
 export type CoursesResponse = PaginatedResponse<CourseItem>;

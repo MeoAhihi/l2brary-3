@@ -5,4 +5,5 @@ export type RefUserDto = {
   id: string;
   fullName: string;
   internationalName: string;
+  avatarUrl: string;
 };
