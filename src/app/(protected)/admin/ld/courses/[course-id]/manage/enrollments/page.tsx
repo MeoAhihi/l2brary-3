@@ -1,11 +1,8 @@
 "use client";
 
-import { BookOpen, Calendar, CheckCircle, Users } from "lucide-react";
 import { useParams } from "next/navigation";
 
-import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { StatCard } from "@/components/ui/stat-card";
 import { useDeleteEnrollment, useUpdateEnrollment } from "@/hooks/enrollments";
 import type { EnrollmentItem } from "@/types/enrollment/response";
 import { EnrollmentStatusEnum } from "@/types/enrollment/type";

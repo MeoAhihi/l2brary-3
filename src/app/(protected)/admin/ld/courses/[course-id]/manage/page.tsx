@@ -1,20 +1,11 @@
 "use client";
 
 // import { use } from "react";
-import {
-  Award,
-  BarChart3,
-  BookOpen,
-  Crown,
-  Shield,
-  Star,
-  TrendingUp,
-  Users,
-} from "lucide-react";
+import { BarChart3, BookOpen, TrendingUp, Users } from "lucide-react";
 import Head from "next/head";
+import Link from "next/link";
 import { use } from "react";
 
-import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useSessionsQuery } from "@/hooks";
 import { useGetCourseById } from "@/hooks/courses/useGetCourseById";
@@ -26,46 +17,6 @@ import {
   WeekDayMap,
   WeekTypeEnum,
 } from "@/types/courses/type";
-
-const getPositionIcon = (role: string) => {
-  switch (role) {
-    case "assistant":
-      return <Crown className="h-4 w-4 text-yellow-600" />;
-    case "leader":
-      return <Star className="h-4 w-4 text-blue-600" />;
-    case "mentor":
-      return <Shield className="h-4 w-4 text-green-600" />;
-    case "coordinator":
-      return <Award className="h-4 w-4 text-purple-600" />;
-    default:
-      return <Users className="h-4 w-4 text-gray-600" />;
-  }
-};
-
-const getPositionBadge = (role: string) => {
-  switch (role) {
-    case "assistant":
-      return (
-        <Badge className="bg-yellow-100 text-yellow-800">
-          Course Assistant
-        </Badge>
-      );
-    case "leader":
-      return (
-        <Badge className="bg-blue-100 text-blue-800">Discussion Leader</Badge>
-      );
-    case "mentor":
-      return <Badge className="bg-green-100 text-green-800">Peer Mentor</Badge>;
-    case "coordinator":
-      return (
-        <Badge className="bg-purple-100 text-purple-800">
-          Study Coordinator
-        </Badge>
-      );
-    default:
-      return <Badge variant="secondary">Student</Badge>;
-  }
-};
 
 export default function ManageCoursePage({
   params,
@@ -228,22 +179,24 @@ export default function ManageCoursePage({
             <CardContent>
               <div className="space-y-2">
                 <button className="hover:bg-accent w-full rounded-lg border p-3 text-left transition-colors">
-                  <div className="font-medium">Thêm Mô-đun mới</div>
-                  <div className="text-muted-foreground text-sm">
-                    Tạo nội dung cho khóa học
-                  </div>
+                  <Link
+                    href={`/admin/ld/courses/${courseId}/manage/sessions/new`}
+                  >
+                    <div className="font-medium">Thêm Tiết học mới</div>
+                    <div className="text-muted-foreground text-sm">
+                      Tạo một tiết học cho khóa học
+                    </div>
+                  </Link>
                 </button>
                 <button className="hover:bg-accent w-full rounded-lg border p-3 text-left transition-colors">
-                  <div className="font-medium">Duyệt đăng ký</div>
-                  <div className="text-muted-foreground text-sm">
-                    Phê duyệt các yêu cầu chờ xử lý
-                  </div>
-                </button>
-                <button className="hover:bg-accent w-full rounded-lg border p-3 text-left transition-colors">
-                  <div className="font-medium">Xuất báo cáo</div>
-                  <div className="text-muted-foreground text-sm">
-                    Tải xuống dữ liệu phân tích khóa học
-                  </div>
+                  <Link
+                    href={`/admin/ld/courses/${courseId}/manage/enrollments`}
+                  >
+                    <div className="font-medium">Duyệt đăng ký</div>
+                    <div className="text-muted-foreground text-sm">
+                      Phê duyệt các yêu cầu chờ xử lý
+                    </div>
+                  </Link>
                 </button>
               </div>
             </CardContent>

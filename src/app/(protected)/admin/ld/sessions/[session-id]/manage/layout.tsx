@@ -12,6 +12,7 @@ import { usePathname } from "next/navigation";
 import { use } from "react";
 
 import PageHeader from "@/components/ui/page-header";
+import { useSessionByIdQuery } from "@/hooks";
 import { cn } from "@/lib/utils";
 
 interface ManageSessionLayoutProps {
@@ -33,11 +34,6 @@ const tabs = [
     icon: CheckSquare,
   },
   {
-    name: "Diểm cộng",
-    href: "/stamp",
-    icon: Stamp,
-  },
-  {
     name: "Ghi điểm",
     href: "/game-log",
     icon: Gamepad2,
@@ -55,13 +51,15 @@ export default function ManageSessionLayout({
 }: ManageSessionLayoutProps) {
   const pathname = usePathname();
   const { "session-id": sessionId } = use(params);
-  const sessionName = "Buổi học Vật lý Lý thuyết";
-
+  const { data: session, isLoading: isLoadingSession } = useSessionByIdQuery({
+    sessionId,
+  });
+  if (isLoadingSession) return <div>Vui lòng chờ giây lát ...</div>;
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="mx-auto max-w-6xl">
         <PageHeader
-          pageTitle={sessionName}
+          pageTitle={session.title}
           descriptions={[`Session ID: ${sessionId}`]}
         />
 

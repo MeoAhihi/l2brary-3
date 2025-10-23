@@ -20,6 +20,7 @@ import {
 import { useTableSkeleton } from "@/hooks/table";
 import { formatScheduleRule, formatTimeRange } from "@/lib/format";
 import type { CourseItem } from "@/types/courses/response";
+import { CourseStatusMap } from "@/types/courses/type";
 
 export const columns: ColumnDef<CourseItem>[] = [
   {
@@ -121,6 +122,11 @@ export const columns: ColumnDef<CourseItem>[] = [
     },
   },
   {
+    id: "status",
+    header: "Trạng thái",
+    cell: ({ row }) => CourseStatusMap[row.original.status],
+  },
+  {
     id: "actions",
     cell: ({ row }) => <CourseActionsCell course={row.original} />,
   },
@@ -144,17 +150,6 @@ function CourseActionsCell({ course }: { course: CourseItem }) {
 
   const handleSettings = () => {
     router.push(`/admin/ld/courses/${course.id}/manage/settings`);
-  };
-
-  const handleDelete = () => {
-    // Confirm before delete
-
-    if (window.confirm("Bạn có chắc muốn xoá khoá học này?")) {
-      // TODO: Implement delete logic
-      toast("Đã xoá khoá học", {
-        description: course.title,
-      });
-    }
   };
 
   const handleCopyId = () => {
@@ -206,12 +201,6 @@ function CourseActionsCell({ course }: { course: CourseItem }) {
           <span className="flex items-center gap-2">
             <Settings />
             Cài đặt
-          </span>
-        </DropdownMenuItem>
-        <DropdownMenuItem onClick={handleDelete}>
-          <span className="text-destructive flex items-center gap-2">
-            <X />
-            Xoá
           </span>
         </DropdownMenuItem>
         <DropdownMenuSeparator />

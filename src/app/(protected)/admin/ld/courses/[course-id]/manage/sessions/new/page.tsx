@@ -23,13 +23,7 @@ export default function NewSessionPage() {
         ? params["course-id"][0]
         : "";
 
-  const {
-    register,
-    handleSubmit,
-    watch,
-    setValue,
-    formState: { errors, isSubmitting },
-  } = useForm<CreateSessionDto>({
+  const { register, handleSubmit } = useForm<CreateSessionDto>({
     defaultValues: {
       title: "",
       description: "",

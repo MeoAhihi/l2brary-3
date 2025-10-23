@@ -5,9 +5,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 
 export type Member = {
   id: number | string;
-  fullname: string;
-  internationalName?: string;
-  avatar?: string;
+  fullName: string;
 };
 
 export const columns: ColumnDef<Member>[] = [
@@ -52,50 +50,25 @@ export const columns: ColumnDef<Member>[] = [
       </div>
     ),
     cell: ({ row }) => {
-      const member = row.original;
       return (
         <div className="flex flex-row items-center gap-2">
-          <Avatar className="h-8 w-8">
-            {member.avatar ? (
-              <AvatarImage src={member.avatar} alt={member.fullname} />
-            ) : null}
-            <AvatarFallback>
-              {member.fullname
-                .split(" ")
-                .map((n) => n[0])
-                .join("")
-                .toUpperCase()}
-            </AvatarFallback>
-          </Avatar>
-          {row.original.fullname}
+          {row.original.fullName}
         </div>
       );
     },
     sortingFn: (a, b) => {
-      const getLastName = (fullname: string = "") => {
-        const parts = fullname.trim().split(" ");
+      const getLastName = (fullName: string = "") => {
+        const parts = fullName.trim().split(" ");
         return parts.length > 1
           ? parts[parts.length - 1].toLowerCase()
-          : fullname.toLowerCase();
+          : fullName.toLowerCase();
       };
-      const lastNameA = getLastName(a.original.fullname);
-      const lastNameB = getLastName(b.original.fullname);
+      const lastNameA = getLastName(a.original.fullName);
+      const lastNameB = getLastName(b.original.fullName);
       if (lastNameA < lastNameB) return -1;
       if (lastNameA > lastNameB) return 1;
       return 0;
     },
     enableSorting: true,
-  },
-  {
-    accessorKey: "internationalName",
-    header: "Tên Quốc tế",
-    cell: ({ row }) =>
-      row.original.internationalName ? (
-        <span className="text-muted-foreground">
-          {row.original.internationalName}
-        </span>
-      ) : (
-        <span className="text-muted-foreground italic">N/A</span>
-      ),
   },
 ];

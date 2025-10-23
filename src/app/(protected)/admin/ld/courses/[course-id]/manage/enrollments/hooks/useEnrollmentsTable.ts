@@ -1,4 +1,3 @@
-import { getEnrollments } from "@/apis/enrollment.api";
 import { DEFAULT_PAGE_SIZE } from "@/constants/common";
 import { useEnrollmentsQuery } from "@/hooks/enrollments";
 

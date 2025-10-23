@@ -4,13 +4,13 @@ import { FormEventHandler } from "react";
 
 import { Button } from "@/components/ui/button";
 import { DataTable } from "@/components/ui/data-table/data-table";
-import { DataTablePagination } from "@/components/ui/data-table/data-table-pagination";
 import { Input } from "@/components/ui/input";
+import { useStudentRosterQuery } from "@/hooks/enrollments/useStudentRoster";
 
-import { columns, Member } from "./columns";
+import { columns } from "./columns";
 
 type ManualCheckinMembersTableProps = {
-  members: Member[];
+  courseId: string;
 };
 
 const handleCheckin: FormEventHandler = (e) => {
@@ -18,34 +18,39 @@ const handleCheckin: FormEventHandler = (e) => {
 };
 
 export default function ManualCheckinMembersTable({
-  members,
+  courseId,
 }: ManualCheckinMembersTableProps) {
+  // Get session id from params prop
+  const { data: enrollments, isLoading: isLoadong } =
+    useStudentRosterQuery(courseId);
+
+  if (isLoadong) {
+    return <div>Đang tải danh sách thành viên...</div>;
+  }
   return (
-    <DataTable
-      columns={columns}
-      data={members}
-      footer={(table) => (
-        <div className="flex flex-col gap-4">
-          <form
-            className="flex flex-row items-center justify-between gap-2"
-            onSubmit={handleCheckin}
-          >
-            <div className="text-muted-foreground text-sm">
-              {table.getFilteredSelectedRowModel().rows.length} of{" "}
-              {table.getFilteredRowModel().rows.length} row(s) selected.
-            </div>
-            <Input
-              type="datetime-local"
-              name="checkinTime"
-              className="w-fit"
-              defaultValue={new Date().toISOString().slice(0, 16)}
-              aria-label="Check-in time"
-            />
-            <Button type="submit">Điểm danh</Button>
-          </form>
-          <DataTablePagination table={table} />
-        </div>
-      )}
-    />
+    <>
+      <DataTable
+        manualPagination={true}
+        columns={columns}
+        data={(enrollments ?? []).map((e) => e.user).filter((i) => !!i)}
+        footer={(table) => (
+          <div className="flex flex-col gap-4">
+            <form
+              className="flex flex-row items-center justify-between gap-2"
+              onSubmit={handleCheckin}
+            >
+              <Input
+                type="datetime-local"
+                name="checkinTime"
+                className="w-fit"
+                defaultValue={new Date().toISOString().slice(0, 16)}
+                aria-label="Check-in time"
+              />
+              <Button type="submit">Điểm danh</Button>
+            </form>
+          </div>
+        )}
+      />
+    </>
   );
 }
