@@ -8,7 +8,7 @@ import type {
 } from "@/types/activities/gamification";
 
 interface UseInfiniteActivityLogsQueryProps {
-  userId: string;
+  userId?: string;
   limit?: number;
 }
 

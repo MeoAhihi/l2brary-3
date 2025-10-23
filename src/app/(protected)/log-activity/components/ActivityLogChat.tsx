@@ -18,7 +18,9 @@ const ActivityLogChat = ({
           {`${memberName} đã ${actionName}`}
         </div>
         <div className="text-muted-foreground mt-1 self-end text-xs">
-          {datetime.toLocaleString()}
+          {new Date(datetime).toLocaleString("vi-VN", {
+            timeZone: "Asia/Ho_Chi_Minh",
+          })}
         </div>
       </div>
     </div>

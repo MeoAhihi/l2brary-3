@@ -1,17 +1,19 @@
 "use client";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useEffect, useRef, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
+import { useRef } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
+import { getAllUsers } from "@/apis/user.api";
 import {
   Form,
   FormControl,
   FormField,
   FormItem,
   FormLabel,
+  FormMessage,
 } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
 import {
   Select,
   SelectContent,
@@ -19,21 +21,40 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import {
+  useGamificationDataQuery,
+  useLogGamificationActivityMutation,
+} from "@/hooks";
+import { useActivitiesQuery } from "@/hooks/activities";
 
 import ActivityLogChat from "./components/ActivityLogChat";
-import { ActivityLogProps } from "./types/activityLog";
 
 export default function AcivityLogPage() {
+  const { data, isLoading } = useGamificationDataQuery({ page: 1, limit: 20 });
+  const { data: users, isLoading: isLoadingUsers } = useQuery({
+    queryKey: ["user", "all"],
+    queryFn: () => getAllUsers({ limit: 100 }), // very big number to get all
+    select: (res) =>
+      res.data.items.sort(
+        (a: { fullName: string }, b: { fullName: string }) => {
+          const getLastName = (fullName: string) => {
+            const parts = fullName.trim().split(/\s+/);
+            return parts.length > 0 ? parts[parts.length - 1] : "";
+          };
+          return getLastName(a.fullName).localeCompare(getLastName(b.fullName));
+        },
+      ),
+  });
+
+  const { data: activities, isLoading: isLoadingActivities } =
+    useActivitiesQuery();
   // Zod + React Hook Form setup
 
+  const logActivity = useLogGamificationActivityMutation();
+
   const formSchema = z.object({
-    message: z.string().min(1, "Message is required"),
-    datetime: z.coerce.date({
-      required_error: "Date and time is required",
-      invalid_type_error: "Invalid date and time",
-    }),
-    activity: z.string().min(1, "Activity is required"),
-    member: z.string().min(1, "Member name is required"),
+    activityId: z.string(),
+    userId: z.string().min(1, "Member is required"),
   });
 
   type FormValues = z.infer<typeof formSchema>;
@@ -41,72 +62,28 @@ export default function AcivityLogPage() {
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      message: "",
-      datetime: new Date(),
-      activity: "",
-      member: "",
+      activityId: "",
+      userId: "",
     },
   });
 
-  const [messages, setMessages] = useState<ActivityLogProps[]>([
-    {
-      datetime: new Date("2024-06-01T09:00:00"),
-      memberName: "Alice",
-      sender: "system",
-      actionName: "đăng nhập",
-    },
-    {
-      datetime: new Date("2024-06-01T09:05:00"),
-      memberName: "Bob",
-      sender: "user",
-      actionName: "tải lên một tệp",
-    },
-    {
-      datetime: new Date("2024-06-01T09:10:00"),
-      memberName: "Carol",
-      sender: "system",
-      actionName: "đổi mật khẩu",
-    },
-    {
-      datetime: new Date("2024-06-01T09:15:00"),
-      memberName: "Dave",
-      sender: "user",
-      actionName: "tham gia nhóm",
-    },
-  ]);
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
 
-  useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [messages]);
-
-  function handleSend(data: any) {
+  function handleSend({
+    userId,
+    activityId,
+  }: {
+    userId: string;
+    activityId: string;
+  }) {
     // This function is now used as a form submit handler for react-hook-form
     // The 'data' argument contains the form values
-    const userMessage: ActivityLogProps = {
-      datetime: data.datetime,
-      memberName: data.member,
-      sender: "user",
-      actionName: data.activity,
-    };
-    setMessages((msgs) => [...msgs, userMessage]);
+    logActivity.mutate({ userId, activityId: Number(activityId) });
+    form.reset();
+  }
 
-    // Simulate bot response
-    // Instead of pushing a bot message with a different shape, push a valid ActivityLogProps
-    setTimeout(() => {
-      setMessages((msgs) => [
-        ...msgs,
-        {
-          datetime: new Date(),
-          memberName: "Bot",
-          sender: "system",
-          actionName: "This is a demo bot response.",
-        },
-      ]);
-    }, 800);
-
-    // Optionally, reset the form field for message
-    form.resetField("message");
+  if (isLoading || isLoadingUsers || isLoadingActivities) {
+    return <div>Loading...</div>;
   }
 
   return (
@@ -119,21 +96,21 @@ export default function AcivityLogPage() {
           </p>
         </div>
         <div
-          className="flex-1 space-y-4 overflow-y-auto px-6 py-4"
-          style={{ minHeight: 300 }}
+          className="flex-1 space-y-4 overflow-y-scroll px-6 py-4"
+          style={{ maxHeight: "50vh" }}
         >
           <div className="flex flex-col gap-4">
-            {messages.map((msg, idx) => (
+            {data?.items.map((log, idx) => (
               <div
                 key={idx}
-                className={`flex ${msg.sender === "system" ? "justify-start" : "justify-end"}`}
+                className={`flex ${log.loggedBy === "system" ? "justify-start" : "justify-end"}`}
               >
                 <div className="w-fit max-w-[70%]">
                   <ActivityLogChat
-                    datetime={msg.datetime}
-                    memberName={msg.memberName}
-                    sender={msg.sender}
-                    actionName={msg.actionName}
+                    datetime={log.createdAt}
+                    memberName={log.user.fullName}
+                    sender={log.loggedBy}
+                    actionName={log.activity.name}
                   />
                 </div>
               </div>
@@ -148,54 +125,31 @@ export default function AcivityLogPage() {
             className="flex flex-col gap-4 border-t px-6 py-4"
           >
             <div className="flex flex-col gap-4 md:flex-row">
-              {/* Date Time Field */}
-              <FormField
-                control={form.control}
-                name="datetime"
-                render={({ field }) => (
-                  <FormItem className="flex-1">
-                    <FormLabel>Date &amp; Time</FormLabel>
-                    <FormControl>
-                      <Input
-                        type="datetime-local"
-                        {...field}
-                        value={
-                          typeof field.value === "string"
-                            ? field.value
-                            : field.value instanceof Date
-                              ? field.value.toISOString().slice(0, 16)
-                              : new Date().toISOString().slice(0, 16)
-                        }
-                        onChange={field.onChange}
-                      />
-                    </FormControl>
-                  </FormItem>
-                )}
-              />
-
               {/* Activity Select Field */}
               <FormField
                 control={form.control}
-                name="activity"
+                name="activityId"
                 render={({ field }) => (
                   <FormItem className="flex-1">
-                    <FormLabel>Activity</FormLabel>
+                    <FormLabel>Hoạt động</FormLabel>
                     <FormControl>
                       <Select
-                        value={field.value}
+                        value={field.value.toString()}
                         onValueChange={field.onChange}
                       >
                         <SelectTrigger className="w-full">
-                          <SelectValue placeholder="Select activity" />
+                          <SelectValue placeholder="Chọn hoạt động" />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="running">Running</SelectItem>
-                          <SelectItem value="cycling">Cycling</SelectItem>
-                          <SelectItem value="swimming">Swimming</SelectItem>
-                          <SelectItem value="yoga">Yoga</SelectItem>
+                          {activities?.map((a) => (
+                            <SelectItem key={a.id} value={a.id.toString()}>
+                              [{a.category}] {a.name}
+                            </SelectItem>
+                          ))}
                         </SelectContent>
                       </Select>
                     </FormControl>
+                    <FormMessage />
                   </FormItem>
                 )}
               />
@@ -203,26 +157,29 @@ export default function AcivityLogPage() {
               {/* Members Select Field */}
               <FormField
                 control={form.control}
-                name="member"
+                name="userId"
                 render={({ field }) => (
                   <FormItem className="flex-1">
-                    <FormLabel>Members</FormLabel>
+                    <FormLabel>Thành viên</FormLabel>
                     <FormControl>
                       <Select
                         value={field.value}
                         onValueChange={field.onChange}
                       >
                         <SelectTrigger className="w-full">
-                          <SelectValue placeholder="Select member" />
+                          <SelectValue placeholder="Chọn thành viên" />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="user-id-001">Alice</SelectItem>
-                          <SelectItem value="user-id-002">Bob</SelectItem>
-                          <SelectItem value="user-id-003">Carol</SelectItem>
-                          <SelectItem value="user-id-004">Dave</SelectItem>
+                          {users?.map((user) => (
+                            <SelectItem key={user.id} value={user.id}>
+                              [{user.fullName.split(" ").slice(-1)[0]}]{" "}
+                              {user.fullName}
+                            </SelectItem>
+                          ))}
                         </SelectContent>
                       </Select>
                     </FormControl>
+                    <FormMessage />
                   </FormItem>
                 )}
               />
