@@ -4,6 +4,7 @@ import {
   GetAllSessionPayload,
   GetAllSessionResponse,
 } from "@/types/session/get-all-session.api.dto";
+import { GetSessionAttendanceDto } from "@/types/session/get-session-attendance.dto";
 import { MarkAttendanceDto } from "@/types/session/mark-attendance.api.dto";
 import { SessionDto } from "@/types/session/session.dto";
 import { UpdateSessionDto } from "@/types/session/update-session.api.dto";
@@ -31,7 +32,7 @@ export async function getCourseSessions(params: GetAllSessionPayload) {
 
 // Get session by ID
 export async function getSessionById(id: string) {
-  const response = await axiosClient.get(`/session/${id}`);
+  const response = await axiosClient.get<SessionDto>(`/session/${id}`);
   return response.data;
 }
 
@@ -58,6 +59,8 @@ export async function markAttendance(id: string, data: MarkAttendanceDto) {
 
 // Get session attendance
 export async function getSessionAttendance(id: string) {
-  const response = await axiosClient.get(`/session/${id}/attendance`);
+  const response = await axiosClient.get<GetSessionAttendanceDto[]>(
+    `/session/${id}/attendance`,
+  );
   return response.data;
 }

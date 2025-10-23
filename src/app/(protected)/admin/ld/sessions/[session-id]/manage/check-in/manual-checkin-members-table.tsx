@@ -1,16 +1,18 @@
 "use client";
 
-import { FormEventHandler } from "react";
+import { FormEventHandler, useState } from "react";
 
 import { Button } from "@/components/ui/button";
 import { DataTable } from "@/components/ui/data-table/data-table";
 import { Input } from "@/components/ui/input";
-import { useStudentRosterQuery } from "@/hooks/enrollments/useStudentRoster";
+import { useMarkAttendanceMutation } from "@/hooks";
+import { EnrollmentItem } from "@/types/enrollment/response";
 
 import { columns } from "./columns";
 
 type ManualCheckinMembersTableProps = {
-  courseId: string;
+  sessionId: string;
+  data: EnrollmentItem[];
 };
 
 const handleCheckin: FormEventHandler = (e) => {
@@ -18,35 +20,63 @@ const handleCheckin: FormEventHandler = (e) => {
 };
 
 export default function ManualCheckinMembersTable({
-  courseId,
+  sessionId,
+  data,
 }: ManualCheckinMembersTableProps) {
-  // Get session id from params prop
-  const { data: enrollments, isLoading: isLoadong } =
-    useStudentRosterQuery(courseId);
+  const attendance = useMarkAttendanceMutation();
+  const [time, setTime] = useState<Date | undefined>(undefined);
 
-  if (isLoadong) {
-    return <div>Đang tải danh sách thành viên...</div>;
-  }
   return (
     <>
       <DataTable
         manualPagination={true}
         columns={columns}
-        data={(enrollments ?? []).map((e) => e.user).filter((i) => !!i)}
+        data={(data ?? []).map((e) => e.user).filter((i) => !!i)}
         footer={(table) => (
           <div className="flex flex-col gap-4">
             <form
               className="flex flex-row items-center justify-between gap-2"
               onSubmit={handleCheckin}
             >
+              {/* Get the checked user from the table's selected rows */}
               <Input
                 type="datetime-local"
                 name="checkinTime"
                 className="w-fit"
-                defaultValue={new Date().toISOString().slice(0, 16)}
+                value={time ? time.toISOString().slice(0, 16) : ""}
+                onChange={(e) =>
+                  setTime(e.target.value ? new Date(e.target.value) : undefined)
+                }
                 aria-label="Check-in time"
               />
-              <Button type="submit">Điểm danh</Button>
+              <Button
+                type="submit"
+                onClick={() => {
+                  // Retrieve the selected users from the table
+                  const selectedUsers = table
+                    .getSelectedRowModel()
+                    .rows.map((row) => row.original);
+                  attendance.mutate(
+                    {
+                      sessionId,
+                      attendanceData: {
+                        userIds: selectedUsers.map((u) => u.id),
+                        time,
+                      },
+                    },
+                    {
+                      onSuccess: () => {
+                        // Clear selected users after successful check-in
+                        table.resetRowSelection();
+                        setTime(undefined);
+                      },
+                    },
+                  );
+                  // TODO: You may process selectedUsers as needed for check-in
+                }}
+              >
+                Điểm danh
+              </Button>
             </form>
           </div>
         )}

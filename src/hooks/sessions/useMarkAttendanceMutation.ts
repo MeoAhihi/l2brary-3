@@ -1,4 +1,5 @@
 import { useMutation } from "@tanstack/react-query";
+import { toast } from "sonner";
 
 import { markAttendance } from "@/apis/session.api";
 import { invalidateQueries } from "@/lib/query-client";
@@ -18,10 +19,10 @@ export function useMarkAttendanceMutation() {
       invalidateQueries.ld();
 
       // Show success toast
-      // toast.success("Attendance marked successfully");
+      toast.success("Điểm danh thành công");
     },
     onError: (error) => {
-      console.error("Failed to mark attendance:", error);
+      console.error("Điểm danh thất bại:", error);
       // Error toast is handled by global mutation error handler
     },
   });
