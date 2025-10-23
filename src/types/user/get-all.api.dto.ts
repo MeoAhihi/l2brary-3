@@ -29,6 +29,7 @@ export type GetAllUsersPayload = PaginationPayload & {
  */
 export type UsersItem = {
   id: string;
+  avatarUrl: string;
   fullName: string;
   internationalName: string;
   gender: Gender;

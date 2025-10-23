@@ -1,20 +1,15 @@
 "use client";
-import { Metadata } from "next";
 import React from "react";
 
-import { ClassJoiningTable } from "@/components/member/class-joining-table";
 import ProfileCardContent from "@/components/member/profile-card-content";
 import { Badge } from "@/components/ui/badge";
 import { BadgeCard } from "@/components/ui/badge-card";
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { Card } from "@/components/ui/card";
 import PageHeader from "@/components/ui/page-header";
-import { Skeleton } from "@/components/ui/skeleton";
-import { Timeline } from "@/components/ui/timeline";
 import { useGetUserById } from "@/hooks/users";
 import { Gender } from "@/types/gender.enum";
 
 import { ActivityCard } from "./activity-card";
-import { MyChart } from "./chart";
 
 // export const metadata: Metadata = {
 //   title: "Member Details | Admin | L2brary",
@@ -51,7 +46,7 @@ export default function MemberDetailPage({ params }: MemberDetailPageProps) {
             {/* {JSON.stringify(data)} */}
             <ProfileCardContent
               id={user_id}
-              avatarUrl="/image.png"
+              avatarUrl={userInfo.avatarUrl}
               name={userInfo.fullName}
               phone={userInfo.phoneNumber}
               email={userInfo.email}
