@@ -81,3 +81,47 @@ export type UpdateUserPayload = {
 };
 
 export type UpdateUserResponse = UsersItem;
+
+export type UpdateProfileDto = {
+  /**
+   * URL to the user's avatar image
+   * Example: "https://img.freepik.com/premium-vector/default-avatar-profile-icon-social-media-user-image-gray-avatar-icon-blank-profile-silhouette-vector-illustration_561158-3383.jpg?semt=ais_hybrid&w=740&q=80"
+   */
+  avatarUrl?: string;
+
+  /**
+   * Full name of the user
+   * Example: "John Doe"
+   */
+  fullName?: string;
+
+  /**
+   * International name/format of the user's name
+   * Example: "J. Doe"
+   */
+  internationalName?: string;
+
+  /**
+   * Gender of the user
+   * Example: "male"
+   */
+  gender?: string;
+
+  /**
+   * Birthdate of the user in YYYY-MM-DD format
+   * Example: "2000-01-01"
+   */
+  birthdate?: string;
+
+  /**
+   * Phone number of the user (international format)
+   * Example: "+84123456789"
+   */
+  phoneNumber?: string;
+
+  /**
+   * Email address of the user
+   * Example: "john.doe@example.com"
+   */
+  email?: string;
+};
