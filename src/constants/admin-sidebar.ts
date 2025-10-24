@@ -2,10 +2,9 @@ import {
   Activity,
   BarChart3,
   BookOpen,
-  BookUser,
   GraduationCap,
   ShieldCheck,
-  TrendingUp,
+  Table,
   Users,
 } from "lucide-react";
 
@@ -24,35 +23,30 @@ export const adminSidebar = {
   ],
   projects: [
     {
-      name: "Members",
+      name: "Bảng điều khiển",
+      url: "/admin/dashboard",
+      icon: BarChart3,
+    },
+    {
+      name: "Thành viên",
       url: "/admin/members",
       icon: Users,
     },
     {
-      name: "Courses",
+      name: "Lớp học",
       url: "/admin/ld/courses",
       icon: GraduationCap,
     },
 
     {
-      name: "Log Activity",
+      name: "Ghi nhận hoạt động",
       url: "/log-activity",
       icon: Activity,
     },
     {
-      name: "Analytics Growth",
-      url: "/admin/analytics/growth",
-      icon: TrendingUp,
-    },
-    {
-      name: "Analytic Learning",
-      url: "/admin/analytics/learning",
-      icon: BookUser,
-    },
-    {
-      name: "Engagement Settings",
+      name: "Cấu hình hoạt động",
       url: "/admin/engagement/settings",
-      icon: BarChart3,
+      icon: Table,
     },
     {
       name: "Bảo mật",

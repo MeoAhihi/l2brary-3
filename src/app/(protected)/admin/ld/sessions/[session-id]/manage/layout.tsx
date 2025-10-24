@@ -33,11 +33,11 @@ const tabs = [
     href: "/check-in",
     icon: CheckSquare,
   },
-  {
-    name: "Ghi điểm",
-    href: "/game-log",
-    icon: Gamepad2,
-  },
+  // {
+  //   name: "Ghi điểm",
+  //   href: "/game-log",
+  //   icon: Gamepad2,
+  // },
   {
     name: "Cài đặt",
     href: "/settings",
@@ -59,7 +59,7 @@ export default function ManageSessionLayout({
     <div className="container mx-auto px-4 py-8">
       <div className="mx-auto max-w-6xl">
         <PageHeader
-          pageTitle={session.title}
+          pageTitle={session?.title ?? ""}
           descriptions={[`Session ID: ${sessionId}`]}
         />
 

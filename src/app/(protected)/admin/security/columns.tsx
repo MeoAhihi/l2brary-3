@@ -48,19 +48,49 @@ export const createColumns = (
     header: () => "",
     cell: ({ row }) => row.original.name,
   },
-  ...roles.map<
-    ColumnDef<{ id: string; name: string } & Record<string, boolean>>
-  >((r) => ({
-    accessorKey: r.id,
-    header: () => r.name,
-    cell: ({ row }) => {
-      return (
-        <PermissionCheckbox
-          permissionId={row.original.id}
-          roleId={r.id}
-          checked={row.original[r.id] as boolean}
-        />
-      );
-    },
-  })),
+  // {
+  //   accessorKey: "5361c117-b4d1-41f3-951f-6fbbc681f5de",
+  //   header: "Thành viên",
+  //   cell: ({ row }) => {
+  //     return (
+  //       <PermissionCheckbox
+  //         permissionId={row.original.id}
+  //         roleId="5361c117-b4d1-41f3-951f-6fbbc681f5de"
+  //         checked={
+  //           row.original["5361c117-b4d1-41f3-951f-6fbbc681f5de"] as boolean
+  //         }
+  //       />
+  //     );
+  //   },
+  // },
+  // {
+  //   accessorKey: "764a95e4-a113-4936-8e9e-b22c193a60ba",
+  //   header: "Giám sát viên",
+  //   cell: ({ row }) => {
+  //     return (
+  //       <PermissionCheckbox
+  //         permissionId={row.original.id}
+  //         roleId="764a95e4-a113-4936-8e9e-b22c193a60ba"
+  //         checked={
+  //           row.original["764a95e4-a113-4936-8e9e-b22c193a60ba"] as boolean
+  //         }
+  //       />
+  //     );
+  //   },
+  // },
+  // {
+  //   accessorKey: "0408573c-7ce5-428a-aba3-74819e3a9342",
+  //   header: "Ban điều hành",
+  //   cell: ({ row }) => {
+  //     return (
+  //       <PermissionCheckbox
+  //         permissionId={row.original.id}
+  //         roleId="0408573c-7ce5-428a-aba3-74819e3a9342"
+  //         checked={
+  //           row.original["0408573c-7ce5-428a-aba3-74819e3a9342"] as boolean
+  //         }
+  //       />
+  //     );
+  //   },
+  // },
 ];

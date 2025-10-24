@@ -21,7 +21,7 @@ export default function SecurityPage() {
 
   return (
     <div>
-      {/* <DataTable columns={columns} data={data} manualPagination /> */}
+      <DataTable columns={columns} data={data} manualPagination />
     </div>
   );
 }

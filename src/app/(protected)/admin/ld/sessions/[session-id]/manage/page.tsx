@@ -39,7 +39,7 @@ export default function ManageSessionPage({ params }: ManageSessionPageProps) {
   const { data: game, isLoading: isLoadingGame } = useGameListQuery(sessionId);
 
   const { data: roster, isLoading: isLoadingRoster } = useStudentRosterQuery(
-    session?.course.id,
+    session?.course.id ?? "",
   );
 
   if (
@@ -69,14 +69,14 @@ export default function ManageSessionPage({ params }: ManageSessionPageProps) {
           <StatCard
             title="Hiện diện"
             icon={<CheckSquare className="h-4 w-4" />}
-            value={attendance.length}
+            value={attendance?.length}
             description="93% attendance rate"
           />
 
           <StatCard
             title="Vắng"
             icon={<Stamp className="h-4 w-4" />}
-            value={(roster?.length ?? 0) - attendance.length}
+            value={(roster?.length ?? 0) - (attendance?.length ?? 0)}
             description="For participation"
           />
 
